@@ -23,4 +23,18 @@ cd into above directory and do a clone there manually.
 Then you can run
 ```
 go run test.go apnsx020 SVC-APP-OVP-DEPLOY <nsx password> ./nsx_services.csv
+
+expected output
+
+HTTP Response is: 201 Created
+Successfully created application Object ID: application-376
+HTTP Response is: 201 Created
+Successfully created application Object ID: application-377
+HTTP Response is: 201 Created
+Successfully created application Object ID: application-378
+HTTP Response is: 201 Created
+Successfully created application Object ID: application-379
+HTTP Response is: 201 Created
+Successfully created application Object ID: application-380
+
 ```
