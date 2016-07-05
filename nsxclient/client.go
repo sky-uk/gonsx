@@ -5,6 +5,8 @@ import (
 	"net/http"
 	"crypto/tls"
 	"bytes"
+	"fmt"
+	"io/ioutil"
 )
 
 
@@ -23,17 +25,20 @@ type Type struct {
 	TypeName	string		`xml:"typeName"`
 }
 
-type Scope struct {
-	XMLName		xml.Name	`xml:"scope"`
-	Id		string 		`xml:"id"`
-	ObjectTypeName	string 		`xml:"objectTypeName"`
-	Name		string 		`xml:"name"`
-}
-
 type Element struct {
 	XMLName			xml.Name	`xml:"element"`
 	ApplicationProtocol	string		`xml:"applicationProtocol"`
 	Value			string		`xml:"value"`
+}
+
+type Query struct {
+	VdnScope []Scope `xml:"vdnScope"`
+}
+
+
+type Scope struct {
+	Name string `xml:"name"`
+	ObjectID string `xml:"objectId"`
 }
 
 
@@ -54,6 +59,34 @@ func NewNsxClient(nsxmanager, nsxusername, nsxpassword string) (*NsxClient, erro
 		nsxPassword: nsxpassword,
 	}
 	return &c, nil
+}
+
+func (c *NsxClient) GetScope(scopeName string) string{
+	req, err := http.NewRequest("GET", "https://" + c.nsxManagerHost + "/api/2.0/vdn/scopes", nil)
+	req.SetBasicAuth(c.nsxUser, c.nsxPassword)
+	resp, err := c.httpClient.Do(req)
+	if err != nil {
+		fmt.Printf("Error : %s", err)
+	}
+	r, err := ioutil.ReadAll(resp.Body)
+	var q Query
+	err = xml.Unmarshal(r, &q)
+	if err != nil {
+		fmt.Printf("Error : %s", err)
+	}
+	fmt.Println(len(q.VdnScope))
+	if len(q.VdnScope) > 1 {
+		for _, scopeLoop := range q.VdnScope {
+			//fmt.Print(test)
+			if (scopeLoop.Name == scopeName) {
+				return scopeLoop.ObjectID
+			}
+		}
+	} else if len(q.VdnScope) == 1 {
+		return q.VdnScope[0].ObjectID
+	}
+	return "No such scope"
+
 }
 
 func (c *NsxClient) _doPost(service_xml *Application) (*http.Response, error) {
