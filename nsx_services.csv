@@ -1,0 +1,6 @@
+# name, description, applicationProtocol, value
+Test1;Test TCP Protcol;TCP;444
+Test2;Test UDP Protocol;UDP;4871
+Test3;Test TCP Protocol Range;TCP;181,1000-2000
+Test4;Test Protocol Range;UDP;391,1821-3291
+Test5;Test FTP;FTP;2121
