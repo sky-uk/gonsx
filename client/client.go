@@ -27,10 +27,10 @@ type NSXClient struct {
 	IgnoreSSL	bool
 }
 
-func (nsxClient *NSXClient) get(api *api.NSXApi) {
-	requestURL := fmt.Sprintf("%s%s", nsxClient.URL, api.Ctx.Endpoint)
+func (nsxClient *NSXClient) get(api api.NSXApi) {
+	requestURL := fmt.Sprintf("%s%s", nsxClient.URL, api.GetEndpoint())
 	log.Println(requestURL)
-	req, err := http.NewRequest(api.Ctx.Method, requestURL, nil)
+	req, err := http.NewRequest(api.GetMethod(), requestURL, nil)
 	req.SetBasicAuth(nsxClient.User, nsxClient.Password)
 
 	tr := &http.Transport{
@@ -46,7 +46,7 @@ func (nsxClient *NSXClient) get(api *api.NSXApi) {
 	bodyText, err := ioutil.ReadAll(res.Body)
 	log.Print(string(bodyText))
 
-	xmlerr := xml.Unmarshal(bodyText, &api.Ctx.GetObject())
+	xmlerr := xml.Unmarshal(bodyText, api.GetResponseObject())
 	if xmlerr != nil { panic(xmlerr) }
 }
 

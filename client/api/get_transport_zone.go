@@ -1,24 +1,37 @@
 package api
 
-import "fmt"
+import (
+	"fmt"
+)
 
-type tzContext struct {
-	baseContext
+type GetTransportZoneApi struct {
+	method 		string
+	endpoint	string
+	responseObject	interface{}
 }
 
-type TransportZoneApi struct { }
-
-func NewGetTransportZone() *NSXApi {
-	api := new(NSXApi)
-	ctx := new(tzContext)
-	ctx.Method = "GET"
-	ctx.Endpoint = "/api/2.0./vdn/scopes"
-	api.Ctx = ctx
-	return api
+func NewGetTransportZone() *GetTransportZoneApi {
+	this := new(GetTransportZoneApi)
+	this.method = "GET"
+	this.endpoint = "/api/2.0/vdn/scopes"
+	this.responseObject = new(TransportZoneResponseObject)
+	return this
 }
 
-func (* tzContext) GetObject() interface{} {
-	return new(TransportZoneResponseObject)
+func (this GetTransportZoneApi) GetMethod() string {
+	return this.method
+}
+
+func (this GetTransportZoneApi) GetEndpoint() string {
+	return this.endpoint
+}
+
+func (this GetTransportZoneApi) GetResponseObject() interface{} {
+	return this.responseObject
+}
+
+func (this GetTransportZoneApi) GetResponse() *TransportZoneResponseObject {
+	return this.responseObject.(*TransportZoneResponseObject)
 }
 
 type TransportZoneResponseObject struct {

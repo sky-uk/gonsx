@@ -2,12 +2,11 @@ package client
 
 import (
 	"testing"
-	"log"
-	"git.devops.int.ovp.bskyb.com/paas/gonsx/client/api"
 	"net/http"
 	"net/http/httptest"
 	"fmt"
 	"github.com/stretchr/testify/assert"
+	"git.devops.int.ovp.bskyb.com/paas/gonsx/client/api"
 )
 
 func TestHTTPResponse(t *testing.T) {
@@ -26,7 +25,7 @@ func TestHTTPResponse(t *testing.T) {
 	client := NewNSXClient(server.URL, user, password, true)
 
 	api := api.NewGetTransportZone()
+
 	client.get(api)
-	log.Println(api.NSXResponse)
-	assert.Equal(t, "vdnscope-19", api.NSXResponse)
+	assert.Equal(t, "vdnscope-19", api.GetResponse().NetworkScopeList[0].ObjectId)
 }
