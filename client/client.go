@@ -9,14 +9,17 @@ import (
 	"io/ioutil"
 
 	"git.devops.int.ovp.bskyb.com/paas/gonsx/client/api"
+	"bytes"
+	"io"
 )
 
-func NewNSXClient(url string, user string, password string, ignoreSSL bool) *NSXClient {
+func NewNSXClient(url string, user string, password string, ignoreSSL bool, debug bool) *NSXClient {
 	nsxClient := new(NSXClient)
 	nsxClient.URL = url
 	nsxClient.User = user
 	nsxClient.Password = password
 	nsxClient.IgnoreSSL = ignoreSSL
+	nsxClient.debug = debug
 	return nsxClient
 }
 
@@ -25,14 +28,25 @@ type NSXClient struct {
 	User 		string
 	Password	string
 	IgnoreSSL	bool
+	debug 		bool
 }
 
-func (nsxClient *NSXClient) get(api api.NSXApi) {
-	requestURL := fmt.Sprintf("%s%s", nsxClient.URL, api.GetEndpoint())
-	log.Println(requestURL)
-	req, err := http.NewRequest(api.GetMethod(), requestURL, nil)
-	req.SetBasicAuth(nsxClient.User, nsxClient.Password)
+func (nsxClient *NSXClient) Do(api api.NSXApi) {
+	requestURL := fmt.Sprintf("%s%s", nsxClient.URL, api.Endpoint())
 
+	var requestPayload io.Reader
+	if(api.RequestObject() != nil) {
+		requestXmlBytes, marshallingErr := xml.Marshal(api.RequestObject())
+		log.Println(string(requestXmlBytes))
+		if marshallingErr != nil {
+			log.Fatal(marshallingErr)
+		}
+		requestPayload = bytes.NewReader(requestXmlBytes)
+	}
+	req, err := http.NewRequest(api.Method(), requestURL, requestPayload)
+
+	req.SetBasicAuth(nsxClient.User, nsxClient.Password)
+	req.Header.Set("Content-Type", "application/xml")
 	tr := &http.Transport{
 		TLSClientConfig: &tls.Config{InsecureSkipVerify: nsxClient.IgnoreSSL},
 	}
@@ -44,12 +58,11 @@ func (nsxClient *NSXClient) get(api api.NSXApi) {
 	}
 
 	bodyText, err := ioutil.ReadAll(res.Body)
-	log.Print(string(bodyText))
 
-	xmlerr := xml.Unmarshal(bodyText, api.GetResponseObject())
+	if(nsxClient.debug) {
+		log.Println(string(bodyText))
+	}
+
+	xmlerr := xml.Unmarshal(bodyText, api.ResponseObject())
 	if xmlerr != nil { panic(xmlerr) }
 }
-
-// TODO: implement create
-
-// TODO: implement update
