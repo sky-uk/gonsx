@@ -26,3 +26,7 @@ func (this BaseApi) RequestObject() interface{} {
 func (this BaseApi) ResponseObject() interface{} {
 	return this.responseObject
 }
+
+func (this *BaseApi) SetResponseObject(res interface{}) {
+	this.responseObject = res
+}

@@ -5,4 +5,5 @@ type NSXApi interface {
 	Endpoint() 		string
 	RequestObject() 	interface{}
 	ResponseObject() 	interface{}
+	SetResponseObject(interface{})
 }

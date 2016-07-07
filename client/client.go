@@ -52,6 +52,7 @@ func (nsxClient *NSXClient) Do(api api.NSXApi) {
 	}
 	httpClient := &http.Client{Transport: tr}
 	res, err := httpClient.Do(req)
+	defer res.Body.Close()
 
 	if err != nil{
 		log.Fatal(err)
@@ -63,6 +64,13 @@ func (nsxClient *NSXClient) Do(api api.NSXApi) {
 		log.Println(string(bodyText))
 	}
 
-	xmlerr := xml.Unmarshal(bodyText, api.ResponseObject())
-	if xmlerr != nil { panic(xmlerr) }
+	if api.ResponseObject() != nil && res.Header.Get("Content-Type") == "application/xml" {
+		fmt.Println("parsing xml")
+		xmlerr := xml.Unmarshal(bodyText, api.ResponseObject())
+		if xmlerr != nil {
+			panic(xmlerr)
+		}
+	} else {
+		api.SetResponseObject(string(bodyText))
+	}
 }
