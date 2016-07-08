@@ -20,7 +20,7 @@ func TestCreateMethod(t *testing.T) {
 
 func TestCreateEndpoint(t *testing.T) {
 	createSetup()
-	assert.Equal(t, "/api/2.0/vdn/switches", createVirtualWireApi.Endpoint())
+	assert.Equal(t, "/api/2.0/vdn/scopes/vdnscope-1/virtualwires", createVirtualWireApi.Endpoint())
 }
 
 func TestCreateMarshalling(t *testing.T) {
