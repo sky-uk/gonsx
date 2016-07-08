@@ -9,12 +9,12 @@ type GetVirtualWireApi struct {
 	*api.BaseApi
 }
 
-func NewGet(scopeId string) *GetVirtualWireApi {
+func NewGet(id string) *GetVirtualWireApi {
 	this := new(GetVirtualWireApi)
-	this.BaseApi = api.NewBaseApi(http.MethodGet, "/api/2.0/vdn/scopes/"+ scopeId + "/virtualwires", nil, new(VirtualWires))
+	this.BaseApi = api.NewBaseApi(http.MethodGet, "/api/2.0/vdn/virtualwires/" + id, nil, new(VirtualWire))
 	return this
 }
 
-func (this GetVirtualWireApi) GetResponse() *VirtualWires {
-	return this.ResponseObject().(*VirtualWires)
+func (this GetVirtualWireApi) GetResponse() *VirtualWire {
+	return this.ResponseObject().(*VirtualWire)
 }
