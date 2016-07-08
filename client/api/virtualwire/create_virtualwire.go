@@ -5,12 +5,12 @@ import (
 	"net/http"
 )
 
-type CreateLogicalSwitchApi struct {
+type CreateVirtualWireApi struct {
 	*api.BaseApi
 }
 
-func NewCreate(name, desc, tenantID, scopeId string) *CreateLogicalSwitchApi {
-	this := new(CreateLogicalSwitchApi)
+func NewCreate(name, desc, tenantID, scopeId string) *CreateVirtualWireApi {
+	this := new(CreateVirtualWireApi)
 	requestPayload := new(VirtualWireCreateSpec)
 	requestPayload.Name = name
 	requestPayload.TenantID = tenantID
@@ -22,6 +22,6 @@ func NewCreate(name, desc, tenantID, scopeId string) *CreateLogicalSwitchApi {
 	return this
 }
 
-func (this CreateLogicalSwitchApi) GetResponse() string {
+func (this CreateVirtualWireApi) GetResponse() string {
 	return this.ResponseObject().(string)
 }

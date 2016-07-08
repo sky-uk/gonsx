@@ -7,7 +7,7 @@ import (
 	"encoding/xml"
 )
 
-var createVirtualWireApi *CreateLogicalSwitchApi
+var createVirtualWireApi *CreateVirtualWireApi
 
 func createSetup() {
 	createVirtualWireApi = NewCreate("test", "test desc", "test", "vdnscope-1")
