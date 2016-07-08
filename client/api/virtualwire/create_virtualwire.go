@@ -22,6 +22,6 @@ func NewCreate(name, desc, tenantID, scopeId string) *CreateVirtualWireApi {
 	return this
 }
 
-func (this CreateVirtualWireApi) GetResponse() string {
+func (this CreateVirtualWireApi) GetResponse() string{
 	return this.ResponseObject().(string)
 }

@@ -7,7 +7,6 @@ import (
 	"net/http"
 	"crypto/tls"
 	"io/ioutil"
-
 	"git.devops.int.ovp.bskyb.com/paas/gonsx/client/api"
 	"bytes"
 	"io"
@@ -55,21 +54,28 @@ func (nsxClient *NSXClient) Do(api api.NSXApi) {
 	}
 	httpClient := &http.Client{Transport: tr}
 	res, err := httpClient.Do(req)
-	defer res.Body.Close()
-	api.SetStatusCode(res.StatusCode)
-
 	if err != nil{
 		log.Fatal(err)
 	}
+	defer res.Body.Close()
+	nsxClient.handleResponse(api, res)
+
+}
+
+func (nsxClient *NSXClient) handleResponse(api api.NSXApi, res *http.Response) {
+	api.SetStatusCode(res.StatusCode)
 
 	bodyText, err := ioutil.ReadAll(res.Body)
+	if err != nil {
+		log.Fatal(err)
+	}
 	api.SetRawResponse(bodyText)
 
 	if(nsxClient.debug) {
 		log.Println(string(bodyText))
 	}
 
-	if (isXML(res.Header.Get("Content-Type"))) {
+	if (isXML(res.Header.Get("Content-Type")) && api.StatusCode() == 200) {
 		xmlerr := xml.Unmarshal(bodyText, api.ResponseObject())
 		if xmlerr != nil {
 			panic(xmlerr)
@@ -77,6 +83,7 @@ func (nsxClient *NSXClient) Do(api api.NSXApi) {
 	} else {
 		api.SetResponseObject(string(bodyText))
 	}
+
 }
 
 func isXML(contentType string) bool {
