@@ -39,7 +39,7 @@ func (this *BaseApi) RawResponse() []byte {
 	return this.rawResponse
 }
 
-func (this *BaseApi) Err() error {
+func (this *BaseApi) Error() error {
 	return this.err
 }
 

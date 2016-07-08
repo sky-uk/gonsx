@@ -7,7 +7,7 @@ type NSXApi interface {
 	ResponseObject() 	interface{}
 	StatusCode()		int
 	RawResponse()		[]byte
-	Err() 			error
+	Error() 		error
 
 	SetResponseObject(interface{})
 	SetStatusCode(int)
