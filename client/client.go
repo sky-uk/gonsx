@@ -11,6 +11,7 @@ import (
 	"git.devops.int.ovp.bskyb.com/paas/gonsx/client/api"
 	"bytes"
 	"io"
+	"strings"
 )
 
 func NewNSXClient(url string, user string, password string, ignoreSSL bool, debug bool) *NSXClient {
@@ -46,26 +47,29 @@ func (nsxClient *NSXClient) Do(api api.NSXApi) {
 	req, err := http.NewRequest(api.Method(), requestURL, requestPayload)
 
 	req.SetBasicAuth(nsxClient.User, nsxClient.Password)
+	// TODO: remove this hardcoded value!
 	req.Header.Set("Content-Type", "application/xml")
+
 	tr := &http.Transport{
 		TLSClientConfig: &tls.Config{InsecureSkipVerify: nsxClient.IgnoreSSL},
 	}
 	httpClient := &http.Client{Transport: tr}
 	res, err := httpClient.Do(req)
 	defer res.Body.Close()
+	api.SetStatusCode(res.StatusCode)
 
 	if err != nil{
 		log.Fatal(err)
 	}
 
 	bodyText, err := ioutil.ReadAll(res.Body)
+	api.SetRawResponse(bodyText)
 
 	if(nsxClient.debug) {
 		log.Println(string(bodyText))
 	}
 
-	if api.ResponseObject() != nil && res.Header.Get("Content-Type") == "application/xml" {
-		fmt.Println("parsing xml")
+	if (isXML(res.Header.Get("Content-Type"))) {
 		xmlerr := xml.Unmarshal(bodyText, api.ResponseObject())
 		if xmlerr != nil {
 			panic(xmlerr)
@@ -73,4 +77,8 @@ func (nsxClient *NSXClient) Do(api api.NSXApi) {
 	} else {
 		api.SetResponseObject(string(bodyText))
 	}
+}
+
+func isXML(contentType string) bool {
+	return strings.Contains(strings.ToLower(contentType), "/xml")
 }
