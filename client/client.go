@@ -43,6 +43,9 @@ func (nsxClient *NSXClient) Do(api api.NSXApi) {
 		}
 		requestPayload = bytes.NewReader(requestXmlBytes)
 	}
+	if(nsxClient.debug) {
+		log.Println("requestURL:", requestURL)
+	}
 	req, err := http.NewRequest(api.Method(), requestURL, requestPayload)
 
 	req.SetBasicAuth(nsxClient.User, nsxClient.Password)
