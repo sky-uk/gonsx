@@ -3,7 +3,7 @@ package client
 import (
 	"testing"
 	"github.com/stretchr/testify/assert"
-	"git.devops.int.ovp.bskyb.com/paas/gonsx/client/api/tzone"
+	"github.com/sky-uk/paas-gonsx/api/tzone"
 	"net/http"
 )
 
