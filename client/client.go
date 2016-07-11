@@ -31,7 +31,7 @@ type NSXClient struct {
 	debug 		bool
 }
 
-func (nsxClient *NSXClient) Do(api api.NSXApi) {
+func (nsxClient *NSXClient) Do(api api.NSXApi) error {
 	requestURL := fmt.Sprintf("%s%s", nsxClient.URL, api.Endpoint())
 
 	var requestPayload io.Reader
@@ -44,6 +44,10 @@ func (nsxClient *NSXClient) Do(api api.NSXApi) {
 		requestPayload = bytes.NewReader(requestXmlBytes)
 	}
 	req, err := http.NewRequest(api.Method(), requestURL, requestPayload)
+	if err != nil {
+		log.Println("ERROR building the request: %s", err)
+		return err
+	}
 
 	req.SetBasicAuth(nsxClient.User, nsxClient.Password)
 	// TODO: remove this hardcoded value!
@@ -55,20 +59,21 @@ func (nsxClient *NSXClient) Do(api api.NSXApi) {
 	httpClient := &http.Client{Transport: tr}
 	res, err := httpClient.Do(req)
 	if err != nil{
-		log.Fatal(err)
+		log.Println("ERROR executing request: ", err)
+		return err
 	}
 	defer res.Body.Close()
-	nsxClient.handleResponse(api, res)
-
+	return nsxClient.handleResponse(api, res)
 }
 
-func (nsxClient *NSXClient) handleResponse(api api.NSXApi, res *http.Response) {
+func (nsxClient *NSXClient) handleResponse(api api.NSXApi, res *http.Response) error {
 	api.SetStatusCode(res.StatusCode)
-
 	bodyText, err := ioutil.ReadAll(res.Body)
-	if err != nil {
-		log.Fatal(err)
+	if err != nil{
+		log.Println("ERROR reading response: ", err)
+		return err
 	}
+
 	api.SetRawResponse(bodyText)
 
 	if(nsxClient.debug) {
@@ -78,12 +83,13 @@ func (nsxClient *NSXClient) handleResponse(api api.NSXApi, res *http.Response) {
 	if (isXML(res.Header.Get("Content-Type")) && api.StatusCode() == 200) {
 		xmlerr := xml.Unmarshal(bodyText, api.ResponseObject())
 		if xmlerr != nil {
-			panic(xmlerr)
+			log.Println("ERROR unmarshalling response: ", err)
+			return err
 		}
 	} else {
 		api.SetResponseObject(string(bodyText))
 	}
-
+	return nil
 }
 
 func isXML(contentType string) bool {
