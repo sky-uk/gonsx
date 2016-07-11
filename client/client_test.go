@@ -8,6 +8,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"git.devops.int.ovp.bskyb.com/paas/gonsx/client/api"
 	"encoding/base64"
+	"net/url"
 )
 
 var user = "nsxUser"
@@ -40,6 +41,28 @@ func setup(statusCode int, responseBody string)  {
 			fmt.Fprintln(w, responseBody)
 		}))
 	nsxClient = NewNSXClient(server.URL, user, password, ignoreSSL, debug)
+}
+
+func TestHappyCase(t *testing.T) {
+	setup(200, "pong")
+	nsxClient = NewNSXClient(server.URL, user, password, ignoreSSL, debug)
+	apiRequest := api.NewBaseApi(http.MethodGet, "/", nil, nil)
+
+	err := nsxClient.Do(apiRequest)
+
+	assert.Nil(t, err)
+}
+
+func TestFailWhenNotValidSSLCerts(t *testing.T) {
+	setup(0, "")
+	ignoreSSL = false
+	nsxClient = NewNSXClient(server.URL, "invalidUser", "invalidPass", ignoreSSL, debug)
+	apiRequest := api.NewBaseApi(http.MethodGet, "/", nil, nil)
+
+	err := nsxClient.Do(apiRequest)
+
+	assert.NotNil(t, err)
+	assert.IsType(t, url.Error{}, err)
 }
 
 func TestBasicAuthFailure(t *testing.T) {
