@@ -1,4 +1,4 @@
-package client
+package gonsx
 
 import (
 	"fmt"
@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"crypto/tls"
 	"io/ioutil"
-	"github.com/sky-uk/paas-gonsx/api"
+	"github.com/sky-uk/gonsx/api"
 	"bytes"
 	"io"
 	"strings"

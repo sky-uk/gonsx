@@ -2,8 +2,7 @@ package dhcprelay
 
 
 import (
-	"github.com/sky-uk/paas-gonsx/api"
-	"net/http"
+	"github.com/sky-uk/gonsx/api"
 )
 
 type CreateDhcpRelayApi struct {

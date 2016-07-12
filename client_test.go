@@ -1,4 +1,4 @@
-package client
+package gonsx
 
 import (
 	"net/http"
@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"testing"
 	"github.com/stretchr/testify/assert"
-	"github.com/sky-uk/paas-gonsx/api"
+	"github.com/sky-uk/gonsx/api"
 	"encoding/base64"
 )
 

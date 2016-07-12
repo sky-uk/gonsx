@@ -1,10 +1,10 @@
-package client
+package gonsx
 
 import (
 	"testing"
 	"github.com/stretchr/testify/assert"
 	"net/http"
-	"github.com/sky-uk/paas-gonsx/api/virtualwire"
+	"github.com/sky-uk/gonsx/api/virtualwire"
 )
 
 func TestClientGetAllVirtualWires(t *testing.T) {

@@ -1,9 +1,9 @@
-package client
+package gonsx
 
 import (
 	"testing"
 	"github.com/stretchr/testify/assert"
-	"github.com/sky-uk/paas-gonsx/api/tzone"
+	"github.com/sky-uk/gonsx/api/tzone"
 	"net/http"
 )
 
