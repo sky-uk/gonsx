@@ -1,5 +1,5 @@
 [![Build Status](http://jenkins.paas.int.ovp.bskyb.com/buildStatus/icon?job=gonsx/build)](http://jenkins.paas.int.ovp.bskyb.com/job/gonsx/job/build/)
-# gonsx client library
+# Go! NSX client library
 
 ## Overview
 

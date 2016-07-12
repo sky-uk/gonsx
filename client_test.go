@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"testing"
 	"github.com/stretchr/testify/assert"
-	"git.devops.int.ovp.bskyb.com/paas/gonsx/client/api"
+	"github.com/sky-uk/paas-gonsx/api"
 	"encoding/base64"
 )
 

@@ -1,7 +1,7 @@
 package tzone
 
 import (
-	"git.devops.int.ovp.bskyb.com/paas/gonsx/client/api"
+	"github.com/sky-uk/paas-gonsx/api"
 	"net/http"
 )
 

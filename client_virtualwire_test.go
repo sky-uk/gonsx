@@ -4,7 +4,7 @@ import (
 	"testing"
 	"github.com/stretchr/testify/assert"
 	"net/http"
-	"git.devops.int.ovp.bskyb.com/paas/gonsx/client/api/virtualwire"
+	"github.com/sky-uk/paas-gonsx/api/virtualwire"
 )
 
 func TestClientGetAllVirtualWires(t *testing.T) {

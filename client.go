@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"crypto/tls"
 	"io/ioutil"
-	"git.devops.int.ovp.bskyb.com/paas/gonsx/client/api"
+	"github.com/sky-uk/paas-gonsx/api"
 	"bytes"
 	"io"
 	"strings"
