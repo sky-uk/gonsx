@@ -5,12 +5,12 @@ import (
 	"net/http"
 )
 
-type CreateDhcpRelayApi struct {
+type UpdateDhcpRelayApi struct {
 	*api.BaseApi
 }
 
-func NewCreate(dhcpIpAddress, edgeId string, relayAgentslist []RelayAgent) *CreateDhcpRelayApi {
-	this := new(CreateDhcpRelayApi)
+func NewCreate(dhcpIpAddress, edgeId string, relayAgentslist []RelayAgent) *UpdateDhcpRelayApi {
+	this := new(UpdateDhcpRelayApi)
 	requestPayload := new(DhcpRelay)
 	requestPayload.RelayServer.IpAddress = dhcpIpAddress
 	requestPayload.RelayAgents = relayAgentslist
@@ -20,6 +20,6 @@ func NewCreate(dhcpIpAddress, edgeId string, relayAgentslist []RelayAgent) *Crea
 }
 
 
-func (this CreateDhcpRelayApi) GetResponse() string{
+func (this UpdateDhcpRelayApi) GetResponse() string{
 	return this.ResponseObject().(string)
 }
