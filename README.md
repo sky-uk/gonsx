@@ -38,7 +38,7 @@ nsxclient.Do(my_resource_obj)
 Virtual Wire resource. This resource will call the Virtual Wires api within NSX.
 Import the following class:
 ```
-git.devops.int.ovp.bskyb.com/paas/gonsx/client/api/virtualwire
+github.com/paas/gonsx/client/api/virtualwire
 ```
 
 Create:
@@ -63,5 +63,40 @@ Not yet implemented
 Delete:
 ```
 api := virtualwire.NewDelete(virtualWireID)
+nsxclient.Do(delete_api)
+```
+
+
+### Interface
+
+Interface resource. This resource will call the interface api within NSX.
+Import the following class:
+```
+git.devops.int.ovp.bskyb.com/paas/gonsx/client/api/edgeinterface
+```
+
+Create:
+
+```
+ api := edgeinterface.NewCreate(edgeId, interfaceName, virtualWireId, gateway,
+                                        		subnetMask, interfaceType, mtu)
+ nsxclient.Do(api)
+```
+
+Read:
+```
+api := edgeinterface.NewGetAll(edgeID)
+nsxclient.Do(api)
+resp := api.GetResponse().FilterByName(interfaceName)
+```
+
+Update:
+```
+Not yet implemented
+```
+
+Delete:
+```
+api := edgeinterface.NewDelete(interfaceIndex, edgeId)
 nsxclient.Do(delete_api)
 ```
