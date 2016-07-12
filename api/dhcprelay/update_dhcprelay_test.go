@@ -7,7 +7,7 @@ import (
 	"testing"
 )
 
-var createDhcpRelayApi *CreateDhcpRelayApi
+var updateDhcpRelayApi *UpdateDhcpRelayApi
 
 func createSetup() {
 	firstRelayAgent := new(RelayAgent)
@@ -19,24 +19,24 @@ func createSetup() {
 	secondRelayAgent.GiAddress = "10.152.164.1"
 
 	relayAgentsList := []RelayAgent{*firstRelayAgent, *secondRelayAgent}
-	createDhcpRelayApi = NewCreate("10.152.160.10", "edge-50", relayAgentsList)
+	updateDhcpRelayApi = NewCreate("10.152.160.10", "edge-50", relayAgentsList)
 }
 
 func TestCreateMethod(t *testing.T) {
 	createSetup()
-	assert.Equal(t, http.MethodPut, createDhcpRelayApi.Method())
+	assert.Equal(t, http.MethodPut, updateDhcpRelayApi.Method())
 }
 
 func TestCreateEndpoint(t *testing.T) {
 	createSetup()
-	assert.Equal(t, "/api/4.0/edges/edge-50/dhcp/config/relay", createDhcpRelayApi.Endpoint())
+	assert.Equal(t, "/api/4.0/edges/edge-50/dhcp/config/relay", updateDhcpRelayApi.Endpoint())
 }
 
 func TestCreateMarshalling(t *testing.T) {
 	createSetup()
 	expectedXml := "<relay><relayServer><ipAddress>10.152.160.10</ipAddress></relayServer><relayAgents><relayAgent><vnicIndex>16</vnicIndex><giAddress>10.152.165.1</giAddress></relayAgent><relayAgent><vnicIndex>17</vnicIndex><giAddress>10.152.164.1</giAddress></relayAgent></relayAgents></relay>"
 
-	xmlBytes, err := xml.Marshal(createDhcpRelayApi.RequestObject())
+	xmlBytes, err := xml.Marshal(updateDhcpRelayApi.RequestObject())
 
 	assert.Nil(t, err)
 	assert.Equal(t, expectedXml, string(xmlBytes))
