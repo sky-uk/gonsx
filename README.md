@@ -10,10 +10,16 @@ This project is a NSXClient library for talking to NSX API.
 
 The NSXClient is the class used to send requests to the NSX host and pass through credentials.
  
+Import the following files.
+ 
 To create an NSX object run the following code, with the correct params. 
 
 ```
-nsxclient := client.NewNSXClient(url, username, password, ignoreSSL, debug)
+import (
+    "github.com/sky-uk/gonsx"
+)
+
+nsxclient := gonsx.NewNSXClient(url, username, password, ignoreSSL, debug)
 ```
 The params used:
 
@@ -38,7 +44,7 @@ nsxclient.Do(my_resource_obj)
 Virtual Wire resource. This resource will call the Virtual Wires api within NSX.
 Import the following class:
 ```
-github.com/paas/gonsx/client/api/virtualwire
+github.com/sky-uk/gonsx/api/virtualwire
 ```
 
 Create:
@@ -72,7 +78,7 @@ nsxclient.Do(delete_api)
 Interface resource. This resource will call the interface api within NSX.
 Import the following class:
 ```
-git.devops.int.ovp.bskyb.com/paas/gonsx/client/api/edgeinterface
+github.com/sky-uk/gonsx/api/edgeinterface
 ```
 
 Create:

@@ -3,6 +3,7 @@ package dhcprelay
 import "encoding/xml"
 
 type DhcpRelay struct {
+	XMLName     xml.Name     `xml:"relay"`
 	RelayServer RelayServer  `xml:"relayServer"`
 	RelayAgents []RelayAgent `xml:"relayAgents>relayAgent"`
 }
