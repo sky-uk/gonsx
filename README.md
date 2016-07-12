@@ -1,41 +1,67 @@
 [![Build Status](http://jenkins.paas.int.ovp.bskyb.com/buildStatus/icon?job=gonsx/build)](http://jenkins.paas.int.ovp.bskyb.com/job/gonsx/job/build/)
-# Go! NSX client library
+# gonsx client library
 
 ## Overview
 
 This project is a NSXClient library for talking to NSX API.
 
-## Testing
+## Usage
+### NSXClient
 
-There is a test.go file and nsxservices.csv file.
-
-```
-go get -insecure git.devops.int.ovp.bskyb.com/paas/gonsx.git
-```
-
-the above seems to doesn't work with our gitlab so try following.
+The NSXClient is the class used to send requests to the NSX host and pass through credentials.
+ 
+To create an NSX object run the following code, with the correct params. 
 
 ```
-go to src into your GOPATH
-mkdir -p git.devops.int.ovp.bskyb.com/paas/
-cd into above directory and do a clone there manually.
+nsxclient := client.NewNSXClient(url, username, password, ignoreSSL, debug)
+```
+The params used:
+
+* url: URL of NSX host
+  
+> E.G. https://nsxhost.com
+
+* username: NSX username
+* password: NSX password
+* ignoreSSL: bool on whether to ignore ssl (default false)
+* debug: bool on whether to debug output (default false)
+
+The client is also used run the api calls once you have created the resource object.
+
+```
+nsxclient.Do(my_resource_obj)
 ```
 
-Then you can run
+
+### Virtual Wire(Logical Switch)
+
+Virtual Wire resource. This resource will call the Virtual Wires api within NSX.
+Import the following class:
 ```
-go run test.go apnsx020 SVC-APP-OVP-DEPLOY <nsx password> ./nsx_services.csv
+git.devops.int.ovp.bskyb.com/paas/gonsx/client/api/virtualwire
+```
 
-expected output
+Create:
 
-HTTP Response is: 201 Created
-Successfully created application Object ID: application-376
-HTTP Response is: 201 Created
-Successfully created application Object ID: application-377
-HTTP Response is: 201 Created
-Successfully created application Object ID: application-378
-HTTP Response is: 201 Created
-Successfully created application Object ID: application-379
-HTTP Response is: 201 Created
-Successfully created application Object ID: application-380
+```
+ api := virtualwire.NewCreate(name, desc, tennantID, scopeID)
+ nsxclient.Do(api)
+```
 
+Read:
+```
+api := virtualwire.NewGetAll(scopeID)
+nsxclient.Do(api)
+resp := api.GetResponse().FilterByName(virtualWireName)
+```
+
+Update:
+```
+Not yet implemented
+```
+
+Delete:
+```
+api := virtualwire.NewDelete(virtualWireID)
+nsxclient.Do(delete_api)
 ```
