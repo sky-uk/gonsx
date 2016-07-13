@@ -50,8 +50,13 @@ func RunDhcpRelayExample(nsxManager, nsxUser, nsxPassword string, debug bool) {
 	if err != nil {
 		fmt.Println("Error:", err)
 	} else {
-		fmt.Println("Updated DHCP Relay.")
-		fmt.Println(update_api.GetResponse())
+		if update_api.StatusCode() == 204 {
+			fmt.Println("Updated DHCP Relay.")
+			fmt.Println(update_api.GetResponse())
+		} else {
+			fmt.Println("Failed to update the DHCP relay")
+			fmt.Println(update_api.GetResponse())
+		}
 	}
 
 	//
@@ -74,8 +79,13 @@ func RunDhcpRelayExample(nsxManager, nsxUser, nsxPassword string, debug bool) {
 	if err != nil {
 		fmt.Println("Error:", err)
 	} else {
-		fmt.Println("Updated DHCP Relay.")
-		fmt.Println(update_api.GetResponse())
+		if update_api.StatusCode() == 204 {
+			fmt.Println("Updated DHCP Relay.")
+			fmt.Println(update_api.GetResponse())
+		} else {
+			fmt.Println("Failed to update the DHCP relay")
+			fmt.Println(update_api.GetResponse())
+		}
 	}
 
 
@@ -109,8 +119,13 @@ func RunDhcpRelayExample(nsxManager, nsxUser, nsxPassword string, debug bool) {
 		if err != nil {
 			fmt.Println("Error:", err)
 		} else {
-			fmt.Println("Updated DHCP Relay.")
-			fmt.Println(update_api.GetResponse())
+			if update_api.StatusCode() == 204 {
+				fmt.Println("Updated DHCP Relay.")
+				fmt.Println(update_api.GetResponse())
+			} else {
+				fmt.Println("Failed to update the DHCP relay")
+				fmt.Println(update_api.GetResponse())
+			}
 		}
 
 
@@ -135,7 +150,13 @@ func RunDhcpRelayExample(nsxManager, nsxUser, nsxPassword string, debug bool) {
 		if err != nil {
 			fmt.Println("Error:", err)
 		} else {
-			fmt.Println("DHCP Relay agent deleted.")
+			if update_api.StatusCode() == 204 {
+				fmt.Println("Updated DHCP Relay.")
+				fmt.Println(update_api.GetResponse())
+			} else {
+				fmt.Println("Failed to update the DHCP relay")
+				fmt.Println(update_api.GetResponse())
+			}
 		}
 	} else {
 		// if we got more than one relay agents, then we have to call update after removing
@@ -148,8 +169,13 @@ func RunDhcpRelayExample(nsxManager, nsxUser, nsxPassword string, debug bool) {
 		if err != nil {
 			fmt.Println("Error:", err)
 		} else {
-			fmt.Println("Updated DHCP Relay.")
-			fmt.Println(update_api.GetResponse())
+			if update_api.StatusCode() == 204 {
+				fmt.Println("Updated DHCP Relay.")
+				fmt.Println(update_api.GetResponse())
+			} else {
+				fmt.Println("Failed to update the DHCP relay")
+				fmt.Println(update_api.GetResponse())
+			}
 		}
 
 
