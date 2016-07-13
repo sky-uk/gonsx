@@ -5,15 +5,15 @@ import (
 	"testing"
 )
 
-func setup() (*DhcpRelay) {
+func setup() *DhcpRelay {
 	dhcpRelay := &DhcpRelay{}
 	firstRelayAgent := RelayAgent{
-		VnicIndex:     "1",
-		GiAddress:     "10.10.10.1",
+		VnicIndex: "1",
+		GiAddress: "10.10.10.1",
 	}
 	secondRelayAgent := RelayAgent{
-		VnicIndex:     "2",
-		GiAddress:     "10.10.10.2",
+		VnicIndex: "2",
+		GiAddress: "10.10.10.2",
 	}
 
 	dhcpRelay.RelayAgents = []RelayAgent{firstRelayAgent, secondRelayAgent}
@@ -40,13 +40,11 @@ func TestFilterByVnicIndex(t *testing.T) {
 	assert.Equal(t, "10.10.10.2", secondFiltered.GiAddress)
 }
 
-
 func TestCheckByVnicIndex(t *testing.T) {
 	dhcpRelay := setup()
 	assert.Equal(t, true, dhcpRelay.CheckByVnicIndex("1"))
 	assert.Equal(t, false, dhcpRelay.CheckByVnicIndex("10"))
 }
-
 
 func TestRemoveByVnicIndex(t *testing.T) {
 	dhcpRelay := setup()

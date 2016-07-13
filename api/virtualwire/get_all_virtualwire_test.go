@@ -1,10 +1,10 @@
 package virtualwire
 
 import (
-	"testing"
-	"github.com/stretchr/testify/assert"
 	"encoding/xml"
+	"github.com/stretchr/testify/assert"
 	"net/http"
+	"testing"
 )
 
 var getAllVirtualWiresApi *GetAllVirtualWiresApi
@@ -33,4 +33,3 @@ func TestGetAllUnMarshalling(t *testing.T) {
 	assert.Len(t, getAllVirtualWiresApi.GetResponse().DataPage.VirtualWires, 1)
 	assert.Equal(t, "virtualwire-1", getAllVirtualWiresApi.GetResponse().DataPage.VirtualWires[0].ObjectID)
 }
-

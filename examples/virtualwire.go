@@ -41,5 +41,4 @@ func RunVirtualWireExample(nsxManager, nsxUser, nsxPassword string, debug bool) 
 		fmt.Println("Status code: ", delete_api.StatusCode())
 	}
 
-
 }

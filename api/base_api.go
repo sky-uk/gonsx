@@ -1,14 +1,14 @@
 package api
 
 type BaseApi struct {
-	method	 	string
-	endpoint 	string
-	requestObject 	interface{}
-	responseObject 	interface{}
+	method         string
+	endpoint       string
+	requestObject  interface{}
+	responseObject interface{}
 
-	statusCode	int
-	rawResponse	[]byte
-	err 		error
+	statusCode  int
+	rawResponse []byte
+	err         error
 }
 
 func NewBaseApi(method string, endpoint string, requestObject interface{}, responseObject interface{}) *BaseApi {

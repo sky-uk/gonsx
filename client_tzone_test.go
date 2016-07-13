@@ -1,10 +1,10 @@
 package gonsx
 
 import (
-	"testing"
-	"github.com/stretchr/testify/assert"
 	"github.com/sky-uk/gonsx/api/tzone"
+	"github.com/stretchr/testify/assert"
 	"net/http"
+	"testing"
 )
 
 func TestClientGetAllTransportZones(t *testing.T) {

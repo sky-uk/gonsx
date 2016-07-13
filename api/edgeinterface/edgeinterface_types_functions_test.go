@@ -1,27 +1,27 @@
 package edgeinterface
 
 import (
-	"testing"
 	"github.com/stretchr/testify/assert"
+	"testing"
 )
 
 func setup() (edgeInterfacesList *EdgeInterfaces) {
 	edgeInterfacesList = &EdgeInterfaces{}
 	firstInterface := EdgeInterface{
-		Name: "firstInterface",
+		Name:          "firstInterface",
 		ConnectedToId: "virtualwire-1",
-		Type: "internal",
-		Index: "1",
-		Mtu: 1500,
-		IsConnected: true,
+		Type:          "internal",
+		Index:         "1",
+		Mtu:           1500,
+		IsConnected:   true,
 	}
 	secondInterface := EdgeInterface{
-		Name: "secondInterface",
+		Name:          "secondInterface",
 		ConnectedToId: "virtualwire-1",
-		Type: "internal",
-		Index: "2",
-		Mtu: 1500,
-		IsConnected: true,
+		Type:          "internal",
+		Index:         "2",
+		Mtu:           1500,
+		IsConnected:   true,
 	}
 	edgeInterfacesList.Interfaces = []EdgeInterface{firstInterface, secondInterface}
 	return edgeInterfacesList
@@ -36,4 +36,3 @@ func TestFilterByName(t *testing.T) {
 	secondFiltered := edgeInterfaces.FilterByName("secondInterface")
 	assert.Equal(t, "2", secondFiltered.Index)
 }
-

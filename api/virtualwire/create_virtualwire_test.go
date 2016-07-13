@@ -1,10 +1,10 @@
 package virtualwire
 
 import (
-	"testing"
+	"encoding/xml"
 	"github.com/stretchr/testify/assert"
 	"net/http"
-	"encoding/xml"
+	"testing"
 )
 
 var createVirtualWireApi *CreateVirtualWireApi
@@ -31,7 +31,7 @@ func TestCreateMarshalling(t *testing.T) {
 	object.TenantID = "test"
 	expectedXml := "<virtualWireCreateSpec><name>test</name><controlPlaneMode>UNICAST_MODE</controlPlaneMode><description>test desc</description><tenantId>test</tenantId></virtualWireCreateSpec>"
 
-	xmlBytes, err :=xml.Marshal(object)
+	xmlBytes, err := xml.Marshal(object)
 
 	assert.Nil(t, err)
 	assert.Equal(t, expectedXml, string(xmlBytes))
@@ -40,4 +40,3 @@ func TestCreateMarshalling(t *testing.T) {
 func TestCreateUnMarshalling(t *testing.T) {
 	// TODO
 }
-

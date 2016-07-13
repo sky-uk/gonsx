@@ -1,9 +1,9 @@
 package virtualwire
 
 import (
-	"testing"
 	"github.com/stretchr/testify/assert"
 	"net/http"
+	"testing"
 )
 
 var deleteVirtualWireApi *DeleteVirtualWiresApi

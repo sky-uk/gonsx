@@ -1,8 +1,8 @@
 package tzone
 
 import (
-	"testing"
 	"github.com/stretchr/testify/assert"
+	"testing"
 )
 
 func TestFilterByName(t *testing.T) {
@@ -14,7 +14,7 @@ func TestFilterByName(t *testing.T) {
 	networkScope2.ObjectId = "id-2"
 	networkScope2.Name = "name-2"
 
-	networkScopeList.NetworkScopeList = []NetworkScope { *networkScope1, *networkScope2}
+	networkScopeList.NetworkScopeList = []NetworkScope{*networkScope1, *networkScope2}
 
 	networkScopeFiltered := networkScopeList.FilterByName("name-2")
 	assert.Equal(t, "id-2", networkScopeFiltered.ObjectId)

@@ -30,7 +30,6 @@ func RunEdgeinterfaceExample(nsxManager, nsxUser, nsxPassword string, debug bool
 		virtual_wire_id = create_api.GetResponse()
 	}
 
-
 	//
 	// Create Edge Interface for the virtual wire we created above
 	//
@@ -46,7 +45,6 @@ func RunEdgeinterfaceExample(nsxManager, nsxUser, nsxPassword string, debug bool
 		fmt.Println("Status code:", edge_interface_api.StatusCode())
 		fmt.Println("Failed to create interface.")
 	}
-
 
 	//
 	// Deleting Edge Interface.

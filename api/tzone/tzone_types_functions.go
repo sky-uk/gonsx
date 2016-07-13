@@ -13,7 +13,7 @@ func (s NetworkScope) String() string {
 func (v NetworkScopeList) FilterByName(name string) *NetworkScope {
 	var networkScopeFound NetworkScope
 	for _, networkScope := range v.NetworkScopeList {
-		if(networkScope.Name == name) {
+		if networkScope.Name == name {
 			networkScopeFound = networkScope
 			break
 		}

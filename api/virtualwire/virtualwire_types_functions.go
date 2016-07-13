@@ -13,7 +13,7 @@ func (s VirtualWire) String() string {
 func (v VirtualWires) FilterByName(name string) *VirtualWire {
 	var virtualWireFound VirtualWire
 	for _, virtualWire := range v.DataPage.VirtualWires {
-		if(virtualWire.Name == name) {
+		if virtualWire.Name == name {
 			virtualWireFound = virtualWire
 			break
 		}

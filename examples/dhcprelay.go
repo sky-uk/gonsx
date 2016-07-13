@@ -2,9 +2,9 @@ package main
 
 import (
 	"fmt"
-	"os"
 	"github.com/sky-uk/gonsx"
 	"github.com/sky-uk/gonsx/api/dhcprelay"
+	"os"
 )
 
 func getAllDhcpRelays(edgeId string, nsxclient *gonsx.NSXClient) (*dhcprelay.DhcpRelay, error) {
@@ -29,7 +29,6 @@ func RunDhcpRelayExample(nsxManager, nsxUser, nsxPassword string, debug bool) {
 	// Create NSXClient object.
 	//
 	nsxclient := gonsx.NewNSXClient(nsxManager, nsxUser, nsxPassword, true, debug)
-
 
 	// Get All current DHCP Relays.
 	CurrentDHCPRelay, err := getAllDhcpRelays("edge-50", nsxclient)
@@ -88,7 +87,6 @@ func RunDhcpRelayExample(nsxManager, nsxUser, nsxPassword string, debug bool) {
 		}
 	}
 
-
 	//
 	// Delete DHCP Relay Agent
 	//
@@ -128,10 +126,7 @@ func RunDhcpRelayExample(nsxManager, nsxUser, nsxPassword string, debug bool) {
 			}
 		}
 
-
 	}
-
-
 
 	//
 	// Delete DHCP Relay Agent
@@ -178,10 +173,6 @@ func RunDhcpRelayExample(nsxManager, nsxUser, nsxPassword string, debug bool) {
 			}
 		}
 
-
 	}
-
-
-
 
 }
