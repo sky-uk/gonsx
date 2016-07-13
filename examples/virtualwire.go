@@ -2,24 +2,15 @@ package main
 
 import (
 	"fmt"
-	"os"
 	"github.com/sky-uk/gonsx"
 	"github.com/sky-uk/gonsx/api/virtualwire"
 )
 
-func main() {
-	if len(os.Args) != 4 {
-		fmt.Printf("syntax error\nUsages: %s [https://nsxmanager_addr] [username] [password]\n\n", os.Args[0])
-		os.Exit(1)
-	}
-	nsxManager := os.Args[1]
-	nsxUser := os.Args[2]
-	nsxPassword := os.Args[3]
-
+func RunVirtualWireExample(nsxManager, nsxUser, nsxPassword string, debug bool) {
 	//
 	// Create NSXClient object.
 	//
-	nsxclient := gonsx.NewNSXClient(nsxManager, nsxUser, nsxPassword, true, true)
+	nsxclient := gonsx.NewNSXClient(nsxManager, nsxUser, nsxPassword, true, debug)
 
 	//
 	// Get All VirtualWires (Logical Switches).
