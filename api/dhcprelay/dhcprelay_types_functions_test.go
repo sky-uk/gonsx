@@ -39,3 +39,19 @@ func TestFilterByVnicIndex(t *testing.T) {
 	secondFiltered := dhcpRelay.FilterByVnicIndex("2")
 	assert.Equal(t, "10.10.10.2", secondFiltered.GiAddress)
 }
+
+
+func TestCheckByVnicIndex(t *testing.T) {
+	dhcpRelay := setup()
+	assert.Equal(t, true, dhcpRelay.CheckByVnicIndex("1"))
+	assert.Equal(t, false, dhcpRelay.CheckByVnicIndex("10"))
+}
+
+
+func TestRemoveByVnicIndex(t *testing.T) {
+	dhcpRelay := setup()
+	assert.Equal(t, true, dhcpRelay.CheckByVnicIndex("1"))
+
+	newdhcpRelay := dhcpRelay.RemoveByVnicIndex("1")
+	assert.Equal(t, false, newdhcpRelay.CheckByVnicIndex("1"))
+}
