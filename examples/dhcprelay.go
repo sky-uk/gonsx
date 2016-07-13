@@ -28,10 +28,28 @@ func main() {
 	// make the api call with nsxclient
 	err := nsxclient.Do(api)
 	// check if we err otherwise read response.
+	var CurrentDHCPRelay *dhcprelay.DhcpRelay
 	if err != nil {
 		fmt.Println("Error:", err)
 	} else {
 		fmt.Println(api.GetResponse())
+		CurrentDHCPRelay = api.GetResponse()
 	}
+
+	// Create New Relay Agent.
+	dhcp_ip := CurrentDHCPRelay.RelayServer.IpAddress
+	new_relay_agent := dhcprelay.RelayAgent{VnicIndex: "18", GiAddress: "10.152.163.1"}
+	newRelayAgentsList := append(CurrentDHCPRelay.RelayAgents, new_relay_agent)
+
+	update_api := dhcprelay.NewUpdate(dhcp_ip, "edge-50", newRelayAgentsList)
+
+	err = nsxclient.Do(update_api)
+	if err != nil {
+		fmt.Println("Error:", err)
+	} else {
+		fmt.Println(update_api.GetResponse())
+	}
+
+
 
 }
