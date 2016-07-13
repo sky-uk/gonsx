@@ -11,6 +11,6 @@ type DeleteVirtualWiresApi struct {
 
 func NewDelete(virtualWireId string) *DeleteVirtualWiresApi {
 	this := new(DeleteVirtualWiresApi)
-	this.BaseApi = api.NewBaseApi(http.MethodDelete, "/api/2.0/vdn/virtualwires/" + virtualWireId, nil, nil)
+	this.BaseApi = api.NewBaseApi(http.MethodDelete, "/api/2.0/vdn/virtualwires/"+virtualWireId, nil, nil)
 	return this
 }

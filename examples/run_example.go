@@ -1,8 +1,8 @@
 package main
 
 import (
-	"os"
 	"fmt"
+	"os"
 )
 
 func main() {
@@ -39,4 +39,3 @@ func main() {
 	fmt.Println("Example not implemented.")
 
 }
-

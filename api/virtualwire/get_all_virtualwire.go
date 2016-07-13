@@ -11,7 +11,7 @@ type GetAllVirtualWiresApi struct {
 
 func NewGetAll(scopeId string) *GetAllVirtualWiresApi {
 	this := new(GetAllVirtualWiresApi)
-	this.BaseApi = api.NewBaseApi(http.MethodGet, "/api/2.0/vdn/scopes/" + scopeId + "/virtualwires", nil, new(VirtualWires))
+	this.BaseApi = api.NewBaseApi(http.MethodGet, "/api/2.0/vdn/scopes/"+scopeId+"/virtualwires", nil, new(VirtualWires))
 	return this
 }
 

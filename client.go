@@ -1,15 +1,15 @@
 package gonsx
 
 import (
-	"fmt"
-	"log"
-	"encoding/xml"
-	"net/http"
-	"crypto/tls"
-	"io/ioutil"
-	"github.com/sky-uk/gonsx/api"
 	"bytes"
+	"crypto/tls"
+	"encoding/xml"
+	"fmt"
+	"github.com/sky-uk/gonsx/api"
 	"io"
+	"io/ioutil"
+	"log"
+	"net/http"
 	"strings"
 )
 
@@ -24,18 +24,18 @@ func NewNSXClient(url string, user string, password string, ignoreSSL bool, debu
 }
 
 type NSXClient struct {
-	URL		string
-	User 		string
-	Password	string
-	IgnoreSSL	bool
-	debug 		bool
+	URL       string
+	User      string
+	Password  string
+	IgnoreSSL bool
+	debug     bool
 }
 
 func (nsxClient *NSXClient) Do(api api.NSXApi) error {
 	requestURL := fmt.Sprintf("%s%s", nsxClient.URL, api.Endpoint())
 
 	var requestPayload io.Reader
-	if(api.RequestObject() != nil) {
+	if api.RequestObject() != nil {
 		requestXmlBytes, marshallingErr := xml.Marshal(api.RequestObject())
 		log.Println(string(requestXmlBytes))
 		if marshallingErr != nil {
@@ -43,7 +43,7 @@ func (nsxClient *NSXClient) Do(api api.NSXApi) error {
 		}
 		requestPayload = bytes.NewReader(requestXmlBytes)
 	}
-	if(nsxClient.debug) {
+	if nsxClient.debug {
 		log.Println("requestURL:", requestURL)
 	}
 	req, err := http.NewRequest(api.Method(), requestURL, requestPayload)
@@ -61,7 +61,7 @@ func (nsxClient *NSXClient) Do(api api.NSXApi) error {
 	}
 	httpClient := &http.Client{Transport: tr}
 	res, err := httpClient.Do(req)
-	if err != nil{
+	if err != nil {
 		log.Println("ERROR executing request: ", err)
 		return err
 	}
@@ -72,18 +72,18 @@ func (nsxClient *NSXClient) Do(api api.NSXApi) error {
 func (nsxClient *NSXClient) handleResponse(api api.NSXApi, res *http.Response) error {
 	api.SetStatusCode(res.StatusCode)
 	bodyText, err := ioutil.ReadAll(res.Body)
-	if err != nil{
+	if err != nil {
 		log.Println("ERROR reading response: ", err)
 		return err
 	}
 
 	api.SetRawResponse(bodyText)
 
-	if(nsxClient.debug) {
+	if nsxClient.debug {
 		log.Println(string(bodyText))
 	}
 
-	if (isXML(res.Header.Get("Content-Type")) && api.StatusCode() == 200) {
+	if isXML(res.Header.Get("Content-Type")) && api.StatusCode() == 200 {
 		xmlerr := xml.Unmarshal(bodyText, api.ResponseObject())
 		if xmlerr != nil {
 			log.Println("ERROR unmarshalling response: ", err)

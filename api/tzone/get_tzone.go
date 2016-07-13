@@ -11,7 +11,7 @@ type GetTransportZoneApi struct {
 
 func NewGet(id string) *GetTransportZoneApi {
 	this := new(GetTransportZoneApi)
-	this.BaseApi = api.NewBaseApi(http.MethodGet, "/api/2.0/vdn/scopes/" + id, nil, new(NetworkScope))
+	this.BaseApi = api.NewBaseApi(http.MethodGet, "/api/2.0/vdn/scopes/"+id, nil, new(NetworkScope))
 	return this
 }
 

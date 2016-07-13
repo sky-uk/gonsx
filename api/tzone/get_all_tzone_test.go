@@ -1,10 +1,10 @@
 package tzone
 
 import (
-	"testing"
-	"github.com/stretchr/testify/assert"
 	"encoding/xml"
+	"github.com/stretchr/testify/assert"
 	"net/http"
+	"testing"
 )
 
 var getAllTransportZonesApi *GetAllTransportZonesApi

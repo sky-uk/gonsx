@@ -1,9 +1,9 @@
 package api
 
 import (
-	"testing"
-	"github.com/stretchr/testify/assert"
 	"errors"
+	"github.com/stretchr/testify/assert"
+	"testing"
 )
 
 func TestBaseApi(t *testing.T) {

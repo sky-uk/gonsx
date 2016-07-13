@@ -12,7 +12,7 @@ func (d RelayAgent) String() string {
 
 func (v DhcpRelay) FilterByIpAddress(ip_address string) *RelayAgent {
 	var relayAgentFound RelayAgent
-	for _, relay_agent := range v.RelayAgents{
+	for _, relay_agent := range v.RelayAgents {
 		if relay_agent.GiAddress == ip_address {
 			relayAgentFound = relay_agent
 			break
@@ -23,8 +23,8 @@ func (v DhcpRelay) FilterByIpAddress(ip_address string) *RelayAgent {
 
 func (v DhcpRelay) FilterByVnicIndex(vnicIndex string) *RelayAgent {
 	var relayAgentFound RelayAgent
-	for _, relay_agent := range v.RelayAgents{
-		if relay_agent.VnicIndex == vnicIndex{
+	for _, relay_agent := range v.RelayAgents {
+		if relay_agent.VnicIndex == vnicIndex {
 			relayAgentFound = relay_agent
 			break
 		}
@@ -32,9 +32,9 @@ func (v DhcpRelay) FilterByVnicIndex(vnicIndex string) *RelayAgent {
 	return &relayAgentFound
 }
 
-func (v DhcpRelay) RemoveByVnicIndex(vnicIndex string) *DhcpRelay{
-	for idx, relay_agent := range v.RelayAgents{
-		if relay_agent.VnicIndex == vnicIndex{
+func (v DhcpRelay) RemoveByVnicIndex(vnicIndex string) *DhcpRelay {
+	for idx, relay_agent := range v.RelayAgents {
+		if relay_agent.VnicIndex == vnicIndex {
 			v.RelayAgents = append(v.RelayAgents[:idx], v.RelayAgents[idx+1:]...)
 			break
 		}
@@ -42,10 +42,9 @@ func (v DhcpRelay) RemoveByVnicIndex(vnicIndex string) *DhcpRelay{
 	return &v
 }
 
-
 func (v DhcpRelay) CheckByVnicIndex(vnicIndex string) bool {
-	for _, relay_agent := range v.RelayAgents{
-		if relay_agent.VnicIndex == vnicIndex{
+	for _, relay_agent := range v.RelayAgents {
+		if relay_agent.VnicIndex == vnicIndex {
 			return true
 		}
 	}

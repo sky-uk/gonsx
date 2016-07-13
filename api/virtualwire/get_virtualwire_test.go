@@ -1,10 +1,10 @@
 package virtualwire
 
 import (
-	"testing"
-	"github.com/stretchr/testify/assert"
 	"encoding/xml"
+	"github.com/stretchr/testify/assert"
 	"net/http"
+	"testing"
 )
 
 var getVirtualWireApi *GetVirtualWireApi

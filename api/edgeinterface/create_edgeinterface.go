@@ -10,24 +10,24 @@ type CreateEdgeInterfaceApi struct {
 }
 
 func NewCreate(edgeId, interfaceName, virtualWireId, gateway,
-		subnetMask, interfaceType string, mtu int) *CreateEdgeInterfaceApi {
+	subnetMask, interfaceType string, mtu int) *CreateEdgeInterfaceApi {
 	this := new(CreateEdgeInterfaceApi)
 
 	address_group := AddressGroup{PrimaryAddress: gateway, SubnetMask: subnetMask}
 	address_group_list := []AddressGroup{address_group}
 
 	edge_interface := EdgeInterface{
-		Name: interfaceName,
+		Name:          interfaceName,
 		ConnectedToId: virtualWireId,
-		Type: interfaceType,
-		Mtu: mtu,
-		IsConnected: true,
-		AddressGroups:	AddressGroups{address_group_list},
+		Type:          interfaceType,
+		Mtu:           mtu,
+		IsConnected:   true,
+		AddressGroups: AddressGroups{address_group_list},
 	}
 	requestPayload := &EdgeInterfaces{}
 	requestPayload.Interfaces = []EdgeInterface{edge_interface}
 
-	this.BaseApi = api.NewBaseApi(http.MethodPost, "/api/4.0/edges/" + edgeId + "/interfaces/?action=patch", requestPayload, new(EdgeInterfaces))
+	this.BaseApi = api.NewBaseApi(http.MethodPost, "/api/4.0/edges/"+edgeId+"/interfaces/?action=patch", requestPayload, new(EdgeInterfaces))
 	return this
 }
 

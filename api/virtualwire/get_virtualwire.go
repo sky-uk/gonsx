@@ -11,7 +11,7 @@ type GetVirtualWireApi struct {
 
 func NewGet(id string) *GetVirtualWireApi {
 	this := new(GetVirtualWireApi)
-	this.BaseApi = api.NewBaseApi(http.MethodGet, "/api/2.0/vdn/virtualwires/" + id, nil, new(VirtualWire))
+	this.BaseApi = api.NewBaseApi(http.MethodGet, "/api/2.0/vdn/virtualwires/"+id, nil, new(VirtualWire))
 	return this
 }
 

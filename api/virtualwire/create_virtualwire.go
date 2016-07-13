@@ -18,10 +18,10 @@ func NewCreate(name, desc, tenantID, scopeId string) *CreateVirtualWireApi {
 	// TODO: need to make it argument
 	requestPayload.ControlPlaneMode = "UNICAST_MODE"
 
-	this.BaseApi = api.NewBaseApi(http.MethodPost, "/api/2.0/vdn/scopes/" + scopeId +"/virtualwires", requestPayload, new(string))
+	this.BaseApi = api.NewBaseApi(http.MethodPost, "/api/2.0/vdn/scopes/"+scopeId+"/virtualwires", requestPayload, new(string))
 	return this
 }
 
-func (this CreateVirtualWireApi) GetResponse() string{
+func (this CreateVirtualWireApi) GetResponse() string {
 	return this.ResponseObject().(string)
 }

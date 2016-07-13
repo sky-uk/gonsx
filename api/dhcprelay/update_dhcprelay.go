@@ -1,6 +1,5 @@
 package dhcprelay
 
-
 import (
 	"github.com/sky-uk/gonsx/api"
 	"net/http"
@@ -16,12 +15,10 @@ func NewUpdate(dhcpIpAddress, edgeId string, relayAgentslist []RelayAgent) *Upda
 	requestPayload.RelayServer.IpAddress = dhcpIpAddress
 	requestPayload.RelayAgents = relayAgentslist
 
-	this.BaseApi = api.NewBaseApi(http.MethodPut, "/api/4.0/edges/" + edgeId +"/dhcp/config/relay", requestPayload, new(string))
+	this.BaseApi = api.NewBaseApi(http.MethodPut, "/api/4.0/edges/"+edgeId+"/dhcp/config/relay", requestPayload, new(string))
 	return this
 }
 
-
-func (this UpdateDhcpRelayApi) GetResponse() string{
+func (this UpdateDhcpRelayApi) GetResponse() string {
 	return this.ResponseObject().(string)
 }
-
