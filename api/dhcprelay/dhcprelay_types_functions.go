@@ -31,3 +31,23 @@ func (v DhcpRelay) FilterByVnicIndex(vnicIndex string) *RelayAgent {
 	}
 	return &relayAgentFound
 }
+
+func (v DhcpRelay) RemoveByVnicIndex(vnicIndex string) *DhcpRelay{
+	for idx, relay_agent := range v.RelayAgents{
+		if relay_agent.VnicIndex == vnicIndex{
+			v.RelayAgents = append(v.RelayAgents[:idx], v.RelayAgents[idx+1:]...)
+			break
+		}
+	}
+	return &v
+}
+
+
+func (v DhcpRelay) CheckByVnicIndex(vnicIndex string) bool {
+	for _, relay_agent := range v.RelayAgents{
+		if relay_agent.VnicIndex == vnicIndex{
+			return true
+		}
+	}
+	return false
+}
