@@ -106,3 +106,32 @@ Delete:
 api := edgeinterface.NewDelete(interfaceIndex, edgeId)
 nsxclient.Do(delete_api)
 ```
+
+### Dhcp Relay
+
+Interface resource. This resource will call the interface api within NSX.
+Import the following class:
+```
+github.com/sky-uk/gonsx/api/dhcprelay
+```
+
+The Dhcp relay behaves differently in the API and as such it doesn't have a create and only an update and delete.
+The delete function will remove the whole relay and all of its information. If you do not wish to do this and only
+remove interfaces from the DHCP relay, then you must run an update instead. 
+
+Read:
+```
+api := dhcp.NewGetAll(edgeId)
+nsxclient.Do(api)
+```
+
+Update:
+```
+api := dhcprelay.NewUpdate(dhcpIpAddress, edgeId, relayAgentslist)
+nsxclient.Do(api)
+```
+
+Delete:
+```
+api := dhcprelay.NewDelete(edgeId)
+```

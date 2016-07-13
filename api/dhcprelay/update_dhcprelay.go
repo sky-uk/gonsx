@@ -10,7 +10,7 @@ type UpdateDhcpRelayApi struct {
 	*api.BaseApi
 }
 
-func NewCreate(dhcpIpAddress, edgeId string, relayAgentslist []RelayAgent) *UpdateDhcpRelayApi {
+func NewUpdate(dhcpIpAddress, edgeId string, relayAgentslist []RelayAgent) *UpdateDhcpRelayApi {
 	this := new(UpdateDhcpRelayApi)
 	requestPayload := new(DhcpRelay)
 	requestPayload.RelayServer.IpAddress = dhcpIpAddress
@@ -24,3 +24,4 @@ func NewCreate(dhcpIpAddress, edgeId string, relayAgentslist []RelayAgent) *Upda
 func (this UpdateDhcpRelayApi) GetResponse() string{
 	return this.ResponseObject().(string)
 }
+
