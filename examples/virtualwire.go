@@ -6,6 +6,7 @@ import (
 	"github.com/sky-uk/gonsx/api/virtualwire"
 )
 
+// RunVirtualWireExample  Implementes VirtualWire example.
 func RunVirtualWireExample(nsxManager, nsxUser, nsxPassword string, debug bool) {
 	//
 	// Create NSXClient object.
@@ -18,27 +19,27 @@ func RunVirtualWireExample(nsxManager, nsxUser, nsxPassword string, debug bool) 
 	api := virtualwire.NewGetAll("vdnscope-19")
 	nsxclient.Do(api)
 	// Get ID of our VirtualWire with name "test"
-	virtual_wire_id := (api.GetResponse().FilterByName("test").ObjectID)
+	virtualWireID := (api.GetResponse().FilterByName("test").ObjectID)
 	// check if we got virtual wire id, or create a new one.
-	if virtual_wire_id == "" {
-		create_api := virtualwire.NewCreate("test", "test desc", "tenant id", "vdnscope-19")
-		nsxclient.Do(create_api)
-		fmt.Println("Status code:", create_api.StatusCode())
-		virtual_wire_id = create_api.GetResponse()
+	if virtualWireID == "" {
+		createVirtualWireAPI := virtualwire.NewCreate("test", "test desc", "tenant id", "vdnscope-19")
+		nsxclient.Do(createVirtualWireAPI)
+		fmt.Println("Status code:", createVirtualWireAPI.StatusCode())
+		virtualWireID = createVirtualWireAPI.GetResponse()
 	}
 
 	//
 	// Deleting a virtual wire.
 	//
-	delete_api := virtualwire.NewDelete(virtual_wire_id)
-	nsxclient.Do(delete_api)
+	deleteAPI := virtualwire.NewDelete(virtualWireID)
+	nsxclient.Do(deleteAPI)
 
 	// check if it was a successful.
-	if delete_api.StatusCode() == 204 {
+	if deleteAPI.StatusCode() == 204 {
 		fmt.Println("Virtual Wire deleted.")
 	} else {
 		fmt.Println("Failed to delete virtual wire.")
-		fmt.Println("Status code: ", delete_api.StatusCode())
+		fmt.Println("Status code: ", deleteAPI.StatusCode())
 	}
 
 }

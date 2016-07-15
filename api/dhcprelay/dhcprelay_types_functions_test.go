@@ -23,10 +23,10 @@ func setup() *DhcpRelay {
 func TestFilterByIpAddress(t *testing.T) {
 	dhcpRelay := setup()
 
-	firstFiltered := dhcpRelay.FilterByIpAddress("10.10.10.1")
+	firstFiltered := dhcpRelay.FilterByIPAddress("10.10.10.1")
 	assert.Equal(t, "1", firstFiltered.VnicIndex)
 
-	secondFiltered := dhcpRelay.FilterByIpAddress("10.10.10.2")
+	secondFiltered := dhcpRelay.FilterByIPAddress("10.10.10.2")
 	assert.Equal(t, "2", secondFiltered.VnicIndex)
 }
 

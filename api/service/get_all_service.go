@@ -5,16 +5,19 @@ import (
 	"net/http"
 )
 
-type GetAllServiceApi struct {
-	*api.BaseApi
+// GetAllServiceAPI base object.
+type GetAllServiceAPI struct {
+	*api.BaseAPI
 }
 
-func NewGetAll(scopeId string) *GetAllServiceApi {
-	this := new(GetAllServiceApi)
-	this.BaseApi = api.NewBaseApi(http.MethodGet, "/api/2.0/services/application/"+scopeId, nil, new(ApplicationsList))
+// NewGetAll returns a new object of GetAllServiceAPI.
+func NewGetAll(scopeID string) *GetAllServiceAPI {
+	this := new(GetAllServiceAPI)
+	this.BaseAPI = api.NewBaseAPI(http.MethodGet, "/api/2.0/services/application/"+ scopeID, nil, new(ApplicationsList))
 	return this
 }
 
-func (this GetAllServiceApi) GetResponse() *ApplicationsList {
-	return this.ResponseObject().(*ApplicationsList)
+// GetResponse returns ResponseObject of GetAllServiceAPI.
+func (ga GetAllServiceAPI) GetResponse() *ApplicationsList {
+	return ga.ResponseObject().(*ApplicationsList)
 }

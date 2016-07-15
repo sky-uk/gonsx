@@ -5,16 +5,19 @@ import (
 	"net/http"
 )
 
-type GetAllTransportZonesApi struct {
-	*api.BaseApi
+// GetAllTransportZonesAPI base api object.
+type GetAllTransportZonesAPI struct {
+	*api.BaseAPI
 }
 
-func NewGetAll() *GetAllTransportZonesApi {
-	this := new(GetAllTransportZonesApi)
-	this.BaseApi = api.NewBaseApi(http.MethodGet, "/api/2.0/vdn/scopes", nil, new(NetworkScopeList))
+// NewGetAll returns new object of GetAllTransportZonesAPI
+func NewGetAll() *GetAllTransportZonesAPI {
+	this := new(GetAllTransportZonesAPI)
+	this.BaseAPI = api.NewBaseAPI(http.MethodGet, "/api/2.0/vdn/scopes", nil, new(NetworkScopeList))
 	return this
 }
 
-func (this GetAllTransportZonesApi) GetResponse() *NetworkScopeList {
-	return this.ResponseObject().(*NetworkScopeList)
+// GetResponse returns ResponseObject of GetAllTransportZonesAPI
+func (ga GetAllTransportZonesAPI) GetResponse() *NetworkScopeList {
+	return ga.ResponseObject().(*NetworkScopeList)
 }

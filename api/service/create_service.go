@@ -5,23 +5,26 @@ import (
 	"net/http"
 )
 
-type CreateServiceApi struct {
-	*api.BaseApi
+// CreateServiceAPI api object
+type CreateServiceAPI struct {
+	*api.BaseAPI
 }
 
-func NewCreate(scopeId, name, desc, proto, ports string) *CreateServiceApi {
-	this := new(CreateServiceApi)
+// NewCreate returns a new object of CreateServiceAPI.
+func NewCreate(scopeID, name, desc, proto, ports string) *CreateServiceAPI {
+	this := new(CreateServiceAPI)
 	requestPayload := new(ApplicationService)
 	requestPayload.Name = name
 	requestPayload.Description = desc
 
-	element := ServiceElement{ApplicationProtocol: proto, Value: ports}
-	requestPayload.Element = []ServiceElement{element}
+	element := Element{ApplicationProtocol: proto, Value: ports}
+	requestPayload.Element = []Element{element}
 
-	this.BaseApi = api.NewBaseApi(http.MethodPost, "/api/2.0/services/application/"+scopeId, requestPayload, new(ApplicationService))
+	this.BaseAPI = api.NewBaseAPI(http.MethodPost, "/api/2.0/services/application/"+ scopeID, requestPayload, new(ApplicationService))
 	return this
 }
 
-func (this CreateServiceApi) GetResponse() *ApplicationService {
-	return this.ResponseObject().(*ApplicationService)
+// GetResponse returns a ResponseObject of CreateServiceAPI.
+func (ca CreateServiceAPI) GetResponse() *ApplicationService {
+	return ca.ResponseObject().(*ApplicationService)
 }

@@ -7,23 +7,24 @@ import (
 	"os"
 )
 
-func getAllDhcpRelays(edgeId string, nsxclient *gonsx.NSXClient) (*dhcprelay.DhcpRelay, error) {
+func getAllDhcpRelays(edgeID string, nsxclient *gonsx.NSXClient) (*dhcprelay.DhcpRelay, error) {
 	//
 	// Get All DHCP Relay agents.
 	//
-	api := dhcprelay.NewGetAll(edgeId)
+	api := dhcprelay.NewGetAll(edgeID)
 	// make the api call with nsxclient
 	err := nsxclient.Do(api)
 	// check if we err otherwise read response.
 	if err != nil {
 		fmt.Println("Error:", err)
 		return nil, err
-	} else {
-		fmt.Println("Get All Response: ", api.GetResponse())
-		return api.GetResponse(), nil
 	}
+
+	fmt.Println("Get All Response: ", api.GetResponse())
+	return api.GetResponse(), nil
 }
 
+// RunDhcpRelayExample ...Runs the DHCPRelay example.
 func RunDhcpRelayExample(nsxManager, nsxUser, nsxPassword string, debug bool) {
 	//
 	// Create NSXClient object.
@@ -40,21 +41,21 @@ func RunDhcpRelayExample(nsxManager, nsxUser, nsxPassword string, debug bool) {
 	//
 	// Add New Relay Agent into existing list.
 	//
-	new_relay_agent := dhcprelay.RelayAgent{VnicIndex: "16", GiAddress: "10.152.165.1"}
-	newRelayAgentsList := append(CurrentDHCPRelay.RelayAgents, new_relay_agent)
+	newRelayAgent:= dhcprelay.RelayAgent{VnicIndex: "16", GiAddress: "10.152.165.1"}
+	newRelayAgentsList := append(CurrentDHCPRelay.RelayAgents, newRelayAgent)
 
-	update_api := dhcprelay.NewUpdate("10.152.160.10", "edge-50", newRelayAgentsList)
+	updateAPI:= dhcprelay.NewUpdate("10.152.160.10", "edge-50", newRelayAgentsList)
 
-	err = nsxclient.Do(update_api)
+	err = nsxclient.Do(updateAPI)
 	if err != nil {
 		fmt.Println("Error:", err)
 	} else {
-		if update_api.StatusCode() == 204 {
+		if updateAPI.StatusCode() == 204 {
 			fmt.Println("Updated DHCP Relay.")
-			fmt.Println(update_api.GetResponse())
+			fmt.Println(updateAPI.GetResponse())
 		} else {
 			fmt.Println("Failed to update the DHCP relay")
-			fmt.Println(update_api.GetResponse())
+			fmt.Println(updateAPI.GetResponse())
 		}
 	}
 
@@ -69,21 +70,21 @@ func RunDhcpRelayExample(nsxManager, nsxUser, nsxPassword string, debug bool) {
 		os.Exit(1)
 	}
 
-	new_relay_agent = dhcprelay.RelayAgent{VnicIndex: "17", GiAddress: "10.152.164.1"}
-	newRelayAgentsList = append(CurrentDHCPRelay.RelayAgents, new_relay_agent)
+	newRelayAgent = dhcprelay.RelayAgent{VnicIndex: "17", GiAddress: "10.152.164.1"}
+	newRelayAgentsList = append(CurrentDHCPRelay.RelayAgents, newRelayAgent)
 
-	update_api = dhcprelay.NewUpdate("10.152.160.10", "edge-50", newRelayAgentsList)
+	updateAPI = dhcprelay.NewUpdate("10.152.160.10", "edge-50", newRelayAgentsList)
 
-	err = nsxclient.Do(update_api)
+	err = nsxclient.Do(updateAPI)
 	if err != nil {
 		fmt.Println("Error:", err)
 	} else {
-		if update_api.StatusCode() == 204 {
+		if updateAPI.StatusCode() == 204 {
 			fmt.Println("Updated DHCP Relay.")
-			fmt.Println(update_api.GetResponse())
+			fmt.Println(updateAPI.GetResponse())
 		} else {
 			fmt.Println("Failed to update the DHCP relay")
-			fmt.Println(update_api.GetResponse())
+			fmt.Println(updateAPI.GetResponse())
 		}
 	}
 
@@ -99,8 +100,8 @@ func RunDhcpRelayExample(nsxManager, nsxUser, nsxPassword string, debug bool) {
 
 	//  see if our vnic exists in relay agents list and this is the only one there.
 	if CurrentDHCPRelay.CheckByVnicIndex("16") && (len(CurrentDHCPRelay.RelayAgents) == 1) {
-		delete_api := dhcprelay.NewDelete("edge-50")
-		err = nsxclient.Do(delete_api)
+		deleteAPI := dhcprelay.NewDelete("edge-50")
+		err = nsxclient.Do(deleteAPI)
 		if err != nil {
 			fmt.Println("Error:", err)
 		} else {
@@ -112,17 +113,17 @@ func RunDhcpRelayExample(nsxManager, nsxUser, nsxPassword string, debug bool) {
 		fmt.Println("There are other DHCP Relay agents, only removing single entry with update.")
 		newRelayAgentsList := CurrentDHCPRelay.RemoveByVnicIndex("16").RelayAgents
 
-		update_api := dhcprelay.NewUpdate("10.152.160.10", "edge-50", newRelayAgentsList)
-		err = nsxclient.Do(update_api)
+		updateAPI := dhcprelay.NewUpdate("10.152.160.10", "edge-50", newRelayAgentsList)
+		err = nsxclient.Do(updateAPI)
 		if err != nil {
 			fmt.Println("Error:", err)
 		} else {
-			if update_api.StatusCode() == 204 {
+			if updateAPI.StatusCode() == 204 {
 				fmt.Println("Updated DHCP Relay.")
-				fmt.Println(update_api.GetResponse())
+				fmt.Println(updateAPI.GetResponse())
 			} else {
 				fmt.Println("Failed to update the DHCP relay")
-				fmt.Println(update_api.GetResponse())
+				fmt.Println(updateAPI.GetResponse())
 			}
 		}
 
@@ -140,17 +141,17 @@ func RunDhcpRelayExample(nsxManager, nsxUser, nsxPassword string, debug bool) {
 	//  see if our vnic exists in relay agents list and this is the only one there.
 	if CurrentDHCPRelay.CheckByVnicIndex("17") && (len(CurrentDHCPRelay.RelayAgents) == 1) {
 		fmt.Println("Last dhcp relay agent, removing the whole DHCP Relay.")
-		delete_api := dhcprelay.NewDelete("edge-50")
-		err = nsxclient.Do(delete_api)
+		deleteAPI := dhcprelay.NewDelete("edge-50")
+		err = nsxclient.Do(deleteAPI)
 		if err != nil {
 			fmt.Println("Error:", err)
 		} else {
-			if update_api.StatusCode() == 204 {
+			if updateAPI.StatusCode() == 204 {
 				fmt.Println("Updated DHCP Relay.")
-				fmt.Println(update_api.GetResponse())
+				fmt.Println(updateAPI.GetResponse())
 			} else {
 				fmt.Println("Failed to update the DHCP relay")
-				fmt.Println(update_api.GetResponse())
+				fmt.Println(updateAPI.GetResponse())
 			}
 		}
 	} else {
@@ -159,17 +160,17 @@ func RunDhcpRelayExample(nsxManager, nsxUser, nsxPassword string, debug bool) {
 		fmt.Println("There are other DHCP Relay agents, only removing single entry with update.")
 		newRelayAgentsList := CurrentDHCPRelay.RemoveByVnicIndex("16").RelayAgents
 
-		update_api := dhcprelay.NewUpdate("10.152.160.10", "edge-50", newRelayAgentsList)
-		err = nsxclient.Do(update_api)
+		updateAPI := dhcprelay.NewUpdate("10.152.160.10", "edge-50", newRelayAgentsList)
+		err = nsxclient.Do(updateAPI)
 		if err != nil {
 			fmt.Println("Error:", err)
 		} else {
-			if update_api.StatusCode() == 204 {
+			if updateAPI.StatusCode() == 204 {
 				fmt.Println("Updated DHCP Relay.")
-				fmt.Println(update_api.GetResponse())
+				fmt.Println(updateAPI.GetResponse())
 			} else {
 				fmt.Println("Failed to update the DHCP relay")
-				fmt.Println(update_api.GetResponse())
+				fmt.Println(updateAPI.GetResponse())
 			}
 		}
 

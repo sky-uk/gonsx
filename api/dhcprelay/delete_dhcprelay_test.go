@@ -6,18 +6,18 @@ import (
 	"testing"
 )
 
-var deleteDhcpRelayApi *DeleteDhcpRelayApi
+var deleteDhcpRelayAPI *DeleteDhcpRelayAPI
 
 func setupDelete() {
-	deleteDhcpRelayApi = NewDelete("edge-50")
+	deleteDhcpRelayAPI = NewDelete("edge-50")
 }
 
 func TestDeleteMethod(t *testing.T) {
 	setupDelete()
-	assert.Equal(t, http.MethodDelete, deleteDhcpRelayApi.Method())
+	assert.Equal(t, http.MethodDelete, deleteDhcpRelayAPI.Method())
 }
 
 func TestDeleteEndpoint(t *testing.T) {
 	setupDelete()
-	assert.Equal(t, "/api/4.0/edges/edge-50/dhcp/config/relay", deleteDhcpRelayApi.Endpoint())
+	assert.Equal(t, "/api/4.0/edges/edge-50/dhcp/config/relay", deleteDhcpRelayAPI.Endpoint())
 }

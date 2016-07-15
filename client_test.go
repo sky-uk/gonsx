@@ -45,7 +45,7 @@ func setup(statusCode int, responseBody string) {
 func TestHappyCase(t *testing.T) {
 	setup(200, "pong")
 	nsxClient = NewNSXClient(server.URL, user, password, ignoreSSL, debug)
-	apiRequest := api.NewBaseApi(http.MethodGet, "/", nil, nil)
+	apiRequest := api.NewBaseAPI(http.MethodGet, "/", nil, nil)
 
 	err := nsxClient.Do(apiRequest)
 
@@ -58,7 +58,7 @@ func TestBasicAuthFailure(t *testing.T) {
 	setup(0, "")
 	nsxClient = NewNSXClient(server.URL, "invalidUser", "invalidPass", ignoreSSL, debug)
 
-	apiRequest := api.NewBaseApi(http.MethodGet, "/", nil, nil)
+	apiRequest := api.NewBaseAPI(http.MethodGet, "/", nil, nil)
 	nsxClient.Do(apiRequest)
 
 	assert.Equal(t, 403, apiRequest.StatusCode())

@@ -9,7 +9,7 @@ func setup() (edgeInterfacesList *EdgeInterfaces) {
 	edgeInterfacesList = &EdgeInterfaces{}
 	firstInterface := EdgeInterface{
 		Name:          "firstInterface",
-		ConnectedToId: "virtualwire-1",
+		ConnectedToID: "virtualwire-1",
 		Type:          "internal",
 		Index:         "1",
 		Mtu:           1500,
@@ -17,7 +17,7 @@ func setup() (edgeInterfacesList *EdgeInterfaces) {
 	}
 	secondInterface := EdgeInterface{
 		Name:          "secondInterface",
-		ConnectedToId: "virtualwire-1",
+		ConnectedToID: "virtualwire-1",
 		Type:          "internal",
 		Index:         "2",
 		Mtu:           1500,

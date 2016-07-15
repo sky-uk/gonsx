@@ -7,28 +7,28 @@ import (
 	"testing"
 )
 
-var getTransportZoneApi *GetTransportZoneApi
+var getTransportZoneAPI *GetTransportZoneAPI
 
 func setupGet(id string) {
-	getTransportZoneApi = NewGet(id)
+	getTransportZoneAPI = NewGet(id)
 }
 
 func TestGetMethod(t *testing.T) {
 	setupGet("id1")
-	assert.Equal(t, http.MethodGet, getTransportZoneApi.Method())
+	assert.Equal(t, http.MethodGet, getTransportZoneAPI.Method())
 }
 
 func TestGetEndpoint(t *testing.T) {
 	setupGet("id1")
-	assert.Equal(t, "/api/2.0/vdn/scopes/id1", getTransportZoneApi.Endpoint())
+	assert.Equal(t, "/api/2.0/vdn/scopes/id1", getTransportZoneAPI.Endpoint())
 }
 
 func TestGetUnMarshalling(t *testing.T) {
 	setupGet("id1")
 	xmlContent := []byte("<vdnScope><objectId>vdnscope-1</objectId></vdnScope>")
 
-	xmlerr := xml.Unmarshal(xmlContent, getTransportZoneApi.ResponseObject())
+	xmlerr := xml.Unmarshal(xmlContent, getTransportZoneAPI.ResponseObject())
 
 	assert.Nil(t, xmlerr)
-	assert.Equal(t, "vdnscope-1", getTransportZoneApi.GetResponse().ObjectId)
+	assert.Equal(t, "vdnscope-1", getTransportZoneAPI.GetResponse().ObjectID)
 }

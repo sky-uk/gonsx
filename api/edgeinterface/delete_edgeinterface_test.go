@@ -6,18 +6,18 @@ import (
 	"testing"
 )
 
-var deleteEdgeInterfaceApi *DeleteEdgeInterfaceApi
+var deleteEdgeInterfaceAPI *DeleteEdgeInterfaceAPI
 
 func setupDelete() {
-	deleteEdgeInterfaceApi = NewDelete("1", "edge-1")
+	deleteEdgeInterfaceAPI = NewDelete("1", "edge-1")
 }
 
 func TestDeleteMethod(t *testing.T) {
 	setupDelete()
-	assert.Equal(t, http.MethodDelete, deleteEdgeInterfaceApi.Method())
+	assert.Equal(t, http.MethodDelete, deleteEdgeInterfaceAPI.Method())
 }
 
 func TestDeleteEndpoint(t *testing.T) {
 	setupDelete()
-	assert.Equal(t, "/api/4.0/edges/edge-1/interfaces/?index=1", deleteEdgeInterfaceApi.Endpoint())
+	assert.Equal(t, "/api/4.0/edges/edge-1/interfaces/?index=1", deleteEdgeInterfaceAPI.Endpoint())
 }
