@@ -17,7 +17,7 @@ func TestClientGetAllTransportZones(t *testing.T) {
 	nsxClient.Do(api)
 
 	assert.Len(t, api.GetResponse().NetworkScopeList, 1)
-	assert.Equal(t, "vdnscope-19", api.GetResponse().NetworkScopeList[0].ObjectId)
+	assert.Equal(t, "vdnscope-19", api.GetResponse().NetworkScopeList[0].ObjectID)
 }
 
 func TestClientGetAllTransportZonesFiltered(t *testing.T) {
@@ -30,7 +30,7 @@ func TestClientGetAllTransportZonesFiltered(t *testing.T) {
 	nsxClient.Do(api)
 	actualTransportZone := api.GetResponse().FilterByName("S3_OVP_Routed_Network_Slough")
 
-	assert.Equal(t, "vdnscope-19", actualTransportZone.ObjectId)
+	assert.Equal(t, "vdnscope-19", actualTransportZone.ObjectID)
 }
 
 func TestClientGetTransportZone(t *testing.T) {
@@ -43,5 +43,5 @@ func TestClientGetTransportZone(t *testing.T) {
 	nsxClient.Do(api)
 	actualTransportZone := api.GetResponse()
 
-	assert.Equal(t, "vdnscope-19", actualTransportZone.ObjectId)
+	assert.Equal(t, "vdnscope-19", actualTransportZone.ObjectID)
 }

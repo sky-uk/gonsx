@@ -13,6 +13,7 @@ import (
 	"strings"
 )
 
+// NewNSXClient  Creates a new nsxclient object.
 func NewNSXClient(url string, user string, password string, ignoreSSL bool, debug bool) *NSXClient {
 	nsxClient := new(NSXClient)
 	nsxClient.URL = url
@@ -23,6 +24,7 @@ func NewNSXClient(url string, user string, password string, ignoreSSL bool, debu
 	return nsxClient
 }
 
+// NSXClient struct.
 type NSXClient struct {
 	URL       string
 	User      string
@@ -31,17 +33,18 @@ type NSXClient struct {
 	debug     bool
 }
 
+// Do - makes the API call.
 func (nsxClient *NSXClient) Do(api api.NSXApi) error {
 	requestURL := fmt.Sprintf("%s%s", nsxClient.URL, api.Endpoint())
 
 	var requestPayload io.Reader
 	if api.RequestObject() != nil {
-		requestXmlBytes, marshallingErr := xml.Marshal(api.RequestObject())
-		log.Println(string(requestXmlBytes))
+		requestXMLBytes, marshallingErr := xml.Marshal(api.RequestObject())
+		log.Println(string(requestXMLBytes))
 		if marshallingErr != nil {
 			log.Fatal(marshallingErr)
 		}
-		requestPayload = bytes.NewReader(requestXmlBytes)
+		requestPayload = bytes.NewReader(requestXMLBytes)
 	}
 	if nsxClient.debug {
 		log.Println("requestURL:", requestURL)

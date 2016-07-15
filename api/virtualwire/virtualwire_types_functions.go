@@ -10,9 +10,10 @@ func (s VirtualWire) String() string {
 	return fmt.Sprintf("id: %s, name: %s", s.ObjectID, s.Name)
 }
 
-func (v VirtualWires) FilterByName(name string) *VirtualWire {
+// FilterByName returns a single virtualWire object if it matches the name from VirtualWires
+func (s VirtualWires) FilterByName(name string) *VirtualWire {
 	var virtualWireFound VirtualWire
-	for _, virtualWire := range v.DataPage.VirtualWires {
+	for _, virtualWire := range s.DataPage.VirtualWires {
 		if virtualWire.Name == name {
 			virtualWireFound = virtualWire
 			break

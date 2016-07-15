@@ -1,5 +1,6 @@
 package api
 
+// NSXApi object.
 type NSXApi interface {
 	Method() string
 	Endpoint() string

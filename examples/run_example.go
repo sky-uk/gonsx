@@ -14,24 +14,24 @@ func main() {
 	nsxManager := os.Args[1]
 	nsxUser := os.Args[2]
 	nsxPassword := os.Args[3]
-	example_name := os.Args[4]
+	exampleName := os.Args[4]
 	debug := false
 
 	if len(os.Args) == 6 && os.Args[6] == "true" {
 		debug = true
 	}
 
-	switch example_name {
+	switch exampleName {
 	case "dhcprelay":
-		fmt.Println("running dhcprelay with: ", nsxManager, nsxUser, nsxPassword, example_name, debug)
+		fmt.Println("running dhcprelay with: ", nsxManager, nsxUser, nsxPassword, exampleName, debug)
 		RunDhcpRelayExample(nsxManager, nsxUser, nsxPassword, debug)
 		return
 	case "edgeinterface":
-		fmt.Println("running edge interface with: ", nsxManager, nsxUser, nsxPassword, example_name, debug)
+		fmt.Println("running edge interface with: ", nsxManager, nsxUser, nsxPassword, exampleName, debug)
 		RunEdgeinterfaceExample(nsxManager, nsxUser, nsxPassword, debug)
 		return
 	case "virtualwire":
-		fmt.Println("running virtualwire example with: ", nsxManager, nsxUser, nsxPassword, example_name, debug)
+		fmt.Println("running virtualwire example with: ", nsxManager, nsxUser, nsxPassword, exampleName, debug)
 		RunVirtualWireExample(nsxManager, nsxUser, nsxPassword, debug)
 		return
 	}

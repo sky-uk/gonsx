@@ -15,7 +15,7 @@ func TestBaseApi(t *testing.T) {
 	rawResponse := []byte("some server response in []byte")
 	err := errors.New("an error")
 
-	api := NewBaseApi(method, endpoint, requestObject, responseObject)
+	api := NewBaseAPI(method, endpoint, requestObject, responseObject)
 
 	api.SetStatusCode(statusCode)
 	api.SetRawResponse(rawResponse)

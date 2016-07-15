@@ -6,18 +6,18 @@ import (
 	"testing"
 )
 
-var deleteVirtualWireApi *DeleteVirtualWiresApi
+var deleteVirtualWireAPI *DeleteVirtualWiresAPI
 
 func setupDelete() {
-	deleteVirtualWireApi = NewDelete("virtualwire-1")
+	deleteVirtualWireAPI = NewDelete("virtualwire-1")
 }
 
 func TestDeleteMethod(t *testing.T) {
 	setupDelete()
-	assert.Equal(t, http.MethodDelete, deleteVirtualWireApi.Method())
+	assert.Equal(t, http.MethodDelete, deleteVirtualWireAPI.Method())
 }
 
 func TestDeleteEndpoint(t *testing.T) {
 	setupDelete()
-	assert.Equal(t, "/api/2.0/vdn/virtualwires/virtualwire-1", deleteVirtualWireApi.Endpoint())
+	assert.Equal(t, "/api/2.0/vdn/virtualwires/virtualwire-1", deleteVirtualWireAPI.Endpoint())
 }
