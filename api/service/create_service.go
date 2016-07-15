@@ -20,11 +20,11 @@ func NewCreate(scopeID, name, desc, proto, ports string) *CreateServiceAPI {
 	element := Element{ApplicationProtocol: proto, Value: ports}
 	requestPayload.Element = []Element{element}
 
-	this.BaseAPI = api.NewBaseAPI(http.MethodPost, "/api/2.0/services/application/"+ scopeID, requestPayload, new(ApplicationService))
+	this.BaseAPI = api.NewBaseAPI(http.MethodPost, "/api/2.0/services/application/"+scopeID, requestPayload, new(string))
 	return this
 }
 
 // GetResponse returns a ResponseObject of CreateServiceAPI.
-func (ca CreateServiceAPI) GetResponse() *ApplicationService {
-	return ca.ResponseObject().(*ApplicationService)
+func (ca CreateServiceAPI) GetResponse() string {
+	return ca.ResponseObject().(string)
 }

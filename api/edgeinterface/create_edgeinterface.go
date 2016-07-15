@@ -29,7 +29,7 @@ func NewCreate(edgeID, interfaceName, virtualWireID, gateway,
 	requestPayload := &EdgeInterfaces{}
 	requestPayload.Interfaces = []EdgeInterface{edgeInterface}
 
-	this.BaseAPI = api.NewBaseAPI(http.MethodPost, "/api/4.0/edges/"+ edgeID +"/interfaces/?action=patch", requestPayload, new(EdgeInterfaces))
+	this.BaseAPI = api.NewBaseAPI(http.MethodPost, "/api/4.0/edges/"+edgeID+"/interfaces/?action=patch", requestPayload, new(EdgeInterfaces))
 	return this
 }
 

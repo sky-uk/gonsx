@@ -21,7 +21,7 @@ func RunEdgeinterfaceExample(nsxManager, nsxUser, nsxPassword string, debug bool
 	nsxclient.Do(api)
 
 	// Get ID of our virtualwire with name "test"
-	virtualWireID:= (api.GetResponse().FilterByName("test").ObjectID)
+	virtualWireID := (api.GetResponse().FilterByName("test").ObjectID)
 
 	// check if we got virtual wire id, otherwise let's create one and get the ID.
 	if virtualWireID == "" {

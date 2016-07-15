@@ -10,12 +10,12 @@ type ApplicationsList struct {
 
 // ApplicationService - object within ApplicationsList.
 type ApplicationService struct {
-	XMLName     xml.Name         `xml:"application"`
-	Name        string           `xml:"name"`
-	ObjectID    string           `xml:"objectId,omitempty"`
-	Type        string           `xml:"type>TypeName"`
-	Revision    int              `xml:"revision,omitempty"`
-	Description string           `xml:"description"`
+	XMLName     xml.Name  `xml:"application"`
+	Name        string    `xml:"name"`
+	ObjectID    string    `xml:"objectId,omitempty"`
+	Type        string    `xml:"type>TypeName,omitempty"`
+	Revision    int       `xml:"revision,omitempty"`
+	Description string    `xml:"description"`
 	Element     []Element `xml:"element"`
 }
 

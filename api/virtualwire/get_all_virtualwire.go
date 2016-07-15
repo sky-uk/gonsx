@@ -13,7 +13,7 @@ type GetAllVirtualWiresAPI struct {
 // NewGetAll returns a new object of GetAllVirtualWiresAPI.
 func NewGetAll(scopeID string) *GetAllVirtualWiresAPI {
 	this := new(GetAllVirtualWiresAPI)
-	this.BaseAPI = api.NewBaseAPI(http.MethodGet, "/api/2.0/vdn/scopes/"+ scopeID +"/virtualwires", nil, new(VirtualWires))
+	this.BaseAPI = api.NewBaseAPI(http.MethodGet, "/api/2.0/vdn/scopes/"+scopeID+"/virtualwires", nil, new(VirtualWires))
 	return this
 }
 

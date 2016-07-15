@@ -20,7 +20,7 @@ func NewCreate(name, desc, tenantID, scopeID string) *CreateVirtualWireAPI {
 	// TODO: need to make it argument
 	requestPayload.ControlPlaneMode = "UNICAST_MODE"
 
-	this.BaseAPI = api.NewBaseAPI(http.MethodPost, "/api/2.0/vdn/scopes/"+ scopeID +"/virtualwires", requestPayload, new(string))
+	this.BaseAPI = api.NewBaseAPI(http.MethodPost, "/api/2.0/vdn/scopes/"+scopeID+"/virtualwires", requestPayload, new(string))
 	return this
 }
 
