@@ -6,8 +6,8 @@ import (
 )
 
 func main() {
-	if len(os.Args) != 5 {
-		fmt.Printf("syntax error\nUsages: %s [Example Name] [https://nsxmanager_address] [username] [password]\n\n", os.Args[0])
+	if len(os.Args) < 5 {
+		fmt.Printf("syntax error\nUsages: %s [https://nsxmanager_address] [username] [password] [Example Name]\n\n", os.Args[0])
 		os.Exit(1)
 	}
 
@@ -17,7 +17,7 @@ func main() {
 	exampleName := os.Args[4]
 	debug := false
 
-	if len(os.Args) == 6 && os.Args[6] == "true" {
+	if len(os.Args) == 6 && os.Args[5] == "true" {
 		debug = true
 	}
 
@@ -33,6 +33,10 @@ func main() {
 	case "virtualwire":
 		fmt.Println("running virtualwire example with: ", nsxManager, nsxUser, nsxPassword, exampleName, debug)
 		RunVirtualWireExample(nsxManager, nsxUser, nsxPassword, debug)
+		return
+	case "service":
+		fmt.Println("running service example with: ", nsxManager, nsxUser, nsxPassword, exampleName, debug)
+		RunServiceExample(nsxManager, nsxUser, nsxPassword, debug)
 		return
 	}
 

@@ -20,7 +20,7 @@ func TestGetAllMethod(t *testing.T) {
 
 func TestGetAllEndpoint(t *testing.T) {
 	setupGetAll()
-	assert.Equal(t, "/api/2.0/services/application/globalroot-0", getAllServiceAPI.Endpoint())
+	assert.Equal(t, "/api/2.0/services/application/scope/globalroot-0", getAllServiceAPI.Endpoint())
 }
 
 func TestGetAllUnMarshalling(t *testing.T) {
