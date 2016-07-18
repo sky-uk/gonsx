@@ -63,9 +63,17 @@ func RunSecurityGroupExample(nsxManager, nsxUser, nsxPassword string, debug bool
 	//
 	// Get Single SecurityGroup
 	//
-	// Get All (note that we're re-utilizing the GetAll object from above here )
+	// Get All (we need to make the getAllAPI call again to get a fresh list of securitygroups. )
 	// check the status code and proceed accordingly.
 	fmt.Println("== Running Get Single Security Group with name 'OVP_sg_test' ==")
+	// make api call.
+	err = nsxclient.Do(getAllAPI)
+
+	// check if there were any errors
+	if err != nil {
+		fmt.Println("Error: ", err)
+	}
+
 	if getAllAPI.StatusCode() == 200 {
 		service := getAllAPI.GetResponse().FilterByName("OVP_sg_test")
 		if service.ObjectID != "" {
@@ -76,6 +84,35 @@ func RunSecurityGroupExample(nsxManager, nsxUser, nsxPassword string, debug bool
 	} else {
 		fmt.Println("Status code:", getAllAPI.StatusCode())
 		fmt.Println("Response: ", getAllAPI.ResponseObject())
+	}
+
+
+	//
+	// Delete single SecurityGroup with objectId
+	//
+	// Get All (note that we're re-utilizing the GetAll object from above here )
+	// check the status code and proceed accordingly.
+	fmt.Println("== Running Delete Single Security Group with name 'OVP_sg_test' ==")
+	securityGroup := getAllAPI.GetResponse().FilterByName("OVP_sg_test")
+	if securityGroup.ObjectID != "" {
+		fmt.Println(securityGroup)
+	} else {
+		fmt.Println("Not found!")
+	}
+
+	deleteAPI := securitygroup.NewDelete(securityGroup.ObjectID)
+	err = nsxclient.Do(deleteAPI)
+	if err != nil {
+		fmt.Println("Error:", err)
+	}
+
+	if deleteAPI.StatusCode() == 200 {
+		fmt.Println(deleteAPI.ResponseObject())
+		fmt.Println("Service deleted successfully.")
+	} else {
+		fmt.Println("Failed to delete the service!")
+		fmt.Println("StatusCode:", deleteAPI.StatusCode())
+		fmt.Println("ResponseObject:", deleteAPI.ResponseObject())
 	}
 
 

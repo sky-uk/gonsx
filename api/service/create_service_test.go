@@ -25,7 +25,7 @@ func TestCreateEndpoint(t *testing.T) {
 
 func TestCreateMarshalling(t *testing.T) {
 	createSetup()
-	expectedXML := "<application><name>test_8080</name><type><TypeName></TypeName></type><description>Test TCP</description><element><applicationProtocol>TCP</applicationProtocol><value>8080</value></element></application>"
+	expectedXML := "<application><name>test_8080</name><description>Test TCP</description><element><applicationProtocol>TCP</applicationProtocol><value>8080</value></element></application>"
 
 	xmlBytes, err := xml.Marshal(createServiceAPI.RequestObject())
 
