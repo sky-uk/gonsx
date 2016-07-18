@@ -34,7 +34,12 @@ func main() {
 		fmt.Println("running virtualwire example with: ", nsxManager, nsxUser, nsxPassword, exampleName, debug)
 		RunVirtualWireExample(nsxManager, nsxUser, nsxPassword, debug)
 		return
+	case "securitytag":
+		fmt.Println("running securitytag example with:", nsxManager, nsxUser, nsxPassword, exampleName, debug)
+		RunSecurityTagExample(nsxManager, nsxUser, nsxPassword, debug)
+		return
 	}
+
 
 	fmt.Println("Example not implemented.")
 

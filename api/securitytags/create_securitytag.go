@@ -18,7 +18,7 @@ func NewCreate(name, desc string) *CreateSecurityTagAPI {
 	requestPayload.Description = desc
 	// TODO: need to make it argument
 	requestPayload.TypeName = "SecurityTag"
-	this.BaseAPI = api.NewBaseAPI(http.MethodPost, "api/2.0/services/securitytags/tag", requestPayload, new(string))
+	this.BaseAPI = api.NewBaseAPI(http.MethodPost, "/api/2.0/services/securitytags/tag", requestPayload, new(string))
 	return this
 }
 
