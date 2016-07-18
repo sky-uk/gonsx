@@ -38,6 +38,10 @@ func main() {
 		fmt.Println("running service example with: ", nsxManager, nsxUser, nsxPassword, exampleName, debug)
 		RunServiceExample(nsxManager, nsxUser, nsxPassword, debug)
 		return
+	case "securitygroup":
+		fmt.Println("running service example with: ", nsxManager, nsxUser, nsxPassword, exampleName, debug)
+		RunSecurityGroupExample(nsxManager, nsxUser, nsxPassword, debug)
+		return
 	}
 
 	fmt.Println("Example not implemented.")

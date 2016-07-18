@@ -13,6 +13,6 @@ type AssignSecurityTagAPI struct {
 // NewAssign - Generates a new AssignSecurityTagAPI object.
 func NewAssign(securityTagID, vmID string) *AssignSecurityTagAPI {
 	this := new(AssignSecurityTagAPI)
-	this.BaseAPI = api.NewBaseAPI(http.MethodPut, "/api/2.0/services/securitytags/tag/" + securityTagID + "/vm/" + vmID, nil, nil)
+	this.BaseAPI = api.NewBaseAPI(http.MethodPut, "/api/2.0/services/securitytags/tag/"+securityTagID+"/vm/"+vmID, nil, nil)
 	return this
 }

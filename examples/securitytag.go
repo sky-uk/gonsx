@@ -1,1 +1,1 @@
-package examples
+package main

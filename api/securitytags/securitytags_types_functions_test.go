@@ -1,28 +1,27 @@
 package securitytags
 
 import (
-	"testing"
 	"github.com/stretchr/testify/assert"
+	"testing"
 )
 
 func setup() (securityTagsList *SecurityTags) {
 	securityTagsList = &SecurityTags{}
 	firstSecurityTag := SecurityTag{
-		Name: "securityTag1",
-		ObjectID: "securitytag-1",
-		TypeName: "SecurityTag",
+		Name:        "securityTag1",
+		ObjectID:    "securitytag-1",
+		TypeName:    "SecurityTag",
 		Description: "test",
 	}
 	secondSecurityTag := SecurityTag{
-		Name: "securityTag2",
-		ObjectID: "securitytag-2",
-		TypeName: "SecurityTag",
+		Name:        "securityTag2",
+		ObjectID:    "securitytag-2",
+		TypeName:    "SecurityTag",
 		Description: "test",
 	}
 	securityTagsList.SecurityTags = []SecurityTag{firstSecurityTag, secondSecurityTag}
 	return securityTagsList
 }
-
 
 func TestFilterByName(t *testing.T) {
 	securityTags := setup()
