@@ -1,4 +1,4 @@
-# gonsx client library examples
+# GoNSX client library examples
 
 ## Overview
 

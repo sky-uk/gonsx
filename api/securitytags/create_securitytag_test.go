@@ -1,10 +1,10 @@
 package securitytags
 
 import (
-	"testing"
+	"encoding/xml"
 	"github.com/stretchr/testify/assert"
 	"net/http"
-	"encoding/xml"
+	"testing"
 )
 
 var createSecurityTagAPI *CreateSecurityTagAPI
@@ -30,7 +30,7 @@ func TestCreateMarshalling(t *testing.T) {
 	object.TypeName = "SecurityTag"
 	expectedXML := "<securityTag><name>test</name><description>test desc</description><type><typeName>SecurityTag</typeName></type></securityTag>"
 
-	xmlBytes, err :=xml.Marshal(object)
+	xmlBytes, err := xml.Marshal(object)
 
 	assert.Nil(t, err)
 	assert.Equal(t, expectedXML, string(xmlBytes))

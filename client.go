@@ -40,9 +40,11 @@ func (nsxClient *NSXClient) Do(api api.NSXApi) error {
 	var requestPayload io.Reader
 	if api.RequestObject() != nil {
 		requestXMLBytes, marshallingErr := xml.Marshal(api.RequestObject())
-		log.Println(string(requestXMLBytes))
 		if marshallingErr != nil {
 			log.Fatal(marshallingErr)
+		}
+		if nsxClient.debug {
+			log.Println(string(requestXMLBytes))
 		}
 		requestPayload = bytes.NewReader(requestXMLBytes)
 	}

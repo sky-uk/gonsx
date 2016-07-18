@@ -23,6 +23,6 @@ func NewCreate(name, desc string) *CreateSecurityTagAPI {
 }
 
 // GetResponse returns the ResponseObject from CreateSecurityTagAPI
-func (createAPI CreateSecurityTagAPI) GetResponse() string{
+func (createAPI CreateSecurityTagAPI) GetResponse() string {
 	return createAPI.ResponseObject().(string)
 }

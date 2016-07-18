@@ -13,6 +13,6 @@ type DeleteSecurityTagAPI struct {
 // NewDelete - Generates a new DeleteSecurityTagApi object.
 func NewDelete(securityTagID string) *DeleteSecurityTagAPI {
 	this := new(DeleteSecurityTagAPI)
-	this.BaseAPI= api.NewBaseAPI(http.MethodDelete, "/api/2.0/services/securitytags/tag/" + securityTagID, nil, nil)
+	this.BaseAPI = api.NewBaseAPI(http.MethodDelete, "/api/2.0/services/securitytags/tag/"+securityTagID, nil, nil)
 	return this
 }
