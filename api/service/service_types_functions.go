@@ -9,7 +9,7 @@ func (a ApplicationsList) String() string {
 }
 
 func (a ApplicationService) String() string {
-	return fmt.Sprintf("objectId: %-20s name: %-20s", a.ObjectID, a.Name)
+	return fmt.Sprintf("objectId: %-20s name: %-20s.", a.ObjectID, a.Name)
 }
 
 // FilterByName returns a single service object if it matches the name in ApplicationsList
@@ -22,4 +22,15 @@ func (a ApplicationsList) FilterByName(name string) *ApplicationService {
 		}
 	}
 	return &serviceFound
+}
+
+
+// CheckByName - Returns true or false depending if name is in ApplicationList
+func (a ApplicationsList) CheckByName(name string) bool {
+	for _, applicationService := range a.Applications{
+		if applicationService.Name == name {
+			return true
+		}
+	}
+	return false
 }

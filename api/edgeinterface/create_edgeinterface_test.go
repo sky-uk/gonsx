@@ -14,6 +14,29 @@ func createSetup() {
 		"10.190.160.1", "255.255.255.0", "internal", 1500)
 }
 
+
+func createObject() (*EdgeInterfaces) {
+	edgeInterfacesList := new(EdgeInterfaces)
+	firstInterface := EdgeInterface{
+		Name:          "firstInterface",
+		ConnectedToID: "virtualwire-1",
+		Type:          "internal",
+		Index:         "1",
+		Mtu:           1500,
+		IsConnected:   true,
+	}
+	secondInterface := EdgeInterface{
+		Name:          "secondInterface",
+		ConnectedToID: "virtualwire-1",
+		Type:          "internal",
+		Index:         "2",
+		Mtu:           1500,
+		IsConnected:   true,
+	}
+	edgeInterfacesList.Interfaces = []EdgeInterface{firstInterface, secondInterface}
+	return edgeInterfacesList
+}
+
 func TestCreateMethod(t *testing.T) {
 	createSetup()
 	assert.Equal(t, http.MethodPost, createEdgeInterfaceAPI.Method())
@@ -32,8 +55,4 @@ func TestCreateMarshalling(t *testing.T) {
 
 	assert.Nil(t, err)
 	assert.Equal(t, expectedXML, string(xmlBytes))
-}
-
-func TestCreateUnMarshalling(t *testing.T) {
-	// TODO
 }

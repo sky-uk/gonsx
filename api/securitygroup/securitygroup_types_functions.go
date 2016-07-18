@@ -9,7 +9,7 @@ func (sgl List) String() string {
 }
 
 func (sg SecurityGroup) String() string {
-	return fmt.Sprintf("objectId: %-20s name: %-20s", sg.ObjectID, sg.Name)
+	return fmt.Sprintf("objectId: %-20s name: %-20s.", sg.ObjectID, sg.Name)
 }
 
 // FilterByName returns a single securitygroup object if it matches the name in SecurityGroup

@@ -43,6 +43,12 @@ func TestCreateMarshalling(t *testing.T) {
 
 }
 
+func TestGetResponse(t *testing.T) {
+	createSetup()
+	updateDhcpRelayAPI.SetResponseObject("string output returned")
+	assert.Equal(t, "string output returned", updateDhcpRelayAPI.GetResponse())
+}
+
 func TestCreateUnMarshalling(t *testing.T) {
 	// TODO
 }
