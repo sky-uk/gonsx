@@ -13,7 +13,7 @@ type ApplicationService struct {
 	XMLName     xml.Name  `xml:"application"`
 	Name        string    `xml:"name"`
 	ObjectID    string    `xml:"objectId,omitempty"`
-	Type        string    `xml:"type>TypeName,omitempty"`
+	Type        string    `xml:"type,omitempty>TypeName,omitempty"`
 	Revision    int       `xml:"revision,omitempty"`
 	Description string    `xml:"description"`
 	Element     []Element `xml:"element"`
