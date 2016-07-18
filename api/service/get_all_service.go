@@ -13,7 +13,7 @@ type GetAllServiceAPI struct {
 // NewGetAll returns a new object of GetAllServiceAPI.
 func NewGetAll(scopeID string) *GetAllServiceAPI {
 	this := new(GetAllServiceAPI)
-	this.BaseAPI = api.NewBaseAPI(http.MethodGet, "/api/2.0/services/application/"+ scopeID, nil, new(ApplicationsList))
+	this.BaseAPI = api.NewBaseAPI(http.MethodGet, "/api/2.0/services/application/scope/"+scopeID, nil, new(ApplicationsList))
 	return this
 }
 

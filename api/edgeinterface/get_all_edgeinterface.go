@@ -13,7 +13,7 @@ type GetAllEdgeInterfacesAPI struct {
 // NewGetAll returns the api object of GetAllEdgeInterfacesAPI
 func NewGetAll(edgeID string) *GetAllEdgeInterfacesAPI {
 	this := new(GetAllEdgeInterfacesAPI)
-	this.BaseAPI = api.NewBaseAPI(http.MethodGet, "/api/4.0/edges/"+ edgeID +"/interfaces", nil, new(EdgeInterfaces))
+	this.BaseAPI = api.NewBaseAPI(http.MethodGet, "/api/4.0/edges/"+edgeID+"/interfaces", nil, new(EdgeInterfaces))
 	return this
 }
 

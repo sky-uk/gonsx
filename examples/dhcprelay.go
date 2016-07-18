@@ -41,10 +41,10 @@ func RunDhcpRelayExample(nsxManager, nsxUser, nsxPassword string, debug bool) {
 	//
 	// Add New Relay Agent into existing list.
 	//
-	newRelayAgent:= dhcprelay.RelayAgent{VnicIndex: "16", GiAddress: "10.152.165.1"}
+	newRelayAgent := dhcprelay.RelayAgent{VnicIndex: "16", GiAddress: "10.152.165.1"}
 	newRelayAgentsList := append(CurrentDHCPRelay.RelayAgents, newRelayAgent)
 
-	updateAPI:= dhcprelay.NewUpdate("10.152.160.10", "edge-50", newRelayAgentsList)
+	updateAPI := dhcprelay.NewUpdate("10.152.160.10", "edge-50", newRelayAgentsList)
 
 	err = nsxclient.Do(updateAPI)
 	if err != nil {

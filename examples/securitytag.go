@@ -8,6 +8,7 @@ import (
 	"errors"
 )
 
+// getAllSecurityTags - gets all securitytags
 func getAllSecurityTags(nsxclient *gonsx.NSXClient) (*securitytags.SecurityTags, error){
 	api := securitytags.NewGetAll()
 	err := nsxclient.Do(api)
@@ -25,6 +26,7 @@ func getAllSecurityTags(nsxclient *gonsx.NSXClient) (*securitytags.SecurityTags,
 	}
 }
 
+// createSecurityTag - creates securitytags
 func createSecurityTag(name, desc string, nsxclient *gonsx.NSXClient) (string, error){
 	api := securitytags.NewCreate(name, desc)
 	err := nsxclient.Do(api)
@@ -38,6 +40,7 @@ func createSecurityTag(name, desc string, nsxclient *gonsx.NSXClient) (string, e
 	}
 }
 
+// deleteSecurityTag - deletes securitytags
 func deleteSecurityTag(ID string, nsxclient *gonsx.NSXClient)(error){
 	api := securitytags.NewDelete(ID)
 	err := nsxclient.Do(api)
@@ -51,6 +54,7 @@ func deleteSecurityTag(ID string, nsxclient *gonsx.NSXClient)(error){
 	}
 }
 
+// RunSecurityTagExample - runs securitytag example
 func RunSecurityTagExample(nsxManager, nsxUser, nsxPassword string, debug bool){
 	nsxclient := gonsx.NewNSXClient(nsxManager, nsxUser, nsxPassword, true, debug)
 
