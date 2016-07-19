@@ -3,11 +3,11 @@ package dhcprelay
 import "fmt"
 
 func (s RelayServer) String() string {
-	return fmt.Sprintf("DhcpRelayServer ipAddress:%s", s.IPAddress)
+	return fmt.Sprintf("DhcpRelayServer ipAddress:%s.", s.IPAddress)
 }
 
 func (d RelayAgent) String() string {
-	return fmt.Sprintf("DhcpRelayAgent VnicIndex:%s, GiAddress:%s", d.VnicIndex, d.GiAddress)
+	return fmt.Sprintf("DhcpRelayAgent VnicIndex:%s, GiAddress:%s.", d.VnicIndex, d.GiAddress)
 }
 
 // FilterByIPAddress - Filters the DhcpRelay->RelayAgents with provided IP Address.

@@ -3,6 +3,7 @@ package dhcprelay
 import (
 	"github.com/stretchr/testify/assert"
 	"testing"
+	"fmt"
 )
 
 func setup() *DhcpRelay {
@@ -17,6 +18,7 @@ func setup() *DhcpRelay {
 	}
 
 	dhcpRelay.RelayAgents = []RelayAgent{firstRelayAgent, secondRelayAgent}
+	dhcpRelay.RelayServer.IPAddress = "10.10.10.10"
 	return dhcpRelay
 }
 
@@ -50,6 +52,18 @@ func TestRemoveByVnicIndex(t *testing.T) {
 	dhcpRelay := setup()
 	assert.Equal(t, true, dhcpRelay.CheckByVnicIndex("1"))
 
-	newdhcpRelay := dhcpRelay.RemoveByVnicIndex("1")
-	assert.Equal(t, false, newdhcpRelay.CheckByVnicIndex("1"))
+	newDhcpRelay := dhcpRelay.RemoveByVnicIndex("1")
+	assert.Equal(t, false, newDhcpRelay.CheckByVnicIndex("1"))
+}
+
+
+func TestStringImplementation(t *testing.T) {
+	dhcpRelay := setup()
+
+	relay_server_string := fmt.Sprintln(dhcpRelay.RelayServer)
+	assert.Equal(t, "DhcpRelayServer ipAddress:10.10.10.10.\n", relay_server_string)
+
+	relay_agents_string := fmt.Sprintln(dhcpRelay.RelayAgents[0])
+	assert.Equal(t, "DhcpRelayAgent VnicIndex:1, GiAddress:10.10.10.1.\n", relay_agents_string)
+
 }
