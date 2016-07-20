@@ -33,10 +33,10 @@ func TestFilterByName(t *testing.T) {
 func TestStringImplementation(t *testing.T) {
 	securityGroupList := setup()
 
-	string_output_list := fmt.Sprintln(securityGroupList)
-	assert.Equal(t, "SecurityGroupList object, contains SecurityGroup objects.\n", string_output_list)
+	stringOutputOfList := fmt.Sprintln(securityGroupList)
+	assert.Equal(t, "SecurityGroupList object, contains SecurityGroup objects.\n", stringOutputOfList)
 
-	string_output_single := fmt.Sprintln(securityGroupList.SecurityGroups[0])
-	assert.Equal(t, "objectId: securitygroup-001    name: TEST_SG_1           .\n", string_output_single)
+	stringOutputOfObject := fmt.Sprintln(securityGroupList.SecurityGroups[0])
+	assert.Equal(t, "objectId: securitygroup-001    name: TEST_SG_1           .\n", stringOutputOfObject)
 
 }

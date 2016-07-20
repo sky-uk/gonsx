@@ -16,14 +16,13 @@ func getAllSecurityTags(nsxclient *gonsx.NSXClient) (*securitytags.SecurityTags,
 	if err != nil {
 		fmt.Println("Error: ", err)
 		return nil, err
-	} else{
-		if api.StatusCode() == 200 {
-			return api.GetResponse(), nil
-		} else {
-			return nil, errors.New(string(api.RawResponse()))
-		}
-
 	}
+
+	if api.StatusCode() == 200 {
+		return api.GetResponse(), nil
+	}
+
+	return nil, errors.New(string(api.RawResponse()))
 }
 
 // createSecurityTag - creates securitytags
@@ -34,10 +33,11 @@ func createSecurityTag(name, desc string, nsxclient *gonsx.NSXClient) (string, e
 	if err != nil {
 		fmt.Println("Error: ", err)
 		return "", err
-	} else{
-		fmt.Println("Creating security tag with id ", api.GetResponse())
-		return api.GetResponse(), nil
 	}
+
+	fmt.Println("Creating security tag with id ", api.GetResponse())
+	return api.GetResponse(), nil
+
 }
 
 // deleteSecurityTag - deletes securitytags
@@ -48,10 +48,10 @@ func deleteSecurityTag(ID string, nsxclient *gonsx.NSXClient)(error){
 	if err != nil {
 		fmt.Println("Error: ", err)
 		return err
-	} else{
-		fmt.Println("Deleting security tag with id" , ID)
-		return nil
 	}
+	fmt.Println("Deleting security tag with id" , ID)
+	return nil
+
 }
 
 // RunSecurityTagExample - runs securitytag example
