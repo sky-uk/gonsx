@@ -45,6 +45,10 @@ func main() {
 		fmt.Println("running securitytag example with:", nsxManager, nsxUser, nsxPassword, exampleName, debug)
 		RunSecurityTagExample(nsxManager, nsxUser, nsxPassword, debug)
 		return
+	case "securitypolicy":
+		fmt.Println("running service example with: ", nsxManager, nsxUser, nsxPassword, exampleName, debug)
+		RunSecurityPolicyExample(nsxManager, nsxUser, nsxPassword, debug)
+		return
 	}
 
 

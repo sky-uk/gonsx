@@ -43,10 +43,10 @@ func TestCheckByName(t *testing.T) {
 func TestStringImplementation(t *testing.T) {
 	applicationsList := setup()
 
-	string_output_list := fmt.Sprintln(applicationsList)
-	assert.Equal(t, "ApplicationsList object, contains service objects.\n", string_output_list)
+	stringOutputOfList := fmt.Sprintln(applicationsList)
+	assert.Equal(t, "ApplicationsList object, contains service objects.\n", stringOutputOfList)
 
-	string_output_single := fmt.Sprintln(applicationsList.Applications[0])
-	assert.Equal(t, "objectId: application-001      name: Test_80             .\n", string_output_single)
+	stringOutputOfObject := fmt.Sprintln(applicationsList.Applications[0])
+	assert.Equal(t, "objectId: application-001      name: Test_80             .\n", stringOutputOfObject)
 
 }
