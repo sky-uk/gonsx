@@ -1,9 +1,9 @@
 package dhcprelay
 
 import (
+	"fmt"
 	"github.com/stretchr/testify/assert"
 	"testing"
-	"fmt"
 )
 
 func setup() *DhcpRelay {
@@ -55,7 +55,6 @@ func TestRemoveByVnicIndex(t *testing.T) {
 	newDhcpRelay := dhcpRelay.RemoveByVnicIndex("1")
 	assert.Equal(t, false, newDhcpRelay.CheckByVnicIndex("1"))
 }
-
 
 func TestStringImplementation(t *testing.T) {
 	dhcpRelay := setup()

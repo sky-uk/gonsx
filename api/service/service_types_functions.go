@@ -24,10 +24,9 @@ func (a ApplicationsList) FilterByName(name string) *ApplicationService {
 	return &serviceFound
 }
 
-
 // CheckByName - Returns true or false depending if name is in ApplicationList
 func (a ApplicationsList) CheckByName(name string) bool {
-	for _, applicationService := range a.Applications{
+	for _, applicationService := range a.Applications {
 		if applicationService.Name == name {
 			return true
 		}

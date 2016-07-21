@@ -36,7 +36,7 @@ func TestCreateMarshalling(t *testing.T) {
 	assert.Equal(t, expectedXML, string(xmlBytes))
 }
 
-func TestGetResponse(t *testing.T){
+func TestGetResponse(t *testing.T) {
 	createSetup()
 	expectedString := "securitytag-1"
 	createSecurityTagAPI.SetResponseObject(expectedString)

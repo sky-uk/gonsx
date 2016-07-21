@@ -1,10 +1,10 @@
 package securitygroup
 
 import (
-"encoding/xml"
-"github.com/stretchr/testify/assert"
-"net/http"
-"testing"
+	"encoding/xml"
+	"github.com/stretchr/testify/assert"
+	"net/http"
+	"testing"
 )
 
 var createSecurityGroupAPI *CreateSecurityGroupAPI
@@ -36,4 +36,3 @@ func TestCreateMarshalling(t *testing.T) {
 func TestCreateUnMarshalling(t *testing.T) {
 	// TODO
 }
-

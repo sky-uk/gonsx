@@ -37,7 +37,7 @@ func main() {
 	case "securitytag":
 		fmt.Println("running securitytag example with:", nsxManager, nsxUser, nsxPassword, exampleName, debug)
 		RunSecurityTagExample(nsxManager, nsxUser, nsxPassword, debug)
-                return
+		return
 	case "service":
 		fmt.Println("running service example with: ", nsxManager, nsxUser, nsxPassword, exampleName, debug)
 		RunServiceExample(nsxManager, nsxUser, nsxPassword, debug)
@@ -51,7 +51,6 @@ func main() {
 		RunSecurityPolicyExample(nsxManager, nsxUser, nsxPassword, debug)
 		return
 	}
-
 
 	fmt.Println("Example not implemented.")
 
