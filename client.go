@@ -53,7 +53,7 @@ func (nsxClient *NSXClient) Do(api api.NSXApi) error {
 	}
 	req, err := http.NewRequest(api.Method(), requestURL, requestPayload)
 	if err != nil {
-		log.Println("ERROR building the request: %s", err)
+		log.Println("ERROR building the request: ", err)
 		return err
 	}
 
