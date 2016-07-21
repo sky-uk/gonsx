@@ -3,7 +3,7 @@ package edgeinterface
 import "fmt"
 
 func (s EdgeInterfaces) String() string {
-	return fmt.Sprintf("%s", s.Interfaces)
+	return fmt.Sprintf("%v", s.Interfaces)
 }
 
 //func (s EdgeInterface) String() string {

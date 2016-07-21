@@ -14,8 +14,7 @@ func createSetup() {
 		"10.190.160.1", "255.255.255.0", "internal", 1500)
 }
 
-
-func createObject() (*EdgeInterfaces) {
+func createObject() *EdgeInterfaces {
 	edgeInterfacesList := new(EdgeInterfaces)
 	firstInterface := EdgeInterface{
 		Name:          "firstInterface",

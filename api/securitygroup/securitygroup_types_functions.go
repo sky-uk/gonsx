@@ -13,7 +13,7 @@ func (sg SecurityGroup) String() string {
 }
 
 // FilterByName returns a single securitygroup object if it matches the name in SecurityGroup
-func (sgl List) FilterByName(name string) *SecurityGroup{
+func (sgl List) FilterByName(name string) *SecurityGroup {
 	var securityGroupFound SecurityGroup
 	for _, sg := range sgl.SecurityGroups {
 		if sg.Name == name {
@@ -23,4 +23,3 @@ func (sgl List) FilterByName(name string) *SecurityGroup{
 	}
 	return &securityGroupFound
 }
-

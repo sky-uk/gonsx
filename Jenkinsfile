@@ -1,7 +1,9 @@
 #!groovy
 
 project_name = 'GoNSX'
+project_github_url = 'git@github.com:sky-uk/gonsx.git'
 project_src_path = 'github.com/sky-uk/gonsx'
+git_credentials_id = '9be96924-ccbc-4f9e-a07c-18818fff868c'
 
 version_file = 'VERSION'
 major_version = null
@@ -14,11 +16,16 @@ node {
     wrap([$class: 'TimestamperBuildWrapper']) {
         wrap([$class: 'AnsiColorBuildWrapper']) {
             ws {
+                stage 'checkout'
+                git_branch = env.BRANCH_NAME
+                echo "Checking out branch [${git_branch}]"
+                git branch: git_branch, url: project_github_url, credentialsId: git_credentials_id
+
                 stage 'version'
                 autoincVersion()
                 writeFile file: version_file, text: version()
 
-                echo "Starting pipeline for ${project_name} ${version()}"
+                echo "Starting pipeline for project: [${project_name}], branch: [${git_branch}], version: [${version()}]"
 
                 stage 'lint'
                 echo "Running Go lint"
@@ -93,13 +100,15 @@ node {
                     ])
                 }
 
-                //stage 'release'
-                //    // check-in and push changes.
-
                 //stage 'package'
                 //    // build in parallel or all archs an upload to github
                 //    // add release notes/changelog
-                //    fakeTask(5)
+                //
+
+                //stage 'release'
+                //    // check-in and push changes.
+
+
             }
         }
     }

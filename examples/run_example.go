@@ -51,7 +51,6 @@ func main() {
 		return
 	}
 
-
 	fmt.Println("Example not implemented.")
 
 }

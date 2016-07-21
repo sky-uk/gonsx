@@ -33,9 +33,9 @@ type DynamicSet struct {
 
 // DynamicCriteria - <dynamicCriteria> element of <dynamicSet>
 type DynamicCriteria struct {
-	Operator string   `xml:"operator"`
-	Key      string   `xml:"key"`
-	Criteria string   `xml:"criteria"`
-	Value    string   `xml:"value"`
-	IsValid  bool     `xml:"isValid,omitempty"`
+	Operator string `xml:"operator"`
+	Key      string `xml:"key"`
+	Criteria string `xml:"criteria"`
+	Value    string `xml:"value"`
+	IsValid  bool   `xml:"isValid,omitempty"`
 }

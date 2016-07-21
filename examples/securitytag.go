@@ -1,15 +1,16 @@
 package main
 
 import (
+	"errors"
 	"fmt"
-	"os"
 	"github.com/sky-uk/gonsx"
 	"github.com/sky-uk/gonsx/api/securitytag"
-	"errors"
+	"os"
 )
 
 
-func getAllSecurityTags(nsxclient *gonsx.NSXClient) (*securitytag.SecurityTags, error){
+// getAllSecurityTags - gets all securitytags
+func getAllSecurityTags(nsxclient *gonsx.NSXClient) (*securitytag.SecurityTags, error) {
 	api := securitytag.NewGetAll()
 	err := nsxclient.Do(api)
 
@@ -25,7 +26,9 @@ func getAllSecurityTags(nsxclient *gonsx.NSXClient) (*securitytag.SecurityTags, 
 	return nil, errors.New(string(api.RawResponse()))
 }
 
-func createSecurityTag(name, desc string, nsxclient *gonsx.NSXClient) (string, error){
+
+// createSecurityTag - creates securitytags
+func createSecurityTag(name, desc string, nsxclient *gonsx.NSXClient) (string, error) {
 	api := securitytag.NewCreate(name, desc)
 	err := nsxclient.Do(api)
 
@@ -39,7 +42,9 @@ func createSecurityTag(name, desc string, nsxclient *gonsx.NSXClient) (string, e
 
 }
 
-func deleteSecurityTag(ID string, nsxclient *gonsx.NSXClient)(error){
+
+// deleteSecurityTag - deletes securitytags
+func deleteSecurityTag(ID string, nsxclient *gonsx.NSXClient) error {
 	api := securitytag.NewDelete(ID)
 	err := nsxclient.Do(api)
 
@@ -47,12 +52,13 @@ func deleteSecurityTag(ID string, nsxclient *gonsx.NSXClient)(error){
 		fmt.Println("Error: ", err)
 		return err
 	}
-	fmt.Println("Deleting security tag with id" , ID)
+	fmt.Println("Deleting security tag with id", ID)
 	return nil
 
 }
 
-func RunSecurityTagExample(nsxManager, nsxUser, nsxPassword string, debug bool){
+// RunSecurityTagExample - runs securitytag example
+func RunSecurityTagExample(nsxManager, nsxUser, nsxPassword string, debug bool) {
 	nsxclient := gonsx.NewNSXClient(nsxManager, nsxUser, nsxPassword, true, debug)
 
 	getTags, err := getAllSecurityTags(nsxclient)
@@ -66,7 +72,7 @@ func RunSecurityTagExample(nsxManager, nsxUser, nsxPassword string, debug bool){
 		if err != nil {
 			fmt.Println("Error", err)
 		}
-	} else{
+	} else {
 		fmt.Println("Tag already exists")
 	}
 
@@ -84,6 +90,4 @@ func RunSecurityTagExample(nsxManager, nsxUser, nsxPassword string, debug bool){
 		}
 	}
 
-
 }
-

@@ -1,9 +1,9 @@
 package service
 
 import (
+	"fmt"
 	"github.com/stretchr/testify/assert"
 	"testing"
-	"fmt"
 )
 
 func setup() (applicationsList *ApplicationsList) {

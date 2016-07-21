@@ -1,6 +1,5 @@
 package securitygroup
 
-
 import (
 	"github.com/sky-uk/gonsx/api"
 	"net/http"
@@ -19,14 +18,14 @@ func NewCreate(scopeID, tagName, setOperator, criteriaOperator, criteriaKey, cri
 
 	dynamicCriteria := DynamicCriteria{
 		Operator: criteriaOperator,
-		Key: criteriaKey,
-		Value: criteriaValue,
+		Key:      criteriaKey,
+		Value:    criteriaValue,
 		Criteria: criteria,
 	}
 	dynamicCriteriaList := []DynamicCriteria{dynamicCriteria}
 
 	dynamicSet := DynamicSet{
-		Operator: setOperator,
+		Operator:        setOperator,
 		DynamicCriteria: dynamicCriteriaList,
 	}
 	dynamicSetList := []DynamicSet{dynamicSet}

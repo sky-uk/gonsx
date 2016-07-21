@@ -13,7 +13,6 @@ func RunSecurityGroupExample(nsxManager, nsxUser, nsxPassword string, debug bool
 	//
 	nsxclient := gonsx.NewNSXClient(nsxManager, nsxUser, nsxPassword, true, debug)
 
-
 	//
 	// Get All Services.
 	//
@@ -59,7 +58,6 @@ func RunSecurityGroupExample(nsxManager, nsxUser, nsxPassword string, debug bool
 		fmt.Println(createAPI.ResponseObject())
 	}
 
-
 	//
 	// Get Single SecurityGroup
 	//
@@ -85,7 +83,6 @@ func RunSecurityGroupExample(nsxManager, nsxUser, nsxPassword string, debug bool
 		fmt.Println("Status code:", getAllAPI.StatusCode())
 		fmt.Println("Response: ", getAllAPI.ResponseObject())
 	}
-
 
 	//
 	// Delete single SecurityGroup with objectId
@@ -114,8 +111,5 @@ func RunSecurityGroupExample(nsxManager, nsxUser, nsxPassword string, debug bool
 		fmt.Println("StatusCode:", deleteAPI.StatusCode())
 		fmt.Println("ResponseObject:", deleteAPI.ResponseObject())
 	}
-
-
-
 
 }
