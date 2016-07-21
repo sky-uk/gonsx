@@ -1,4 +1,4 @@
-package securitytags
+package securitytag
 
 import "fmt"
 

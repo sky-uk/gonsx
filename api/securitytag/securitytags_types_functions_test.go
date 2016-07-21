@@ -1,4 +1,4 @@
-package securitytags
+package securitytag
 
 import (
 	"github.com/stretchr/testify/assert"
@@ -41,4 +41,9 @@ func TestCheckByName(t *testing.T) {
 
 	secondCheck := securityTags.CheckByName("securityTagNo")
 	assert.Equal(t, false, secondCheck)
+}
+
+func TestStringImplementation(t *testing.T) {
+	securityTags := setup()
+	assert.Equal(t, "[{{ } securitytag-1 securityTag1 test SecurityTag} {{ } securitytag-2 securityTag2 test SecurityTag}]", securityTags.String())
 }

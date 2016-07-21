@@ -1,4 +1,4 @@
-package securitytags
+package securitytag
 
 import (
 	"encoding/xml"
@@ -34,4 +34,11 @@ func TestCreateMarshalling(t *testing.T) {
 
 	assert.Nil(t, err)
 	assert.Equal(t, expectedXML, string(xmlBytes))
+}
+
+func TestGetResponse(t *testing.T){
+	createSetup()
+	expectedString := "securitytag-1"
+	createSecurityTagAPI.SetResponseObject(expectedString)
+	assert.Equal(t, expectedString, createSecurityTagAPI.GetResponse())
 }
