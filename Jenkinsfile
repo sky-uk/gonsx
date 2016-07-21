@@ -1,7 +1,9 @@
 #!groovy
 
 project_name = 'GoNSX'
+project_github_url = 'git@github.com:sky-uk/gonsx.git'
 project_src_path = 'github.com/sky-uk/gonsx'
+git_credentials_id = '9be96924-ccbc-4f9e-a07c-18818fff868c'
 
 version_file = 'VERSION'
 major_version = null
@@ -14,7 +16,10 @@ node {
     wrap([$class: 'TimestamperBuildWrapper']) {
         wrap([$class: 'AnsiColorBuildWrapper']) {
             ws {
+                stage 'checkout'
                 git_branch = env.BRANCH_NAME
+                echo "Checking out branch [${git_branch}]"
+                git branch: git_branch, url: project_github_url, credentialsId: git_credentials_id
 
                 stage 'version'
                 autoincVersion()
