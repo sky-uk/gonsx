@@ -60,10 +60,10 @@ func TestRemoveByVnicIndex(t *testing.T) {
 func TestStringImplementation(t *testing.T) {
 	dhcpRelay := setup()
 
-	relay_server_string := fmt.Sprintln(dhcpRelay.RelayServer)
-	assert.Equal(t, "DhcpRelayServer ipAddress:10.10.10.10.\n", relay_server_string)
+	relayServerString := fmt.Sprintln(dhcpRelay.RelayServer)
+	assert.Equal(t, "DhcpRelayServer ipAddress:10.10.10.10.\n", relayServerString)
 
-	relay_agents_string := fmt.Sprintln(dhcpRelay.RelayAgents[0])
-	assert.Equal(t, "DhcpRelayAgent VnicIndex:1, GiAddress:10.10.10.1.\n", relay_agents_string)
+	relayAgentString := fmt.Sprintln(dhcpRelay.RelayAgents[0])
+	assert.Equal(t, "DhcpRelayAgent VnicIndex:1, GiAddress:10.10.10.1.\n", relayAgentString)
 
 }

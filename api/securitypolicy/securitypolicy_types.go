@@ -9,18 +9,25 @@ type SecurityPolicies struct {
 
 // SecurityPolicy object struct
 type SecurityPolicy struct {
-	XMLName            xml.Name          `xml:"securityPolicy"`
-	ObjectID           string            `xml:"objectId,omitempty"`
-	ObjectTypeName     string            `xml:"objectTypeName,omitempty"`
-	VsmUUID            string            `xml:"vsmUuid,omitempty"`
-	NodeID             string            `xml:"nodeId,omitempty"`
-	Revision           int               `xml:"revision,omitempty"`
-	TypeName           string            `xml:"type>typeName"`
-	Name               string            `xml:"name,omitempty"`
-	Description        string            `xml:"description"`
-	IsUniversal        bool              `xml:"isUniversal"`
-	InheritanceAllowed bool              `xml:"inheritanceAllowed"`
-	ActionsByCategory  ActionsByCategory `xml:"actionsByCategory"`
+	XMLName              xml.Name          `xml:"securityPolicy"`
+	ObjectID             string            `xml:"objectId,omitempty"`
+	ObjectTypeName       string            `xml:"objectTypeName,omitempty"`
+	VsmUUID              string            `xml:"vsmUuid,omitempty"`
+	NodeID               string            `xml:"nodeId,omitempty"`
+	Revision             int               `xml:"revision,omitempty"`
+	TypeName             string            `xml:"type,omitempty>typeName,omitempty"`
+	Name                 string            `xml:"name,omitempty"`
+	Description          string            `xml:"description,omitempty"`
+	Precedence           string            `xml:"precedence"`
+	IsUniversal          bool              `xml:"isUniversal,omitempty"`
+	InheritanceAllowed   bool              `xml:"inheritanceAllowed,omitempty"`
+	ActionsByCategory    ActionsByCategory `xml:"actionsByCategory"`
+	SecurityGroupBinding []SecurityGroup   `xml:"securityGroupBinding"`
+}
+
+// SecurityGroup object struct
+type SecurityGroup struct {
+	ObjectID string `xml:"objectId,omitempty"`
 }
 
 // ActionsByCategory element of SecurityPolicy.
@@ -32,12 +39,14 @@ type ActionsByCategory struct {
 
 // Action element of ActionsByCategory list.
 type Action struct {
-	XMLName        xml.Name `xml:"action"`
-	ObjectID       string   `xml:"objectId,omitempty"`
-	ObjectTypeName string   `xml:"objectTypeName,omitempty"`
-	VsmUUID        string   `xml:"vsmUuid,omitempty"`
-	NodeID         string   `xml:"nodeId,omitempty"`
-	Revision       int      `xml:"revision,omitempty"`
-	TypeName       string   `xml:"type>typeName"`
-	IsEnabled      bool     `xml:"isEnabled"`
+	XMLName                xml.Name        `xml:"action"`
+	Class                  string          `xml:"class,attr"`
+	ObjectID               string          `xml:"objectId,omitempty"`
+	ObjectTypeName         string          `xml:"objectTypeName,omitempty"`
+	VsmUUID                string          `xml:"vsmUuid,omitempty"`
+	NodeID                 string          `xml:"nodeId,omitempty"`
+	Revision               int             `xml:"revision,omitempty"`
+	TypeName               string          `xml:"type,omitempty>typeName,omitempty"`
+	IsEnabled              bool            `xml:"isEnabled"`
+	SecondarySecurityGroup []SecurityGroup `xml:"secondarySecurityGroup"`
 }
