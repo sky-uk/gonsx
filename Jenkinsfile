@@ -14,14 +14,13 @@ node {
     wrap([$class: 'TimestamperBuildWrapper']) {
         wrap([$class: 'AnsiColorBuildWrapper']) {
             ws {
-                stage 'checkout'
-                scm checkout
-                
+                git_branch = env.BRANCH_NAME
+
                 stage 'version'
                 autoincVersion()
                 writeFile file: version_file, text: version()
 
-                echo "Starting pipeline for ${project_name} ${version()}"
+                echo "Starting pipeline for project: [${project_name}], branch: [${git_branch}], version: [${version()}]"
 
                 stage 'lint'
                 echo "Running Go lint"
@@ -96,13 +95,15 @@ node {
                     ])
                 }
 
-                //stage 'release'
-                //    // check-in and push changes.
-
                 //stage 'package'
                 //    // build in parallel or all archs an upload to github
                 //    // add release notes/changelog
-                //    fakeTask(5)
+                //
+
+                //stage 'release'
+                //    // check-in and push changes.
+
+
             }
         }
     }
