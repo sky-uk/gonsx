@@ -4,4 +4,4 @@
 *.coverprofile
 coverage.html
 coverage-gocov.xml
-coverage-gocov.htl
+coverage-gocov.html

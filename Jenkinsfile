@@ -1,4 +1,5 @@
 #!groovy
+import java.security.MessageDigest;
 
 project_name = 'GoNSX'
 project_github_url = 'git@github.com:sky-uk/gonsx.git'
@@ -17,13 +18,16 @@ node {
         wrap([$class: 'AnsiColorBuildWrapper']) {
             ws {
                 stage 'checkout'
+                deleteDir()
                 git_branch = env.BRANCH_NAME
                 echo "Checking out branch [${git_branch}]"
                 git branch: git_branch, url: project_github_url, credentialsId: git_credentials_id
 
                 stage 'version'
-                autoincVersion()
-                writeFile file: version_file, text: version()
+                if(autoincVersion()) {
+                    writeFile file: version_file, text: version()
+                    commit(version_file, "bumping to: ${version()}")
+                }
 
                 echo "Starting pipeline for project: [${project_name}], branch: [${git_branch}], version: [${version()}]"
 
@@ -100,15 +104,12 @@ node {
                     ])
                 }
 
-                //stage 'package'
-                //    // build in parallel or all archs an upload to github
-                //    // add release notes/changelog
-                //
-
-                //stage 'release'
-                //    // check-in and push changes.
-
-
+                // we only release from master
+                if(git_branch == 'master') {
+                    stage 'release'
+                    tag(version(), "Jenkins ${env.JOB_NAME} ${env.BUILD_DISPLAY_NAME}")
+                    push(git_credentials_id, git_branch)
+                }
             }
         }
     }
@@ -124,7 +125,9 @@ def autoincVersion() {
         if(checkIfTagExists(version())) {
             error "Next patch version (${version()}) already exists!"
         }
+        return true
     }
+    return false
 }
 
 def version() {
@@ -137,16 +140,43 @@ def setVersion(major, minor, patch) {
     this.patch_version = patch
 }
 
+// git workarounds as there is no gitpublisher plugin yet
+def commit(String filesToAdd, String comment) {
+    sh("git add ${filesToAdd}")
+    sh("git commit -m '${comment}'")
+}
+
+def tag(String tag, String comment) {
+    sh("git tag -a -f -m '${comment}' ${tag}")
+
+}
+
+def push(String credentials, String branch) {
+    sshagent([credentials]) {
+        sh("git push origin ${branch}")
+        sh("git push origin ${branch} --tags")
+    }
+}
+
+def checkIfTagExists(tag) {
+    echo "Checking if tag ${tag} exists"
+    shOut = enhancedSh("git rev-parse -q --verify \"refs/tags/${tag}\"")
+    if(shOut[0] == 0) return true
+    return false
+}
+
 def inContainer(Closure body) {
-    docker.image(this.docker_image).inside("-v ${pwd()}:/paas/go/src/${project_src_path}") {
+    docker.image(this.docker_image).inside("-v ${pwd()}:/paas/go/src/${project_src_path} -v ${System.getProperty('java.io.tmpdir')}:${System.getProperty('java.io.tmpdir')}") {
         body()
     }
 }
 
 // FIXME: this function is very hacky... but the "sh" step is very limited atm
 def enhancedSh(command) {
-    def commandTime = System.currentTimeMillis()
-    def filesPrefix = "${pwd()}/sh-${commandTime}"
+    def generateMD5 = generateMD5(command)
+    def tmpDir = "${System.getProperty('java.io.tmpdir')}/jenkins-enhancedsh"
+    new File(tmpDir).mkdirs()
+    def filesPrefix = "${tmpDir}/sh-${generateMD5}"
     def commandFilePath = ("${filesPrefix}-command.txt")
     writeFile file: commandFilePath, text: command
 
@@ -171,9 +201,6 @@ def enhancedSh(command) {
     return [exitCode, stdout, stderr]
 }
 
-def checkIfTagExists(tag) {
-    echo "Checking if tag ${tag} exists"
-    shOut = enhancedSh("git rev-parse -q --verify \"refs/tags/${tag}\"")
-    if(shOut[0] == 0) return true
-    return false
+def generateMD5(String s){
+    MessageDigest.getInstance("MD5").digest(s.bytes).encodeHex().toString()
 }
