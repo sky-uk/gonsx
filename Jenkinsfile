@@ -14,6 +14,9 @@ node {
     wrap([$class: 'TimestamperBuildWrapper']) {
         wrap([$class: 'AnsiColorBuildWrapper']) {
             ws {
+                stage 'checkout'
+                scm checkout
+                
                 stage 'version'
                 autoincVersion()
                 writeFile file: version_file, text: version()
