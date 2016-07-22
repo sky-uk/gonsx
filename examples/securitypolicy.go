@@ -43,8 +43,14 @@ func RunSecurityPolicyExample(nsxManager, nsxUser, nsxPassword string, debug boo
 	//
 	// Create a new SecurityPolicy
 	//
-	createAPI := securitypolicy.NewCreate("ovp_test_security_policy", "50002",
-		"long description", []string{"securitygroup-177", "securitygroup-197"})
+	fmt.Println("== Running Create new SecurityPolicy with name 'ovp_test_security_policy' ==")
+	createAPI := securitypolicy.NewCreate(
+		"ovp_test_security_policy",
+		"50002",
+		"long description",
+		[]string{"securitygroup-177", "securitygroup-197"},
+		[]securitypolicy.Action{},
+	)
 	// * make sure above securitygroup names exist or you will be creating them
 	// as part of terraform manifest and reference the security group names.
 	// function expects a list of string, I'm create a list inplace in the function
@@ -68,6 +74,40 @@ func RunSecurityPolicyExample(nsxManager, nsxUser, nsxPassword string, debug boo
 	//
 	// Delete a SecurityPolicy
 	//
+	fmt.Println("== Running Delete SecurityPolicy with name 'ovp_test_security_policy' ==")
+
+	// Refresh the response of getAllAPI because we just created a new security policy which won't be
+	// there in the getAllAPI response which we have from earlier request.
+	err = nsxclient.Do(getAllAPI)
+	// check if there were any errors
+	if err != nil {
+		fmt.Println("Error: ", err)
+	}
+
+	// now search for the name and get the objectID of security policy we want to delete.
+	securityPolicyToDelete := getAllAPI.GetResponse().FilterByName("ovp_test_security_policy")
+	fmt.Println(" securityPolicy ObjectID:", securityPolicyToDelete.ObjectID)
+	// build the delete API call object.
+	deleteAPICall := securitypolicy.NewDelete(securityPolicyToDelete.ObjectID, false)
+
+	// make the call.
+	deleteErr := nsxclient.Do(deleteAPICall)
+
+	// check for errors.
+	if deleteErr != nil {
+		fmt.Println("Error:", deleteErr)
+	}
+
+	// check if the status code.
+	if deleteAPICall.StatusCode() == 204 {
+		fmt.Println("SecurityPolicy deleted.")
+	} else {
+		fmt.Println("Status code:", deleteAPICall.StatusCode())
+		fmt.Println("Response: ", deleteAPICall.ResponseObject())
+	}
+	// END
+
+
 
 
 }
