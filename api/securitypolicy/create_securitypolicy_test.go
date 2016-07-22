@@ -11,7 +11,7 @@ var createSecurityPolicyAPI *CreateSecurityPolicyAPI
 
 func createSetup() {
 	securityGroupIDs := []string{"securitygroup-0001", "securitygroup-0002"}
-	createSecurityPolicyAPI = NewCreate("OVP_test_security_policy", "5501", "this is a long description.", securityGroupIDs)
+	createSecurityPolicyAPI = NewCreate("OVP_test_security_policy", "5501", "this is a long description.", securityGroupIDs, []Action{})
 }
 
 func TestCreateMethod(t *testing.T) {
