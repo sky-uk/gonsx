@@ -24,3 +24,15 @@ func (sp *SecurityPolicy) RemoveSecurityGroupBinding(objectID string){
 	}
 	return
 }
+
+// FilterByName returns a single security policy object if it matches the name in SecurityPolicies list.
+func (spList SecurityPolicies) FilterByName(name string) *SecurityPolicy{
+	var securityPolicyFound SecurityPolicy
+	for _, securityPolicy := range spList.SecurityPolicies{
+		if securityPolicy.Name == name {
+			securityPolicyFound = securityPolicy
+			break
+		}
+	}
+	return &securityPolicyFound
+}
