@@ -21,8 +21,8 @@ type SecurityPolicy struct {
 	Precedence           string            `xml:"precedence"`
 	IsUniversal          bool              `xml:"isUniversal,omitempty"`
 	InheritanceAllowed   bool              `xml:"inheritanceAllowed,omitempty"`
-	ActionsByCategory    ActionsByCategory `xml:"actionsByCategory"`
-	SecurityGroupBinding []SecurityGroup   `xml:"securityGroupBinding"`
+	ActionsByCategory    ActionsByCategory `xml:"actionsByCategory,omitempty"`
+	SecurityGroupBinding []SecurityGroup   `xml:"securityGroupBinding,omitempty"`
 }
 
 // SecurityGroup object struct
@@ -33,8 +33,8 @@ type SecurityGroup struct {
 // ActionsByCategory element of SecurityPolicy.
 type ActionsByCategory struct {
 	XMLName  xml.Name `xml:"actionsByCategory"`
-	Category string   `xml:"category"`
-	Actions  []Action `xml:"action"`
+	Category string   `xml:"category,omitempty"`
+	Actions  []Action `xml:"action,omitempty"`
 }
 
 // Action element of ActionsByCategory list.
@@ -47,6 +47,6 @@ type Action struct {
 	NodeID                 string          `xml:"nodeId,omitempty"`
 	Revision               int             `xml:"revision,omitempty"`
 	TypeName               string          `xml:"type,omitempty>typeName,omitempty"`
-	IsEnabled              bool            `xml:"isEnabled"`
-	SecondarySecurityGroup []SecurityGroup `xml:"secondarySecurityGroup"`
+	IsEnabled              bool            `xml:"isEnabled,omitempty"`
+	SecondarySecurityGroup []SecurityGroup `xml:"secondarySecurityGroup,omitempty"`
 }

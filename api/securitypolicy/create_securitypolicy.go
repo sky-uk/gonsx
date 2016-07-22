@@ -11,7 +11,7 @@ type CreateSecurityPolicyAPI struct {
 }
 
 // NewCreate returns a new object of CreatePolicyAPI.
-func NewCreate(name, precedence, description string, securityGroups []string) *CreateSecurityPolicyAPI {
+func NewCreate(name, precedence, description string, securityGroups []string, actions []Action) *CreateSecurityPolicyAPI {
 	this := new(CreateSecurityPolicyAPI)
 	requestPayload := new(SecurityPolicy)
 	requestPayload.Name = name
@@ -25,6 +25,7 @@ func NewCreate(name, precedence, description string, securityGroups []string) *C
 		securityGroupBindingList = append(securityGroupBindingList, securityGroupBinding)
 	}
 	requestPayload.SecurityGroupBinding = securityGroupBindingList
+	requestPayload.ActionsByCategory = ActionsByCategory{Actions: actions}
 	this.BaseAPI = api.NewBaseAPI(http.MethodPost, "/api/2.0/services/policy/securitypolicy", requestPayload, new(string))
 	return this
 }
