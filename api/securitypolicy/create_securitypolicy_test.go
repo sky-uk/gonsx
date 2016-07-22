@@ -26,7 +26,7 @@ func TestCreateEndpoint(t *testing.T) {
 
 func TestCreateMarshalling(t *testing.T) {
 	createSetup()
-	expectedXML := "<securityPolicy><name>OVP_test_security_policy</name><description>this is a long description.</description><precedence>5501</precedence><actionsByCategory><category></category></actionsByCategory><securityGroupBinding><objectId>securitygroup-0001</objectId></securityGroupBinding><securityGroupBinding><objectId>securitygroup-0002</objectId></securityGroupBinding></securityPolicy>"
+	expectedXML := "<securityPolicy><name>OVP_test_security_policy</name><description>this is a long description.</description><precedence>5501</precedence><actionsByCategory></actionsByCategory><securityGroupBinding><objectId>securitygroup-0001</objectId></securityGroupBinding><securityGroupBinding><objectId>securitygroup-0002</objectId></securityGroupBinding></securityPolicy>"
 
 	xmlBytes, err := xml.Marshal(createSecurityPolicyAPI.RequestObject())
 
