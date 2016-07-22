@@ -35,5 +35,9 @@ func TestCreateMarshalling(t *testing.T) {
 }
 
 func TestCreateUnMarshalling(t *testing.T) {
-	// TODO
+	createSetup()
+
+	createSecurityPolicyAPI.SetRawResponse([]byte("securitypolicy-001"))
+	createSecurityPolicyAPI.SetResponseObject("securitypolicy-001")
+	assert.Equal(t, "securitypolicy-001", createSecurityPolicyAPI.GetResponse())
 }
