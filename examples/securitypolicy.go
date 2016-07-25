@@ -6,7 +6,7 @@ import (
 	"github.com/sky-uk/gonsx/api/securitypolicy"
 )
 
-// RunSecurityPolicyExample  Implementes Service example.
+// RunSecurityPolicyExample  Implements Security Policy example.
 func RunSecurityPolicyExample(nsxManager, nsxUser, nsxPassword string, debug bool) {
 	//
 	// Create NSXClient object.
