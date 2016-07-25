@@ -71,7 +71,7 @@ func TestRemoveSecurityGroupBinding(t *testing.T) {
 	assert.Equal(t, "securitygroup-002", securityPolicy.SecurityGroupBinding[0].ObjectID)
 }
 
-func TestRemoveFirewallActionByName(t *testing.T){
+func TestRemoveFirewallActionByName(t *testing.T) {
 	securityPolicy := constructSecurityPolicy("securitypolicy-0001", "OVP_test_security_policy")
 
 	assert.Len(t, securityPolicy.ActionsByCategory.Actions, 1)
@@ -79,7 +79,7 @@ func TestRemoveFirewallActionByName(t *testing.T){
 	assert.Len(t, securityPolicy.ActionsByCategory.Actions, 0)
 }
 
-func TestAddOutboundFirewallAction(t *testing.T){
+func TestAddOutboundFirewallAction(t *testing.T) {
 	securityPolicy := constructSecurityPolicy("securitypolicy-0001", "OVP_test_security_policy")
 
 	assert.Len(t, securityPolicy.ActionsByCategory.Actions, 1)
@@ -96,7 +96,6 @@ func TestAddOutboundFirewallAction(t *testing.T){
 	assert.Len(t, securityPolicy.ActionsByCategory.Actions, 1)
 }
 
-
 func TestFilterByName(t *testing.T) {
 	securityPolicy := constructSecurityPolicy("securitypolicy-0001", "OVP_test_security_policy")
 	securityPoliciesList := &SecurityPolicies{SecurityPolicies: []SecurityPolicy{*securityPolicy}}
@@ -107,7 +106,7 @@ func TestFilterByName(t *testing.T) {
 
 }
 
-func TestRemoveSecurityPolicyByName(t *testing.T){
+func TestRemoveSecurityPolicyByName(t *testing.T) {
 	firstSecurityPolicy := constructSecurityPolicy("securitypolicy-0001", "first_security_policy")
 	secondSecurityPolicy := constructSecurityPolicy("securitypolicy-0002", "second_security_policy")
 

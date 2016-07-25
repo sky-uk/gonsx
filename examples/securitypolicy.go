@@ -105,8 +105,6 @@ func RunSecurityPolicyExample(nsxManager, nsxUser, nsxPassword string, debug boo
 		fmt.Println("Response: ", updateAPI.ResponseObject())
 	}
 
-
-
 	//
 	// Delete Firewall Rule.
 	//
@@ -140,7 +138,6 @@ func RunSecurityPolicyExample(nsxManager, nsxUser, nsxPassword string, debug boo
 		fmt.Println("Status code:", updateAPI2.StatusCode())
 		fmt.Println("Response: ", updateAPI2.ResponseObject())
 	}
-
 
 	//
 	// Delete a SecurityPolicy

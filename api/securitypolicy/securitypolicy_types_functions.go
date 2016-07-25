@@ -38,10 +38,9 @@ func (sp *SecurityPolicy) RemoveSecurityGroupBinding(objectID string) {
 	return
 }
 
-
 // RemoveFirewallActionByName - Removes the firewalla ction from security policy object if it exists.
 func (sp *SecurityPolicy) RemoveFirewallActionByName(actionName string) {
-	for idx, action := range sp.ActionsByCategory.Actions{
+	for idx, action := range sp.ActionsByCategory.Actions {
 		if action.Name == actionName {
 			sp.ActionsByCategory.Actions = append(sp.ActionsByCategory.Actions[:idx], sp.ActionsByCategory.Actions[idx+1:]...)
 			return
@@ -49,11 +48,10 @@ func (sp *SecurityPolicy) RemoveFirewallActionByName(actionName string) {
 	}
 }
 
-
 // AddOutboundFirewallAction adds outbound firewall action rule into security policy.
 func (sp *SecurityPolicy) AddOutboundFirewallAction(name, action string, secGroupObjectIDs []string) {
 	var secondarySecurityGroupList = []SecurityGroup{}
-	for _, secGroupID := range secGroupObjectIDs{
+	for _, secGroupID := range secGroupObjectIDs {
 		securityGroup := SecurityGroup{ObjectID: secGroupID}
 		secondarySecurityGroupList = append(secondarySecurityGroupList, securityGroup)
 	}
@@ -95,9 +93,8 @@ func (spList SecurityPolicies) FilterByName(name string) *SecurityPolicy {
 	return &securityPolicyFound
 }
 
-
 // RemoveSecurityPolicyByName - Removes the SecurityPolicy from a list of SecurityPolicies provided it matches the given name.
-func (spList SecurityPolicies) RemoveSecurityPolicyByName(policyName string) *SecurityPolicies{
+func (spList SecurityPolicies) RemoveSecurityPolicyByName(policyName string) *SecurityPolicies {
 	for idx, securityPolicy := range spList.SecurityPolicies {
 		if securityPolicy.Name == policyName {
 			spList.SecurityPolicies = append(spList.SecurityPolicies[:idx], spList.SecurityPolicies[idx+1:]...)
