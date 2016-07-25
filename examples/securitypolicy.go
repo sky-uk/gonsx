@@ -87,27 +87,9 @@ func RunSecurityPolicyExample(nsxManager, nsxUser, nsxPassword string, debug boo
 	// now search for the name and get the objectID of security policy we want to modify.
 	securityPolicyToModify := getAllAPI.GetResponse().FilterByName("ovp_test_security_policy")
 
-	// First create a list of secondarySecurityGroups to which this rule applies.
-	var secondarySecurityGroupList = []securitypolicy.SecurityGroup{}
-	secondarySecurityGroup := securitypolicy.SecurityGroup{ObjectID: "securitygroup-197"}
-	secondarySecurityGroupList = append(secondarySecurityGroupList, secondarySecurityGroup)
 
-	// Next build the rule using the secondarySecurityGroup list.
-	newRule := securitypolicy.Action{
-		Class:                  "firewallSecurityAction",
-		Name:                   "DummyRule",
-		Action:                 "allow",
-		Category:               "firewall",
-		Direction:              "outbound",
-		SecondarySecurityGroup: secondarySecurityGroupList,
-	}
-
-	// Build actionsByCategory list.
-	actionsByCategory := securitypolicy.ActionsByCategory{Category: "firewall"}
-	actionsByCategory.Actions = []securitypolicy.Action{newRule}
-
-	// Update the securityPolicyToModify.
-	securityPolicyToModify.ActionsByCategory = actionsByCategory
+	// we will use a help function to add a firewall rule.
+	securityPolicyToModify.AddOutboundFirewallAction("DummyRule", "allow", []string{"securitygroup-197"})
 
 	// Now finally call update security policy api call.
 	updateAPI := securitypolicy.NewUpdate(securityPolicyToModify.ObjectID, securityPolicyToModify)
@@ -119,7 +101,7 @@ func RunSecurityPolicyExample(nsxManager, nsxUser, nsxPassword string, debug boo
 	if updateAPI.StatusCode() == 200 {
 		fmt.Println("SecurityPolicy updated.")
 	} else {
-		fmt.Println("SecurityPolicy updated  failure!!!")
+		fmt.Println("SecurityPolicy update  failure!!!")
 		fmt.Println("Status code:", updateAPI.StatusCode())
 		fmt.Println("Response: ", updateAPI.ResponseObject())
 	}
@@ -127,6 +109,37 @@ func RunSecurityPolicyExample(nsxManager, nsxUser, nsxPassword string, debug boo
 	//
 	// Delete Firewall Rule.
 	//
+	fmt.Println("== Running Remove Firewall Rule to new SecurityPolicy with name 'ovp_test_security_policy' ==")
+	// Refresh the response of getAllAPI because we just created a new security policy which won't be
+	// there in the getAllAPI response which we have from earlier request.
+	err = nsxclient.Do(getAllAPI)
+	// check if there were any errors
+	if err != nil {
+		fmt.Println("Error: ", err)
+	}
+
+	// now search for the name and get the objectID of security policy we want to modify.
+	securityPolicyToModify = getAllAPI.GetResponse().FilterByName("ovp_test_security_policy")
+
+
+	// we will use a help function to add a firewall rule.
+	securityPolicyToModify.RemoveFirewallActionByName("DummyRule")
+
+	// Now finally call update security policy api call.
+	updateAPI = securitypolicy.NewUpdate(securityPolicyToModify.ObjectID, securityPolicyToModify)
+	updateErr = nsxclient.Do(updateAPI)
+	if updateErr != nil {
+		fmt.Println("Update Error:", updateErr)
+	}
+	// check if the status code.
+	if updateAPI.StatusCode() == 200 {
+		fmt.Println("SecurityPolicy updated.")
+	} else {
+		fmt.Println("SecurityPolicy update failure!!!")
+		fmt.Println("Status code:", updateAPI.StatusCode())
+		fmt.Println("Response: ", updateAPI.ResponseObject())
+	}
+
 
 	//
 	// Delete a SecurityPolicy
