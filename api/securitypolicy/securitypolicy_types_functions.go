@@ -1,5 +1,20 @@
 package securitypolicy
 
+import (
+	"encoding/xml"
+	"fmt"
+)
+
+func (sp SecurityPolicy) String() string {
+	return fmt.Sprintf("SecurityPolicy with objectId: %s", sp.ObjectID)
+}
+
+// MarshalToXML converts the object into XML
+func (sp SecurityPolicy) MarshalToXML() string {
+	xmlBytes, _ := xml.Marshal(sp)
+	return string(xmlBytes)
+}
+
 // AddSecurityGroupBinding - Adds security group to list of SecurityGroupBinding if it doesn't exists.
 func (sp *SecurityPolicy) AddSecurityGroupBinding(objectID string) {
 	for _, secGroup := range sp.SecurityGroupBinding {
@@ -21,6 +36,10 @@ func (sp *SecurityPolicy) RemoveSecurityGroupBinding(objectID string) {
 		}
 	}
 	return
+}
+
+func (spList SecurityPolicies) String() string {
+	return fmt.Sprint("SecurityPolicies object, contains security policy objects.")
 }
 
 // FilterByName returns a single security policy object if it matches the name in SecurityPolicies list.

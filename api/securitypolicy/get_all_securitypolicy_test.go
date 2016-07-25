@@ -33,6 +33,8 @@ func TestGetAllUnMarshalling(t *testing.T) {
 	xmlerr := xml.Unmarshal(xmlContent, getAllSecurityPoliciesAPI.ResponseObject())
 	assert.Nil(t, xmlerr)
 
-	assert.Len(t, getAllSecurityPoliciesAPI.GetResponse().SecurityPolicies, 5)
-	assert.Equal(t, "OVP_SAND_TEST", getAllSecurityPoliciesAPI.GetResponse().SecurityPolicies[0].Name)
+	assert.Len(t, getAllSecurityPoliciesAPI.GetResponse().SecurityPolicies, 8)
+	assert.Equal(t, "OVP_sp_test2", getAllSecurityPoliciesAPI.GetResponse().SecurityPolicies[0].Name)
+	assert.Equal(t, "OVP_firewall1", getAllSecurityPoliciesAPI.GetResponse().SecurityPolicies[0].ActionsByCategory.Actions[0].Name)
+	assert.Equal(t, "allow", getAllSecurityPoliciesAPI.GetResponse().SecurityPolicies[0].ActionsByCategory.Actions[0].Action)
 }

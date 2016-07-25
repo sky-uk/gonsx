@@ -47,6 +47,10 @@ type Action struct {
 	NodeID                 string          `xml:"nodeId,omitempty"`
 	Revision               int             `xml:"revision,omitempty"`
 	TypeName               string          `xml:"type,omitempty>typeName,omitempty"`
+	Name                   string          `xml:"name,omitempty"`
+	Action                 string          `xml:"action"`
+	Category               string          `xml:"category"`
+	Direction              string          `xml:"direction"`
 	IsEnabled              bool            `xml:"isEnabled,omitempty"`
 	SecondarySecurityGroup []SecurityGroup `xml:"secondarySecurityGroup,omitempty"`
 }
