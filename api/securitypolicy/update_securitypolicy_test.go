@@ -53,4 +53,3 @@ func TestGetResponse(t *testing.T) {
 	updateSecurityPolicyAPI.SetResponseObject("string output returned")
 	assert.Equal(t, "string output returned", updateSecurityPolicyAPI.GetResponse())
 }
-

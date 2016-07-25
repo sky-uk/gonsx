@@ -13,7 +13,7 @@ type UpdateSecurityPolicyAPI struct {
 // NewUpdate creates a new object of UpdateSecurityPolicyAPI
 func NewUpdate(securityPolicyID string, securityPolicyPayload *SecurityPolicy) *UpdateSecurityPolicyAPI {
 	this := new(UpdateSecurityPolicyAPI)
-	endpointURL := "/api/2.0/services/policy/securitypolicy/"+securityPolicyID
+	endpointURL := "/api/2.0/services/policy/securitypolicy/" + securityPolicyID
 	this.BaseAPI = api.NewBaseAPI(http.MethodPut, endpointURL, securityPolicyPayload, new(string))
 	return this
 }

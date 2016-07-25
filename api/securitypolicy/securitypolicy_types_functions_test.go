@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func constructSecurityPolicy() *SecurityPolicy{
+func constructSecurityPolicy() *SecurityPolicy {
 	securityGroupIDs := []string{"securitygroup-001", "securitygroup-002"}
 
 	securityPolicy := &SecurityPolicy{}
@@ -40,4 +40,3 @@ func TestRemoveSecurityGroupBinding(t *testing.T) {
 	securityPolicy.RemoveSecurityGroupBinding("securitygroup-001")
 	assert.Equal(t, "securitygroup-002", securityPolicy.SecurityGroupBinding[0].ObjectID)
 }
-
