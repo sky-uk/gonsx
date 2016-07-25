@@ -18,6 +18,6 @@ func NewGet(securityPolicyID string) *GetSecurityPolicyAPI {
 }
 
 // GetResponse returns ResponseObject of GetSecurityPolicyAPI.
-func (ga GetSecurityPolicyAPI) GetResponse() *SecurityPolicy{
+func (ga GetSecurityPolicyAPI) GetResponse() *SecurityPolicy {
 	return ga.ResponseObject().(*SecurityPolicy)
 }

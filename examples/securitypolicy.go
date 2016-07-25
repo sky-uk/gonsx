@@ -39,7 +39,6 @@ func RunSecurityPolicyExample(nsxManager, nsxUser, nsxPassword string, debug boo
 		fmt.Println("Response: ", getAllAPI.ResponseObject())
 	}
 
-
 	//
 	// Create a new SecurityPolicy
 	//
@@ -106,8 +105,5 @@ func RunSecurityPolicyExample(nsxManager, nsxUser, nsxPassword string, debug boo
 		fmt.Println("Response: ", deleteAPICall.ResponseObject())
 	}
 	// END
-
-
-
 
 }

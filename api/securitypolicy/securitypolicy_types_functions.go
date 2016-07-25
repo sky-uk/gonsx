@@ -1,8 +1,7 @@
 package securitypolicy
 
-
 // AddSecurityGroupBinding - Adds security group to list of SecurityGroupBinding if it doesn't exists.
-func (sp *SecurityPolicy) AddSecurityGroupBinding(objectID string){
+func (sp *SecurityPolicy) AddSecurityGroupBinding(objectID string) {
 	for _, secGroup := range sp.SecurityGroupBinding {
 		if secGroup.ObjectID == objectID {
 			return
@@ -13,9 +12,8 @@ func (sp *SecurityPolicy) AddSecurityGroupBinding(objectID string){
 	return
 }
 
-
 // RemoveSecurityGroupBinding - Adds security group to list of SecurityGroupBinding if it doesn't exists.
-func (sp *SecurityPolicy) RemoveSecurityGroupBinding(objectID string){
+func (sp *SecurityPolicy) RemoveSecurityGroupBinding(objectID string) {
 	for idx, secGroup := range sp.SecurityGroupBinding {
 		if secGroup.ObjectID == objectID {
 			sp.SecurityGroupBinding = append(sp.SecurityGroupBinding[:idx], sp.SecurityGroupBinding[idx+1:]...)
@@ -26,9 +24,9 @@ func (sp *SecurityPolicy) RemoveSecurityGroupBinding(objectID string){
 }
 
 // FilterByName returns a single security policy object if it matches the name in SecurityPolicies list.
-func (spList SecurityPolicies) FilterByName(name string) *SecurityPolicy{
+func (spList SecurityPolicies) FilterByName(name string) *SecurityPolicy {
 	var securityPolicyFound SecurityPolicy
-	for _, securityPolicy := range spList.SecurityPolicies{
+	for _, securityPolicy := range spList.SecurityPolicies {
 		if securityPolicy.Name == name {
 			securityPolicyFound = securityPolicy
 			break
