@@ -50,13 +50,14 @@ func RunSecurityPolicyExample(nsxManager, nsxUser, nsxPassword string, debug boo
 		[]string{"securitygroup-177", "securitygroup-197"},
 		[]securitypolicy.Action{},
 	)
+	//
 	// * make sure above securitygroup names exist or you will be creating them
 	// as part of terraform manifest and reference the security group names.
 	// function expects a list of string, I'm create a list inplace in the function
 	// call but this can be passed from terraform manifest.
 	//
 	// * precendene needs to be unique for security policies.  NSX doesn't allows
-	// creating new policy with same precedence.
+	//   creating new policy with same precedence.
 	//
 	createErr := nsxclient.Do(createAPI)
 	if createErr != nil {
@@ -69,6 +70,65 @@ func RunSecurityPolicyExample(nsxManager, nsxUser, nsxPassword string, debug boo
 		fmt.Println("Status code:", createAPI.StatusCode())
 		fmt.Println("Response: ", createAPI.ResponseObject())
 	}
+
+	//
+	// Add Firewall Rule.
+	//
+	//
+	fmt.Println("== Running Add Firewall Rule to new SecurityPolicy with name 'ovp_test_security_policy' ==")
+	// Refresh the response of getAllAPI because we just created a new security policy which won't be
+	// there in the getAllAPI response which we have from earlier request.
+	err = nsxclient.Do(getAllAPI)
+	// check if there were any errors
+	if err != nil {
+		fmt.Println("Error: ", err)
+	}
+
+	// now search for the name and get the objectID of security policy we want to modify.
+	securityPolicyToModify := getAllAPI.GetResponse().FilterByName("ovp_test_security_policy")
+
+	// First create a list of secondarySecurityGroups to which this rule applies.
+	var secondarySecurityGroupList = []securitypolicy.SecurityGroup{}
+	secondarySecurityGroup := securitypolicy.SecurityGroup{ObjectID: "securitygroup-197"}
+	secondarySecurityGroupList = append(secondarySecurityGroupList, secondarySecurityGroup)
+
+	// Next build the rule using the secondarySecurityGroup list.
+	newRule := securitypolicy.Action{
+		Class: "firewallSecurityAction",
+		Name:"DummyRule",
+		Action:"allow",
+		Category: "firewall",
+		Direction: "outbound",
+		SecondarySecurityGroup: secondarySecurityGroupList,
+	}
+
+	// Build actionsByCategory list.
+	actionsByCategory := securitypolicy.ActionsByCategory{Category: "firewall"}
+	actionsByCategory.Actions = []securitypolicy.Action{newRule}
+
+	// Update the securityPolicyToModify.
+	securityPolicyToModify.ActionsByCategory = actionsByCategory
+
+	// Now finally call update security policy api call.
+	updateAPI := securitypolicy.NewUpdate(securityPolicyToModify.ObjectID, securityPolicyToModify)
+	updateErr := nsxclient.Do(updateAPI)
+	if updateErr != nil {
+		fmt.Println("Update Error:", updateErr)
+	}
+	// check if the status code.
+	if updateAPI.StatusCode() == 200 {
+		fmt.Println("SecurityPolicy updated.")
+	} else {
+		fmt.Println("SecurityPolicy updated  failure!!!")
+		fmt.Println("Status code:", updateAPI.StatusCode())
+		fmt.Println("Response: ", updateAPI.ResponseObject())
+	}
+
+
+	//
+	// Delete Firewall Rule.
+	//
+
 
 	//
 	// Delete a SecurityPolicy
