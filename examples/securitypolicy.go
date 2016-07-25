@@ -87,7 +87,6 @@ func RunSecurityPolicyExample(nsxManager, nsxUser, nsxPassword string, debug boo
 	// now search for the name and get the objectID of security policy we want to modify.
 	securityPolicyToModify := getAllAPI.GetResponse().FilterByName("ovp_test_security_policy")
 
-
 	// we will use a help function to add a firewall rule.
 	securityPolicyToModify.AddOutboundFirewallAction("DummyRule", "allow", []string{"securitygroup-197"})
 
@@ -106,38 +105,40 @@ func RunSecurityPolicyExample(nsxManager, nsxUser, nsxPassword string, debug boo
 		fmt.Println("Response: ", updateAPI.ResponseObject())
 	}
 
+
+
 	//
 	// Delete Firewall Rule.
 	//
 	fmt.Println("== Running Remove Firewall Rule to new SecurityPolicy with name 'ovp_test_security_policy' ==")
 	// Refresh the response of getAllAPI because we just created a new security policy which won't be
 	// there in the getAllAPI response which we have from earlier request.
-	err = nsxclient.Do(getAllAPI)
+	getAllAPI2 := securitypolicy.NewGetAll()
+	err = nsxclient.Do(getAllAPI2)
 	// check if there were any errors
 	if err != nil {
 		fmt.Println("Error: ", err)
 	}
 
 	// now search for the name and get the objectID of security policy we want to modify.
-	securityPolicyToModify = getAllAPI.GetResponse().FilterByName("ovp_test_security_policy")
-
+	securityPolicyToModify2 := getAllAPI2.GetResponse().FilterByName("ovp_test_security_policy")
 
 	// we will use a help function to add a firewall rule.
-	securityPolicyToModify.RemoveFirewallActionByName("DummyRule")
+	securityPolicyToModify2.RemoveFirewallActionByName("DummyRule")
 
 	// Now finally call update security policy api call.
-	updateAPI = securitypolicy.NewUpdate(securityPolicyToModify.ObjectID, securityPolicyToModify)
-	updateErr = nsxclient.Do(updateAPI)
+	updateAPI2 := securitypolicy.NewUpdate(securityPolicyToModify2.ObjectID, securityPolicyToModify2)
+	updateErr = nsxclient.Do(updateAPI2)
 	if updateErr != nil {
 		fmt.Println("Update Error:", updateErr)
 	}
 	// check if the status code.
-	if updateAPI.StatusCode() == 200 {
+	if updateAPI2.StatusCode() == 200 {
 		fmt.Println("SecurityPolicy updated.")
 	} else {
 		fmt.Println("SecurityPolicy update failure!!!")
-		fmt.Println("Status code:", updateAPI.StatusCode())
-		fmt.Println("Response: ", updateAPI.ResponseObject())
+		fmt.Println("Status code:", updateAPI2.StatusCode())
+		fmt.Println("Response: ", updateAPI2.ResponseObject())
 	}
 
 
