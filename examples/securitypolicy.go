@@ -94,11 +94,11 @@ func RunSecurityPolicyExample(nsxManager, nsxUser, nsxPassword string, debug boo
 
 	// Next build the rule using the secondarySecurityGroup list.
 	newRule := securitypolicy.Action{
-		Class: "firewallSecurityAction",
-		Name:"DummyRule",
-		Action:"allow",
-		Category: "firewall",
-		Direction: "outbound",
+		Class:                  "firewallSecurityAction",
+		Name:                   "DummyRule",
+		Action:                 "allow",
+		Category:               "firewall",
+		Direction:              "outbound",
 		SecondarySecurityGroup: secondarySecurityGroupList,
 	}
 
@@ -124,11 +124,9 @@ func RunSecurityPolicyExample(nsxManager, nsxUser, nsxPassword string, debug boo
 		fmt.Println("Response: ", updateAPI.ResponseObject())
 	}
 
-
 	//
 	// Delete Firewall Rule.
 	//
-
 
 	//
 	// Delete a SecurityPolicy

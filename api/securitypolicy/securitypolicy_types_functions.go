@@ -1,8 +1,8 @@
 package securitypolicy
 
 import (
-	"fmt"
 	"encoding/xml"
+	"fmt"
 )
 
 func (sp SecurityPolicy) String() string {
@@ -11,7 +11,7 @@ func (sp SecurityPolicy) String() string {
 
 // MarshalToXML converts the object into XML
 func (sp SecurityPolicy) MarshalToXML() string {
-	xmlBytes,_ := xml.Marshal(sp)
+	xmlBytes, _ := xml.Marshal(sp)
 	return string(xmlBytes)
 }
 
@@ -37,8 +37,6 @@ func (sp *SecurityPolicy) RemoveSecurityGroupBinding(objectID string) {
 	}
 	return
 }
-
-
 
 func (spList SecurityPolicies) String() string {
 	return fmt.Sprint("SecurityPolicies object, contains security policy objects.")

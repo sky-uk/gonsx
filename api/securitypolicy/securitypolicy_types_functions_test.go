@@ -1,9 +1,9 @@
 package securitypolicy
 
 import (
+	"fmt"
 	"github.com/stretchr/testify/assert"
 	"testing"
-	"fmt"
 )
 
 func constructSecurityPolicy() *SecurityPolicy {
@@ -38,7 +38,6 @@ func TestAddSecurityGroupBinding(t *testing.T) {
 	securityPolicy.AddSecurityGroupBinding("securitygroup-new")
 	assert.Equal(t, "securitygroup-new", securityPolicy.SecurityGroupBinding[2].ObjectID)
 }
-
 
 func TestRemoveSecurityGroupBinding(t *testing.T) {
 	securityPolicy := constructSecurityPolicy()
@@ -75,7 +74,7 @@ func TestStringOutput(t *testing.T) {
 
 func TestMarshalToXML(t *testing.T) {
 	securityPolicy := constructSecurityPolicy()
-	convertedXML :=  securityPolicy.MarshalToXML()
+	convertedXML := securityPolicy.MarshalToXML()
 
 	expectedXML := "<securityPolicy><objectId>securitypolicy-0001</objectId><name>OVP_test_security_policy</name><description>this is a long description.</description><precedence>50001</precedence><actionsByCategory></actionsByCategory><securityGroupBinding><objectId>securitygroup-001</objectId></securityGroupBinding><securityGroupBinding><objectId>securitygroup-002</objectId></securityGroupBinding></securityPolicy>"
 	assert.Equal(t, expectedXML, convertedXML)
