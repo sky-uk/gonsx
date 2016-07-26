@@ -2,7 +2,6 @@ package edgeinterface
 
 import (
 	"encoding/xml"
-	"github.com/sky-uk/gonsx/api/dhcprelay"
 	"github.com/stretchr/testify/assert"
 	"net/http"
 	"testing"
