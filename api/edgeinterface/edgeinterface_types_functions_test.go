@@ -3,6 +3,7 @@ package edgeinterface
 import (
 	"github.com/stretchr/testify/assert"
 	"testing"
+	"fmt"
 )
 
 func setup() (edgeInterfacesList *EdgeInterfaces) {
@@ -35,4 +36,10 @@ func TestFilterByName(t *testing.T) {
 
 	secondFiltered := edgeInterfaces.FilterByName("secondInterface")
 	assert.Equal(t, "2", secondFiltered.Index)
+}
+
+func TestStringImplementation(t *testing.T) {
+	edgeInterface := setup()
+	expectedOutput := "[{{ } firstInterface  1500 internal true virtualwire-1 {[]} 1} {{ } secondInterface  1500 internal true virtualwire-1 {[]} 2}]"
+	assert.Equal(t, expectedOutput, fmt.Sprint(edgeInterface))
 }
