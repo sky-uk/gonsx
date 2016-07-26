@@ -15,3 +15,12 @@ type SecurityTag struct {
 	Description string   `xml:"description"`
 	TypeName    string   `xml:"type>typeName"`
 }
+
+type BasicInfoList struct {
+	BasicInfoList 	[]BasicInfo  	`xml:"basicinfo"`
+}
+
+type BasicInfo struct {
+	ObjectID	string 		`xml:"objectId"`
+	Name     	string 		`xml:"name"`
+}

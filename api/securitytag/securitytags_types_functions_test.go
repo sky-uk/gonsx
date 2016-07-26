@@ -23,6 +23,20 @@ func setup() (securityTagsList *SecurityTags) {
 	return securityTagsList
 }
 
+func setupAttached() (basicInfoList *BasicInfoList) {
+	basicInfoList = &BasicInfoList{}
+	firstBasicInfo := BasicInfo{
+		Name:        "vm1",
+		ObjectID:    "vm-1",
+	}
+	secondBasicInfo := BasicInfo{
+		Name:        "vm2",
+		ObjectID:    "vm-2",
+	}
+	basicInfoList.BasicInfoList = []BasicInfo{firstBasicInfo, secondBasicInfo}
+	return basicInfoList
+}
+
 func TestFilterByName(t *testing.T) {
 	securityTags := setup()
 
@@ -41,6 +55,16 @@ func TestCheckByName(t *testing.T) {
 
 	secondCheck := securityTags.CheckByName("securityTagNo")
 	assert.Equal(t, false, secondCheck)
+}
+
+func TestFilterByNameAttached(t *testing.T) {
+	basicInfo := setupAttached()
+
+	firstFiltered := basicInfo.FilterByNameAttached("vm1")
+	assert.Equal(t, "vm-1", firstFiltered.ObjectID)
+
+	secondFiltered := basicInfo.FilterByNameAttached("vm2")
+	assert.Equal(t, "vm-2", secondFiltered.ObjectID)
 }
 
 func TestStringImplementation(t *testing.T) {
