@@ -88,7 +88,12 @@ func RunSecurityPolicyExample(nsxManager, nsxUser, nsxPassword string, debug boo
 	securityPolicyToModify := getAllAPI.GetResponse().FilterByName("ovp_test_security_policy")
 
 	// we will use a help function to add a firewall rule.
-	securityPolicyToModify.AddOutboundFirewallAction("DummyRule", "allow", []string{"securitygroup-197"})
+	securityPolicyToModify.AddOutboundFirewallAction(
+		"DummyRule",
+		"allow",
+		"outbound",
+		[]string{"securitygroup-197"},
+	)
 
 	// Now finally call update security policy api call.
 	updateAPI := securitypolicy.NewUpdate(securityPolicyToModify.ObjectID, securityPolicyToModify)

@@ -3,6 +3,7 @@ package securitypolicy
 import (
 	"encoding/xml"
 	"fmt"
+	"errors"
 )
 
 func (sp SecurityPolicy) String() string {
@@ -49,7 +50,14 @@ func (sp *SecurityPolicy) RemoveFirewallActionByName(actionName string) {
 }
 
 // AddOutboundFirewallAction adds outbound firewall action rule into security policy.
-func (sp *SecurityPolicy) AddOutboundFirewallAction(name, action string, secGroupObjectIDs []string) {
+func (sp *SecurityPolicy) AddOutboundFirewallAction(name, action, direction string, secGroupObjectIDs []string) error {
+	if action != "allow" && action != "disallow" {
+		return errors.New("Action can be only 'allow' or 'disallow'")
+	}
+	if direction != "outbound" && direction != "inbound" {
+		return errors.New("Direction can be only 'inbound' or 'outbound'")
+	}
+
 	var secondarySecurityGroupList = []SecurityGroup{}
 	for _, secGroupID := range secGroupObjectIDs {
 		securityGroup := SecurityGroup{ObjectID: secGroupID}
@@ -61,21 +69,23 @@ func (sp *SecurityPolicy) AddOutboundFirewallAction(name, action string, secGrou
 		Name:                   name,
 		Action:                 action,
 		Category:               "firewall",
-		Direction:              "outbound",
+		Direction:              direction,
 		SecondarySecurityGroup: secondarySecurityGroupList,
 	}
 
 	if sp.ActionsByCategory.Category == "firewall" && len(sp.ActionsByCategory.Actions) >= 1 {
 		sp.ActionsByCategory.Actions = append(sp.ActionsByCategory.Actions, newAction)
-		return
+		return nil
 	}
 
 	// Build actionsByCategory list.
 	actionsByCategory := ActionsByCategory{Category: "firewall"}
 	actionsByCategory.Actions = []Action{newAction}
 	sp.ActionsByCategory = actionsByCategory
-	return
+	return nil
 }
+
+
 
 func (spList SecurityPolicies) String() string {
 	return fmt.Sprint("SecurityPolicies object, contains security policy objects.")

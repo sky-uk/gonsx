@@ -79,11 +79,12 @@ func TestRemoveFirewallActionByName(t *testing.T) {
 	assert.Len(t, securityPolicy.ActionsByCategory.Actions, 0)
 }
 
-func TestAddOutboundFirewallAction(t *testing.T) {
+func TestAddFirewallAction(t *testing.T) {
 	securityPolicy := constructSecurityPolicy("securitypolicy-0001", "OVP_test_security_policy")
 
 	assert.Len(t, securityPolicy.ActionsByCategory.Actions, 1)
-	securityPolicy.AddOutboundFirewallAction("new_action", "allow", []string{"securitygroup-001"})
+	addErr := securityPolicy.AddOutboundFirewallAction("new_action", "allow", "outbound", []string{"securitygroup-001"})
+	assert.Nil(t, addErr)
 	assert.Len(t, securityPolicy.ActionsByCategory.Actions, 2)
 
 	securityPolicy.RemoveFirewallActionByName("DummyRule")
@@ -91,9 +92,22 @@ func TestAddOutboundFirewallAction(t *testing.T) {
 	securityPolicy.RemoveFirewallActionByName("new_action")
 	assert.Len(t, securityPolicy.ActionsByCategory.Actions, 0)
 
+	// test failures for wrong action.
+	wrongActionErr := securityPolicy.AddOutboundFirewallAction("new_action_2", "disallow_wrong", "inbound", []string{"securitygroup-001"})
+	assert.NotNil(t, wrongActionErr)
+	assert.Equal(t, "Action can be only 'allow' or 'disallow'", fmt.Sprint(wrongActionErr))
+
+
+	// test failures for wrong action.
+	wrongDirectionErr := securityPolicy.AddOutboundFirewallAction("new_action_2", "disallow", "inbound_wrong", []string{"securitygroup-001"})
+	assert.NotNil(t, wrongDirectionErr)
+	assert.Equal(t, "Direction can be only 'inbound' or 'outbound'", fmt.Sprint(wrongDirectionErr))
+
 	// Now test adding new action on empty ActionsByCategory
-	securityPolicy.AddOutboundFirewallAction("new_action_2", "disallow", []string{"securitygroup-001"})
+	securityPolicy.AddOutboundFirewallAction("new_action_2", "disallow", "inbound", []string{"securitygroup-001"})
 	assert.Len(t, securityPolicy.ActionsByCategory.Actions, 1)
+
+
 }
 
 func TestFilterByName(t *testing.T) {

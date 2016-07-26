@@ -5,6 +5,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"net/http"
 	"testing"
+	"github.com/sky-uk/gonsx/api/dhcprelay"
 )
 
 var createEdgeInterfaceAPI *CreateEdgeInterfaceAPI
