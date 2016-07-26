@@ -1,9 +1,9 @@
 package edgeinterface
 
 import (
+	"fmt"
 	"github.com/stretchr/testify/assert"
 	"testing"
-	"fmt"
 )
 
 func setup() (edgeInterfacesList *EdgeInterfaces) {

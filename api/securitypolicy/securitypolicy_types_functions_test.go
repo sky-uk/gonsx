@@ -97,7 +97,6 @@ func TestAddFirewallAction(t *testing.T) {
 	assert.NotNil(t, wrongActionErr)
 	assert.Equal(t, "Action can be only 'allow' or 'disallow'", fmt.Sprint(wrongActionErr))
 
-
 	// test failures for wrong action.
 	wrongDirectionErr := securityPolicy.AddOutboundFirewallAction("new_action_2", "disallow", "inbound_wrong", []string{"securitygroup-001"})
 	assert.NotNil(t, wrongDirectionErr)
@@ -106,7 +105,6 @@ func TestAddFirewallAction(t *testing.T) {
 	// Now test adding new action on empty ActionsByCategory
 	securityPolicy.AddOutboundFirewallAction("new_action_2", "disallow", "inbound", []string{"securitygroup-001"})
 	assert.Len(t, securityPolicy.ActionsByCategory.Actions, 1)
-
 
 }
 

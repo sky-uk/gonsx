@@ -26,12 +26,12 @@ func setup() (securityTagsList *SecurityTags) {
 func setupAttached() (basicInfoList *BasicInfoList) {
 	basicInfoList = &BasicInfoList{}
 	firstBasicInfo := BasicInfo{
-		Name:        "vm1",
-		ObjectID:    "vm-1",
+		Name:     "vm1",
+		ObjectID: "vm-1",
 	}
 	secondBasicInfo := BasicInfo{
-		Name:        "vm2",
-		ObjectID:    "vm-2",
+		Name:     "vm2",
+		ObjectID: "vm-2",
 	}
 	basicInfoList.BasicInfoList = []BasicInfo{firstBasicInfo, secondBasicInfo}
 	return basicInfoList

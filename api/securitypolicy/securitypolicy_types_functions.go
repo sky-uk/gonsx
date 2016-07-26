@@ -2,8 +2,8 @@ package securitypolicy
 
 import (
 	"encoding/xml"
-	"fmt"
 	"errors"
+	"fmt"
 )
 
 func (sp SecurityPolicy) String() string {
@@ -84,8 +84,6 @@ func (sp *SecurityPolicy) AddOutboundFirewallAction(name, action, direction stri
 	sp.ActionsByCategory = actionsByCategory
 	return nil
 }
-
-
 
 func (spList SecurityPolicies) String() string {
 	return fmt.Sprint("SecurityPolicies object, contains security policy objects.")
