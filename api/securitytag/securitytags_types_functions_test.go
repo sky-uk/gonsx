@@ -60,11 +60,11 @@ func TestCheckByName(t *testing.T) {
 func TestFilterByNameAttached(t *testing.T) {
 	basicInfo := setupAttached()
 
-	firstFiltered := basicInfo.FilterByNameAttached("vm1")
-	assert.Equal(t, "vm-1", firstFiltered.ObjectID)
+	firstFiltered := basicInfo.FilterByIDAttached("vm-1")
+	assert.Equal(t, "vm1", firstFiltered.Name)
 
-	secondFiltered := basicInfo.FilterByNameAttached("vm2")
-	assert.Equal(t, "vm-2", secondFiltered.ObjectID)
+	secondFiltered := basicInfo.FilterByIDAttached("vm-2")
+	assert.Equal(t, "vm2", secondFiltered.Name)
 }
 
 func TestStringImplementation(t *testing.T) {
