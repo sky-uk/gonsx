@@ -34,6 +34,7 @@ func constructSecurityPolicy(objectID, name string) *SecurityPolicy {
 		Action:                 "allow",
 		Category:               "firewall",
 		Direction:              "outbound",
+		VsmUUID:                "4221A849-079E-D13E-6B36-068D4F1222A9",
 		SecondarySecurityGroup: secondarySecurityGroupList,
 	}
 
@@ -79,6 +80,17 @@ func TestRemoveFirewallActionByName(t *testing.T) {
 	assert.Len(t, securityPolicy.ActionsByCategory.Actions, 0)
 }
 
+func TestRemoveFirewallActionByUUID(t *testing.T) {
+	securityPolicy := constructSecurityPolicy("securitypolicy-0001", "OVP_test_security_policy")
+	ruleUUIDToRemove := "4221A849-079E-D13E-6B36-068D4F1222A9"
+
+	assert.Len(t, securityPolicy.ActionsByCategory.Actions, 1)
+	securityPolicy.RemoveFirewallActionByUUID("wrong uuid")
+	assert.Len(t, securityPolicy.ActionsByCategory.Actions, 1)
+	securityPolicy.RemoveFirewallActionByUUID(ruleUUIDToRemove)
+	assert.Len(t, securityPolicy.ActionsByCategory.Actions, 0)
+}
+
 func TestAddFirewallAction(t *testing.T) {
 	securityPolicy := constructSecurityPolicy("securitypolicy-0001", "OVP_test_security_policy")
 
@@ -105,6 +117,15 @@ func TestAddFirewallAction(t *testing.T) {
 	// Now test adding new action on empty ActionsByCategory
 	securityPolicy.AddOutboundFirewallAction("new_action_2", "disallow", "inbound", []string{"securitygroup-001"})
 	assert.Len(t, securityPolicy.ActionsByCategory.Actions, 1)
+
+}
+
+func TestCheckFirewallRuleByUUID(t *testing.T) {
+	securityPolicy := constructSecurityPolicy("securitypolicy-0001", "OVP_test_security_policy")
+	uuidToCheck := "4221A849-079E-D13E-6B36-068D4F1222A9"
+
+	assert.True(t, securityPolicy.CheckFirewallRuleByUUID(uuidToCheck))
+	assert.False(t, securityPolicy.CheckFirewallRuleByUUID("not valid uuid"))
 
 }
 
