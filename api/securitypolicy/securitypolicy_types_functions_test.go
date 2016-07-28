@@ -107,15 +107,15 @@ func TestAddFirewallAction(t *testing.T) {
 	// test failures for wrong action.
 	wrongActionErr := securityPolicy.AddOutboundFirewallAction("new_action_2", "disallow_wrong", "inbound", []string{"securitygroup-001"})
 	assert.NotNil(t, wrongActionErr)
-	assert.Equal(t, "Action can be only 'allow' or 'disallow'", fmt.Sprint(wrongActionErr))
+	assert.Equal(t, "Action can be only 'allow' or 'block'", fmt.Sprint(wrongActionErr))
 
 	// test failures for wrong action.
-	wrongDirectionErr := securityPolicy.AddOutboundFirewallAction("new_action_2", "disallow", "inbound_wrong", []string{"securitygroup-001"})
+	wrongDirectionErr := securityPolicy.AddOutboundFirewallAction("new_action_2", "block", "inbound_wrong", []string{"securitygroup-001"})
 	assert.NotNil(t, wrongDirectionErr)
 	assert.Equal(t, "Direction can be only 'inbound' or 'outbound'", fmt.Sprint(wrongDirectionErr))
 
 	// Now test adding new action on empty ActionsByCategory
-	securityPolicy.AddOutboundFirewallAction("new_action_2", "disallow", "inbound", []string{"securitygroup-001"})
+	securityPolicy.AddOutboundFirewallAction("new_action_2", "block", "inbound", []string{"securitygroup-001"})
 	assert.Len(t, securityPolicy.ActionsByCategory.Actions, 1)
 
 }
@@ -172,7 +172,7 @@ func TestMarshalToXML(t *testing.T) {
 	securityPolicy := constructSecurityPolicy("securitypolicy-0001", "OVP_test_security_policy")
 	convertedXML := securityPolicy.MarshalToXML()
 
-	expectedXML := "<securityPolicy><objectId>securitypolicy-0001</objectId><name>OVP_test_security_policy</name><description>this is a long description.</description><precedence>50001</precedence><actionsByCategory><category>firewall</category><action class=\"firewallSecurityAction\"><name>DummyRule</name><action>allow</action><category>firewall</category><direction>outbound</direction><secondarySecurityGroup><objectId>securitygroup-197</objectId></secondarySecurityGroup></action></actionsByCategory><securityGroupBinding><objectId>securitygroup-001</objectId></securityGroupBinding><securityGroupBinding><objectId>securitygroup-002</objectId></securityGroupBinding></securityPolicy>"
+	expectedXML := "<securityPolicy><objectId>securitypolicy-0001</objectId><name>OVP_test_security_policy</name><description>this is a long description.</description><precedence>50001</precedence><actionsByCategory><category>firewall</category><action class=\"firewallSecurityAction\"><vsmUuid>4221A849-079E-D13E-6B36-068D4F1222A9</vsmUuid><name>DummyRule</name><action>allow</action><category>firewall</category><direction>outbound</direction><secondarySecurityGroup><objectId>securitygroup-197</objectId></secondarySecurityGroup></action></actionsByCategory><securityGroupBinding><objectId>securitygroup-001</objectId></securityGroupBinding><securityGroupBinding><objectId>securitygroup-002</objectId></securityGroupBinding></securityPolicy>"
 	assert.Equal(t, expectedXML, convertedXML)
 
 }
