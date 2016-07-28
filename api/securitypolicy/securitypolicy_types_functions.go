@@ -49,7 +49,7 @@ func (sp *SecurityPolicy) CheckFirewallRuleByUUID(uuid string) bool {
 	return false
 }
 
-// CheckFirewallRuleByName - Checks if the rule with given name exists in the firewall rules of security policy.
+// GetFirewallRuleByName - Checks if the rule with given name exists in the firewall rules of security policy.
 func (sp *SecurityPolicy) GetFirewallRuleByName(name string) *Action {
 	var actionFound Action
 	for _, action := range sp.ActionsByCategory.Actions {
