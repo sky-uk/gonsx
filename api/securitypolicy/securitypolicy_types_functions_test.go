@@ -129,6 +129,25 @@ func TestCheckFirewallRuleByUUID(t *testing.T) {
 
 }
 
+func TestGetFirewallRuleByUUID(t *testing.T) {
+	securityPolicy := constructSecurityPolicy("securitypolicy-0001", "OVP_test_security_policy")
+	uuidToCheck := "4221A849-079E-D13E-6B36-068D4F1222A9"
+
+	actionObject := securityPolicy.GetFirewallRuleByUUID(uuidToCheck)
+	assert.Equal(t, "DummyRule", actionObject.Name)
+}
+
+func TestGetFirewallRuleByName(t *testing.T) {
+	securityPolicy := constructSecurityPolicy("securitypolicy-0001", "OVP_test_security_policy")
+	expectedUUID := "4221A849-079E-D13E-6B36-068D4F1222A9"
+
+	actionObject := securityPolicy.GetFirewallRuleByName("DummyRule")
+	assert.Equal(t, expectedUUID, actionObject.VsmUUID)
+
+	actionObject = securityPolicy.GetFirewallRuleByName("Wrong name")
+	assert.Equal(t, "", actionObject.VsmUUID)
+}
+
 func TestFilterByName(t *testing.T) {
 	securityPolicy := constructSecurityPolicy("securitypolicy-0001", "OVP_test_security_policy")
 	securityPoliciesList := &SecurityPolicies{SecurityPolicies: []SecurityPolicy{*securityPolicy}}
