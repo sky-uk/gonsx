@@ -71,7 +71,7 @@ func (sp *SecurityPolicy) RemoveFirewallActionByUUID(uuid string) {
 
 // AddOutboundFirewallAction adds outbound firewall action rule into security policy.
 func (sp *SecurityPolicy) AddOutboundFirewallAction(name, action, direction string, secGroupObjectIDs []string) error {
-	if action != "allow" && action != "disallow" {
+	if action != "allow" && action != "block" {
 		return errors.New("Action can be only 'allow' or 'block'")
 	}
 	if direction != "outbound" && direction != "inbound" {
