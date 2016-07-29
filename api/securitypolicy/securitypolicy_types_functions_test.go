@@ -117,6 +117,7 @@ func TestAddFirewallAction(t *testing.T) {
 	// Now test adding new action on empty ActionsByCategory
 	securityPolicy.AddOutboundFirewallAction("new_action_2", "block", "inbound", []string{"securitygroup-001"})
 	assert.Len(t, securityPolicy.ActionsByCategory.Actions, 1)
+	assert.True(t, securityPolicy.ActionsByCategory.Actions[0].IsEnabled)
 
 }
 
