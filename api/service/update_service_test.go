@@ -15,7 +15,7 @@ func updateSetup() {
 
 func TestUpdateMethod(t *testing.T) {
 	updateSetup()
-	assert.Equal(t, http.MethodPost, updateServiceAPI.Method())
+	assert.Equal(t, http.MethodPut, updateServiceAPI.Method())
 }
 
 func TestUpdateEndpoint(t *testing.T) {
