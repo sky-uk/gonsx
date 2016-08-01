@@ -22,7 +22,6 @@ func RunSecurityPolicyExample(nsxManager, nsxUser, nsxPassword string, debug boo
 
 	// make api call.
 	err := nsxclient.Do(getAllAPI)
-
 	// check if there were any errors
 	if err != nil {
 		fmt.Println("Error: ", err)
@@ -56,9 +55,10 @@ func RunSecurityPolicyExample(nsxManager, nsxUser, nsxPassword string, debug boo
 	// function expects a list of string, I'm create a list inplace in the function
 	// call but this can be passed from terraform manifest.
 	//
-	// * precendene needs to be unique for security policies.  NSX doesn't allows
+	// * precendence needs to be unique for security policies.  NSX doesn't allows
 	//   creating new policy with same precedence.
 	//
+
 	createErr := nsxclient.Do(createAPI)
 	if createErr != nil {
 		fmt.Println("Error:", createErr)
@@ -93,6 +93,7 @@ func RunSecurityPolicyExample(nsxManager, nsxUser, nsxPassword string, debug boo
 		"allow",
 		"outbound",
 		[]string{"securitygroup-197"},
+		[]string{"application-22", "application-231"},
 	)
 
 	// Now finally call update security policy api call.
