@@ -21,11 +21,11 @@ func NewUpdate(scopeID, name, desc, proto, ports string) *UpdateServiceAPI {
 	securityPolicyPayload.Element = []Element{element}
 
 	endpointURL := "/api/2.0/services/application/" + scopeID
-	this.BaseAPI = api.NewBaseAPI(http.MethodPost, endpointURL, securityPolicyPayload, new(string))
+	this.BaseAPI = api.NewBaseAPI(http.MethodPut, endpointURL, securityPolicyPayload, new(string))
 	return this
 }
 
 // GetResponse returns the ResponseObject from UpdateServiceAPI
-func (updateAPI UpdateServiceAPI) GetResponse() string {
-	return updateAPI.ResponseObject().(string)
+func (updateAPI UpdateServiceAPI) GetResponse() *ApplicationService {
+	return updateAPI.ResponseObject().(*ApplicationService)
 }
