@@ -5,7 +5,7 @@ import (
         "net/http"
 )
 
-// UpdateServiceApi ...
+// UpdateServiceAPI ...
 type UpdateServiceAPI struct {
         *api.BaseAPI
 }
