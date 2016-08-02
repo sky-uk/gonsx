@@ -25,14 +25,14 @@ func setup() (securityGrouplist *List) {
 	first := SecurityGroup{
 		Name:     "TEST_SG_1",
 		ObjectID: "securitygroup-001",
-		DynamicMemberDefinition: DynamicMemberDefinition{
+		DynamicMemberDefinition: &DynamicMemberDefinition{
 			DynamicSet: dynamicSetList,
 		},
 	}
 	second := SecurityGroup{
 		Name:     "TEST_SG_2",
 		ObjectID: "securitygroup-002",
-		DynamicMemberDefinition: DynamicMemberDefinition{
+		DynamicMemberDefinition: &DynamicMemberDefinition{
 			DynamicSet: dynamicSetList,
 		},
 	}
@@ -61,11 +61,11 @@ func TestStringImplementation(t *testing.T) {
 
 }
 
-func TestDynamicMemberDefinition_AddDynamicSet(t *testing.T) {
+func TestAddDynamicMemberDefinitionSet(t *testing.T) {
 	securityGroupList := setup()
-	dynamicMemberDefintion := securityGroupList.SecurityGroups[0].DynamicMemberDefinition
+	securityGroup := securityGroupList.SecurityGroups[0]
 
-	assert.Len(t, dynamicMemberDefintion.DynamicSet, 1)
+	assert.Len(t, securityGroup.DynamicMemberDefinition.DynamicSet, 1)
 
 	newDynamicCriteria := DynamicCriteria{
 		Operator: "ADD",
@@ -74,6 +74,6 @@ func TestDynamicMemberDefinition_AddDynamicSet(t *testing.T) {
 		Criteria: "contains",
 	}
 	newDynamicCriteriaList := []DynamicCriteria{newDynamicCriteria}
-	dynamicMemberDefintion.AddDynamicSet("OR", newDynamicCriteriaList)
-	assert.Len(t, dynamicMemberDefintion.DynamicSet, 2)
+	securityGroup.AddDynamicMemberDefinitionSet("OR", newDynamicCriteriaList)
+	assert.Len(t, securityGroup.DynamicMemberDefinition.DynamicSet, 2)
 }
