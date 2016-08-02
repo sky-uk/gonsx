@@ -19,6 +19,6 @@ func NewUpdate(securityGroupID string, securityGroupPayload *SecurityGroup) *Upd
 }
 
 // GetResponse returns the ResponseObject from UpdateServiceAPI
-func (updateAPI UpdateSecurityGroupAPI) GetResponse() *SecurityGroup{
+func (updateAPI UpdateSecurityGroupAPI) GetResponse() *SecurityGroup {
 	return updateAPI.ResponseObject().(*SecurityGroup)
 }

@@ -84,7 +84,6 @@ func RunSecurityGroupExample(nsxManager, nsxUser, nsxPassword string, debug bool
 		fmt.Println("Response: ", getAllAPI.ResponseObject())
 	}
 
-
 	//
 	// Update SecurityGroup
 	//
