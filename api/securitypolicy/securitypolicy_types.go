@@ -53,12 +53,12 @@ type Action struct {
 	Direction              string          `xml:"direction"`
 	IsEnabled              bool            `xml:"isEnabled,omitempty"`
 	SecondarySecurityGroup []SecurityGroup `xml:"secondarySecurityGroup,omitempty"`
-	Applications           Applications    `xml:"applications,omitempty"`
+	Applications           *Applications   `xml:"applications,omitempty"`
 }
 
 //Applications object struct
 type Applications struct {
-	Applications []Application `xml:"application"`
+	Applications []Application `xml:"application,omitempty"`
 }
 
 // Application element of Applications List

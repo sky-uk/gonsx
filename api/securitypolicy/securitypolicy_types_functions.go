@@ -108,14 +108,19 @@ func (sp *SecurityPolicy) AddOutboundFirewallAction(name, action, direction stri
 		secondarySecurityGroupList = append(secondarySecurityGroupList, securityGroup)
 	}
 
-	var secondaryApplicationList = []Application{}
-	for _, applicationObjectID := range applicationObjectIDs {
-		application := Application{ObjectID: applicationObjectID}
-		secondaryApplicationList = append(secondaryApplicationList, application)
-	}
+	var secondaryApplicationsList = &Applications{}
 
-	var secondaryApplicationsList = Applications{}
-	secondaryApplicationsList.Applications = secondaryApplicationList
+	if applicationObjectIDs[0] != "any" {
+		var secondaryApplicationList = []Application{}
+		for _, applicationObjectID := range applicationObjectIDs {
+			application := Application{ObjectID: applicationObjectID}
+			secondaryApplicationList = append(secondaryApplicationList, application)
+		}
+
+		secondaryApplicationsList.Applications = secondaryApplicationList
+	} else {
+		secondaryApplicationsList = nil
+	}
 
 	newAction := Action{
 		Class:                  "firewallSecurityAction",
