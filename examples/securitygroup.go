@@ -43,7 +43,7 @@ func RunSecurityGroupExample(nsxManager, nsxUser, nsxPassword string, debug bool
 	// Create single service.
 	//
 	fmt.Println("== Running Create new SecurityGroup with name 'OVP_sg_test' ==")
-	createAPI := securitygroup.NewCreate("globalroot-0", "OVP_sg_test", "OR", "OR", "VM.SECURITY_TAG", "ovp_test_app4", "contains")
+	createAPI := securitygroup.NewCreate("globalroot-0", "OVP_sg_test")
 	err = nsxclient.Do(createAPI)
 	if err != nil {
 		fmt.Println("Error:", err)
@@ -51,10 +51,10 @@ func RunSecurityGroupExample(nsxManager, nsxUser, nsxPassword string, debug bool
 
 	if createAPI.StatusCode() == 201 {
 		newSecurityGroupID := createAPI.ResponseObject()
-		fmt.Println("Service created successfully.")
+		fmt.Println("SecurityGroup created successfully.")
 		fmt.Println("objectId:", newSecurityGroupID)
 	} else {
-		fmt.Println("Failed to created the service!")
+		fmt.Println("Failed to create the securitygroup!")
 		fmt.Println(createAPI.ResponseObject())
 	}
 
@@ -84,6 +84,38 @@ func RunSecurityGroupExample(nsxManager, nsxUser, nsxPassword string, debug bool
 		fmt.Println("Response: ", getAllAPI.ResponseObject())
 	}
 
+
+	//
+	// Update SecurityGroup
+	//
+	securityGroupToUpdate := getAllAPI.GetResponse().FilterByName("OVP_sg_test")
+
+	newDynamicCriteria := securitygroup.DynamicCriteria{
+		Operator: "AND",
+		Key:      "VM.NAME",
+		Value:    "test_vm_name2",
+		Criteria: "contains",
+	}
+	newDynamicCriteriaList := []securitygroup.DynamicCriteria{newDynamicCriteria}
+	securityGroupToUpdate.AddDynamicMemberDefinitionSet("OR", newDynamicCriteriaList)
+
+	updateAPI := securitygroup.NewUpdate(securityGroupToUpdate.ObjectID, securityGroupToUpdate)
+
+	err = nsxclient.Do(updateAPI)
+	if err != nil {
+		fmt.Println("Error:", err)
+	}
+
+	if updateAPI.StatusCode() == 200 {
+		fmt.Println("Security Group object updated successfully.")
+		response := updateAPI.GetResponse()
+		fmt.Println(response)
+	} else {
+		fmt.Println("Failed to update the security group!")
+		fmt.Println("StatusCode:", updateAPI.StatusCode())
+		fmt.Println("ResponseObject:", updateAPI.ResponseObject())
+	}
+
 	//
 	// Delete single SecurityGroup with objectId
 	//
@@ -105,9 +137,9 @@ func RunSecurityGroupExample(nsxManager, nsxUser, nsxPassword string, debug bool
 
 	if deleteAPI.StatusCode() == 200 {
 		fmt.Println(deleteAPI.ResponseObject())
-		fmt.Println("Service deleted successfully.")
+		fmt.Println("Security group deleted successfully.")
 	} else {
-		fmt.Println("Failed to delete the service!")
+		fmt.Println("Failed to delete the security group.!")
 		fmt.Println("StatusCode:", deleteAPI.StatusCode())
 		fmt.Println("ResponseObject:", deleteAPI.ResponseObject())
 	}
