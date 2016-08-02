@@ -11,17 +11,10 @@ type UpdateServiceAPI struct {
 }
 
 // NewUpdate creates a new object of UpdateServiceAPI
-func NewUpdate(scopeID, name, desc, proto, ports string) *UpdateServiceAPI {
+func NewUpdate(scopeID string, payload *ApplicationService) *UpdateServiceAPI {
 	this := new(UpdateServiceAPI)
-	securityPolicyPayload := new(ApplicationService)
-	securityPolicyPayload.Name = name
-	securityPolicyPayload.Description = desc
-
-	element := Element{ApplicationProtocol: proto, Value: ports}
-	securityPolicyPayload.Element = []Element{element}
-
 	endpointURL := "/api/2.0/services/application/" + scopeID
-	this.BaseAPI = api.NewBaseAPI(http.MethodPut, endpointURL, securityPolicyPayload, new(string))
+	this.BaseAPI = api.NewBaseAPI(http.MethodPut, endpointURL, payload, new(string))
 	return this
 }
 
