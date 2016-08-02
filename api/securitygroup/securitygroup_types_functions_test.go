@@ -7,14 +7,34 @@ import (
 )
 
 func setup() (securityGrouplist *List) {
+	dynamicCriteria := DynamicCriteria{
+		Operator: "OR",
+		Key:      "VM.NAME",
+		Value:    "test_vm",
+		Criteria: "contains",
+	}
+	dynamicCriteriaList := []DynamicCriteria{dynamicCriteria}
+
+	dynamicSet := DynamicSet{
+		Operator:        "OR",
+		DynamicCriteria: dynamicCriteriaList,
+	}
+	dynamicSetList := []DynamicSet{dynamicSet}
+
 	securityGrouplist = &List{}
 	first := SecurityGroup{
 		Name:     "TEST_SG_1",
 		ObjectID: "securitygroup-001",
+		DynamicMemberDefinition: DynamicMemberDefinition{
+			DynamicSet: dynamicSetList,
+		},
 	}
 	second := SecurityGroup{
 		Name:     "TEST_SG_2",
 		ObjectID: "securitygroup-002",
+		DynamicMemberDefinition: DynamicMemberDefinition{
+			DynamicSet: dynamicSetList,
+		},
 	}
 	securityGrouplist.SecurityGroups = []SecurityGroup{first, second}
 	return securityGrouplist
@@ -39,4 +59,21 @@ func TestStringImplementation(t *testing.T) {
 	stringOutputOfObject := fmt.Sprintln(securityGroupList.SecurityGroups[0])
 	assert.Equal(t, "objectId: securitygroup-001    name: TEST_SG_1           .\n", stringOutputOfObject)
 
+}
+
+func TestDynamicMemberDefinition_AddDynamicSet(t *testing.T) {
+	securityGroupList := setup()
+	dynamicMemberDefintion := securityGroupList.SecurityGroups[0].DynamicMemberDefinition
+
+	assert.Len(t, dynamicMemberDefintion.DynamicSet, 1)
+
+	newDynamicCriteria := DynamicCriteria{
+		Operator: "ADD",
+		Key:      "VM.NAME",
+		Value:    "test_vm_name2",
+		Criteria: "contains",
+	}
+	newDynamicCriteriaList := []DynamicCriteria{newDynamicCriteria}
+	dynamicMemberDefintion.AddDynamicSet("OR", newDynamicCriteriaList)
+	assert.Len(t, dynamicMemberDefintion.DynamicSet, 2)
 }

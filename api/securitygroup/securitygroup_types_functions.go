@@ -23,3 +23,9 @@ func (sgl List) FilterByName(name string) *SecurityGroup {
 	}
 	return &securityGroupFound
 }
+
+// AddDynamicSet adds new DynamicSet to DynamicMemberDefinition of SecurityGroup object.
+func (dynMemberDef *DynamicMemberDefinition) AddDynamicSet(operator string, dynamicCriteriaList []DynamicCriteria) {
+	newDynamicSet := DynamicSet{Operator: operator, DynamicCriteria: dynamicCriteriaList}
+	dynMemberDef.DynamicSet = append(dynMemberDef.DynamicSet, newDynamicSet)
+}
