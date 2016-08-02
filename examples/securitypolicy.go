@@ -93,7 +93,7 @@ func RunSecurityPolicyExample(nsxManager, nsxUser, nsxPassword string, debug boo
 		"allow",
 		"outbound",
 		[]string{"securitygroup-197"},
-		[]string{"application-22", "application-231"},
+		[]string{"application-212", "application-66"},
 	)
 
 	// Now finally call update security policy api call.
@@ -114,71 +114,70 @@ func RunSecurityPolicyExample(nsxManager, nsxUser, nsxPassword string, debug boo
 	//
 	// Delete Firewall Rule.
 	//
-	//fmt.Println("== Running Remove Firewall Rule to new SecurityPolicy with name 'ovp_test_security_policy' ==")
-	//// Refresh the response of getAllAPI because we just created a new security policy which won't be
-	//// there in the getAllAPI response which we have from earlier request.
-	//getAllAPI2 := securitypolicy.NewGetAll()
-	//err = nsxclient.Do(getAllAPI2)
-	//// check if there were any errors
-	//if err != nil {
-	//	fmt.Println("Error: ", err)
-	//}
-	//
-	//// now search for the name and get the objectID of security policy we want to modify.
-	//securityPolicyToModify2 := getAllAPI2.GetResponse().FilterByName("ovp_test_security_policy")
-	//
-	//// we will use a help function to add a firewall rule.
-	//securityPolicyToModify2.RemoveFirewallActionByName("DummyRule")
-	//
-	//// Now finally call update security policy api call.
-	//updateAPI2 := securitypolicy.NewUpdate(securityPolicyToModify2.ObjectID, securityPolicyToModify2)
-	//updateErr = nsxclient.Do(updateAPI2)
-	//if updateErr != nil {
-	//	fmt.Println("Update Error:", updateErr)
-	//}
-	//// check if the status code.
-	//if updateAPI2.StatusCode() == 200 {
-	//	fmt.Println("SecurityPolicy updated.")
-	//} else {
-	//	fmt.Println("SecurityPolicy update failure!!!")
-	//	fmt.Println("Status code:", updateAPI2.StatusCode())
-	//	fmt.Println("Response: ", updateAPI2.ResponseObject())
-	//}
+	fmt.Println("== Running Remove Firewall Rule to new SecurityPolicy with name 'ovp_test_security_policy' ==")
+	// Refresh the response of getAllAPI because we just created a new security policy which won't be
+	// there in the getAllAPI response which we have from earlier request.
+	getAllAPI2 := securitypolicy.NewGetAll()
+	err = nsxclient.Do(getAllAPI2)
+	// check if there were any errors
+	if err != nil {
+		fmt.Println("Error: ", err)
+	}
 
-	//
-	// Delete a SecurityPolicy
-	//
-	//fmt.Println("== Running Delete SecurityPolicy with name 'ovp_test_security_policy' ==")
-	//
-	//// Refresh the response of getAllAPI because we just created a new security policy which won't be
-	//// there in the getAllAPI response which we have from earlier request.
-	//err = nsxclient.Do(getAllAPI)
-	//// check if there were any errors
-	//if err != nil {
-	//	fmt.Println("Error: ", err)
-	//}
-	//
-	//// now search for the name and get the objectID of security policy we want to delete.
-	//securityPolicyToDelete := getAllAPI.GetResponse().FilterByName("ovp_test_security_policy")
-	//fmt.Println(" securityPolicy ObjectID:", securityPolicyToDelete.ObjectID)
-	//// build the delete API call object.
-	//deleteAPICall := securitypolicy.NewDelete(securityPolicyToDelete.ObjectID, false)
-	//
-	//// make the call.
-	//deleteErr := nsxclient.Do(deleteAPICall)
-	//
-	//// check for errors.
-	//if deleteErr != nil {
-	//	fmt.Println("Error:", deleteErr)
-	//}
-	//
-	//// check if the status code.
-	//if deleteAPICall.StatusCode() == 204 {
-	//	fmt.Println("SecurityPolicy deleted.")
-	//} else {
-	//	fmt.Println("Status code:", deleteAPICall.StatusCode())
-	//	fmt.Println("Response: ", deleteAPICall.ResponseObject())
-	//}
-	//// END
+	// now search for the name and get the objectID of security policy we want to modify.
+	securityPolicyToModify2 := getAllAPI2.GetResponse().FilterByName("ovp_test_security_policy")
+
+	// we will use a help function to add a firewall rule.
+	securityPolicyToModify2.RemoveFirewallActionByName("DummyRule")
+
+	// Now finally call update security policy api call.
+	updateAPI2 := securitypolicy.NewUpdate(securityPolicyToModify2.ObjectID, securityPolicyToModify2)
+	updateErr = nsxclient.Do(updateAPI2)
+	if updateErr != nil {
+		fmt.Println("Update Error:", updateErr)
+	}
+	// check if the status code.
+	if updateAPI2.StatusCode() == 200 {
+		fmt.Println("SecurityPolicy updated.")
+	} else {
+		fmt.Println("SecurityPolicy update failure!!!")
+		fmt.Println("Status code:", updateAPI2.StatusCode())
+		fmt.Println("Response: ", updateAPI2.ResponseObject())
+	}
+
+	//Delete a SecurityPolicy
+
+	fmt.Println("== Running Delete SecurityPolicy with name 'ovp_test_security_policy' ==")
+
+	// Refresh the response of getAllAPI because we just created a new security policy which won't be
+	// there in the getAllAPI response which we have from earlier request.
+	err = nsxclient.Do(getAllAPI)
+	// check if there were any errors
+	if err != nil {
+		fmt.Println("Error: ", err)
+	}
+
+	// now search for the name and get the objectID of security policy we want to delete.
+	securityPolicyToDelete := getAllAPI.GetResponse().FilterByName("ovp_test_security_policy")
+	fmt.Println(" securityPolicy ObjectID:", securityPolicyToDelete.ObjectID)
+	// build the delete API call object.
+	deleteAPICall := securitypolicy.NewDelete(securityPolicyToDelete.ObjectID, false)
+
+	// make the call.
+	deleteErr := nsxclient.Do(deleteAPICall)
+
+	// check for errors.
+	if deleteErr != nil {
+		fmt.Println("Error:", deleteErr)
+	}
+
+	// check if the status code.
+	if deleteAPICall.StatusCode() == 204 {
+		fmt.Println("SecurityPolicy deleted.")
+	} else {
+		fmt.Println("Status code:", deleteAPICall.StatusCode())
+		fmt.Println("Response: ", deleteAPICall.ResponseObject())
+	}
+	// END
 
 }
