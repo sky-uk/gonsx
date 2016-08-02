@@ -9,12 +9,10 @@ import (
 
 var updateServiceAPI *UpdateServiceAPI
 
-
-
 func updateSetup() {
 	testServiceObj := new(ApplicationService)
 	testServiceObj.Name = "application-0001"
-	testServiceObj.Description  = "dummy description"
+	testServiceObj.Description = "dummy description"
 	element := Element{ApplicationProtocol: "TCP", Value: "8080"}
 	testServiceObj.Element = []Element{element}
 
