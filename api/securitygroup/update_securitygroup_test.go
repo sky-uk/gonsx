@@ -53,9 +53,3 @@ func TestUpdateMarshalling(t *testing.T) {
 	assert.Nil(t, err)
 	assert.Equal(t, expectedXML, string(xmlBytes))
 }
-
-func TestGetResponse(t *testing.T) {
-	updateSetup()
-	updateSecurityGroupAPI.SetResponseObject("string output returned")
-	assert.Equal(t, "string output returned", updateSecurityGroupAPI.GetResponse())
-}

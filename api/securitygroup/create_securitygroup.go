@@ -18,7 +18,7 @@ func NewCreate(scopeID, securityGroupName string) *CreateSecurityGroupAPI {
 	requestPayload := new(SecurityGroup)
 	requestPayload.Name = securityGroupName
 
-	// Build API object and return
+	// Build API object and return it
 	this.BaseAPI = api.NewBaseAPI(http.MethodPost, "/api/2.0/services/securitygroup/bulk/"+scopeID, requestPayload, new(string))
 	return this
 }
