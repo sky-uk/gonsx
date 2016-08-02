@@ -74,7 +74,27 @@ func RunServiceExample(nsxManager, nsxUser, nsxPassword string, debug bool) {
 	}
 
 	//
-	// Deleting a virtual wire.
+	// Updating a single service.
+	// Get list of all applications. Search through looking for application match. Update the value to change and send payload back.
+	// scopeID string, payload *ApplicationService
+	
+	updateAPI := service.NewUpdate(applicationIDToUpdate, *ZZZZZZ)
+	err = nsxclient.Do(updateAPI)
+	if err != nil {
+		fmt.Println("Error: ", err)
+	}
+
+	if updateAPI.StatusCode() == 200 {
+		applicationID := updateAPI.ResponseObject()
+		fmt.Println("Service created successfully.")
+		fmt.Println("objectId:", applicationID)
+	} else {
+		fmt.Println("Failed to update the service!")
+		fmt.Println(updateAPI.ResponseObject())
+	}
+
+	//
+	// Deleting a single service.
 	//
 
 	// Let's refresh the getAllAPI call, so that it has the last created data.
