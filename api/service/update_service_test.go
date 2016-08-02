@@ -10,22 +10,28 @@ import (
 var updateServiceAPI *UpdateServiceAPI
 
 func updateSetup() {
-	updateServiceAPI = NewUpdate("globalroot-0", "test_8080", "Test TCP", "TCP", "8080")
+	testServiceObj := new(ApplicationService)
+	testServiceObj.Name = "application-0001"
+	testServiceObj.Description = "dummy description"
+	element := Element{ApplicationProtocol: "TCP", Value: "8080"}
+	testServiceObj.Element = []Element{element}
+
+	updateServiceAPI = NewUpdate("application-0001", testServiceObj)
 }
 
 func TestUpdateMethod(t *testing.T) {
 	updateSetup()
-	assert.Equal(t, http.MethodPost, updateServiceAPI.Method())
+	assert.Equal(t, http.MethodPut, updateServiceAPI.Method())
 }
 
 func TestUpdateEndpoint(t *testing.T) {
 	updateSetup()
-	assert.Equal(t, "/api/2.0/services/application/globalroot-0", updateServiceAPI.Endpoint())
+	assert.Equal(t, "/api/2.0/services/application/application-0001", updateServiceAPI.Endpoint())
 }
 
 func TestUpdateMarshalling(t *testing.T) {
 	updateSetup()
-	expectedXML := "<application><name>test_8080</name><description>Test TCP</description><element><applicationProtocol>TCP</applicationProtocol><value>8080</value></element></application>"
+	expectedXML := "<application><name>application-0001</name><description>dummy description</description><element><applicationProtocol>TCP</applicationProtocol><value>8080</value></element></application>"
 
 	xmlBytes, err := xml.Marshal(updateServiceAPI.RequestObject())
 
