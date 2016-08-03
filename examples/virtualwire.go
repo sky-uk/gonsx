@@ -29,6 +29,20 @@ func RunVirtualWireExample(nsxManager, nsxUser, nsxPassword string, debug bool) 
 	}
 
 	//
+	// Updating a virtualwire
+	//
+
+	updateAPI := virtualwire.NewUpdate("test2", "test2 desc", virtualWireID)
+	nsxclient.Do(updateAPI)
+
+	if updateAPI.StatusCode() == 200 {
+		fmt.Println("Updated virtual wire")
+	} else {
+		fmt.Println("Failed to update virtualwire")
+		fmt.Println("Status code:", updateAPI.StatusCode())
+	}
+
+	//
 	// Deleting a virtual wire.
 	//
 	deleteAPI := virtualwire.NewDelete(virtualWireID)
