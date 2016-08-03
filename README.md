@@ -63,7 +63,8 @@ resp := api.GetResponse().FilterByName(virtualWireName)
 
 Update:
 ```
-Not yet implemented
+api := virtualwire.NewUpdate(name, desc, virtualwireID)
+nsxclient.Do(api)
 ```
 
 Delete:
