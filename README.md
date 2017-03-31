@@ -6,7 +6,7 @@
 This project is a NSXClient library for talking to NSX API.
 
 ### Features
-
+<center>
 | Feature         | Create | Read  | Update  | Delete |
 |-----------------|--------|-------|---------|--------|
 | DHCP Relay      |   Y    |   Y   |    N    |   Y    |
@@ -17,7 +17,7 @@ This project is a NSXClient library for talking to NSX API.
 | Service         |   Y    |   Y   |    N    |   Y    |
 | Transport Zone  |   Y    |   Y   |    N    |   Y    |
 | Virtual Wire    |   Y    |   Y   |    N    |   Y    |
-
+</center>
 ## Usage
 ### NSXClient
 
