@@ -5,6 +5,14 @@
 
 This project is a NSXClient library for talking to NSX API.
 
+### Features
+
+| Feature | Create | Read | Update | Delete |
+|---------|--------|------|--------|--------|
+|         |        |      |        |        |
+|         |        |      |        |        |
+|         |        |      |        |        |
+
 ## Usage
 ### NSXClient
 
