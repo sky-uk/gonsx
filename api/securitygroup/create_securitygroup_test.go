@@ -10,7 +10,8 @@ import (
 var createSecurityGroupAPI *CreateSecurityGroupAPI
 
 func createSetup() {
-	createSecurityGroupAPI = NewCreate("globalroot-0", "OVP_sg_test")
+	createSecurityGroupAPI = NewCreate("globalroot-0", "OVP_sg_test", "OR", "OR", "VM.SECURITY_TAG", "ovp_test_app4", "contains")
+
 }
 
 func TestCreateMethod(t *testing.T) {
@@ -25,7 +26,7 @@ func TestCreateEndpoint(t *testing.T) {
 
 func TestCreateMarshalling(t *testing.T) {
 	createSetup()
-	expectedXML := "<securitygroup><name>OVP_sg_test</name></securitygroup>"
+	expectedXML := "<securitygroup><name>OVP_sg_test</name><dynamicMemberDefinition><dynamicSet><operator>OR</operator><dynamicCriteria><operator>OR</operator><key>VM.SECURITY_TAG</key><criteria>contains</criteria><value>ovp_test_app4</value></dynamicCriteria></dynamicSet></dynamicMemberDefinition></securitygroup>"
 
 	xmlBytes, err := xml.Marshal(createSecurityGroupAPI.RequestObject())
 
