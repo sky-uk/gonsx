@@ -43,7 +43,7 @@ func RunSecurityGroupExample(nsxManager, nsxUser, nsxPassword string, debug bool
 	// Create single service.
 	//
 	fmt.Println("== Running Create new SecurityGroup with name 'OVP_sg_test' ==")
-	createAPI := securitygroup.NewCreate("globalroot-0", "OVP_sg_test")
+	createAPI := securitygroup.NewCreate("globalroot-0", "OVP_sg_test", "OR", "OR", "VM.SECURITY_TAG", "ovp_test_app4", "contains")
 	err = nsxclient.Do(createAPI)
 	if err != nil {
 		fmt.Println("Error:", err)
