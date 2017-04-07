@@ -13,6 +13,6 @@ type DeleteSecurityGroupAPI struct {
 // NewDelete returns a new object of DeleteSecurityGroupAPI.
 func NewDelete(securityGroupID string) *DeleteSecurityGroupAPI {
 	this := new(DeleteSecurityGroupAPI)
-	this.BaseAPI = api.NewBaseAPI(http.MethodDelete, "/api/2.0/services/securitygroup/"+ securityGroupID, nil, nil)
+	this.BaseAPI = api.NewBaseAPI(http.MethodDelete, "/api/2.0/services/securitygroup/"+securityGroupID, nil, nil)
 	return this
 }
