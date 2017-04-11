@@ -21,6 +21,29 @@ This project is a NSXClient library for talking to NSX API.
 
 Implementation of CRUD in above features is partial in some cases.
 
+
+### Security Policy features
+
+
+| Feature                          | NSX AP                                                           | GONSX Library |
+|----------------------------------|------------------------------------------------------------------|---------------|
+| End point                        | POST /2.0/services/policy/securitypolicy                         |       Y       |
+| Status                           | GET /2.0/services/policy/securitypolicy/status                   |       N       |
+| Alarms                           | GET /2.0/services/policy/securitypolicy/alarms/all               |       N       |
+| Provider Firewall                | GET /2.0/services/policy/securitypolicy/serviceprovider/firewall |       N       |
+| Provider Firewall                | PUT /2.0/services/policy/securitypolicy/serviceprovider/firewall |       N       |
+| ID                               | GET /2.0/services/policy/securitypolicy/{ID}                     |       Y       |
+| ID                               | PUT /2.0/services/policy/securitypolicy/{ID}                     |       Y       |
+| ID                               | DELETE /2.0/services/policy/securitypolicy/{ID}                  |       Y       |
+| Security Actions                 | GET /2.0/services/policy/securitypolicy/{ID}/securityactions     |       N       |
+| Hierarchy                        | GET /2.0/services/policy/securitypolicy/hierarchy                |       N       |
+| Hierarchy                        | POST /2.0/services/policy/securitypolicy/hierarchy               |       N       |
+| Security Action VMs              | GET /2.0/services/policy/securityaction/category/virtualmachines |       N       |
+| Security Action Security Groups  | GET /2.0/services/policy/securitygroup/{ID}/securityactions      |       N       |
+| VM Security Actions              | GET /2.0/services/policy/virtualmachine/{ID}/securityactions     |       N       |
+| Service Provider Firewall        | GET /2.0/services/policy/serviceprovider/firewall                |       N       |
+| Security Group Security Policies | GET /2.0/services/policy/securitygroup/{ID}/securitypolicies     |       N       |
+
 ## Usage
 ### NSXClient
 
