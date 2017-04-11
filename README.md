@@ -25,7 +25,7 @@ Implementation of CRUD in above features is partial in some cases.
 ### Security Policy features
 
 
-| Feature                          | NSX AP                                                           | GONSX Library |
+| Feature                          | NSX API                                                          | GONSX Library |
 |----------------------------------|------------------------------------------------------------------|---------------|
 | End point                        | POST /2.0/services/policy/securitypolicy                         |       Y       |
 | Status                           | GET /2.0/services/policy/securitypolicy/status                   |       N       |
