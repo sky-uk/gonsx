@@ -48,7 +48,7 @@ Implementation of CRUD in above features is partial in some cases.
 Apart from the basic CRUD functionality the Security Group supports the following 
 
 | Component               | Funcionality Name                                           | GONSX |
-|-----------------------------------------------------------------------------------------------|
+|-------------------------|-------------------------------------------------------------|-------|
 | Security Group          | Add Multiple Dynamic Membership Criteria                    |   P   |
 | Security Group          | Static Membership (always add these )                       |   N   |         
 | Security Group          | Static Exclusions (always exclude these )                   |   N   |
