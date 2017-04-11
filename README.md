@@ -55,6 +55,63 @@ Apart from the basic CRUD functionality the Security Group supports the followin
 | Security Group          | Add More than one Dynamic Membership criteria               |   N   |
 | Security Group          | Operators for more than one Dynamic Membership criteria     |   N   |
 
+Criteria Details 
+
+- OS Name 
+- Computer Name 
+- VM Name 
+- Security Tag 
+- Entity - This could be 
+            - Another Security Group 
+            - Cluster 
+            - Logical Switch 
+            - Logical Port Group 
+            - vApp
+            - Datacenter
+            - IP Sets 
+            - Directory Group
+            - MAC Sets 
+            - Security Tag
+            - vNic  
+            - Virtual Machine 
+            - Resource Pool
+            - Distributed Port Group 
+
+
+
+- Static Membership (always include )
+            - Security Group 
+            - Cluster 
+            - Logical Switch 
+            - Logical Port Group 
+            - vApp
+            - Datacenter
+            - IP Sets 
+            - Directory Group
+            - MAC Sets 
+            - Security Tag
+            - vNic  
+            - Virtual Machine 
+            - Resource Pool
+            - Distributed Port Group 
+
+
+
+  -  Static Exclusions (never include) 
+            - Security Group 
+            - Cluster 
+            - Logical Switch 
+            - Logical Port Group 
+            - vApp
+            - Datacenter
+            - IP Sets 
+            - Directory Group
+            - MAC Sets 
+            - Security Tag
+            - vNic  
+            - Virtual Machine 
+            - Resource Pool
+            - Distributed Port Group 
 
 NOTE: 
 
