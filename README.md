@@ -44,6 +44,24 @@ Implementation of CRUD in above features is partial in some cases.
 | Service Provider Firewall        | GET /2.0/services/policy/serviceprovider/firewall                |       N       |
 | Security Group Security Policies | GET /2.0/services/policy/securitygroup/{ID}/securitypolicies     |       N       |
 
+
+Apart from the basic CRUD functionality the Security Group supports the following 
+
+| Component               | Funcionality Name                                           | GONSX |
+|-----------------------------------------------------------------------------------------------|
+| Security Group          | Add Multiple Dynamic Membership Criteria                    |   P   |
+| Security Group          | Static Membership (always add these )                       |   N   |         
+| Security Group          | Static Exclusions (always exclude these )                   |   N   |
+| Security Group          | Add More than one Dynamic Membership criteria               |   N   |
+| Security Group          | Operators for more than one Dynamic Membership criteria     |   N   |
+
+
+NOTE: 
+
+Security Group - Add Multiple Dynamic Membership Criteria  
+This functionality is implemented partially, this is not accounted when creating , however we can do it while editing.
+
+
 ## Usage
 ### NSXClient
 
