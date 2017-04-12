@@ -71,32 +71,33 @@ Apart from the basic CRUD functionality the Security Group supports the followin
 | Component               | Funcionality Name                                           | GONSX |
 |-------------------------|-------------------------------------------------------------|-------|
 | Security Group          | Add Multiple Dynamic Membership Criteria                    |   P   |
-| Security Group          | Static Membership (always add these )                       |   N   |
+| Security Group          | Static Membership (always add these )                       |   N   |         
 | Security Group          | Static Exclusions (always exclude these )                   |   N   |
 | Security Group          | Add More than one Dynamic Membership criteria               |   N   |
 | Security Group          | Operators for more than one Dynamic Membership criteria     |   N   |
 
-Criteria Details for dynamic membership
+Criteria Details 
 
-- OS Name
-- Computer Name
-- VM Name
-- Security Tag - Implemented
-- Entity :This could be
-     - Another Security Group
-     - Cluster
-     - Logical Switch
-     - Logical Port Group
+- OS Name 
+- Computer Name 
+- VM Name 
+- Security Tag 
+- Entity :This could be 
+     - Another Security Group 
+     - Cluster 
+     - Logical Switch 
+     - Logical Port Group 
      - vApp
      - Datacenter
-     - IP Sets
+     - IP Sets 
      - Directory Group
-     - MAC Sets
+     - MAC Sets 
      - Security Tag
-     - vNic
-     - Virtual Machine
+     - vNic  
+     - Virtual Machine 
      - Resource Pool
-     - Distributed Port Group
+     - Distributed Port Group 
+
 
 
 
@@ -138,6 +139,7 @@ NOTE:
 
 Security Group - Add Multiple Dynamic Membership Criteria  
 This functionality is implemented partially, this is not accounted when creating , however we can do it while editing.
+
 
 ## Usage
 ### NSXClient
