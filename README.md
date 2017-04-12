@@ -82,36 +82,36 @@ Criteria Details
 - Static Membership (always include )
      - Security Group 
      - Cluster 
-            - Logical Switch 
-            - Logical Port Group 
-            - vApp
-            - Datacenter
-            - IP Sets 
-            - Directory Group
-            - MAC Sets 
-            - Security Tag
-            - vNic  
-            - Virtual Machine 
-            - Resource Pool
-            - Distributed Port Group 
+     - Logical Switch 
+     - Logical Port Group 
+     - vApp
+     - Datacenter
+     - IP Sets 
+     - Directory Group
+     - MAC Sets 
+     - Security Tag
+     - vNic  
+     - Virtual Machine 
+     - Resource Pool
+     - Distributed Port Group 
 
 
 
-  -  Static Exclusions (never include) 
-            - Security Group 
-            - Cluster 
-            - Logical Switch 
-            - Logical Port Group 
-            - vApp
-            - Datacenter
-            - IP Sets 
-            - Directory Group
-            - MAC Sets 
-            - Security Tag
-            - vNic  
-            - Virtual Machine 
-            - Resource Pool
-            - Distributed Port Group 
+ - Static Exclusions (never include) 
+      - Security Group 
+      - Cluster 
+      - Logical Switch 
+      - Logical Port Group 
+      - vApp
+      - Datacenter
+      - IP Sets 
+      - Directory Group
+      - MAC Sets 
+      - Security Tag
+      - vNic  
+      - Virtual Machine 
+      - Resource Pool
+      - Distributed Port Group 
 
 NOTE: 
 
