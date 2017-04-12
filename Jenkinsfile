@@ -4,7 +4,7 @@ project_name = 'gonsx'
 project_owner = 'sky-uk'
 
 project_src_path = "github.com/${project_owner}/${project_name}"
-github_token_id = 'gonsx-jenkins-release-token'
+github_token_id = 'svc-paas-github-access-token-as-text'
 github_credentials_id = 'svc-paas-github-deploy-key'
 
 version_file = 'VERSION'
@@ -94,8 +94,8 @@ slackHelper.notificationWrapper(slackChannel, currentBuild, env, true) {
                 gitHelper.push(github_credentials_id, git_branch)
 
                 echo "Creating GitHub Release v${version()}"
-                withCredentials([string(credentialsId: 'github_token_id', variable: 'GITHUB_TOKEN')]) {
-                    def github_release_response = gitHelper.createGitHubRelease(GITHUB_TOKEN, project_owner, project_name, version(), git_branch)
+                withCredentials([string(credentialsId: github_token_id, variable: 'GITHUB_TOKEN')]) {
+                    def github_release_response = gitHelper.createGitHubRelease(env.GITHUB_TOKEN, project_owner, project_name, version(), git_branch)
                     echo "${github_release_response}"
                     // FIXME: this is not working yet
                     // echo "Attaching artifacts to GitHub Release v${version()}"
