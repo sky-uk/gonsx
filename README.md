@@ -25,64 +25,44 @@ Implementation of CRUD in above features is partial in some cases.
 ### Security Policy features
 
 
-| Feature                          | NSX API                                                          | GONSX Library |
-|----------------------------------|------------------------------------------------------------------|---------------|
-| End point                        | POST /2.0/services/policy/securitypolicy                         |       Y       |
-| Status                           | GET /2.0/services/policy/securitypolicy/status                   |       N       |
-| Alarms                           | GET /2.0/services/policy/securitypolicy/alarms/all               |       N       |
-| Provider Firewall                | GET /2.0/services/policy/securitypolicy/serviceprovider/firewall |       N       |
-| Provider Firewall                | PUT /2.0/services/policy/securitypolicy/serviceprovider/firewall |       N       |
-| ID                               | GET /2.0/services/policy/securitypolicy/{ID}                     |       Y       |
-| ID                               | PUT /2.0/services/policy/securitypolicy/{ID}                     |       Y       |
-| ID                               | DELETE /2.0/services/policy/securitypolicy/{ID}                  |       Y       |
-| Security Actions                 | GET /2.0/services/policy/securitypolicy/{ID}/securityactions     |       N       |
-| Hierarchy                        | GET /2.0/services/policy/securitypolicy/hierarchy                |       N       |
-| Hierarchy                        | POST /2.0/services/policy/securitypolicy/hierarchy               |       N       |
-| Security Action VMs              | GET /2.0/services/policy/securityaction/category/virtualmachines |       N       |
-| Security Action Security Groups  | GET /2.0/services/policy/securitygroup/{ID}/securityactions      |       N       |
-| VM Security Actions              | GET /2.0/services/policy/virtualmachine/{ID}/securityactions     |       N       |
-| Service Provider Firewall        | GET /2.0/services/policy/serviceprovider/firewall                |       N       |
-| Security Group Security Policies | GET /2.0/services/policy/securitygroup/{ID}/securitypolicies     |       N       |
+| Function                      | Attribute                         | Implemented |   Required  |
+|-------------------------------|-----------------------------------|-------------|-------------|
+| Common                        | Name (String)                     |      Y      |      Y      |
+|                               | Description (String)              |      Y      |      Y      |
+|                               | Inherit Security Policy (Boolean) |      N      |      N/A    |
+|                               |   Parent Policy (String)          |      N      |      N/A    |
+|                               | Weight/Precedence (Integer)       |      Y      |      Y      |
+| Guest Introspection Services  | List (String)                     |      N      |      N/A    |
+|                               | Name (String)                     |      N      |      N/A    |
+|                               | Action (String)                   |      N      |      N/A    |
+|                               | Service Type (String)             |      N      |      N/A    |
+|                               | Service Name (String )            |      N      |      N/A    |
+|                               | Service Profile (String)          |      N      |      N/A    |
+|                               | State (String)                    |      N      |      N/A    |
+|                               | Enforce (Boolean)                 |      N      |      N/A    |
+| Firewall rule                 | Name (String)                     |      Y      |      Y      |
+|                               | Description (String)              |      Y      |      Y      |
+|                               | Action (String)                   |      Y      |      Y      |
+|                               | Policy Security Groups (String[]) |      Y      |      Y      |
+|                               | Negate Source (Boolean)           |      N      |      N      |
+|                               | Destination (String[])            |      Y      |      Y      |
+|                               | Service (String[])                |      Y      |      Y      |
+|                               | *State (String)                   |      Y      |      Y      |
+|                               | Log (Boolean)                     |      N      |      N/A    |
+| Network Introspection Service | Name (String)                     |      N      |      N/A    |
+|                               | Description (String)              |      N      |      N/A    |
+|                               | Action (String)                   |      N      |      N/A    |
+|                               | Service Name (String)             |      N      |      N/A    |
+|                               | Profile (String)                  |      N      |      N/A    |
+|                               | Source (String[])                 |      N      |      N/A    |
+|                               | NegateSource (Boolean)            |      N      |      N/A    |
+|                               | Destination (String[])            |      N      |      N/A    |
+|                               | NegateDestination (Boolean)       |      N      |      N/A    |
+|                               | Service (String)                  |      N      |      N/A    |
+|                               | State (String)                    |      N      |      N/A    |
+|                               | Log (Boolean)                     |      N      |      N/A    |
 
-
-| Function                      | Attribute                         | Implemented |
-|-------------------------------|-----------------------------------|-------------|
-| Policy                        | Name (String)                     |      Y      |
-|                               | Description (String)              |      Y      |
-|                               | Inherit Security Policy (Boolean) |      N      |
-|                               |   Parent Policy (String)          |      N      |
-|                               | Weight/Precedence (Integer)       |      Y      |
-| Guest Introspection Services  | List (String)                     |      N      |
-|                               | Name (String)                     |      N      |
-|                               | Action (String)                   |      N      |
-|                               | Service Type (String)             |      N      |
-|                               | Service Name (String )            |      N      |
-|                               | Service Profile (String)          |      N      |
-|                               | State (String)                    |      N      |
-|                               | Enforce (Boolean)                 |      N      |
-| Firewall rule                 | Name (String)                     |      Y      |
-|                               | Description (String)              |      Y      |
-|                               | Action (String)                   |      Y      |
-|                               | Policy Security Groups (String[]) |      Y      |
-|                               | Negate Source (Boolean)           |      N      |
-|                               | Destination (String[])            |      N      |
-|                               | Service (String[])                |      N      |
-|                               | State (String)                    |      N      |
-|                               | Log (Boolean)                     |      N      |
-| Network Introspection Service | Name (String)                     |      N      |
-|                               | Description (String)              |      N      |
-|                               | Action (String)                   |      N      |
-|                               | Service Name (String)             |      N      |
-|                               | Profile (String)                  |      N      |
-|                               | Source (String[])                 |      N      |
-|                               | NegateSource (Boolean)            |      N      |
-|                               | Destination (String[])            |      N      |
-|                               | NegateDestination (Boolean)       |      N      |
-|                               | Service (String)                  |      N      |
-|                               | State (String)                    |      N      |
-|                               | Log (Boolean)                     |      N      |
-
-
+*State is defaulted to true in all cases and can't be modified.
 
 ### Security Group features
 
