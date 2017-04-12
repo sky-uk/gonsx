@@ -61,27 +61,27 @@ Criteria Details
 - Computer Name 
 - VM Name 
 - Security Tag 
-- Entity - This could be 
-            - Another Security Group 
-            - Cluster 
-            - Logical Switch 
-            - Logical Port Group 
-            - vApp
-            - Datacenter
-            - IP Sets 
-            - Directory Group
-            - MAC Sets 
-            - Security Tag
-            - vNic  
-            - Virtual Machine 
-            - Resource Pool
-            - Distributed Port Group 
+- Entity :This could be 
+     - Another Security Group 
+     - Cluster 
+     - Logical Switch 
+     - Logical Port Group 
+     - vApp
+     - Datacenter
+     - IP Sets 
+     - Directory Group
+     - MAC Sets 
+     - Security Tag
+     - vNic  
+     - Virtual Machine 
+     - Resource Pool
+     - Distributed Port Group 
 
 
 
 - Static Membership (always include )
-            - Security Group 
-            - Cluster 
+     - Security Group 
+     - Cluster 
             - Logical Switch 
             - Logical Port Group 
             - vApp
