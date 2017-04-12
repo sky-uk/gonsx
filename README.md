@@ -45,6 +45,47 @@ Implementation of CRUD in above features is partial in some cases.
 | Security Group Security Policies | GET /2.0/services/policy/securitygroup/{ID}/securitypolicies     |       N       |
 
 
+| Function                      | Attribute                         | Implemented |
+|-------------------------------|-----------------------------------|-------------|
+| Policy                        | Name (String)                     |      Y      |
+|                               | Description (String)              |      Y      |
+|                               | Inherit Security Policy (Boolean) |      N      |
+|                               |   Parent Policy (String)          |      N      |
+|                               | Weight/Precedence (Integer)       |      Y      |
+| Guest Introspection Services  | List (String)                     |      N      |
+|                               | Name (String)                     |      N      |
+|                               | Action (String)                   |      N      |
+|                               | Service Type (String)             |      N      |
+|                               | Service Name (String )            |      N      |
+|                               | Service Profile (String)          |      N      |
+|                               | State (String)                    |      N      |
+|                               | Enforce (Boolean)                 |      N      |
+| Firewall rule                 | Name (String)                     |      Y      |
+|                               | Description (String)              |      Y      |
+|                               | Action (String)                   |      Y      |
+|                               | Policy Security Groups (String[]) |      Y      |
+|                               | Negate Source (Boolean)           |      N      |
+|                               | Destination (String[])            |      N      |
+|                               | Service (String[])                |      N      |
+|                               | State (String)                    |      N      |
+|                               | Log (Boolean)                     |      N      |
+| Network Introspection Service | Name (String)                     |      N      |
+|                               | Description (String)              |      N      |
+|                               | Action (String)                   |      N      |
+|                               | Service Name (String)             |      N      |
+|                               | Profile (String)                  |      N      |
+|                               | Source (String[])                 |      N      |
+|                               | NegateSource (Boolean)            |      N      |
+|                               | Destination (String[])            |      N      |
+|                               | NegateDestination (Boolean)       |      N      |
+|                               | Service (String)                  |      N      |
+|                               | State (String)                    |      N      |
+|                               | Log (Boolean)                     |      N      |
+
+
+
+### Security Group features
+
 Apart from the basic CRUD functionality the Security Group supports the following 
 
 | Component               | Funcionality Name                                           | GONSX |
