@@ -25,100 +25,120 @@ Implementation of CRUD in above features is partial in some cases.
 ### Security Policy features
 
 
-| Feature                          | NSX API                                                          | GONSX Library |
-|----------------------------------|------------------------------------------------------------------|---------------|
-| End point                        | POST /2.0/services/policy/securitypolicy                         |       Y       |
-| Status                           | GET /2.0/services/policy/securitypolicy/status                   |       N       |
-| Alarms                           | GET /2.0/services/policy/securitypolicy/alarms/all               |       N       |
-| Provider Firewall                | GET /2.0/services/policy/securitypolicy/serviceprovider/firewall |       N       |
-| Provider Firewall                | PUT /2.0/services/policy/securitypolicy/serviceprovider/firewall |       N       |
-| ID                               | GET /2.0/services/policy/securitypolicy/{ID}                     |       Y       |
-| ID                               | PUT /2.0/services/policy/securitypolicy/{ID}                     |       Y       |
-| ID                               | DELETE /2.0/services/policy/securitypolicy/{ID}                  |       Y       |
-| Security Actions                 | GET /2.0/services/policy/securitypolicy/{ID}/securityactions     |       N       |
-| Hierarchy                        | GET /2.0/services/policy/securitypolicy/hierarchy                |       N       |
-| Hierarchy                        | POST /2.0/services/policy/securitypolicy/hierarchy               |       N       |
-| Security Action VMs              | GET /2.0/services/policy/securityaction/category/virtualmachines |       N       |
-| Security Action Security Groups  | GET /2.0/services/policy/securitygroup/{ID}/securityactions      |       N       |
-| VM Security Actions              | GET /2.0/services/policy/virtualmachine/{ID}/securityactions     |       N       |
-| Service Provider Firewall        | GET /2.0/services/policy/serviceprovider/firewall                |       N       |
-| Security Group Security Policies | GET /2.0/services/policy/securitygroup/{ID}/securitypolicies     |       N       |
+| Function                      | Attribute                         | Implemented |   Required  |
+|-------------------------------|-----------------------------------|-------------|-------------|
+| Common                        | Name (String)                     |      Y      |      Y      |
+|                               | Description (String)              |      Y      |      Y      |
+|                               | Inherit Security Policy (Boolean) |      N      |      N/A    |
+|                               |   Parent Policy (String)          |      N      |      N/A    |
+|                               | Weight/Precedence (Integer)       |      Y      |      Y      |
+| Guest Introspection Services  | List (String)                     |      N      |      N/A    |
+|                               | Name (String)                     |      N      |      N/A    |
+|                               | Action (String)                   |      N      |      N/A    |
+|                               | Service Type (String)             |      N      |      N/A    |
+|                               | Service Name (String )            |      N      |      N/A    |
+|                               | Service Profile (String)          |      N      |      N/A    |
+|                               | State (String)                    |      N      |      N/A    |
+|                               | Enforce (Boolean)                 |      N      |      N/A    |
+| Firewall rule                 | Name (String)                     |      Y      |      Y      |
+|                               | Description (String)              |      Y      |      Y      |
+|                               | Action (String)                   |      Y      |      Y      |
+|                               | Policy Security Groups (String[]) |      Y      |      Y      |
+|                               | Negate Source (Boolean)           |      N      |      N      |
+|                               | Destination (String[])            |      Y      |      Y      |
+|                               | Service (String[])                |      Y      |      Y      |
+|                               | *State (String)                   |      Y      |      Y      |
+|                               | Log (Boolean)                     |      N      |      N/A    |
+| Network Introspection Service | Name (String)                     |      N      |      N/A    |
+|                               | Description (String)              |      N      |      N/A    |
+|                               | Action (String)                   |      N      |      N/A    |
+|                               | Service Name (String)             |      N      |      N/A    |
+|                               | Profile (String)                  |      N      |      N/A    |
+|                               | Source (String[])                 |      N      |      N/A    |
+|                               | NegateSource (Boolean)            |      N      |      N/A    |
+|                               | Destination (String[])            |      N      |      N/A    |
+|                               | NegateDestination (Boolean)       |      N      |      N/A    |
+|                               | Service (String)                  |      N      |      N/A    |
+|                               | State (String)                    |      N      |      N/A    |
+|                               | Log (Boolean)                     |      N      |      N/A    |
 
+*State is defaulted to true in all cases and can't be modified.
 
-### Security Group Features
+### Security Group features
 
-Apart from the basic CRUD functionality the Security Group supports the following
+Apart from the basic CRUD functionality the Security Group supports the following 
 
 | Component               | Funcionality Name                                           | GONSX |
 |-------------------------|-------------------------------------------------------------|-------|
 | Security Group          | Add Multiple Dynamic Membership Criteria                    |   P   |
-| Security Group          | Static Membership (always add these )                       |   N   |
+| Security Group          | Static Membership (always add these )                       |   N   |         
 | Security Group          | Static Exclusions (always exclude these )                   |   N   |
 | Security Group          | Add More than one Dynamic Membership criteria               |   N   |
 | Security Group          | Operators for more than one Dynamic Membership criteria     |   N   |
 
-Criteria Details for dynamic membership
+Criteria Details 
 
-- OS Name
-- Computer Name
-- VM Name
-- Security Tag - Implemented
-- Entity :This could be
-     - Another Security Group
-     - Cluster
-     - Logical Switch
-     - Logical Port Group
+- OS Name 
+- Computer Name 
+- VM Name 
+- Security Tag 
+- Entity :This could be 
+     - Another Security Group 
+     - Cluster 
+     - Logical Switch 
+     - Logical Port Group 
      - vApp
      - Datacenter
-     - IP Sets
+     - IP Sets 
      - Directory Group
-     - MAC Sets
+     - MAC Sets 
      - Security Tag
-     - vNic
-     - Virtual Machine
+     - vNic  
+     - Virtual Machine 
      - Resource Pool
-     - Distributed Port Group
+     - Distributed Port Group 
 
 
 
 - Static Membership (always include )
-     - Security Group
-     - Cluster
-     - Logical Switch
-     - Logical Port Group
+     - Security Group 
+     - Cluster 
+     - Logical Switch 
+     - Logical Port Group 
      - vApp
      - Datacenter
-     - IP Sets
+     - IP Sets 
      - Directory Group
-     - MAC Sets
+     - MAC Sets 
      - Security Tag
-     - vNic
-     - Virtual Machine
+     - vNic  
+     - Virtual Machine 
      - Resource Pool
-     - Distributed Port Group
+     - Distributed Port Group 
 
 
 
- - Static Exclusions (never include)
-      - Security Group
-      - Cluster
-      - Logical Switch
-      - Logical Port Group
+ - Static Exclusions (never include) 
+      - Security Group 
+      - Cluster 
+      - Logical Switch 
+      - Logical Port Group 
       - vApp
       - Datacenter
-      - IP Sets
+      - IP Sets 
       - Directory Group
-      - MAC Sets
+      - MAC Sets 
       - Security Tag
-      - vNic
-      - Virtual Machine
+      - vNic  
+      - Virtual Machine 
       - Resource Pool
-      - Distributed Port Group
+      - Distributed Port Group 
 
-NOTE:
+NOTE: 
 
-Security Group - Add Multiple Dynamic Membership Criteria
+Security Group - Add Multiple Dynamic Membership Criteria  
 This functionality is implemented partially, this is not accounted when creating , however we can do it while editing.
+
 
 ## Usage
 ### NSXClient
