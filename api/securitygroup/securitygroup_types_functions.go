@@ -40,8 +40,8 @@ func (sg *SecurityGroup) AddDynamicMemberDefinitionSet(operator string, dynamicC
 func NewDynamicCriteria(operator, key, value, criteria string) *DynamicCriteria {
 	newDynamicCriteria := DynamicCriteria{
 		Operator: operator,
-		Key: key,
-		Value: value,
+		Key:      key,
+		Value:    value,
 		Criteria: criteria,
 	}
 	return &newDynamicCriteria
@@ -50,7 +50,7 @@ func NewDynamicCriteria(operator, key, value, criteria string) *DynamicCriteria 
 // NewDynamicSet returns a list of dynamic criteria and their operators.
 func NewDynamicSet(operator string, dynamicCriteriaList []DynamicCriteria) *DynamicSet {
 	newDynamicSet := DynamicSet{
-		Operator: operator,
+		Operator:        operator,
 		DynamicCriteria: dynamicCriteriaList,
 	}
 	return &newDynamicSet
@@ -63,10 +63,3 @@ func NewDynamicMemberDefinition(dynamicSetList []DynamicSet) *DynamicMemberDefin
 	}
 	return &newDynamicMemberDefinition
 }
-
-
-
-
-
-
-
