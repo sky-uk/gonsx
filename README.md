@@ -70,70 +70,73 @@ Apart from the basic CRUD functionality the Security Group supports the followin
 
 | Component               | Funcionality Name                                           | GONSX |
 |-------------------------|-------------------------------------------------------------|-------|
-| Security Group          | Add Multiple Dynamic Membership Criteria                    |   P   |
-| Security Group          | Static Membership (always add these )                       |   N   |         
-| Security Group          | Static Exclusions (always exclude these )                   |   N   |
-| Security Group          | Add More than one Dynamic Membership criteria               |   N   |
+| Security Group          | Add Multiple Dynamic Membership Criteria                    |   Y   |
+|                         | OS Name                                                     |   Y   |
+|                         | Computer Name                                               |   Y   |
+|                         | VM Name                                                     |   Y   |
+|                         | Security Tag                                                |   Y   |
+|                         | Entity : This could be                                      |   Y   |
+|                         |  - Another Security Group                                   |   Y   |
+|                         |  - Cluster                                                  |   Y   |
+|                         |  - Logical Switch                                           |   Y   |
+|                         |  - Logical Port Group                                       |   Y   |
+|                         |  - vApp                                                     |   Y   |
+|                         |  - IP Sets                                                  |   Y   |
+|                         |  - Directory Group                                          |   Y   |
+|                         |  - MAC Sets                                                 |   Y   |
+|                         |  - Security Tag                                             |   Y   |
+|                         |  - vNic                                                     |   Y   |
+|                         |  - Virtual Machine                                          |   Y   |
+|                         |  - Resource Pool                                            |   Y   |
+|                         |  - Distributed Port Group                                   |   Y   |
+| Security Group          | Add More than one Dynamic Membership criteria               |   y   |
 | Security Group          | Operators for more than one Dynamic Membership criteria     |   N   |
+| Security Group          | Static Membership (always add these )                       |   N   | 
+|                         | Security Group                                              |   N   |  
+|                         | Cluster                                                     |   N   |   
+|                         | Logical Switch                                              |   N   |  
+|                         | Logical Port Group                                          |   N   |
+|                         | vApp                                                        |   N   |
+|                         | Datacenter                                                  |   N   |
+|                         | IP Sets                                                     |   N   |
+|                         | MAC Sets                                                    |   N   |
+|                         | Security Tag                                                |   N   |
+|                         | Directory Group                                             |   N   |
+|                         | vNic                                                        |   N   |
+|                         | Virtual Machine                                             |   N   |
+|                         | Resource Pool                                               |   N   |
+|                         | Distributed Port Group                                      |   N   |
+| Security Group          | Static Exclusions (always exclude these )                   |   N   |
+|                         | Security Group                                              |   N   |  
+|                         | Cluster                                                     |   N   |   
+|                         | Logical Switch                                              |   N   |  
+|                         | Logical Port Group                                          |   N   |
+|                         | vApp                                                        |   N   |
+|                         | Datacenter                                                  |   N   |
+|                         | IP Sets                                                     |   N   |
+|                         | MAC Sets                                                    |   N   |
+|                         | Security Tag                                                |   N   |
+|                         | Directory Group                                             |   N   |
+|                         | vNic                                                        |   N   |
+|                         | Virtual Machine                                             |   N   |
+|                         | Resource Pool                                               |   N   |
+|                         | Distributed Port Group                                      |   N   | 
+| Security Group          | Static Exclusions (never include)                           |   N   |
+|                         | Security Group                                              |   N   |
+|                         | Cluster                                                     |   N   |   
+|                         | Logical Switch                                              |   N   |  
+|                         | Logical Port Group                                          |   N   |
+|                         | vApp                                                        |   N   |
+|                         | Datacenter                                                  |   N   |
+|                         | IP Sets                                                     |   N   |
+|                         | MAC Sets                                                    |   N   |
+|                         | Security Tag                                                |   N   |
+|                         | Directory Group                                             |   N   |
+|                         | vNic                                                        |   N   |
+|                         | Virtual Machine                                             |   N   |
+|                         | Resource Pool                                               |   N   |
+|                         | Distributed Port Group                                      |   N   | 
 
-Criteria Details 
-
-- OS Name 
-- Computer Name 
-- VM Name 
-- Security Tag 
-- Entity :This could be 
-     - Another Security Group 
-     - Cluster 
-     - Logical Switch 
-     - Logical Port Group 
-     - vApp
-     - Datacenter
-     - IP Sets 
-     - Directory Group
-     - MAC Sets 
-     - Security Tag
-     - vNic  
-     - Virtual Machine 
-     - Resource Pool
-     - Distributed Port Group 
-
-
-
-
-- Static Membership (always include )
-     - Security Group 
-     - Cluster 
-     - Logical Switch 
-     - Logical Port Group 
-     - vApp
-     - Datacenter
-     - IP Sets 
-     - Directory Group
-     - MAC Sets 
-     - Security Tag
-     - vNic  
-     - Virtual Machine 
-     - Resource Pool
-     - Distributed Port Group 
-
-
-
- - Static Exclusions (never include) 
-      - Security Group 
-      - Cluster 
-      - Logical Switch 
-      - Logical Port Group 
-      - vApp
-      - Datacenter
-      - IP Sets 
-      - Directory Group
-      - MAC Sets 
-      - Security Tag
-      - vNic  
-      - Virtual Machine 
-      - Resource Pool
-      - Distributed Port Group 
 
 NOTE: 
 
