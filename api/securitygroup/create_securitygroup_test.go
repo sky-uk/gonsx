@@ -10,8 +10,15 @@ import (
 var createSecurityGroupAPI *CreateSecurityGroupAPI
 
 func createSetup() {
-	createSecurityGroupAPI = NewCreate("globalroot-0", "OVP_sg_test", "OR", "OR", "VM.SECURITY_TAG", "ovp_test_app4", "contains")
+	newDynamicCriteria1 := NewDynamicCriteria("OR", "VM.SECURITY_TAG", "ovp_test_app4", "contains")
+	dynamicCriteriaList := []DynamicCriteria{*newDynamicCriteria1}
 
+	newDynamicSet1 := NewDynamicSet("OR", dynamicCriteriaList)
+	dynamicSetList := []DynamicSet{*newDynamicSet1}
+
+	newDynamicMemberDefinition1 := NewDynamicMemberDefinition(dynamicSetList)
+
+	createSecurityGroupAPI = NewCreate("globalroot-0", "OVP_sg_test", newDynamicMemberDefinition1)
 }
 
 func TestCreateMethod(t *testing.T) {
