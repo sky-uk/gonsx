@@ -54,6 +54,10 @@ func deleteSecurityTag(ID string, nsxclient *gonsx.NSXClient) error {
 
 }
 
+func updateSecurityTag(ID,name,description string, nsxclient *gonsx.NSXClient) error {
+	api := securitytag.NewUpdate(ID, name, description)
+}
+
 // RunSecurityTagExample - runs securitytag example
 func RunSecurityTagExample(nsxManager, nsxUser, nsxPassword string, debug bool) {
 	nsxclient := gonsx.NewNSXClient(nsxManager, nsxUser, nsxPassword, true, debug)

@@ -11,9 +11,10 @@ type UpdateSecurityTagAPI struct {
 }
 
 // NewUpdate - Generates a new UpdateSecurityTagAPI object.
-func NewUpdate(name, desc string) *UpdateSecurityTagAPI {
+func NewUpdate(securityTagID,name, desc string) *UpdateSecurityTagAPI {
 	this := new(UpdateSecurityTagAPI)
 	requestPayload := new(SecurityTag)
+	requestPayload.ObjectID = securityTagID
 	requestPayload.Name = name
 	requestPayload.Description = desc
 	// TODO: need to make it argument
