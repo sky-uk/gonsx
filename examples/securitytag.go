@@ -75,7 +75,6 @@ func RunSecurityTagExample(nsxManager, nsxUser, nsxPassword string, debug bool) 
 	} else {
 		fmt.Println("Tag already exists")
 	}
-
 	getTags, err = getAllSecurityTags(nsxclient)
 	if err != nil {
 		fmt.Println("Failed to get tags")
@@ -84,6 +83,21 @@ func RunSecurityTagExample(nsxManager, nsxUser, nsxPassword string, debug bool) 
 
 	if getTags.CheckByName("test") {
 		ID := getTags.FilterByName("test").ObjectID
+		fmt.Println("Trying to update Tag", ID)
+		api := securitytag.NewUpdate(ID, "test2", "testing the update function")
+		updateerr := nsxclient.Do(api)
+		if updateerr != nil {
+			fmt.Println("Unable to update tag ", updateerr)
+
+		}
+
+	}
+	getTags, err = getAllSecurityTags(nsxclient)
+	if getTags.CheckByName("test2") {
+		fmt.Println("tag updated")
+	}
+	if getTags.CheckByName("test2") {
+		ID := getTags.FilterByName("test2").ObjectID
 		err := deleteSecurityTag(ID, nsxclient)
 		if err != nil {
 			fmt.Println("Error: ", err)
