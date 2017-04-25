@@ -15,14 +15,12 @@ type UpdateSecurityTagAPI struct {
 func NewUpdate(securityTagID,name, desc string) *UpdateSecurityTagAPI {
 	this := new(UpdateSecurityTagAPI)
 	requestPayload := new(SecurityTag)
-	requestPayload.ObjectID = securityTagID
 	requestPayload.Name = name
 	requestPayload.Description = desc
-	// TODO: need to make it argument
 	requestPayload.TypeName = "SecurityTag"
+	requestPayload.ObjectID = securityTagID
         fmt.Println(requestPayload)
-	this.BaseAPI = api.NewBaseAPI(http.MethodPut, "/api/2.0/services/securitytags/tag/bulk", requestPayload, new(SecurityTag))
-	fmt.Println(this)
+	this.BaseAPI = api.NewBaseAPI(http.MethodPut, "/api/2.0/services/securitytags/tag/"+securityTagID, requestPayload, new(SecurityTag))
 	return this
 }
 
