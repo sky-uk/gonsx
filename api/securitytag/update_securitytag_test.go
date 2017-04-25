@@ -1,19 +1,19 @@
 package securitytag
 
 import (
+	"encoding/xml"
 	"github.com/stretchr/testify/assert"
 	"net/http"
 	"testing"
-	"encoding/xml"
 )
 
 var updateSecurityTagAPI *UpdateSecurityTagAPI
 
 func updateSetup() {
 	SecurityTagID := "testtag-1"
-	SecurityTagName :="testTag"
+	SecurityTagName := "testTag"
 	SecurityTagDescription := "A description"
-	updateSecurityTagAPI = NewUpdate(SecurityTagID,SecurityTagName, SecurityTagDescription)
+	updateSecurityTagAPI = NewUpdate(SecurityTagID, SecurityTagName, SecurityTagDescription)
 
 }
 
@@ -24,7 +24,7 @@ func TestSecurityTagUpdateMethod(t *testing.T) {
 
 func TestSecurityTagUpdateEndpoint(t *testing.T) {
 	updateSetup()
-	assert.Equal(t, "/api/2.0/services/securitytags/tag/testtag-1", updateSecurityTagAPI.Endpoint() )
+	assert.Equal(t, "/api/2.0/services/securitytags/tag/testtag-1", updateSecurityTagAPI.Endpoint())
 }
 
 func TestSecurityTagUpdateMarshalling(t *testing.T) {
@@ -34,4 +34,3 @@ func TestSecurityTagUpdateMarshalling(t *testing.T) {
 	assert.Nil(t, err)
 	assert.Equal(t, expectedXML, string(xmlBytes))
 }
-
