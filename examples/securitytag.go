@@ -54,17 +54,6 @@ func deleteSecurityTag(ID string, nsxclient *gonsx.NSXClient) error {
 
 }
 
-// updateSecurityTag - Updates the tag
-func updateSecurityTag(ID,name,description string, nsxclient *gonsx.NSXClient) error {
-	api := securitytag.NewUpdate(ID, name, description)
-	err := nsxclient.Do(api)
-	if err != nil {
-		fmt.Println("Error: ", err)
-		return err
-	}
-	fmt.Println("Updating security tag with id", ID)
-	return nil
-}
 
 // RunSecurityTagExample - runs securitytag example
 func RunSecurityTagExample(nsxManager, nsxUser, nsxPassword string, debug bool) {
@@ -89,11 +78,12 @@ func RunSecurityTagExample(nsxManager, nsxUser, nsxPassword string, debug bool) 
 		fmt.Println("Failed to get tags")
 		os.Exit(1)
 	}
-
+	getTags, err = getAllSecurityTags(nsxclient)
 	if getTags.CheckByName("test") {
 		ID := getTags.FilterByName("test").ObjectID
 		fmt.Println("Trying to update Tag",ID)
-		updateerr := updateSecurityTag(ID,"test2","testing the update function", nsxclient)
+		api := securitytag.NewUpdate(ID,"test2","testing the update function")
+		updateerr := nsxclient.Do(api)
 		if updateerr != nil {
 			fmt.Println("Unable to update tag " , updateerr)
 
