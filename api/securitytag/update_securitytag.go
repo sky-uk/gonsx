@@ -3,7 +3,6 @@ package securitytag
 import (
 	"github.com/sky-uk/gonsx/api"
 	"net/http"
-	"fmt"
 )
 
 //UpdateSecurityTagAPI - struct
@@ -19,7 +18,6 @@ func NewUpdate(securityTagID,name, desc string) *UpdateSecurityTagAPI {
 	requestPayload.Description = desc
 	requestPayload.TypeName = "SecurityTag"
 	requestPayload.ObjectID = securityTagID
-        fmt.Println(requestPayload)
 	this.BaseAPI = api.NewBaseAPI(http.MethodPut, "/api/2.0/services/securitytags/tag/"+securityTagID, requestPayload, new(SecurityTag))
 	return this
 }
