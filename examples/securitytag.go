@@ -78,7 +78,7 @@ func RunSecurityTagExample(nsxManager, nsxUser, nsxPassword string, debug bool) 
 		fmt.Println("Failed to get tags")
 		os.Exit(1)
 	}
-	getTags, err = getAllSecurityTags(nsxclient)
+
 	if getTags.CheckByName("test") {
 		ID := getTags.FilterByName("test").ObjectID
 		fmt.Println("Trying to update Tag",ID)
