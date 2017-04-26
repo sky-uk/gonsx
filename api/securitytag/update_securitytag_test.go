@@ -11,11 +11,10 @@ var updateSecurityTagAPI *UpdateSecurityTagAPI
 
 func updateSetup() {
 	updatePayload := SecurityTag{
-		ObjectID: "testtag-1",
-		Name: "testTag",
+		ObjectID:    "testtag-1",
+		Name:        "testTag",
 		Description: "A description",
-		TypeName: "SecurityTag",
-
+		TypeName:    "SecurityTag",
 	}
 	updateSecurityTagAPI = NewUpdate("testtag-1", &updatePayload)
 
