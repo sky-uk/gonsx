@@ -10,6 +10,7 @@ import (
 var updateSecurityTagAPI *UpdateSecurityTagAPI
 
 func updateSetup() {
+  
 	updatePayload := SecurityTag{
 		ObjectID: "testtag-1",
 		Name: "testTag",
