@@ -32,7 +32,7 @@ func TestSecurityTagUpdateEndpoint(t *testing.T) {
 
 func TestSecurityTagUpdateMarshalling(t *testing.T) {
 	updateSetup()
-	expectedXML := "<securityTag><objectId>testtag-1</objectId><name>testTag</name><description>A description</description><type><typeName>SecurityTag</typeName></type></securityTag>"
+	expectedXML := "<securityTag><objectId>testtag-1</objectId><name>testTag</name><description>A description</description><type><typeName>SecurityTag</typeName></type><revision>1</revision></securityTag>"
 	xmlBytes, err := xml.Marshal(updateSecurityTagAPI.RequestObject())
 	assert.Nil(t, err)
 	assert.Equal(t, expectedXML, string(xmlBytes))
