@@ -81,7 +81,13 @@ func RunSecurityTagExample(nsxManager, nsxUser, nsxPassword string, debug bool) 
 	if getTags.CheckByName("test") {
 		ID := getTags.FilterByName("test").ObjectID
 		fmt.Println("Trying to update Tag", ID)
-		api := securitytag.NewUpdate(ID, "test2", "testing the update function")
+		updatePayload := securitytag.SecurityTag{
+			ObjectID:    ID,
+			Name:        "test2",
+			Description: "A description",
+			TypeName:    "SecurityTag",
+		}
+		api := securitytag.NewUpdate(ID, &updatePayload)
 		updateerr := nsxclient.Do(api)
 		if updateerr != nil {
 			fmt.Println("Unable to update tag ", updateerr)
