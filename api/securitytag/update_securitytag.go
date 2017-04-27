@@ -18,6 +18,6 @@ func NewUpdate(securityTagID string, securityTagPayload *SecurityTag) *UpdateSec
 }
 
 // GetResponse returns the ResponseObject from UpdateSecurityTagAPI
-func (updateAPI UpdateSecurityTagAPI) GetResponse() string {
-	return updateAPI.ResponseObject().(string)
+func (updateAPI UpdateSecurityTagAPI) GetResponse() *SecurityTag {
+	return updateAPI.ResponseObject().(*SecurityTag)
 }
