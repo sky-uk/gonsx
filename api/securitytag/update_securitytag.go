@@ -18,7 +18,7 @@ func NewUpdate(securityTagID string, securityTagPayload *SecurityTag) *UpdateSec
 	fmt.Println(securityTagPayload.Revision)
 	rev := securityTagPayload.Revision
 	newrev,_ := strconv.ParseInt(rev,10,64)
-	newrev +=1
+	newrev++
 	securityTagPayload.Revision = strconv.FormatInt(newrev,10)
 	this.BaseAPI = api.NewBaseAPI(http.MethodPut, "/api/2.0/services/securitytags/tag/"+securityTagID, securityTagPayload, new(SecurityTag))
 	return this
