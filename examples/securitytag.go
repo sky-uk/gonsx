@@ -6,7 +6,6 @@ import (
 	"github.com/sky-uk/gonsx"
 	"github.com/sky-uk/gonsx/api/securitytag"
 	"os"
-
 )
 
 // getAllSecurityTags - gets all securitytags
@@ -105,7 +104,6 @@ func RunSecurityTagExample(nsxManager, nsxUser, nsxPassword string, debug bool) 
 			Name:        "test3",
 			Description: "A larger description",
 			TypeName:    "SecurityTag",
-
 		}
 		api := securitytag.NewUpdate(ID, &updatePayload)
 		updateerr := nsxclient.Do(api)
@@ -118,7 +116,7 @@ func RunSecurityTagExample(nsxManager, nsxUser, nsxPassword string, debug bool) 
 	if getTags.CheckByName("test3") {
 		fmt.Println("tag updated twice")
 	}
-        return 
+	return
 	if getTags.CheckByName("test3") {
 		ID := getTags.FilterByName("test3").ObjectID
 		err := deleteSecurityTag(ID, nsxclient)
