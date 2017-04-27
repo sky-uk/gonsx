@@ -44,3 +44,10 @@ func (b BasicInfoList) FilterByIDAttached(id string) *BasicInfo {
 	}
 	return &basicInfoFound
 }
+
+// AddSecurityTagToAttachmentList - Adds a SecurityTagAttachment to a SecurityTagAttachmentList
+func (sgal SecurityTagAttachmentList) AddSecurityTagToAttachmentList(st SecurityTagAttachment) []SecurityTagAttachment {
+	sgal.SecurityTagAttachments = append(sgal.SecurityTagAttachments, st)
+	return sgal.SecurityTagAttachments
+}
+
