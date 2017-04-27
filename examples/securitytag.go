@@ -116,7 +116,7 @@ func RunSecurityTagExample(nsxManager, nsxUser, nsxPassword string, debug bool) 
 	if getTags.CheckByName("test3") {
 		fmt.Println("tag updated twice")
 	}
-	return
+	
 	if getTags.CheckByName("test3") {
 		ID := getTags.FilterByName("test3").ObjectID
 		err := deleteSecurityTag(ID, nsxclient)
