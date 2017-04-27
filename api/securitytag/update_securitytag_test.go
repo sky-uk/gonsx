@@ -10,10 +10,13 @@ import (
 var updateSecurityTagAPI *UpdateSecurityTagAPI
 
 func updateSetup() {
-	SecurityTagID := "testtag-1"
-	SecurityTagName := "testTag"
-	SecurityTagDescription := "A description"
-	updateSecurityTagAPI = NewUpdate(SecurityTagID, SecurityTagName, SecurityTagDescription)
+	updatePayload := SecurityTag{
+		ObjectID:    "testtag-1",
+		Name:        "testTag",
+		Description: "A description",
+		TypeName:    "SecurityTag",
+	}
+	updateSecurityTagAPI = NewUpdate("testtag-1", &updatePayload)
 
 }
 
