@@ -14,7 +14,6 @@ type UpdateSecurityTagAPI struct {
 //NewUpdate - Generates a new UpdateSecurityTagAPI object.
 func NewUpdate(securityTagID string, securityTagPayload *SecurityTag) *UpdateSecurityTagAPI {
 	this := new(UpdateSecurityTagAPI)
-	fmt.Println(securityTagPayload.Revision)
 	this.BaseAPI = api.NewBaseAPI(http.MethodPut, "/api/2.0/services/securitytags/tag/"+securityTagID, securityTagPayload, new(SecurityTag))
 	return this
 }
