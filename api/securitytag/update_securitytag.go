@@ -1,7 +1,6 @@
 package securitytag
 
 import (
-	"fmt"
 	"github.com/sky-uk/gonsx/api"
 	"net/http"
 )
