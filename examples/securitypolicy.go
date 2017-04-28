@@ -46,7 +46,7 @@ func RunSecurityPolicyExample(nsxManager, nsxUser, nsxPassword string, debug boo
 		"ovp_test_security_policy",
 		"50002",
 		"long description",
-		[]string{"securitygroup-177", "securitygroup-197"},
+		[]string{"securitygroup-304", "securitygroup-305"},
 		[]securitypolicy.Action{},
 	)
 	//
@@ -89,10 +89,17 @@ func RunSecurityPolicyExample(nsxManager, nsxUser, nsxPassword string, debug boo
 
 	// we will use a help function to add a firewall rule.
 	securityPolicyToModify.AddOutboundFirewallAction(
-		"DummyRule",
+		"DummyAllowOutboundRule",
 		"allow",
 		"outbound",
-		[]string{"securitygroup-197"},
+		[]string{"securitygroup-304"},
+		[]string{"application-212", "application-66"},
+	)
+
+	securityPolicyToModify.AddInboundFirewallAction(
+		"DummyAllowInbouncRule",
+		"allow",
+		"inbound",
 		[]string{"application-212", "application-66"},
 	)
 
