@@ -12,14 +12,14 @@ func setup() (securityTagsList *SecurityTags) {
 		ObjectID:    "securitytag-1",
 		TypeName:    "SecurityTag",
 		Description: "test",
-		Revision:    "1",
+		Revision:     1,
 	}
 	secondSecurityTag := SecurityTag{
 		Name:        "securityTag2",
 		ObjectID:    "securitytag-2",
 		TypeName:    "SecurityTag",
 		Description: "test",
-		Revision:    "2",
+		Revision:     2,
 	}
 	securityTagsList.SecurityTags = []SecurityTag{firstSecurityTag, secondSecurityTag}
 	return securityTagsList
