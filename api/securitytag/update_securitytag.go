@@ -16,10 +16,10 @@ type UpdateSecurityTagAPI struct {
 func NewUpdate(securityTagID string, securityTagPayload *SecurityTag) *UpdateSecurityTagAPI {
 	this := new(UpdateSecurityTagAPI)
 	fmt.Println(securityTagPayload.Revision)
-	rev := securityTagPayload.Revision
-	newrev, _ := strconv.ParseInt(rev, 10, 64)
-	newrev++
-	securityTagPayload.Revision = strconv.FormatInt(newrev, 10)
+	Revision := securityTagPayload.Revision
+	newRevision, _ := strconv.ParseInt(Revision, 10, 64)
+	newRevision++
+	securityTagPayload.Revision = strconv.FormatInt(newRevision, 10)
 	this.BaseAPI = api.NewBaseAPI(http.MethodPut, "/api/2.0/services/securitytags/tag/"+securityTagID, securityTagPayload, new(SecurityTag))
 	return this
 }

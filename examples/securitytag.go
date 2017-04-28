@@ -95,6 +95,7 @@ func RunSecurityTagExample(nsxManager, nsxUser, nsxPassword string, debug bool) 
 		}
 
 	}
+        return
 	getTags, err = getAllSecurityTags(nsxclient)
 	if getTags.CheckByName("test2") {
 		ID := getTags.FilterByName("test2").ObjectID
