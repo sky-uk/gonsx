@@ -7,9 +7,8 @@ func (s SecurityTags) String() string {
 }
 
 func (s SecurityTag) String() string {
-	return fmt.Sprintf("Security tag name %s and id %s",s.Name,s.ObjectID)
+	return fmt.Sprintf("Security tag name %s and id %s", s.Name, s.ObjectID)
 }
-
 
 // FilterByName - Filters the SecurityTags->SecurityTag with provided name
 func (s SecurityTags) FilterByName(name string) *SecurityTag {

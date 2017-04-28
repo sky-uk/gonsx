@@ -74,7 +74,7 @@ func TestStringImplementationSecurityTags(t *testing.T) {
 	assert.Equal(t, "Security tags contains a list of securitytags", securityTags.String())
 }
 
-func TestStingImplementationSecurityTag(t *testing.T){
+func TestStingImplementationSecurityTag(t *testing.T) {
 	firstSecurityTag := SecurityTag{
 		Name:        "securityTag1",
 		ObjectID:    "securitytag-1",
