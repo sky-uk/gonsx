@@ -145,7 +145,7 @@ func (sp *SecurityPolicy) AddOutboundFirewallAction(name, action, direction stri
 	return nil
 }
 
-// AddOutboundFirewallAction adds outbound firewall action rule into security policy.
+// AddInboundFirewallAction adds outbound firewall action rule into security policy.
 func (sp *SecurityPolicy) AddInboundFirewallAction(name, action, direction string, applicationObjectIDs []string) error {
 	if action != "allow" && action != "block" {
 		return errors.New("Action can be only 'allow' or 'block'")
