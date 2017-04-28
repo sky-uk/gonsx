@@ -12,12 +12,14 @@ func setup() (securityTagsList *SecurityTags) {
 		ObjectID:    "securitytag-1",
 		TypeName:    "SecurityTag",
 		Description: "test",
+		Revision:    1,
 	}
 	secondSecurityTag := SecurityTag{
 		Name:        "securityTag2",
 		ObjectID:    "securitytag-2",
 		TypeName:    "SecurityTag",
 		Description: "test",
+		Revision:    2,
 	}
 	securityTagsList.SecurityTags = []SecurityTag{firstSecurityTag, secondSecurityTag}
 	return securityTagsList
@@ -67,7 +69,18 @@ func TestFilterByNameAttached(t *testing.T) {
 	assert.Equal(t, "vm2", secondFiltered.Name)
 }
 
-func TestStringImplementation(t *testing.T) {
+func TestStringImplementationSecurityTags(t *testing.T) {
 	securityTags := setup()
-	assert.Equal(t, "[{{ } securitytag-1 securityTag1 test SecurityTag} {{ } securitytag-2 securityTag2 test SecurityTag}]", securityTags.String())
+	assert.Equal(t, "Security tags contains a list of securitytags", securityTags.String())
+}
+
+func TestStingImplementationSecurityTag(t *testing.T) {
+	firstSecurityTag := SecurityTag{
+		Name:        "securityTag1",
+		ObjectID:    "securitytag-1",
+		TypeName:    "SecurityTag",
+		Description: "test",
+		Revision:    1,
+	}
+	assert.Equal(t, "Security tag name securityTag1 and id securitytag-1", firstSecurityTag.String())
 }
