@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"github.com/sky-uk/gonsx/api"
 	"net/http"
-	"strconv"
 )
 
 //UpdateSecurityTagAPI - struct
