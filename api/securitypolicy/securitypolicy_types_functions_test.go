@@ -91,18 +91,19 @@ func TestRemoveFirewallActionByUUID(t *testing.T) {
 	assert.Len(t, securityPolicy.ActionsByCategory.Actions, 0)
 }
 
-func TestAddFirewallAction(t *testing.T) {
+func TestSecurityPolicy_AddOutboundFirewallAction(t *testing.T) {
 	securityPolicy := constructSecurityPolicy("securitypolicy-0001", "OVP_test_security_policy")
 
+	// test removing existing rule and add new one with 0 rules in list.
 	assert.Len(t, securityPolicy.ActionsByCategory.Actions, 1)
-	addErr := securityPolicy.AddOutboundFirewallAction("new_action", "allow", "outbound", []string{"securitygroup-001"}, []string{"application-1"})
-	assert.Nil(t, addErr)
+	addOutboundErr := securityPolicy.AddOutboundFirewallAction("new_allow_outbound_rule", "allow", "outbound", []string{"securitygroup-001"}, []string{"application-1", "application-2"})
+	assert.Nil(t, addOutboundErr)
 	assert.Len(t, securityPolicy.ActionsByCategory.Actions, 2)
-
 	securityPolicy.RemoveFirewallActionByName("DummyRule")
-	assert.Len(t, securityPolicy.ActionsByCategory.Actions, 1)
-	securityPolicy.RemoveFirewallActionByName("new_action")
+	securityPolicy.RemoveFirewallActionByName("new_allow_outbound_rule")
 	assert.Len(t, securityPolicy.ActionsByCategory.Actions, 0)
+	newAddOutboundErr := securityPolicy.AddOutboundFirewallAction("new_allow_outbound_rule", "allow", "outbound", []string{"securitygroup-001"}, []string{"any"})
+	assert.Nil(t, newAddOutboundErr)
 
 	// test failures for wrong action.
 	wrongActionErr := securityPolicy.AddOutboundFirewallAction("new_action_2", "disallow_wrong", "inbound", []string{"securitygroup-001"}, []string{"application-1"})
@@ -110,14 +111,40 @@ func TestAddFirewallAction(t *testing.T) {
 	assert.Equal(t, "Action can be only 'allow' or 'block'", fmt.Sprint(wrongActionErr))
 
 	// test failures for wrong action.
-	wrongDirectionErr := securityPolicy.AddOutboundFirewallAction("new_action_2", "block", "inbound_wrong", []string{"securitygroup-001"}, []string{"application-1"})
-	assert.NotNil(t, wrongDirectionErr)
-	assert.Equal(t, "Direction can be only 'inbound' or 'outbound'", fmt.Sprint(wrongDirectionErr))
+	wrongOutboundDirectionErr := securityPolicy.AddOutboundFirewallAction("new_action_2", "block", "outbound_wrong", []string{"securitygroup-001"}, []string{"application-1"})
+	assert.NotNil(t, wrongOutboundDirectionErr)
+	assert.Equal(t, "Direction can only be 'outbound'", fmt.Sprint(wrongOutboundDirectionErr))
 
 	// Now test adding new action on empty ActionsByCategory
 	securityPolicy.AddOutboundFirewallAction("new_action_2", "block", "inbound", []string{"securitygroup-001"}, []string{"application-1"})
 	assert.Len(t, securityPolicy.ActionsByCategory.Actions, 1)
 	assert.True(t, securityPolicy.ActionsByCategory.Actions[0].IsEnabled)
+}
+
+func TestSecurityPolicy_AddInboundFirewallAction(t *testing.T) {
+	securityPolicy := constructSecurityPolicy("securitypolicy-0001", "OVP_test_security_policy")
+	assert.Len(t, securityPolicy.ActionsByCategory.Actions, 1)
+
+	// test removing existing rule and add new one with 0 rules in list.
+	securityPolicy.RemoveFirewallActionByName("DummyRule")
+	assert.Len(t, securityPolicy.ActionsByCategory.Actions, 0)
+	addInboundErr := securityPolicy.AddInboundFirewallAction("new_inbound_allow_rule", "allow", "inbound", []string{"any"})
+	assert.Nil(t, addInboundErr)
+	assert.Len(t, securityPolicy.ActionsByCategory.Actions, 1)
+
+	// test multiple application IDs work
+	multiAppActionErr := securityPolicy.AddInboundFirewallAction("new_inbound_allow_rule", "allow", "inbound", []string{"application-1", "application-2"})
+	assert.Nil(t, multiAppActionErr)
+
+	// test failures for wrong action.
+	wrongActionErr := securityPolicy.AddInboundFirewallAction("new_inbound_allow_rule", "allow_wrong", "inbound", []string{"application-1"})
+	assert.NotNil(t, wrongActionErr)
+	assert.Equal(t, "Action can be only 'allow' or 'block'", fmt.Sprint(wrongActionErr))
+
+	// test failures for wrong action.
+	wrongDirectionErr := securityPolicy.AddInboundFirewallAction("new_action_2", "block", "inbound_wrong", []string{"application-1"})
+	assert.NotNil(t, wrongDirectionErr)
+	assert.Equal(t, "Direction can only be 'inbound'", fmt.Sprint(wrongDirectionErr))
 
 }
 
