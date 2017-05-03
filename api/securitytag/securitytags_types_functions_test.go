@@ -119,5 +119,3 @@ func TestVerifyAttachments(t *testing.T) {
 	listToVerifyTwo.SecurityTags = []SecurityTag{fourthAttachedSecurityTag, fifthAttachedSecurityTag}
 	assert.Equal(t, []string{"securitytag-135", "securitytag-150"}, securityTagAttachmentList.VerifyAttachments(listToVerifyTwo))
 }
-
-
