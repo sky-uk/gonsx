@@ -4,7 +4,6 @@ import (
 	"github.com/stretchr/testify/assert"
 	"testing"
 	"net/http"
-	//"encoding/xml"
 	"encoding/xml"
 )
 
@@ -19,7 +18,7 @@ func TestGetAllAttachedToVmMethod(t *testing.T)  {
 	assert.Equal(t, http.MethodGet, getAllSecurityTagsAttachedToVmAPI.Method())
 }
 
-func TestNewGetAllAttachedToVM(t *testing.T) {
+func TestNewGetAllAttachedToVMEndpoint(t *testing.T) {
 	setUpGetAllAttachedToVM()
 	assert.Equal(t,"/api/2.0/services/securitytags/vm/vm-246",getAllSecurityTagsAttachedToVmAPI.Endpoint())
 }
