@@ -54,30 +54,29 @@ func deleteSecurityTag(ID string, nsxclient *gonsx.NSXClient) error {
 
 }
 
-func detatchSecurityTag(securityTagID string, vmID string, nsxclient *gonsx.NSXClient)error{
-	api := securitytag.NewDetach(securityTagID,vmID)
+func detatchSecurityTag(securityTagID string, vmID string, nsxclient *gonsx.NSXClient) error {
+	api := securitytag.NewDetach(securityTagID, vmID)
 	err := nsxclient.Do(api)
 
 	if err != nil {
 		fmt.Println("Error: ", err)
 		return err
 	}
-	fmt.Println("Detaching security tag with id "+ securityTagID +" from "+ vmID)
+	fmt.Println("Detaching security tag with id " + securityTagID + " from " + vmID)
 	return nil
 }
 
-func  updateAttachedSecurityTags(vmID string, securityTagPayload *securitytag.AttachmentList, nsxclient *gonsx.NSXClient) (string,error){
+func updateAttachedSecurityTags(vmID string, securityTagPayload *securitytag.AttachmentList, nsxclient *gonsx.NSXClient) (string, error) {
 
 	var vmsAttached *securitytag.SecurityTags
-	vmsAttached,_ = getAllAttachedToVM(vmID,nsxclient)
-
+	vmsAttached, _ = getAllAttachedToVM(vmID, nsxclient)
 
 	var tagsToRemove []string
 	tagsToRemove = securityTagPayload.VerifyAttachments(vmsAttached)
 	fmt.Print(tagsToRemove)
 
 	for _, objectID := range tagsToRemove {
-		detatchSecurityTag(objectID,vmID,nsxclient)
+		detatchSecurityTag(objectID, vmID, nsxclient)
 	}
 
 	api := securitytag.NewUpdateAttachedTags(vmID, securityTagPayload)
@@ -104,8 +103,6 @@ func getAllAttachedToVM(vmID string, nsxclient *gonsx.NSXClient) (*securitytag.S
 	}
 	return nil, errors.New(string(api.RawResponse()))
 }
-
-
 
 // RunSecurityTagExample - runs securitytag example
 func RunSecurityTagExample(nsxManager, nsxUser, nsxPassword string, debug bool) {

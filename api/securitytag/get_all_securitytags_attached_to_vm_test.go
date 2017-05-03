@@ -1,10 +1,10 @@
 package securitytag
 
 import (
-	"github.com/stretchr/testify/assert"
-	"testing"
-	"net/http"
 	"encoding/xml"
+	"github.com/stretchr/testify/assert"
+	"net/http"
+	"testing"
 )
 
 var getAllSecurityTagsAttachedToVMAPI *GetAllSecurityTagsAttachedToVMAPI
@@ -13,14 +13,14 @@ func setUpGetAllAttachedToVM() {
 	getAllSecurityTagsAttachedToVMAPI = NewGetAllAttachedToVM("vm-246")
 }
 
-func TestGetAllAttachedToVmMethod(t *testing.T)  {
+func TestGetAllAttachedToVmMethod(t *testing.T) {
 	setUpGetAllAttachedToVM()
 	assert.Equal(t, http.MethodGet, getAllSecurityTagsAttachedToVMAPI.Method())
 }
 
 func TestNewGetAllAttachedToVMEndpoint(t *testing.T) {
 	setUpGetAllAttachedToVM()
-	assert.Equal(t,"/api/2.0/services/securitytags/vm/vm-246", getAllSecurityTagsAttachedToVMAPI.Endpoint())
+	assert.Equal(t, "/api/2.0/services/securitytags/vm/vm-246", getAllSecurityTagsAttachedToVMAPI.Endpoint())
 }
 
 func TestGetAllSecurityTagsAttachedToVmUnMarshalling(t *testing.T) {
@@ -33,4 +33,3 @@ func TestGetAllSecurityTagsAttachedToVmUnMarshalling(t *testing.T) {
 	assert.Equal(t, "securitytag-127", getAllSecurityTagsAttachedToVMAPI.GetResponse().SecurityTags[0].ObjectID)
 
 }
-

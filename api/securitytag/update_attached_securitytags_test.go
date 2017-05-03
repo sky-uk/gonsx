@@ -1,10 +1,10 @@
 package securitytag
 
 import (
-	"github.com/stretchr/testify/assert"
-	"testing"
-	"net/http"
 	"encoding/xml"
+	"github.com/stretchr/testify/assert"
+	"net/http"
+	"testing"
 )
 
 var updateAttachedSecurityTagsAPI *UpdateAttachedSecurityTagsAPI
@@ -18,7 +18,7 @@ func setUpUpdateAllAttachedSecurityTags() {
 	requestPayload.AddSecurityTagToAttachmentList(securityTagAttachmentOne)
 	requestPayload.AddSecurityTagToAttachmentList(securityTagAttachmentTwo)
 	requestPayload.AddSecurityTagToAttachmentList(securityTagAttachmentThree)
-	updateAttachedSecurityTagsAPI = NewUpdateAttachedTags(vmID,requestPayload)
+	updateAttachedSecurityTagsAPI = NewUpdateAttachedTags(vmID, requestPayload)
 }
 
 func TestNewUpdateAttachedSecurityTagsMethod(t *testing.T) {
@@ -26,19 +26,18 @@ func TestNewUpdateAttachedSecurityTagsMethod(t *testing.T) {
 	assert.Equal(t, http.MethodPost, updateAttachedSecurityTagsAPI.Method())
 }
 
-func TestNewUpdateAttachedSecurityTagsEndpoint(t *testing.T)  {
+func TestNewUpdateAttachedSecurityTagsEndpoint(t *testing.T) {
 	setUpUpdateAllAttachedSecurityTags()
-	assert.Equal(t, "/api/2.0/services/securitytags/vm/vm-426?action=ASSIGN_TAGS", updateAttachedSecurityTagsAPI.Endpoint() )
+	assert.Equal(t, "/api/2.0/services/securitytags/vm/vm-426?action=ASSIGN_TAGS", updateAttachedSecurityTagsAPI.Endpoint())
 }
 
-func TestNewUpdateAttachedSecurityTagsMarshalling(t *testing.T)  {
+func TestNewUpdateAttachedSecurityTagsMarshalling(t *testing.T) {
 	setUpUpdateAllAttachedSecurityTags()
 	expectedXML := "<securityTags><securityTag><objectId>securitytag-127</objectId></securityTag><securityTag><objectId>securitytag-128</objectId></securityTag><securityTag><objectId>securitytag-129</objectId></securityTag></securityTags>"
 	xmlBytes, err := xml.Marshal(updateAttachedSecurityTagsAPI.RequestObject())
 	assert.Nil(t, err)
 	assert.Equal(t, expectedXML, string(xmlBytes))
 }
-
 
 func TestNewUpdateAttachedSecurityTagsResponse(t *testing.T) {
 	setUpUpdateAllAttachedSecurityTags()

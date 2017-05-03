@@ -19,7 +19,7 @@ type SecurityTag struct {
 
 // AttachmentList struct
 type AttachmentList struct {
-	XMLName	xml.Name `xml:"securityTags"`
+	XMLName                xml.Name     `xml:"securityTags"`
 	SecurityTagAttachments []Attachment `xml:"securityTag"`
 }
 

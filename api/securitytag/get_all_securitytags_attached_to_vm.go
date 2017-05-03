@@ -21,4 +21,3 @@ func NewGetAllAttachedToVM(vmID string) *GetAllSecurityTagsAttachedToVMAPI {
 func (getAPI GetAllSecurityTagsAttachedToVMAPI) GetResponse() *SecurityTags {
 	return getAPI.ResponseObject().(*SecurityTags)
 }
-
