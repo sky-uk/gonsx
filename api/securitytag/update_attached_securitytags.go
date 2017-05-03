@@ -14,15 +14,6 @@ type UpdateAttachedSecurityTagsAPI struct {
 func NewUpdateAttachedTags(vmID string,securityTagPayload *SecurityTagAttachmentList) *UpdateAttachedSecurityTagsAPI {
 
 	this := new(UpdateAttachedSecurityTagsAPI)
-
-
-	//endpointUrl := "GET /2.0/services/securitytags/vm/"+vmID
-	//currentSecurityTags := api.NewBaseAPI(http.MethodGet, endpointUrl, nil, nil)
-	//TODO
-	//Compare current attached tags with ones in payload
-	//Remove any attached tags which are not in payload
-
-
 	endpointURL := "/api/2.0/services/securitytags/vm/" + vmID + "?action=ASSIGN_TAGS"
 	this.BaseAPI = api.NewBaseAPI(http.MethodPost, endpointURL,securityTagPayload,nil)
 

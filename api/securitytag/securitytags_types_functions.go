@@ -40,9 +40,34 @@ func (b BasicInfoList) FilterByIDAttached(id string) *BasicInfo {
 	return &basicInfoFound
 }
 
+
 // AddSecurityTagToAttachmentList - Adds a SecurityTagAttachment to a SecurityTagAttachmentList
-func (sgal SecurityTagAttachmentList) AddSecurityTagToAttachmentList(st SecurityTagAttachment) []SecurityTagAttachment {
+func (sgal *SecurityTagAttachmentList) AddSecurityTagToAttachmentList(st SecurityTagAttachment) {
 	sgal.SecurityTagAttachments = append(sgal.SecurityTagAttachments, st)
-	return sgal.SecurityTagAttachments
 }
+
+
+// CheckByObjectID - Checks if a specific securityTagAttachment is within a SecurityTagAttachmentList
+func (s *SecurityTagAttachmentList) CheckByObjectID(objectID string) bool {
+	for _, securityTagAttachment := range s.SecurityTagAttachments{
+		if securityTagAttachment.ObjectID == objectID{
+			return true
+		}
+	}
+	return false
+}
+
+// VerifyAttachments - Returns a list of tags that need to be detached from the VM
+func(s *SecurityTagAttachmentList) VerifyAttachments(originalTags *SecurityTags) []string{
+	var tagsToRemove []string
+	for _, securityTag := range originalTags.SecurityTags{
+	   if s.CheckByObjectID(securityTag.ObjectID) == false{
+		   tagsToRemove = append(tagsToRemove,securityTag.ObjectID)
+	   }
+	}
+	return tagsToRemove
+}
+
+
+
 
