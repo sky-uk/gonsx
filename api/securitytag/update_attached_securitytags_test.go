@@ -10,10 +10,7 @@ import (
 var updateAttachedSecurityTagsAPI *UpdateAttachedSecurityTagsAPI
 
 func setUpUpdateAllAttachedSecurityTags() {
-
-
 	vmID := "vm-426"
-
 	securityTagAttachmentOne := SecurityTagAttachment{ObjectID: "securitytag-127"}
 	securityTagAttachmentTwo := SecurityTagAttachment{ObjectID: "securitytag-128"}
 	securityTagAttachmentThree := SecurityTagAttachment{ObjectID: "securitytag-129"}
@@ -21,9 +18,7 @@ func setUpUpdateAllAttachedSecurityTags() {
 	requestPayload.AddSecurityTagToAttachmentList(securityTagAttachmentOne)
 	requestPayload.AddSecurityTagToAttachmentList(securityTagAttachmentTwo)
 	requestPayload.AddSecurityTagToAttachmentList(securityTagAttachmentThree)
-
 	updateAttachedSecurityTagsAPI = NewUpdateAttachedTags(vmID,requestPayload)
-
 }
 
 func TestNewUpdateAttachedSecurityTagsMethod(t *testing.T) {
@@ -40,7 +35,6 @@ func TestNewUpdateAttachedSecurityTagsMarshalling(t *testing.T)  {
 	setUpUpdateAllAttachedSecurityTags()
 	expectedXML := "<securityTags><securityTag><objectId>securitytag-127</objectId></securityTag><securityTag><objectId>securitytag-128</objectId></securityTag><securityTag><objectId>securitytag-129</objectId></securityTag></securityTags>"
 	xmlBytes, err := xml.Marshal(updateAttachedSecurityTagsAPI.RequestObject())
-
 	assert.Nil(t, err)
 	assert.Equal(t, expectedXML, string(xmlBytes))
 }

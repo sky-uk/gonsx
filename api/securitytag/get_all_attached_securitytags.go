@@ -14,7 +14,6 @@ type GetAllAttachedSecurityTagsAPI struct {
 func NewGetAllAttached(tagID string) *GetAllAttachedSecurityTagsAPI {
 	this := new(GetAllAttachedSecurityTagsAPI)
 	this.BaseAPI = api.NewBaseAPI(http.MethodGet, "/api/2.0/services/securitytags/tag/"+tagID+"/vm", nil, new(BasicInfoList))
-	println(this)
 	return this
 }
 
