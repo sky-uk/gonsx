@@ -119,3 +119,29 @@ func TestVerifyAttachments(t *testing.T)  {
 	listToVerifyTwo.SecurityTags = []SecurityTag{fourthAttachedSecurityTag,fifthAttachedSecurityTag}
 	assert.Equal(t, []string{"securitytag-135", "securitytag-150"}, securityTagAttachmentList.VerifyAttachments(listToVerifyTwo))
 }
+
+func TestCheckByObjectID(t *testing.T)  {
+	securityTagAttachmentList := setupAttachedToVM()
+	firstCheck := securityTagAttachmentList.CheckByObjectID("securitytag-127")
+	assert.Equal(t, true, firstCheck)
+	secondCheck := securityTagAttachmentList.CheckByObjectID("doesNotExist")
+	assert.Equal(t, false, secondCheck)
+}
+
+func TestVerifyAttachments(t *testing.T)  {
+	securityTagAttachmentList := setupAttachedToVM()
+
+	listToVerifyOne := new(SecurityTags)
+	firstAttachedSecurityTag := SecurityTag{ObjectID: "securitytag-127"}
+	secondAttachedSecurityTag := SecurityTag{ObjectID: "securitytag-128"}
+	thirdAttachedSecurityTag := SecurityTag{ObjectID: "securitytag-129"}
+	listToVerifyOne.SecurityTags = []SecurityTag{firstAttachedSecurityTag,secondAttachedSecurityTag,thirdAttachedSecurityTag}
+
+	assert.Equal(t, []string(nil), securityTagAttachmentList.VerifyAttachments(listToVerifyOne))
+
+	listToVerifyTwo := new(SecurityTags)
+	fourthAttachedSecurityTag := SecurityTag{ObjectID: "securitytag-135"}
+	fifthAttachedSecurityTag := SecurityTag{ObjectID: "securitytag-150"}
+	listToVerifyTwo.SecurityTags = []SecurityTag{fourthAttachedSecurityTag,fifthAttachedSecurityTag}
+	assert.Equal(t, []string{"securitytag-135", "securitytag-150"}, securityTagAttachmentList.VerifyAttachments(listToVerifyTwo))
+}
