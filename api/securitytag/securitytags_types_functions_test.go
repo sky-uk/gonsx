@@ -39,12 +39,12 @@ func setupAttached() (basicInfoList *BasicInfoList) {
 	return basicInfoList
 }
 
-func setupAttachedToVM() (securityTagAttachmentList *SecurityTagAttachmentList){
-	securityTagAttachmentList = new(SecurityTagAttachmentList)
-	firstAttachedSecurityTag := SecurityTagAttachment{ObjectID: "securitytag-127"}
-	secondAttachedSecurityTag := SecurityTagAttachment{ObjectID: "securitytag-128"}
-	thirdAttachedSecurityTag := SecurityTagAttachment{ObjectID: "securitytag-129"}
-	securityTagAttachmentList.SecurityTagAttachments = []SecurityTagAttachment{firstAttachedSecurityTag,secondAttachedSecurityTag,thirdAttachedSecurityTag}
+func setupAttachedToVM() (securityTagAttachmentList *AttachmentList){
+	securityTagAttachmentList = new(AttachmentList)
+	firstAttachedSecurityTag := Attachment{ObjectID: "securitytag-127"}
+	secondAttachedSecurityTag := Attachment{ObjectID: "securitytag-128"}
+	thirdAttachedSecurityTag := Attachment{ObjectID: "securitytag-129"}
+	securityTagAttachmentList.SecurityTagAttachments = []Attachment{firstAttachedSecurityTag,secondAttachedSecurityTag,thirdAttachedSecurityTag}
 	return securityTagAttachmentList
 }
 

@@ -11,10 +11,10 @@ var updateAttachedSecurityTagsAPI *UpdateAttachedSecurityTagsAPI
 
 func setUpUpdateAllAttachedSecurityTags() {
 	vmID := "vm-426"
-	securityTagAttachmentOne := SecurityTagAttachment{ObjectID: "securitytag-127"}
-	securityTagAttachmentTwo := SecurityTagAttachment{ObjectID: "securitytag-128"}
-	securityTagAttachmentThree := SecurityTagAttachment{ObjectID: "securitytag-129"}
-	requestPayload := new(SecurityTagAttachmentList)
+	securityTagAttachmentOne := Attachment{ObjectID: "securitytag-127"}
+	securityTagAttachmentTwo := Attachment{ObjectID: "securitytag-128"}
+	securityTagAttachmentThree := Attachment{ObjectID: "securitytag-129"}
+	requestPayload := new(AttachmentList)
 	requestPayload.AddSecurityTagToAttachmentList(securityTagAttachmentOne)
 	requestPayload.AddSecurityTagToAttachmentList(securityTagAttachmentTwo)
 	requestPayload.AddSecurityTagToAttachmentList(securityTagAttachmentThree)

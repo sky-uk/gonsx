@@ -66,7 +66,7 @@ func detatchSecurityTag(securityTagID string, vmID string, nsxclient *gonsx.NSXC
 	return nil
 }
 
-func  updateAttachedSecurityTags(vmID string, securityTagPayload *securitytag.SecurityTagAttachmentList, nsxclient *gonsx.NSXClient) (string,error){
+func  updateAttachedSecurityTags(vmID string, securityTagPayload *securitytag.AttachmentList, nsxclient *gonsx.NSXClient) (string,error){
 
 	var vmsAttached *securitytag.SecurityTags
 	vmsAttached,_ = getAllAttachedToVM(vmID,nsxclient)

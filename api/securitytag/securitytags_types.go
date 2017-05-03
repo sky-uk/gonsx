@@ -17,28 +17,14 @@ type SecurityTag struct {
 	Revision    int      `xml:"revision,omitempty"`
 }
 
-
-// SecurityTagAttachment list struct
-type SecurityTagAttachmentList struct {
+// AttachmentList struct
+type AttachmentList struct {
 	XMLName	xml.Name `xml:"securityTags"`
-	SecurityTagAttachments []SecurityTagAttachment `xml:"securityTag"`
+	SecurityTagAttachments []Attachment `xml:"securityTag"`
 }
 
-// SecurityTagAttachment object struct
-type SecurityTagAttachment struct {
-	//XMLName	xml.Name `xml:"securityTag"`
-	ObjectID string `xml:"objectId"`
-}
-
-
-// SecurityTagAttachment list struct
-type SecurityTagAttachmentList struct {
-	XMLName	xml.Name `xml:"securityTags"`
-	SecurityTagAttachments []SecurityTagAttachment `xml:"securityTag"`
-}
-
-// SecurityTagAttachment object struct
-type SecurityTagAttachment struct {
+// Attachment object struct
+type Attachment struct {
 	//XMLName	xml.Name `xml:"securityTag"`
 	ObjectID string `xml:"objectId"`
 }

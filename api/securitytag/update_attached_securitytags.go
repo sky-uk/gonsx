@@ -5,13 +5,13 @@ import (
 	"net/http"
 )
 
-// UpdateAttachedSecurityTagAPI - struct
+// UpdateAttachedSecurityTagsAPI - struct
 type UpdateAttachedSecurityTagsAPI struct {
 	*api.BaseAPI
 }
 
-// NewDelete - Generates a new UpdateAttachedSecurityTagAPI object.
-func NewUpdateAttachedTags(vmID string,securityTagPayload *SecurityTagAttachmentList) *UpdateAttachedSecurityTagsAPI {
+// NewUpdateAttachedTags - Generates a NewUpdateAttachedSecurityTagsAPI object.
+func NewUpdateAttachedTags(vmID string,securityTagPayload *AttachmentList) *UpdateAttachedSecurityTagsAPI {
 	this := new(UpdateAttachedSecurityTagsAPI)
 	endpointURL := "/api/2.0/services/securitytags/vm/" + vmID + "?action=ASSIGN_TAGS"
 	this.BaseAPI = api.NewBaseAPI(http.MethodPost, endpointURL,securityTagPayload,nil)
