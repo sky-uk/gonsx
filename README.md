@@ -13,8 +13,8 @@ This project is a NSXClient library for talking to NSX API.
 | Edge Interface          |   Y    |   Y   |    N    |   Y    |
 | Security Group          |   Y    |   Y   |    Y    |   Y    |
 | Security Policy         |   Y    |   Y   |    Y    |   Y    |
-| Security Tag            |   Y    |   Y   |    N    |   Y    |
-| Security Tag Attachment |   Y    |   Y   |    N    |   Y    |
+| Security Tag            |   Y    |   Y   |    Y    |   Y    |
+| Security Tag Attachment |   Y    |   Y   |    Y    |   Y    |
 | Service                 |   Y    |   Y   |    Y    |   Y    |
 | Transport Zone          |   N    |   Y   |    N    |   N    |
 | Virtual Wire            |   Y    |   Y   |    Y    |   Y    |
