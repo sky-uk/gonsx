@@ -1,5 +1,4 @@
-[![Build Status](http://jenkins.paas.int.ovp.bskyb.com/buildStatus/icon?job=gonsx/build)](http://jenkins.paas.int.ovp.bskyb.com/job/gonsx/job/build/)
-# gonsx client library
+# GoNSX - Go library for VMware vSphere NSX API
 
 ## Overview
 
