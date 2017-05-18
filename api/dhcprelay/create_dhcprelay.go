@@ -1,6 +1,5 @@
 package dhcprelay
 
-
 import (
 	"github.com/sky-uk/gonsx/api"
 	"net/http"

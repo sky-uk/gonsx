@@ -1,7 +1,7 @@
 package edgeinterface
 
 import (
-	"github.com/sky-uk/paas-gonsx/api"
+	"github.com/sky-uk/gonsx/api"
 	"net/http"
 )
 
