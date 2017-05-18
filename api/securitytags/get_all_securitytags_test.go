@@ -20,7 +20,7 @@ func TestGetAllMethod(t *testing.T) {
 
 func TestGetAllEndpoint(t *testing.T) {
 	setupGetAll()
-	assert.Equal(t, "/api/2.0/services/securitytags/tags", getAllSecurityTagsAPI.Endpoint())
+	assert.Equal(t, "/api/2.0/services/securitytags/tag", getAllSecurityTagsAPI.Endpoint())
 }
 
 func TestGetAllUnMarshalling(t *testing.T) {

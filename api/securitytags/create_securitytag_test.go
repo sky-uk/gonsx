@@ -20,7 +20,7 @@ func TestCreateMethod(t *testing.T) {
 
 func TestCreateEndpoint(t *testing.T) {
 	createSetup()
-	assert.Equal(t, "api/2.0/services/securitytags/tag", createSecurityTagAPI.Endpoint())
+	assert.Equal(t, "/api/2.0/services/securitytags/tag", createSecurityTagAPI.Endpoint())
 }
 
 func TestCreateMarshalling(t *testing.T) {
