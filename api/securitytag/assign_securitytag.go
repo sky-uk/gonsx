@@ -1,4 +1,4 @@
-package securitytags
+package securitytag
 
 import (
 	"github.com/sky-uk/gonsx/api"

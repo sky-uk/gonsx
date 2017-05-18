@@ -1,7 +1,7 @@
 package gonsx
 
 import (
-	"github.com/sky-uk/gonsx/api/securitytags"
+	"github.com/sky-uk/gonsx/api/securitytag"
 	"github.com/stretchr/testify/assert"
 	"net/http"
 	"testing"
@@ -13,7 +13,7 @@ func TestClientGetAllSecurityTags(t *testing.T) {
 	setup(http.StatusOK, xmlContent)
 	defer server.Close()
 
-	api := securitytags.NewGetAll()
+	api := securitytag.NewGetAll()
 	nsxClient.Do(api)
 
 	assert.Len(t, api.GetResponse().SecurityTags, 16)

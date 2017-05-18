@@ -4,12 +4,13 @@ import (
 	"fmt"
 	"os"
 	"github.com/sky-uk/gonsx"
-	"github.com/sky-uk/gonsx/api/securitytags"
+	"github.com/sky-uk/gonsx/api/securitytag"
 	"errors"
 )
 
-func getAllSecurityTags(nsxclient *gonsx.NSXClient) (*securitytags.SecurityTags, error){
-	api := securitytags.NewGetAll()
+
+func getAllSecurityTags(nsxclient *gonsx.NSXClient) (*securitytag.SecurityTags, error){
+	api := securitytag.NewGetAll()
 	err := nsxclient.Do(api)
 
 	if err != nil {
@@ -25,7 +26,7 @@ func getAllSecurityTags(nsxclient *gonsx.NSXClient) (*securitytags.SecurityTags,
 }
 
 func createSecurityTag(name, desc string, nsxclient *gonsx.NSXClient) (string, error){
-	api := securitytags.NewCreate(name, desc)
+	api := securitytag.NewCreate(name, desc)
 	err := nsxclient.Do(api)
 
 	if err != nil {
@@ -39,7 +40,7 @@ func createSecurityTag(name, desc string, nsxclient *gonsx.NSXClient) (string, e
 }
 
 func deleteSecurityTag(ID string, nsxclient *gonsx.NSXClient)(error){
-	api := securitytags.NewDelete(ID)
+	api := securitytag.NewDelete(ID)
 	err := nsxclient.Do(api)
 
 	if err != nil {
