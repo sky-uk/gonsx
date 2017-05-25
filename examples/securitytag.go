@@ -8,7 +8,6 @@ import (
 	"os"
 )
 
-
 // getAllSecurityTags - gets all securitytags
 func getAllSecurityTags(nsxclient *gonsx.NSXClient) (*securitytag.SecurityTags, error) {
 	api := securitytag.NewGetAll()
@@ -26,7 +25,6 @@ func getAllSecurityTags(nsxclient *gonsx.NSXClient) (*securitytag.SecurityTags, 
 	return nil, errors.New(string(api.RawResponse()))
 }
 
-
 // createSecurityTag - creates securitytags
 func createSecurityTag(name, desc string, nsxclient *gonsx.NSXClient) (string, error) {
 	api := securitytag.NewCreate(name, desc)
@@ -41,7 +39,6 @@ func createSecurityTag(name, desc string, nsxclient *gonsx.NSXClient) (string, e
 	return api.GetResponse(), nil
 
 }
-
 
 // deleteSecurityTag - deletes securitytags
 func deleteSecurityTag(ID string, nsxclient *gonsx.NSXClient) error {
