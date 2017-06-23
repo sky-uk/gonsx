@@ -10,8 +10,7 @@ type CreateDhcpRelayAPI struct {
 	*api.BaseAPI
 }
 
-
-// NewUpdate creates a new object of UpdateDhcpRelayAPI
+// NewCreate creates a new object of UpdateDhcpRelayAPI
 func NewCreate(edgeID string, dhcpRelay DhcpRelay) *CreateDhcpRelayAPI {
 	this := new(CreateDhcpRelayAPI)
 	requestPayload := dhcpRelay
@@ -23,4 +22,3 @@ func NewCreate(edgeID string, dhcpRelay DhcpRelay) *CreateDhcpRelayAPI {
 func (createAPI CreateDhcpRelayAPI) GetResponse() string {
 	return createAPI.ResponseObject().(string)
 }
-
