@@ -72,7 +72,7 @@ func RunDhcpRelayExample(nsxManager, nsxUser, nsxPassword string, debug bool) {
 		fmt.Println("Failed to get all DHCP relays.")
 		os.Exit(1)
 	}
-		var updateDhcp = dhcprelay.DhcpRelay{}
+		var updateDhcp  dhcprelay.DhcpRelay
 		newRelayAgent = dhcprelay.RelayAgent{VnicIndex: "1", GiAddress: "10.72.6.177"}
 		newRelayAgentsList = append(CurrentDHCPRelay.RelayAgents, newRelayAgent)
 	        updateDhcp.RelayAgents = newRelayAgentsList
