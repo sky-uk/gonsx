@@ -5,7 +5,7 @@ import (
 	"net/http"
 )
 
-// UpdateDhcpRelayAPI ...
+// CreateDhcpRelayAPI ...
 type CreateDhcpRelayAPI struct {
 	*api.BaseAPI
 }
