@@ -19,11 +19,10 @@ func TestCreateRelayMethod(t *testing.T) {
 
 }
 
-func TestCreateRelayEndpoint(t *testing.T){
+func TestCreateRelayEndpoint(t *testing.T) {
 	setupCreateRelay()
-	assert.Equal(t,"/api/4.0/edges/edge-5/dhcp/config/relay", createDhcpRelayAPI.Endpoint())
+	assert.Equal(t, "/api/4.0/edges/edge-5/dhcp/config/relay", createDhcpRelayAPI.Endpoint())
 }
-
 
 func TestCreateRelayRespons(t *testing.T) {
 	setupCreateRelay()
