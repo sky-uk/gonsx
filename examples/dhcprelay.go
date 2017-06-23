@@ -32,7 +32,7 @@ func RunDhcpRelayExample(nsxManager, nsxUser, nsxPassword string, debug bool) {
 	nsxclient := gonsx.NewNSXClient(nsxManager, nsxUser, nsxPassword, true, debug)
 
 	// Get All current DHCP Relays.
-	CurrentDHCPRelay, err := getAllDhcpRelays("edge-50", nsxclient)
+	CurrentDHCPRelay, err := getAllDhcpRelays("edge-5", nsxclient)
 	if err != nil {
 		fmt.Println("Failed to get all DHCP relays.")
 		os.Exit(1)
@@ -41,10 +41,15 @@ func RunDhcpRelayExample(nsxManager, nsxUser, nsxPassword string, debug bool) {
 	//
 	// Add New Relay Agent into existing list.
 	//
-	newRelayAgent := dhcprelay.RelayAgent{VnicIndex: "16", GiAddress: "10.152.165.1"}
+	var createDhcp dhcprelay.DhcpRelay
+	newRelayAgent := dhcprelay.RelayAgent{VnicIndex: "9", GiAddress: "10.72.232.200"}
 	newRelayAgentsList := append(CurrentDHCPRelay.RelayAgents, newRelayAgent)
+	createDhcp.RelayAgents = newRelayAgentsList
+	createDhcp.RelayServer.IPAddress = "10.152.160.10"
 
-	updateAPI := dhcprelay.NewUpdate("10.152.160.10", "edge-50", newRelayAgentsList)
+	updateAPI := dhcprelay.NewCreate("edge-5", createDhcp)
+
+
 
 	err = nsxclient.Do(updateAPI)
 	if err != nil {
@@ -64,13 +69,13 @@ func RunDhcpRelayExample(nsxManager, nsxUser, nsxPassword string, debug bool) {
 	//
 
 	// Get All current DHCP Relays.
-	CurrentDHCPRelay, err = getAllDhcpRelays("edge-50", nsxclient)
+	CurrentDHCPRelay, err = getAllDhcpRelays("edge-5", nsxclient)
 	if err != nil {
 		fmt.Println("Failed to get all DHCP relays.")
 		os.Exit(1)
 	}
 
-	newRelayAgent = dhcprelay.RelayAgent{VnicIndex: "17", GiAddress: "10.152.164.1"}
+/*	newRelayAgent = dhcprelay.RelayAgent{VnicIndex: "17", GiAddress: "10.152.164.1"}
 	newRelayAgentsList = append(CurrentDHCPRelay.RelayAgents, newRelayAgent)
 
 	updateAPI = dhcprelay.NewUpdate("10.152.160.10", "edge-50", newRelayAgentsList)
@@ -87,11 +92,12 @@ func RunDhcpRelayExample(nsxManager, nsxUser, nsxPassword string, debug bool) {
 			fmt.Println(updateAPI.GetResponse())
 		}
 	}
-
+*/
 	//
 	// Delete DHCP Relay Agent
 	//
 	// First get current dhcp relay agent list, we are using the objet from above Get All here.
+/*
 	CurrentDHCPRelay, err = getAllDhcpRelays("edge-50", nsxclient)
 	if err != nil {
 		fmt.Println("Failed to get all DHCP relays.")
@@ -141,7 +147,7 @@ func RunDhcpRelayExample(nsxManager, nsxUser, nsxPassword string, debug bool) {
 	//  see if our vnic exists in relay agents list and this is the only one there.
 	if CurrentDHCPRelay.CheckByVnicIndex("17") && (len(CurrentDHCPRelay.RelayAgents) == 1) {
 		fmt.Println("Last dhcp relay agent, removing the whole DHCP Relay.")
-		deleteAPI := dhcprelay.NewDelete("edge-50")
+		deleteAPI := dhcprelay.NewDelete("edge-5")
 		err = nsxclient.Do(deleteAPI)
 		if err != nil {
 			fmt.Println("Error:", err)
@@ -175,5 +181,5 @@ func RunDhcpRelayExample(nsxManager, nsxUser, nsxPassword string, debug bool) {
 		}
 
 	}
-
+*/
 }

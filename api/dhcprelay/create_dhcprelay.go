@@ -6,19 +6,21 @@ import (
 )
 
 // UpdateDhcpRelayAPI ...
-type UpdateDhcpRelayAPI struct {
+type CreateDhcpRelayAPI struct {
 	*api.BaseAPI
 }
 
+
 // NewUpdate creates a new object of UpdateDhcpRelayAPI
-func NewUpdate(edgeID string , dhcpRelay DhcpRelay) *UpdateDhcpRelayAPI {
-	this := new(UpdateDhcpRelayAPI)
+func NewCreate(edgeID string, dhcpRelay DhcpRelay) *CreateDhcpRelayAPI {
+	this := new(CreateDhcpRelayAPI)
 	requestPayload := dhcpRelay
 	this.BaseAPI = api.NewBaseAPI(http.MethodPut, "/api/4.0/edges/"+edgeID+"/dhcp/config/relay", requestPayload, new(string))
 	return this
 }
 
 // GetResponse returns the ResponseObject from UpdateDhcpRelayAPI
-func (updateAPI UpdateDhcpRelayAPI) GetResponse() string {
-	return updateAPI.ResponseObject().(string)
+func (createAPI CreateDhcpRelayAPI) GetResponse() string {
+	return createAPI.ResponseObject().(string)
 }
+
