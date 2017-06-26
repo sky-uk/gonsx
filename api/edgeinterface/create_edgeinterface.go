@@ -11,7 +11,7 @@ type CreateEdgeInterfaceAPI struct {
 }
 
 // NewCreate returns a new object of CreateEdgeInterfaceAPI
-func NewCreate( edgeInterfaceList EdgeInterfaces, edgeID string ) {
+func NewCreate(edgeInterfaceList *EdgeInterfaces, edgeID string) *CreateEdgeInterfaceAPI {
 
 	this := new(CreateEdgeInterfaceAPI)
 
