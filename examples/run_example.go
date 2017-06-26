@@ -49,6 +49,10 @@ func main() {
 		fmt.Println("running service example with: ", nsxManager, nsxUser, nsxPassword, exampleName, debug)
 		RunSecurityPolicyExample(nsxManager, nsxUser, nsxPassword, debug)
 		return
+	case "edge":
+		fmt.Println("running edge example with: ", nsxManager, nsxUser, nsxPassword, exampleName, debug)
+		RunEdgesExample(nsxManager, nsxUser, nsxPassword, debug)
+		return
 	}
 
 	fmt.Println("Example not implemented.")
