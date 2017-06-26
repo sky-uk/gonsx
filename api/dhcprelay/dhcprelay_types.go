@@ -11,8 +11,8 @@ type DhcpRelay struct {
 
 // RelayServer - relayserver within DhcpRelay object.
 type RelayServer struct {
-	IPSets     []string  `xml:"groupingObjectId"`
-	IPAddress  []string   `xml:"ipAddress"`
+	IPSets     []string `xml:"groupingObjectId"`
+	IPAddress  []string `xml:"ipAddress"`
 	DomainName []string `xml:"fqdn"`
 }
 
