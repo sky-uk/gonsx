@@ -21,7 +21,7 @@ func createSetup() {
 	relayAgentsList := []RelayAgent{*firstRelayAgent, *secondRelayAgent}
 	//"10.152.160.10",
 	var updateDhcp DhcpRelay
-	updateDhcp.RelayServer.IPAddress = "10.152.160.10"
+	updateDhcp.RelayServer.IPAddress = []string{"10.152.160.10"}
 	updateDhcp.RelayAgents = relayAgentsList
 	updateDhcpRelayAPI = NewUpdate("edge-50", updateDhcp)
 }
@@ -38,7 +38,7 @@ func TestCreateEndpoint(t *testing.T) {
 
 func TestCreateMarshalling(t *testing.T) {
 	createSetup()
-	expectedXML := "<relay><relayServer><ipAddress>10.152.160.10</ipAddress><fqdn></fqdn></relayServer><relayAgents><relayAgent><vnicIndex>16</vnicIndex><giAddress>10.152.165.1</giAddress></relayAgent><relayAgent><vnicIndex>17</vnicIndex><giAddress>10.152.164.1</giAddress></relayAgent></relayAgents></relay>"
+	expectedXML := "<relay><relayServer><ipAddress>10.152.160.10</ipAddress></relayServer><relayAgents><relayAgent><vnicIndex>16</vnicIndex><giAddress>10.152.165.1</giAddress></relayAgent><relayAgent><vnicIndex>17</vnicIndex><giAddress>10.152.164.1</giAddress></relayAgent></relayAgents></relay>"
 
 	xmlBytes, err := xml.Marshal(updateDhcpRelayAPI.RequestObject())
 
