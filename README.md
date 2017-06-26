@@ -8,7 +8,7 @@ This project is a NSXClient library for talking to NSX API.
 
 | Feature                 | Create | Read  | Update  | Delete |
 |-------------------------|--------|-------|---------|--------|
-| DHCP Relay              |   N    |   Y   |    Y    |   Y    |
+| DHCP Relay              |   Y    |   Y   |    Y    |   Y    |
 | Edge Interface          |   Y    |   Y   |    N    |   Y    |
 | Security Group          |   Y    |   Y   |    Y    |   Y    |
 | Security Policy         |   Y    |   Y   |    Y    |   Y    |
