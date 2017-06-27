@@ -17,7 +17,7 @@ func RunEdgeinterfaceExample(nsxManager, nsxUser, nsxPassword string, debug bool
 	//
 	// Get All VirtualWires.
 	//
-	api := virtualwire.NewGetAll("vdnscope-19")
+	api := virtualwire.NewGetAll("vdnscope-1")
 	nsxclient.Do(api)
 
 	// Get ID of our virtualwire with name "test"
@@ -25,7 +25,7 @@ func RunEdgeinterfaceExample(nsxManager, nsxUser, nsxPassword string, debug bool
 
 	// check if we got virtual wire id, otherwise let's create one and get the ID.
 	if virtualWireID == "" {
-		createAPI := virtualwire.NewCreate("test", "test desc", "tenant id", "vdnscope-19")
+		createAPI := virtualwire.NewCreate("test", "test desc", "tenant id", "vdnscope-1")
 		nsxclient.Do(createAPI)
 		fmt.Println("Status code:", createAPI.StatusCode())
 		virtualWireID = createAPI.GetResponse()
@@ -49,7 +49,7 @@ func RunEdgeinterfaceExample(nsxManager, nsxUser, nsxPassword string, debug bool
 	requestPayload := new(edgeinterface.EdgeInterfaces)
 	requestPayload.Interfaces = []edgeinterface.EdgeInterface{edgeInterface}
 
-	edgeInterfaceAPI := edgeinterface.NewCreate(requestPayload, "edge-50")
+	edgeInterfaceAPI := edgeinterface.NewCreate(requestPayload, "edge-7")
 
 	nsxclient.Do(edgeInterfaceAPI)
 
