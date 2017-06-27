@@ -17,7 +17,7 @@ func RunEdgeinterfaceExample(nsxManager, nsxUser, nsxPassword string, debug bool
 	//
 	// Get All VirtualWires.
 	//
-	api := virtualwire.NewGetAll("vdnscope-19")
+	api := virtualwire.NewGetAll("vdnscope-1")
 	nsxclient.Do(api)
 
 	// Get ID of our virtualwire with name "test"
@@ -25,7 +25,7 @@ func RunEdgeinterfaceExample(nsxManager, nsxUser, nsxPassword string, debug bool
 
 	// check if we got virtual wire id, otherwise let's create one and get the ID.
 	if virtualWireID == "" {
-		createAPI := virtualwire.NewCreate("test", "test desc", "tenant id", "vdnscope-19")
+		createAPI := virtualwire.NewCreate("test", "test desc", "tenant id", "vdnscope-1")
 		nsxclient.Do(createAPI)
 		fmt.Println("Status code:", createAPI.StatusCode())
 		virtualWireID = createAPI.GetResponse()
@@ -34,7 +34,22 @@ func RunEdgeinterfaceExample(nsxManager, nsxUser, nsxPassword string, debug bool
 	//
 	// Create Edge Interface for the virtual wire we created above
 	//
-	edgeInterfaceAPI := edgeinterface.NewCreate("edge-50", "app_virtualwire_one", virtualWireID, "10.10.10.1", "255.255.255.0", "internal", 1500)
+	addressGroup := edgeinterface.AddressGroup{PrimaryAddress: "10.10.10.1", SubnetMask: "255.255.255.0"}
+	addressGroupList := []edgeinterface.AddressGroup{addressGroup}
+
+	edgeInterface := edgeinterface.EdgeInterface{
+		Name:          "app_virtualwire_one",
+		ConnectedToID: virtualWireID,
+		Type:          "internal",
+		Mtu:           1500,
+		IsConnected:   true,
+		AddressGroups: edgeinterface.AddressGroups{addressGroupList},
+	}
+
+	requestPayload := new(edgeinterface.EdgeInterfaces)
+	requestPayload.Interfaces = []edgeinterface.EdgeInterface{edgeInterface}
+
+	edgeInterfaceAPI := edgeinterface.NewCreate(requestPayload, "edge-7")
 
 	nsxclient.Do(edgeInterfaceAPI)
 
