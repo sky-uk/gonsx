@@ -45,7 +45,8 @@ func RunDhcpRelayExample(nsxManager, nsxUser, nsxPassword string, debug bool) {
 	newRelayAgent := dhcprelay.RelayAgent{VnicIndex: "9", GiAddress: "10.72.232.200"}
 	newRelayAgentsList := append(CurrentDHCPRelay.RelayAgents, newRelayAgent)
 	createDhcp.RelayAgents = newRelayAgentsList
-	createDhcp.RelayServer.IPAddress = ["10.152.160.10"]
+
+	createDhcp.RelayServer.IPAddress = []string{"10.152.160.10"}
 
 	CreateAPI := dhcprelay.NewCreate("edge-5", createDhcp)
 
