@@ -1,14 +1,19 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"github.com/sky-uk/gonsx"
 	"github.com/sky-uk/gonsx/api/edgeinterface"
 	"github.com/sky-uk/gonsx/api/virtualwire"
+	"os"
 )
 
 // RunEdgeinterfaceExample - Runs the edge interface example.
 func RunEdgeinterfaceExample(nsxManager, nsxUser, nsxPassword string, debug bool) {
+
+	reader := bufio.NewReader(os.Stdin)
+
 	//
 	// Create NSXClient object.
 	//
@@ -17,6 +22,7 @@ func RunEdgeinterfaceExample(nsxManager, nsxUser, nsxPassword string, debug bool
 	//
 	// Get All VirtualWires.
 	//
+	fmt.Println("Getting all virtual wires in vdnscope-1...")
 	api := virtualwire.NewGetAll("vdnscope-1")
 	nsxclient.Do(api)
 
@@ -25,11 +31,14 @@ func RunEdgeinterfaceExample(nsxManager, nsxUser, nsxPassword string, debug bool
 
 	// check if we got virtual wire id, otherwise let's create one and get the ID.
 	if virtualWireID == "" {
+		fmt.Println("VirtualWire name test doesn't exist, going to create it...")
 		createAPI := virtualwire.NewCreate("test", "test desc", "tenant id", "vdnscope-1")
 		nsxclient.Do(createAPI)
 		fmt.Println("Status code:", createAPI.StatusCode())
 		virtualWireID = createAPI.GetResponse()
 	}
+
+	fmt.Println("Virtual Wire name test ID: ", virtualWireID)
 
 	//
 	// Create Edge Interface for the virtual wire we created above
@@ -49,16 +58,18 @@ func RunEdgeinterfaceExample(nsxManager, nsxUser, nsxPassword string, debug bool
 	requestPayload := new(edgeinterface.EdgeInterfaces)
 	requestPayload.Interfaces = []edgeinterface.EdgeInterface{edgeInterface}
 
+	fmt.Println("Going to create edgeinterface with id edge-7, proceed?")
+	reader.ReadString('\n')
+
 	edgeInterfaceAPI := edgeinterface.NewCreate(requestPayload, "edge-7")
 
 	nsxclient.Do(edgeInterfaceAPI)
 
+	fmt.Println("Status code:", edgeInterfaceAPI.StatusCode())
 	// Check the status code and process accordingly.
 	if edgeInterfaceAPI.StatusCode() == 200 {
-		fmt.Println("Status code:", edgeInterfaceAPI.StatusCode())
-		fmt.Println("Response:", edgeInterfaceAPI.GetResponse())
+		fmt.Println("Interface created, Response:\n", edgeInterfaceAPI.GetResponse())
 	} else {
-		fmt.Println("Status code:", edgeInterfaceAPI.StatusCode())
 		fmt.Println("Failed to create interface.")
 	}
 
@@ -66,26 +77,31 @@ func RunEdgeinterfaceExample(nsxManager, nsxUser, nsxPassword string, debug bool
 	// Deleting Edge Interface.
 	//
 	//  first get all edge interfaces.
-	getAllEdgeInterfacesAPI := edgeinterface.NewGetAll("edge-50")
+	getAllEdgeInterfacesAPI := edgeinterface.NewGetAll("edge-7")
 	nsxclient.Do(getAllEdgeInterfacesAPI)
 
 	if getAllEdgeInterfacesAPI.StatusCode() == 200 {
 		// Find the one we are interested in.
 		interfaceObj := (getAllEdgeInterfacesAPI.GetResponse().FilterByName("app_virtualwire_one"))
 
-		fmt.Print(interfaceObj)
+        if interfaceObj != nil {
+            fmt.Println("Found edge interface, index: ", interfaceObj.Index)
 
-		// create delete call object.
-		edgeDeleteAPI := edgeinterface.NewDelete(interfaceObj.Index, "edge-50")
-		nsxclient.Do(edgeDeleteAPI)
+		    // create delete call object.
+		    fmt.Printf("Going to delete edgeinterface with index %s, proceed?", interfaceObj.Index)
+		    reader.ReadString('\n')
 
-		// check if it was a successful.
-		if edgeDeleteAPI.StatusCode() == 204 {
-			fmt.Println("Deleted edge interface")
-		} else {
-			fmt.Println("Failed to delete edge inteface.")
-			fmt.Println("Status code: ", edgeDeleteAPI.StatusCode())
-		}
+		    edgeDeleteAPI := edgeinterface.NewDelete(interfaceObj.Index, "edge-7")
+		    nsxclient.Do(edgeDeleteAPI)
+
+		    // check if it was a successful.
+		    if edgeDeleteAPI.StatusCode() == 204 {
+			    fmt.Println("Deleted edge interface")
+		    } else {
+			    fmt.Println("Failed to delete edge inteface.")
+			    fmt.Println("Status code: ", edgeDeleteAPI.StatusCode())
+		    }
+        }
 	}
 
 }
