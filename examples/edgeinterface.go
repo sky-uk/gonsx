@@ -84,24 +84,24 @@ func RunEdgeinterfaceExample(nsxManager, nsxUser, nsxPassword string, debug bool
 		// Find the one we are interested in.
 		interfaceObj := (getAllEdgeInterfacesAPI.GetResponse().FilterByName("app_virtualwire_one"))
 
-        if interfaceObj != nil {
-            fmt.Println("Found edge interface, index: ", interfaceObj.Index)
+		if interfaceObj != nil {
+			fmt.Println("Found edge interface, index: ", interfaceObj.Index)
 
-		    // create delete call object.
-		    fmt.Printf("Going to delete edgeinterface with index %s, proceed?", interfaceObj.Index)
-		    reader.ReadString('\n')
+			// create delete call object.
+			fmt.Printf("Going to delete edgeinterface with index %s, proceed?", interfaceObj.Index)
+			reader.ReadString('\n')
 
-		    edgeDeleteAPI := edgeinterface.NewDelete(interfaceObj.Index, "edge-7")
-		    nsxclient.Do(edgeDeleteAPI)
+			edgeDeleteAPI := edgeinterface.NewDelete(interfaceObj.Index, "edge-7")
+			nsxclient.Do(edgeDeleteAPI)
 
-		    // check if it was a successful.
-		    if edgeDeleteAPI.StatusCode() == 204 {
-			    fmt.Println("Deleted edge interface")
-		    } else {
-			    fmt.Println("Failed to delete edge inteface.")
-			    fmt.Println("Status code: ", edgeDeleteAPI.StatusCode())
-		    }
-        }
+			// check if it was a successful.
+			if edgeDeleteAPI.StatusCode() == 204 {
+				fmt.Println("Deleted edge interface")
+			} else {
+				fmt.Println("Failed to delete edge inteface.")
+				fmt.Println("Status code: ", edgeDeleteAPI.StatusCode())
+			}
+		}
 	}
 
 }
