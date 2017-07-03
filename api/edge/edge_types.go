@@ -11,19 +11,10 @@ type Edge struct {
 	FQDN     string   `xml:"fqdn"`
 	Status   string   `xml:"status"`
 	Tenant   string   `xml:"tenant"`
-
-	//<id>edge-10</id>
-	//<version>17</version>
-	//<status>deployed</status>
-	//<datacenterMoid>datacenter-2</datacenterMoid>
-	//<datacenterName>S57 - Slough</datacenterName>
-	//<tenant>OVP_UK</tenant>
-	//<name>s57-ovp-uk-nonprod-dlr-01</name>
-	//<fqdn>s57-ovp-uk-nonprod-dlr-01</fqdn>
 }
 
 type PagedEdgeList struct {
-	EdgePage EdgePage `xml:"edgePage",omitempty`
+	EdgePage EdgePage `xml:"edgePage,omitempty"`
 }
 
 type EdgePage struct {
