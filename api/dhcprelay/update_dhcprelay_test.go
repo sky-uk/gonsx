@@ -19,7 +19,10 @@ func createSetup() {
 	secondRelayAgent.GiAddress = "10.152.164.1"
 
 	relayAgentsList := []RelayAgent{*firstRelayAgent, *secondRelayAgent}
-	updateDhcpRelayAPI = NewUpdate("10.152.160.10", "edge-50", relayAgentsList)
+	var updateDhcp DhcpRelay
+	updateDhcp.RelayServer.IPAddress = []string{"10.152.160.10"}
+	updateDhcp.RelayAgents = relayAgentsList
+	updateDhcpRelayAPI = NewUpdate("edge-50", updateDhcp)
 }
 
 func TestCreateMethod(t *testing.T) {

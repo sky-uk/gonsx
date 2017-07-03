@@ -16,7 +16,7 @@ func TestClientGetAllDhcpRelays(t *testing.T) {
 	api := dhcprelay.NewGetAll("edge-50")
 	nsxClient.Do(api)
 
-	assert.Equal(t, "10.152.160.10", api.GetResponse().RelayServer.IPAddress)
+	assert.Equal(t, []string{"10.152.160.10"}, api.GetResponse().RelayServer.IPAddress)
 	assert.Len(t, api.GetResponse().RelayAgents, 2)
 	assert.Equal(t, "17", api.GetResponse().RelayAgents[0].VnicIndex)
 	assert.Equal(t, "10.152.164.1", api.GetResponse().RelayAgents[0].GiAddress)

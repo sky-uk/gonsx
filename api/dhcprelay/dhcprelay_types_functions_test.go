@@ -18,7 +18,7 @@ func setup() *DhcpRelay {
 	}
 
 	dhcpRelay.RelayAgents = []RelayAgent{firstRelayAgent, secondRelayAgent}
-	dhcpRelay.RelayServer.IPAddress = "10.10.10.10"
+	dhcpRelay.RelayServer.IPAddress = []string{"10.10.10.10"}
 	return dhcpRelay
 }
 
@@ -60,7 +60,7 @@ func TestStringImplementation(t *testing.T) {
 	dhcpRelay := setup()
 
 	relayServerString := fmt.Sprintln(dhcpRelay.RelayServer)
-	assert.Equal(t, "DhcpRelayServer ipAddress:10.10.10.10.\n", relayServerString)
+	assert.Equal(t, "DhcpRelayServer ipAddress:[10.10.10.10].\n", relayServerString)
 
 	relayAgentString := fmt.Sprintln(dhcpRelay.RelayAgents[0])
 	assert.Equal(t, "DhcpRelayAgent VnicIndex:1, GiAddress:10.10.10.1.\n", relayAgentString)

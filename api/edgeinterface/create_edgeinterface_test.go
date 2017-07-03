@@ -10,8 +10,8 @@ import (
 var createEdgeInterfaceAPI *CreateEdgeInterfaceAPI
 
 func createSetup() {
-	createEdgeInterfaceAPI = NewCreate("edge-1", "interface_name", "virtualWire-1",
-		"10.190.160.1", "255.255.255.0", "internal", 1500)
+	edgeInterfacesList := createObject()
+	createEdgeInterfaceAPI = NewCreate(edgeInterfacesList, "edge-1")
 }
 
 func createObject() *EdgeInterfaces {
@@ -48,7 +48,7 @@ func TestCreateEndpoint(t *testing.T) {
 
 func TestCreateMarshalling(t *testing.T) {
 	createSetup()
-	expectedXML := "<interfaces><interface><name>interface_name</name><mtu>1500</mtu><type>internal</type><isConnected>true</isConnected><connectedToId>virtualWire-1</connectedToId><addressGroups><addressGroup><primaryAddress>10.190.160.1</primaryAddress><subnetMask>255.255.255.0</subnetMask></addressGroup></addressGroups></interface></interfaces>"
+	expectedXML := "<interfaces><interface><name>firstInterface</name><mtu>1500</mtu><type>internal</type><isConnected>true</isConnected><connectedToId>virtualwire-1</connectedToId><addressGroups></addressGroups><index>1</index></interface><interface><name>secondInterface</name><mtu>1500</mtu><type>internal</type><isConnected>true</isConnected><connectedToId>virtualwire-1</connectedToId><addressGroups></addressGroups><index>2</index></interface></interfaces>"
 
 	xmlBytes, err := xml.Marshal(createEdgeInterfaceAPI.RequestObject())
 

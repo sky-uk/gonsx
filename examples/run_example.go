@@ -7,7 +7,7 @@ import (
 
 func main() {
 	if len(os.Args) < 5 {
-		fmt.Printf("syntax error\nUsages: %s [https://nsxmanager_address] [username] [password] [Example Name]\n\n", os.Args[0])
+		fmt.Printf("syntax error\nUsages: %s [https://nsxmanager_address] [username] [password] [Example Name] [true]\n\n", os.Args[0])
 		os.Exit(1)
 	}
 
