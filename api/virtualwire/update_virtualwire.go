@@ -11,13 +11,13 @@ type UpdateVirtualWireAPI struct {
 }
 
 // NewUpdate returns a new object of UpdateVirtualWireAPI.
-func NewUpdate(name, desc, virtualwireID string) *UpdateVirtualWireAPI {
+func NewUpdate(virtualWire VirtualWire) *UpdateVirtualWireAPI {
 	this := new(UpdateVirtualWireAPI)
-	requestPayload := new(VirtualWire)
-	requestPayload.Name = name
-	requestPayload.ControlPlaneMode = "UNICAST_MODE"
-	requestPayload.Description = desc
-
-	this.BaseAPI = api.NewBaseAPI(http.MethodPut, "/api/2.0/vdn/virtualwires/"+virtualwireID, requestPayload, nil)
+	this.BaseAPI = api.NewBaseAPI(http.MethodPut, "/api/2.0/vdn/virtualwires/"+virtualWire.ObjectID, virtualWire, nil)
 	return this
+}
+
+// GetUpdateResponse returns ResponseObject of UpdateVirtualWireAPI.
+func (updateVirtualWire UpdateVirtualWireAPI) GetUpdateResponse() string {
+	return updateVirtualWire.ResponseObject().(string)
 }

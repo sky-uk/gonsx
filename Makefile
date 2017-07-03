@@ -1,5 +1,5 @@
 PACKAGE  = github.com/sky-uk/gonsx
-#BINARYNAME =
+BINARYNAME = gonsx-cli
 DATE    ?= $(shell date +%FT%T%z)
 VERSION ?= $(shell git describe --tags --always --dirty --match=v* 2> /dev/null || \
 			cat $(CURDIR)/VERSION 2> /dev/null || echo v0)
@@ -22,7 +22,7 @@ M = $(shell printf "\033[34;1m▶\033[0m")
 
 .PHONY: all
 all: fmt lint test vendor | $(BASE) ; $(info $(M) building executable…) @ ## Build program binary
-	$Q $(GO) build -tags release ./*.go
+	$Q cd $(BASE)/cli && $(GO) build -tags release -o ../$(BINARYNAME) ./*.go
 
 $(BASE): ; $(info $(M) setting GOPATH…)
 	@mkdir -p $(dir $@)
@@ -58,6 +58,7 @@ clean: ; $(info $(M) cleaning…)	@ ## Cleanup everything
 	@rm -rf $(GOPATH)
 	@rm -rf bin
 	@rm -rf test/tests.* test/coverage.*
+	@rm -rf skyinfobox-cli
 
 .PHONY: help
 help:
