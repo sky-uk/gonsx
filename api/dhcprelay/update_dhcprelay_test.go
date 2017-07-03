@@ -7,7 +7,7 @@ import (
 	"testing"
 )
 
-var updateDhcpRelayAPI *UpdateDhcpRelayAPI
+var updateDhcpRelayAPI *UpdateDHCPRelayAPI
 
 func createSetup() {
 	firstRelayAgent := new(RelayAgent)
