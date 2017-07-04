@@ -1,17 +1,40 @@
 package distributedfirewall
 
+type FirewallConfiguration struct {
+	Layer3Sections Layer3Sections `xml:"layer3Sections"`
+	Layer2Sections Layer2Sections `xml:"layer2Sections"`
+}
+
+type Layer2Sections struct {
+	Sections []Section `xml:"section"`
+}
+
+type Layer3Sections struct {
+	Sections []Section `xml:"section"`
+}
+
+type Section struct {
+	Id    string `xml:"id,attr"`
+	Name  string `xml:"name,attr"`
+	Type  string `xml:"type,attr"`
+	Rules []Rule `xml:"rule"`
+}
+
 type Rule struct {
-	RuleID        uint8       `xml:"ruleId"`
-	Name          string      `xml:"name"`
-	Disabled      bool        `xml:"disabled"`
-	RuleType      string      `xml:"ruleType"`
-	Source        string      `xml:"source"`
-	Destination   string      `xml:"destination"`
-	Action        string      `xml:"action"`
-	EdgeID        string      `xml:"edgeId"`
-	AppliedToList []AppliedTo `xml:"appliedToList"`
-	Sources       []Source    `xml:"sources"`
-	Services      []Service   `xml:"services"`
+	RuleID        string        `xml:"id,attr"`
+	Name          string        `xml:"name"`
+	Disabled      bool          `xml:"disabled,attr"`
+	RuleType      string        `xml:"ruleType"`
+	Logged        string        `xml:"logged,attr"`
+	Source        string        `xml:"source"`
+	Destination   string        `xml:"destination"`
+	Action        string        `xml:"action"`
+	EdgeID        string        `xml:"edgeId"`
+	AppliedToList []AppliedTo   `xml:"appliedToList>appliedTo"`
+	Sources       []Source      `xml:"sources>source"`
+	Destinations  []Destination `xml:"destinations>destination"`
+	Services      []Service     `xml:"services>service"`
+	SectionID     uint8         `xml:"sectionID"`
 }
 
 type Service struct {
@@ -30,6 +53,13 @@ type AppliedTo struct {
 }
 
 type Source struct {
+	Name    string `xml:"name"`
+	Type    string `xml:"type"`
+	Value   string `xml:"value"`
+	IsValid bool   `xml:"isValid"`
+}
+
+type Destination struct {
 	Name    string `xml:"name"`
 	Type    string `xml:"type"`
 	Value   string `xml:"value"`
