@@ -25,7 +25,7 @@ func deleteVirtualWire(client *gonsx.NSXClient, flagSet *flag.FlagSet) {
 		os.Exit(2)
 	}
 	if deleteVirtualWireAPI.StatusCode() == http.StatusOK {
-		fmt.Printf("\nSuccessfully deleted virtualwire %s\n", deleteVirtualWireID)
+		fmt.Printf("Successfully deleted virtualwire %s\n", deleteVirtualWireID)
 	} else {
 		fmt.Printf("\nError HTTP response code != 200 when deleting %s. Response: %v", deleteVirtualWireID, deleteVirtualWireAPI.RawResponse())
 		os.Exit(3)

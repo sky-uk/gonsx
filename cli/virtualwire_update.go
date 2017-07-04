@@ -26,7 +26,7 @@ func virtualWireUpdate(client *gonsx.NSXClient, flagSet *flag.FlagSet) {
 	if updateVirtualWireAPI.StatusCode() == http.StatusOK {
 		fmt.Println("Successfully update virtual wire " + virtualWireUpdateObject.ObjectID)
 	} else {
-		fmt.Println("HTTP response code != 200. Error received was " + updateVirtualWireAPI.GetUpdateResponse())
+		fmt.Println("HTTP response code != 200")
 		os.Exit(3)
 	}
 }
