@@ -12,7 +12,7 @@ func setup() (edgeInterfacesList *EdgeInterfaces) {
 		Name:          "firstInterface",
 		ConnectedToID: "virtualwire-1",
 		Type:          "internal",
-		Index:         "1",
+		Index:         1,
 		Mtu:           1500,
 		IsConnected:   true,
 	}
@@ -20,7 +20,7 @@ func setup() (edgeInterfacesList *EdgeInterfaces) {
 		Name:          "secondInterface",
 		ConnectedToID: "virtualwire-1",
 		Type:          "internal",
-		Index:         "2",
+		Index:         2,
 		Mtu:           1500,
 		IsConnected:   true,
 	}
@@ -32,10 +32,10 @@ func TestFilterByName(t *testing.T) {
 	edgeInterfaces := setup()
 
 	firstFiltered := edgeInterfaces.FilterByName("firstInterface")
-	assert.Equal(t, "1", firstFiltered.Index)
+	assert.Equal(t, 1, firstFiltered.Index)
 
 	secondFiltered := edgeInterfaces.FilterByName("secondInterface")
-	assert.Equal(t, "2", secondFiltered.Index)
+	assert.Equal(t, 2, secondFiltered.Index)
 }
 
 func TestStringImplementation(t *testing.T) {
