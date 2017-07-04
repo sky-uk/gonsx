@@ -90,7 +90,7 @@ func RunEdgeinterfaceExample(nsxManager, nsxUser, nsxPassword string, debug bool
 			fmt.Println("Found edge interface, index: ", interfaceObj.Index)
 
 			// create delete call object.
-			fmt.Printf("Going to delete edgeinterface with index %s, proceed?", interfaceObj.Index)
+			fmt.Printf("Going to delete edgeinterface with index %i, proceed?", interfaceObj.Index)
 			reader.ReadString('\n')
 
 			edgeDeleteAPI := edgeinterface.NewDelete(interfaceObj.Index, "edge-7")
