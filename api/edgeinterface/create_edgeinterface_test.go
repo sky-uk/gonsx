@@ -20,7 +20,7 @@ func createObject() *EdgeInterfaces {
 		Name:          "firstInterface",
 		ConnectedToID: "virtualwire-1",
 		Type:          "internal",
-		Index:         "1",
+		Index:         1,
 		Mtu:           1500,
 		IsConnected:   true,
 	}
@@ -28,7 +28,7 @@ func createObject() *EdgeInterfaces {
 		Name:          "secondInterface",
 		ConnectedToID: "virtualwire-1",
 		Type:          "internal",
-		Index:         "2",
+		Index:         2,
 		Mtu:           1500,
 		IsConnected:   true,
 	}
