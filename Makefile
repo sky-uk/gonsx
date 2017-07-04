@@ -58,7 +58,7 @@ clean: ; $(info $(M) cleaning…)	@ ## Cleanup everything
 	@rm -rf $(GOPATH)
 	@rm -rf bin
 	@rm -rf test/tests.* test/coverage.*
-	@rm -rf skyinfobox-cli
+	@rm -rf gonsx-cli
 
 .PHONY: help
 help:
