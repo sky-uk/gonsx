@@ -40,7 +40,7 @@ Replace virtualwire-create with the desired option.
 The gonsx-cli binary allows for creating, reading, updating and deleting a virtual wire. 
 
 **Attributes**  
-|---------------------------------------------------------------|  
+    
 | Attribute        | CLI Option        | Create | Read | Update |  
 |------------------|-------------------|--------|------|--------|  
 | Name             | -name             |    Y   |   Y  |    Y   |  
@@ -49,7 +49,7 @@ The gonsx-cli binary allows for creating, reading, updating and deleting a virtu
 | TenantID         | -tenantid         |    Y   |   Y  |    N   |  
 | ObjectID*        | -id               |    N   |   Y  |    N   |  
 | ScopeID**        | -scopeid          |    N   |   N  |    N   |  
------------------------------------------------------------------  
+ 
 *ObjectID is automatically set on creation and may only be read.  
 **ScopeID is the scope in which to create a logical switch.  
   
