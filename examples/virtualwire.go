@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/sky-uk/gonsx"
 	"github.com/sky-uk/gonsx/api/virtualwire"
+	"net/http"
 )
 
 // RunVirtualWireExample  Implementes VirtualWire example.
@@ -13,16 +14,19 @@ func RunVirtualWireExample(nsxManager, nsxUser, nsxPassword string, debug bool) 
 	//
 	nsxclient := gonsx.NewNSXClient(nsxManager, nsxUser, nsxPassword, true, debug)
 
+	scopeID := "vdnscope-1"
+
 	//
 	// Get All VirtualWires (Logical Switches).
 	//
-	api := virtualwire.NewGetAll("vdnscope-19")
+	api := virtualwire.NewGetAll(scopeID)
 	nsxclient.Do(api)
 	// Get ID of our VirtualWire with name "test"
-	virtualWireID := (api.GetResponse().FilterByName("test").ObjectID)
+	virtualWireID := (api.GetResponse().FilterByName("gonsx-example").ObjectID)
 	// check if we got virtual wire id, or create a new one.
 	if virtualWireID == "" {
-		createVirtualWireAPI := virtualwire.NewCreate("test", "test desc", "tenant id", "vdnscope-19")
+		virtualWireCreateSpec := virtualwire.CreateSpec{Name: "gonsx-example", Description: "gonsx example logical switch", TenantID: "tenant_id", ControlPlaneMode: "UNICAST_MODE"}
+		createVirtualWireAPI := virtualwire.NewCreate(virtualWireCreateSpec, scopeID)
 		nsxclient.Do(createVirtualWireAPI)
 		fmt.Println("Status code:", createVirtualWireAPI.StatusCode())
 		virtualWireID = createVirtualWireAPI.GetResponse()
@@ -31,8 +35,8 @@ func RunVirtualWireExample(nsxManager, nsxUser, nsxPassword string, debug bool) 
 	//
 	// Updating a virtualwire
 	//
-
-	updateAPI := virtualwire.NewUpdate("test2", "test2 desc", virtualWireID)
+	virtualWireUpdate := virtualwire.VirtualWire{Name: "gonsx-example-updated", ObjectID: virtualWireID, ControlPlaneMode: "UNICAST_MODE", Description: "gonsx example logical switch updated", TenantID: "tenant_id"}
+	updateAPI := virtualwire.NewUpdate(virtualWireUpdate)
 	nsxclient.Do(updateAPI)
 
 	if updateAPI.StatusCode() == 200 {
@@ -49,7 +53,7 @@ func RunVirtualWireExample(nsxManager, nsxUser, nsxPassword string, debug bool) 
 	nsxclient.Do(deleteAPI)
 
 	// check if it was a successful.
-	if deleteAPI.StatusCode() == 204 {
+	if deleteAPI.StatusCode() == http.StatusOK {
 		fmt.Println("Virtual Wire deleted.")
 	} else {
 		fmt.Println("Failed to delete virtual wire.")
