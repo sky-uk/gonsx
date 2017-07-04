@@ -49,7 +49,12 @@ func main() {
 		fmt.Println("running service example with: ", nsxManager, nsxUser, nsxPassword, exampleName, debug)
 		RunSecurityPolicyExample(nsxManager, nsxUser, nsxPassword, debug)
 		return
+	case "firewallrules":
+		fmt.Println("running service example with: ", nsxManager, nsxUser, nsxPassword, exampleName, debug)
+		RunDistributedFirewallExamples(nsxManager, nsxUser, nsxPassword, debug)
+		return
 	}
+
 
 	fmt.Println("Example not implemented.")
 
