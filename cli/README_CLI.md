@@ -15,7 +15,7 @@ E.g.
 $ ./gonsx-cli -server https://nsx-server-name -username nsx_user_name -password 'password' virtualwire-show-all -scopeid vdnscope-1
 ```
   
-**OR  
+**OR**    
   
 ```
 $ export NSX_SERVER=https://nsx-server-name
@@ -29,7 +29,7 @@ $ ./gonsx-cli virtualwire-show-all -scopeid vdnscope-1
 $ ./gonsx-cli -help
 ```
   
-** Help per option
+**Help per option**  
 ```
 $ ./gonsx-cli virtualwire-create -help
 ```
@@ -39,7 +39,7 @@ Replace virtualwire-create with the desired option.
 ### Virtual Wire
 The gonsx-cli binary allows for creating, readind, updating and deleting a virtual wire. 
 
-**Attributes  
+**Attributes**  
 |---------------------------------------------------------------|
 | Attribute        | CLI Option        | Create | Read | Update |
 |------------------|-------------------|--------|------|--------|
