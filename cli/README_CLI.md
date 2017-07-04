@@ -37,19 +37,19 @@ Replace virtualwire-create with the desired option.
 
 
 ### Virtual Wire
-The gonsx-cli binary allows for creating, readind, updating and deleting a virtual wire. 
+The gonsx-cli binary allows for creating, reading, updating and deleting a virtual wire. 
 
 **Attributes**  
-|---------------------------------------------------------------|
-| Attribute        | CLI Option        | Create | Read | Update |
-|------------------|-------------------|--------|------|--------|
-| Name             | -name             |    Y   |   Y  |    Y   |
-| Description      | -description      |    Y   |   Y  |    Y   |
-| ControlPlaneMode | -controlplanemode |    Y   |   Y  |    Y   |
-| TenantID         | -tenantid         |    Y   |   Y  |    N   |
-| ObjectID*        | -id               |    N   |   Y  |    N   |
-| ScopeID**        | -scopeid          |    N   |   N  |    N   |
------------------------------------------------------------------
+|---------------------------------------------------------------|  
+| Attribute        | CLI Option        | Create | Read | Update |  
+|------------------|-------------------|--------|------|--------|  
+| Name             | -name             |    Y   |   Y  |    Y   |  
+| Description      | -description      |    Y   |   Y  |    Y   |  
+| ControlPlaneMode | -controlplanemode |    Y   |   Y  |    Y   |  
+| TenantID         | -tenantid         |    Y   |   Y  |    N   |  
+| ObjectID*        | -id               |    N   |   Y  |    N   |  
+| ScopeID**        | -scopeid          |    N   |   N  |    N   |  
+-----------------------------------------------------------------  
 *ObjectID is automatically set on creation and may only be read.  
 **ScopeID is the scope in which to create a logical switch.  
   
@@ -94,7 +94,7 @@ $ ./gonsx-cli virtualwire-show -id virtualwire-91
 $ ./gonsx-cli virtualwire-update -id virtualwire-1 -controlplanemode UNICAST_MODE -description 'Updated my first logical switch' -name LogicalSwitch1
 Successfully update virtual wire virtualwire-1
 ```
-*Note: when updating a virtual wire all existing parameters need to be sent along with the attribute being changed.    
+*Note: when updating a virtual wire all existing attributes need to be sent along with the attribute being changed.    
   
 #### Delete a Virtual Wire
 ```
