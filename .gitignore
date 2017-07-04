@@ -2,6 +2,7 @@
 .idea/
 *.iml
 *.coverprofile
+*.swp
 coverage.html
 coverage-gocov.xml
 coverage-gocov.html
