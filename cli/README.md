@@ -1,7 +1,7 @@
 # GONSX CLI
 
 ## Overview
-Calling 'make' in the root of the repo will build the binary 'gonsx-cli'. The gonsx-cli will allow a user to interact with the NSX API.  
+Calling 'make' in the root of the repo will build the gonsx-cli binary. The gonsx-cli will allow a user to interact with the NSX API.  
   
 
 
