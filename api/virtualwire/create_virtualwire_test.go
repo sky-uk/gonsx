@@ -8,9 +8,15 @@ import (
 )
 
 var createVirtualWireAPI *CreateVirtualWireAPI
+var createSpec CreateSpec
 
 func createSetup() {
-	createVirtualWireAPI = NewCreate("test", "test desc", "test", "vdnscope-1")
+	createSpec.Name = "test"
+	createSpec.ControlPlaneMode = "UNICAST_MODE"
+	createSpec.Description = "test desc"
+	createSpec.TenantID = "test"
+	createVirtualWireAPI = NewCreate(createSpec, "vdnscope-1")
+	createVirtualWireAPI.SetResponseObject("virtualwire-1001")
 }
 
 func TestCreateMethod(t *testing.T) {
@@ -24,17 +30,15 @@ func TestCreateEndpoint(t *testing.T) {
 }
 
 func TestCreateMarshalling(t *testing.T) {
-	object := new(CreateSpec)
-	object.Name = "test"
-	object.Description = "test desc"
-	object.ControlPlaneMode = "UNICAST_MODE"
-	object.TenantID = "test"
 	expectedXML := "<virtualWireCreateSpec><name>test</name><controlPlaneMode>UNICAST_MODE</controlPlaneMode><description>test desc</description><tenantId>test</tenantId></virtualWireCreateSpec>"
-
-	xmlBytes, err := xml.Marshal(object)
-
+	xmlBytes, err := xml.Marshal(createSpec)
 	assert.Nil(t, err)
 	assert.Equal(t, expectedXML, string(xmlBytes))
+}
+
+func TestGetResponse(t *testing.T) {
+	createSetup()
+	assert.Equal(t, "virtualwire-1001", createVirtualWireAPI.GetResponse())
 }
 
 func TestCreateUnMarshalling(t *testing.T) {
