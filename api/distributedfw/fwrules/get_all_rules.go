@@ -3,7 +3,6 @@ package fwrules
 import (
 	"github.com/sky-uk/gonsx/api"
 	"net/http"
-
 )
 
 // GetAllFirewallRulesAPI default struct
@@ -12,16 +11,15 @@ type GetAllRulesAPI struct {
 }
 
 // NewGetAll - Returns all the rules in the specified context
-func NewGetAll(ruleType, section string) *GetAllRulesAPI{
+func NewGetAll(ruleType, section string) *GetAllRulesAPI {
 	this := new(GetAllRulesAPI)
 	var endpoint string
 	if ruleType == "LAYER3" {
-		endpoint = "/api/4.0/firewall/globalroot-0/config/layer3sections/"+section
+		endpoint = "/api/4.0/firewall/globalroot-0/config/layer3sections/" + section
 	}
 
 	this.BaseAPI = api.NewBaseAPI(http.MethodGet, endpoint, nil, new(Section))
 	return this
-
 
 }
 
