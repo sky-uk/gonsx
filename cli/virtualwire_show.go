@@ -32,7 +32,7 @@ func showVirtualWire(client *gonsx.NSXClient, flagSet *flag.FlagSet) {
 		row["VirtualWireID"] = readVirtualWireResponse.ObjectID
 		row["Name"] = readVirtualWireResponse.Name
 		row["TenantID"] = readVirtualWireResponse.TenantID
-		row["ControlPaneMode"] = readVirtualWireResponse.ControlPlaneMode
+		row["ControlPlaneMode"] = readVirtualWireResponse.ControlPlaneMode
 		row["Description"] = readVirtualWireResponse.Description
 		PrettyPrintSingle(row)
 	} else {
