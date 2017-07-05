@@ -3,17 +3,15 @@ package main
 import (
 	"fmt"
 	"github.com/sky-uk/gonsx"
-	"os"
 	"github.com/sky-uk/gonsx/api/distributedfw/fwrules"
-	//"github.com/sky-uk/gonsx/api/distributedfw"
+	"os"
 )
-
 
 func RunDistributedFirewallExamples(nsxManager, nsxUser, nsxPassword string, debug bool) {
 
 	// Example to get al the rules of type LAYER3, inside section id 1110
 	nsxclient := gonsx.NewNSXClient(nsxManager, nsxUser, nsxPassword, true, debug)
-	AllRules  :=  fwrules.NewGetAll("LAYER3","1110")
+	AllRules := fwrules.NewGetAll("LAYER3", "1110")
 	err := nsxclient.Do(AllRules)
 
 	if err != nil {
@@ -33,7 +31,7 @@ func RunDistributedFirewallExamples(nsxManager, nsxUser, nsxPassword string, deb
 	// Example to get a single Rule
 	fmt.Println(" ==== Getting a single RULE ====")
 	thisnsxclient := gonsx.NewNSXClient(nsxManager, nsxUser, nsxPassword, true, debug)
-	thisRule  :=  fwrules.NewGetSingle("1163","LAYER3","1110")
+	thisRule := fwrules.NewGetSingle("1163", "LAYER3", "1110")
 	thiserr := thisnsxclient.Do(thisRule)
 
 	if thiserr != nil {
@@ -46,7 +44,4 @@ func RunDistributedFirewallExamples(nsxManager, nsxUser, nsxPassword string, deb
 		fmt.Println(singleRule)
 	}
 
-
-
 }
-

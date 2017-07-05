@@ -1,6 +1,7 @@
 package fwrules
 
 import (
+	"fmt"
 	"github.com/sky-uk/gonsx/api"
 	"net/http"
 )
@@ -16,10 +17,11 @@ func NewCreate(newRule Rule) *CreateFWRulesAPI {
 	var endpoint string
 	switch newRule.RuleType {
 	case "LAYER3":
-		endpoint = "/api/4.0/firewall/globalroot-0/config/layer3sections/"+string(newRule.SectionID)+"/rules/"
+		endpoint = fmt.Sprintf("/api/4.0/firewall/globalroot-0/config/layer3sections/%d/rules/", newRule.SectionID)
 
 	case "LAYER2":
-		endpoint = "/api/4.0/firewall/globalroot-0/config/layer2sections/"+string(newRule.SectionID)+"/rules/"
+		endpoint = fmt.Sprintf("/api/4.0/firewall/globalroot-0/config/layer2sections/%d/rules/", newRule.SectionID)
+
 	}
 
 	this.BaseAPI = api.NewBaseAPI(http.MethodPost, endpoint, newRule, new(Rule))

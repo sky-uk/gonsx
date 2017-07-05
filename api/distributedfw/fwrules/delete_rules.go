@@ -25,4 +25,3 @@ func NewDelete(deleteRule Rule) *DeleteFWRuleAPI {
 	this.BaseAPI = api.NewBaseAPI(http.MethodDelete, endpoint, deleteRule, new(string))
 	return this
 }
-

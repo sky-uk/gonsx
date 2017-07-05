@@ -21,7 +21,7 @@ type Rule struct {
 	Sources       []Source      `xml:"sources>source"`
 	Destinations  []Destination `xml:"destinations>destination"`
 	Services      []Service     `xml:"services>service"`
-	SectionID     uint8         `xml:"sectionID"`
+	SectionID     int           `xml:"sectionID"`
 	Direction     string        `xml:"direction"`
 	PacketType    string        `xml:"packetType"`
 }
@@ -54,4 +54,3 @@ type Destination struct {
 	Value   string `xml:"value"`
 	IsValid bool   `xml:"isValid"`
 }
-
