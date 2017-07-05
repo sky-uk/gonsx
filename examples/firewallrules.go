@@ -4,58 +4,46 @@ import (
 	"fmt"
 	"github.com/sky-uk/gonsx"
 	"os"
-	"github.com/sky-uk/gonsx/api/distributedfirewall"
-
+	"github.com/sky-uk/gonsx/api/distributedfw/fwrules"
+	//"github.com/sky-uk/gonsx/api/distributedfw"
 )
 
 
-/*func getAllFirewallRules(contextID string) (*distributedfirewall.Rule, error){
-	return nil
-}*/
-
-
 func RunDistributedFirewallExamples(nsxManager, nsxUser, nsxPassword string, debug bool) {
-	//
-	// Create NSXClient object.
-	//
+
+	// Example to get al the rules of type LAYER3, inside section id 1110
 	nsxclient := gonsx.NewNSXClient(nsxManager, nsxUser, nsxPassword, true, debug)
-	AllRules  :=  distributedfirewall.NewGetAll("globalroot-0")
+	AllRules  :=  fwrules.NewGetAll("LAYER3","1110")
 	err := nsxclient.Do(AllRules)
 
 	if err != nil {
 		os.Exit(1)
 	}
+
+	fmt.Println(AllRules.GetResponse())
 	if AllRules.StatusCode() == 200 {
 		myrules := AllRules.GetResponse()
-		var section distributedfirewall.Section
-		fmt.Println("Sections for Layer:")
-		fmt.Println("======================================================================================")
-		for _, section =  range myrules.Layer3Sections.Sections {
-			fmt.Println("===============================================================================")
-			fmt.Println("Section ID : ",section.Id)
-			fmt.Println("Section Name : ",section.Name)
-			fmt.Println("Section Type : ",section.Type)
-			fmt.Println("Rules for :",section.Name)
-			var l3Rule distributedfirewall.Rule
-
-			for _, l3Rule = range section.Rules{
-				fmt.Println(l3Rule)
-			}
-
-			//fmt.Println(section.Rules)
-
-		}
-		fmt.Println("Sections and Rules for Layer 2")
-		fmt.Println("======================================================================================")
-		for _, section =  range myrules.Layer2Sections.Sections {
-			fmt.Println("Section Name : ",section.Name)
-			fmt.Println("Section Type : ",section.Type)
-			//fmt.Println(section.Rules)
-
-		}
-		//fmt.Println(AllRules.RawResponse())
+		//var section distributedfw.Section
+		fmt.Println(" ==== Sections for Layer 3 Section 1110====")
+		fmt.Println(myrules)
 	} else {
 		fmt.Println("could not find firewall rules")
+	}
+
+	// Example to get a single Rule
+	fmt.Println(" ==== Getting a single RULE ====")
+	thisnsxclient := gonsx.NewNSXClient(nsxManager, nsxUser, nsxPassword, true, debug)
+	thisRule  :=  fwrules.NewGetSingle("1163","LAYER3","1110")
+	thiserr := thisnsxclient.Do(thisRule)
+
+	if thiserr != nil {
+		fmt.Println("Error getting a single rule")
+		os.Exit(1)
+	}
+
+	if thisRule.StatusCode() == 200 {
+		singleRule := thisRule.GetResponse()
+		fmt.Println(singleRule)
 	}
 
 

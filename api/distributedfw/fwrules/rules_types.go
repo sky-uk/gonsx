@@ -1,17 +1,4 @@
-package distributedfirewall
-
-type FirewallConfiguration struct {
-	Layer3Sections Layer3Sections `xml:"layer3Sections"`
-	Layer2Sections Layer2Sections `xml:"layer2Sections"`
-}
-
-type Layer2Sections struct {
-	Sections []Section `xml:"section"`
-}
-
-type Layer3Sections struct {
-	Sections []Section `xml:"section"`
-}
+package fwrules
 
 type Section struct {
 	Id    string `xml:"id,attr"`
@@ -35,6 +22,8 @@ type Rule struct {
 	Destinations  []Destination `xml:"destinations>destination"`
 	Services      []Service     `xml:"services>service"`
 	SectionID     uint8         `xml:"sectionID"`
+	Direction     string        `xml:"direction"`
+	PacketType    string        `xml:"packetType"`
 }
 
 type Service struct {
@@ -65,3 +54,4 @@ type Destination struct {
 	Value   string `xml:"value"`
 	IsValid bool   `xml:"isValid"`
 }
+
