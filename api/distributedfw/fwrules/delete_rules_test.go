@@ -41,3 +41,13 @@ func TestL3RuleType(t *testing.T) {
 	setupDeleteL3Rule()
 	assert.Equal(t, "LAYER3", deletedRule.RuleType)
 }
+
+func TestL2RuleType(t *testing.T) {
+	setupDeleteL2Rule()
+	assert.Equal(t, "LAYER2", deletedRule.RuleType)
+}
+
+func TestRuleSection(t *testing.T) {
+	setupDeleteL2Rule()
+	assert.Equal(t, 1234, deletedRule.SectionID)
+}
