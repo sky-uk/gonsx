@@ -37,7 +37,6 @@ func TestL2Endpoint(t *testing.T) {
 	assert.Equal(t, "/api/4.0/firewall/globalroot-0/config/layer2sections", deleteFWRuleAPI.Endpoint())
 }
 
-
 func TestL3RuleType(t *testing.T) {
 	setupDeleteL3Rule()
 	assert.Equal(t, "LAYER3", deletedRule.RuleType)

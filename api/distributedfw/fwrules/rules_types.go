@@ -1,6 +1,5 @@
 package fwrules
 
-
 // Section - Contains the rules
 type Section struct {
 	ID    string `xml:"id,attr"`
@@ -29,7 +28,6 @@ type Rule struct {
 	PacketType    string        `xml:"packetType"`
 }
 
-
 // Service - Struct for the services
 type Service struct {
 	Name            string `xml:"name"`
@@ -46,7 +44,6 @@ type AppliedTo struct {
 	Type    string `xml:"type"`
 	IsValid bool   `xml:"isValid"`
 }
-
 
 // Source - The source for the rule
 type Source struct {
