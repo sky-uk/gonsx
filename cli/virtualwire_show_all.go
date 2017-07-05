@@ -27,14 +27,14 @@ func readAllVirtualWires(client *gonsx.NSXClient, flagSet *flag.FlagSet) {
 	if readAllVirtualWires.StatusCode() == http.StatusOK {
 		virtualWireShowAllResponse := readAllVirtualWires.GetResponse()
 		rows := []map[string]interface{}{}
-		headers := []string{"VirtualWireID", "Name", "TenantID", "ControlPaneMode"}
+		headers := []string{"VirtualWireID", "Name", "TenantID", "ControlPlaneMode"}
 
 		for _, virtualWire := range virtualWireShowAllResponse.DataPage.VirtualWires {
 			row := map[string]interface{}{}
 			row["VirtualWireID"] = virtualWire.ObjectID
 			row["Name"] = virtualWire.Name
 			row["TenantID"] = virtualWire.TenantID
-			row["ControlPaneMode"] = virtualWire.ControlPlaneMode
+			row["ControlPlaneMode"] = virtualWire.ControlPlaneMode
 			rows = append(rows, row)
 		}
 		PrettyPrintMany(headers, rows)
