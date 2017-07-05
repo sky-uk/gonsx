@@ -7,6 +7,7 @@ import (
 	"os"
 )
 
+// RunDistributedFirewallExamples - Runs examples
 func RunDistributedFirewallExamples(nsxManager, nsxUser, nsxPassword string, debug bool) {
 
 	// Example to get al the rules of type LAYER3, inside section id 1110
