@@ -1,5 +1,7 @@
 package fwrules
 
+
+// Section - Contains the rules
 type Section struct {
 	Id    string `xml:"id,attr"`
 	Name  string `xml:"name,attr"`
@@ -7,6 +9,7 @@ type Section struct {
 	Rules []Rule `xml:"rule"`
 }
 
+// Rule - The firewall rules
 type Rule struct {
 	RuleID        string        `xml:"id,attr"`
 	Name          string        `xml:"name"`
@@ -26,6 +29,8 @@ type Rule struct {
 	PacketType    string        `xml:"packetType"`
 }
 
+
+// Service - Struct for the services
 type Service struct {
 	Name            string `xml:"name"`
 	Value           string `xml:"value"`
@@ -34,6 +39,7 @@ type Service struct {
 	SubProtocol     uint8  `xml:"subProtocol"`
 }
 
+// AppliedTo - Objects to which the rule is applied
 type AppliedTo struct {
 	Name    string `xml:"name"`
 	Value   string `xml:"value"`
@@ -41,6 +47,8 @@ type AppliedTo struct {
 	IsValid bool   `xml:"isValid"`
 }
 
+
+// Source - The source for the rule
 type Source struct {
 	Name    string `xml:"name"`
 	Type    string `xml:"type"`
@@ -48,6 +56,7 @@ type Source struct {
 	IsValid bool   `xml:"isValid"`
 }
 
+// Destination - The destination for the rule
 type Destination struct {
 	Name    string `xml:"name"`
 	Type    string `xml:"type"`

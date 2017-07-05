@@ -5,7 +5,7 @@ import (
 	"net/http"
 )
 
-// GetAllFirewallRulesAPI default struct
+// GetAllRulesAPI default struct
 type GetAllRulesAPI struct {
 	*api.BaseAPI
 }

@@ -11,7 +11,7 @@ type CreateFWRulesAPI struct {
 	*api.BaseAPI
 }
 
-// NewGetAll - Returns all the rules in the specified context
+// NewCreate - Returns all the rules in the specified context
 func NewCreate(newRule Rule) *CreateFWRulesAPI {
 	this := new(CreateFWRulesAPI)
 	var endpoint string

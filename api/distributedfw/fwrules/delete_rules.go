@@ -5,12 +5,12 @@ import (
 	"net/http"
 )
 
-// CreateFWRulesAPI default struct
+// DeleteFWRuleAPI default struct
 type DeleteFWRuleAPI struct {
 	*api.BaseAPI
 }
 
-// NewGetAll - Returns all the rules in the specified context
+// NewDelete - Returns all the rules in the specified context
 func NewDelete(deleteRule Rule) *DeleteFWRuleAPI {
 	this := new(DeleteFWRuleAPI)
 	var endpoint string
