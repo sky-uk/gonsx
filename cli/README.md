@@ -102,3 +102,54 @@ $ ./gonsx-cli virtualwire-delete -id virtualwire-1
 Successfully deleted virtualwire virtualwire-1
 ```
   
+### Edge Interfaces
+The gonsx-cli binary allows for creating, reading and deleting edge interfaces connected to a logical router.
+Updating edge interfaces is prevented by the NSX REST API.
+
+**Attributes**  
+    
+| Attribute        | CLI Option        | Create | Read | Delete |  
+|------------------|-------------------|--------|------|--------|  
+| index            | -index            |    N   |   N  |    Y   |  
+| edgeid           | -edgeid           |    Y   |   Y  |    Y   |  
+| configFile       | -configFile       |    Y   |   N  |    N   |
+ 
+  
+#### Create a list of edge interfaces associated to an edge 
+```
+
+./gonsx-cli edgeinterface-create -edgeid <id> -configFile <an XML encoded file with interfaces config>
+Edge interface successfully created
+```
+  
+#### Read All edge interfaces associated to a logical router
+```
+$ ./gonsx-cli edgeinterface-show -edgeid <id>
+
+<interfaces>
+  <interface>
+    <name>s57-ovp-uk_prod-dlr-01_uplink_transit_pri_10.3.156.1_24</name>
+    <label>753000000002/vNic_2</label>
+    <mtu>1500</mtu>
+    <type>uplink</type>
+    <isConnected>true</isConnected>
+    <connectedToId>virtualwire-1</connectedToId>
+    <addressGroups>
+      <addressGroup>
+        <primaryAddress>10.3.156.1</primaryAddress>
+        <subnetMask>255.255.255.240</subnetMask>
+      </addressGroup>
+    </addressGroups>
+    <index>2</index>
+  </interface>
+  ...
+</interfaces>
+```
+
+#### Delete an edge interface
+```
+
+$ ./gonsx-cli edgeinterface-delete -edgeid <id> -index <index>
+Edge interface <id> successfully deleted
+```
+  
