@@ -10,7 +10,7 @@ type GetSingleRuleAPI struct {
 	*api.BaseAPI
 }
 
-// NewGetAll - Returns all the rules in the specified context
+// NewGetSingle - Returns all the rules in the specified context
 func NewGetSingle(ruleID, ruleType, ruleSection string) *GetSingleRuleAPI {
 	this := new(GetSingleRuleAPI)
 	var endpoint string
