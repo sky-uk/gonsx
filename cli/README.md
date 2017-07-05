@@ -63,30 +63,30 @@ Virtual wire ID virtualwire-1 successfully created
 ```
 $ ./gonsx-cli virtualwire-show-all -scopeid vdnscope-1  
 
-|------------------------------------------------------------------------------------------------------|
-| VirtualWireID  | Name                                        | TenantID            | ControlPaneMode |
-|------------------------------------------------------------------------------------------------------|
-| virtualwire-1  | LogicalSwitch1                              | tenantID1           | UNICAST_MODE    |
-|------------------------------------------------------------------------------------------------------|
-| virtualwire-2  | LogicalSwitch2                              | tenantID2           | HYBRID_MODE     |
-|------------------------------------------------------------------------------------------------------|
+|-------------------------------------------------------------------------------------------------------|
+| VirtualWireID  | Name                                        | TenantID            | ControlPlaneMode |
+|-------------------------------------------------------------------------------------------------------|
+| virtualwire-1  | LogicalSwitch1                              | tenantID1           | UNICAST_MODE     |
+|-------------------------------------------------------------------------------------------------------|
+| virtualwire-2  | LogicalSwitch2                              | tenantID2           | HYBRID_MODE      |
+|-------------------------------------------------------------------------------------------------------|
 ```
   
 #### Read a Virtual Wire
 ```
 $ ./gonsx-cli virtualwire-show -id virtualwire-91
 
-|-------------------------------------------|
-| VirtualWireID   | virtualwire-1           |
-|-------------------------------------------|
-| Name            | LogicalSwitch1          |
-|-------------------------------------------|
-| TenantID        | tenantID1               |
-|-------------------------------------------|
-| ControlPaneMode | UNICAST_MODE            |
-|-------------------------------------------|
-| Description     | My First Logical Switch |
-|-------------------------------------------|
+|--------------------------------------------|
+| VirtualWireID    | virtualwire-1           |
+|--------------------------------------------|
+| Name             | LogicalSwitch1          |
+|--------------------------------------------|
+| TenantID         | tenantID1               |
+|--------------------------------------------|
+| ControlPlaneMode | UNICAST_MODE            |
+|--------------------------------------------|
+| Description      | My First Logical Switch |
+|--------------------------------------------|
 ```
   
 #### Update a Virtual Wire
@@ -152,4 +152,3 @@ $ ./gonsx-cli edgeinterface-show -edgeid <id>
 $ ./gonsx-cli edgeinterface-delete -edgeid <id> -index <index>
 Edge interface <id> successfully deleted
 ```
-  
