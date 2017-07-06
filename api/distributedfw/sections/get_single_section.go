@@ -11,7 +11,7 @@ type GetSingleSectionAPI struct {
 }
 
 // NewGetSingle - Returns all the rules in the specified context
-func NewGetSingle(sectionId, sectionType string) *GetSingleSectionAPI {
+func NewGetSingle(sectionID, sectionType string) *GetSingleSectionAPI {
 	this := new(GetSingleSectionAPI)
 	/*
 		var endpoint string

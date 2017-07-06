@@ -7,7 +7,7 @@ type firewallConfiguration struct {
 
 // Section - Contains the rules
 type Section struct {
-	Id        string `xml:"id,attr,omitempty"`
+	ID        string `xml:"id,attr,omitempty"`
 	Name      string `xml:"name,attr,omitempty"`
 	Type      string `xml:"type,attr,omitempty"`
 	Timestamp string `xml:"timestamp,attr,omitempty"`
