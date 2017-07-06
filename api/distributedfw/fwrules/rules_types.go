@@ -32,7 +32,7 @@ type Rule struct {
 type Service struct {
 	Name            string `xml:"name"`
 	Value           string `xml:"value"`
-	DestinationPort uint16 `xml:"destinationPort"`
+	DestinationPort int `xml:"destinationPort"`
 	Protocol        uint8  `xml:"protocol"`
 	SubProtocol     uint8  `xml:"subProtocol"`
 }
