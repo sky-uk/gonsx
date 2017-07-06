@@ -188,7 +188,7 @@ github.com/sky-uk/gonsx/api/virtualwire
 Create:
 
 ```
- api := virtualwire.NewCreate(name, desc, tennantID, scopeID)
+ api := virtualwire.NewCreate(virtualWireCreateSpec, scopeID)
  nsxclient.Do(api)
 ```
 
@@ -197,6 +197,13 @@ Read:
 api := virtualwire.NewGetAll(scopeID)
 nsxclient.Do(api)
 resp := api.GetResponse().FilterByName(virtualWireName)
+```
+
+Read single virtualwire:
+```
+api := virtualwire.NewGet(virtualwireID)
+nsxclient.Do(api)
+resp := api.GetResponse()
 ```
 
 Update:
