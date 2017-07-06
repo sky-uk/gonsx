@@ -1,9 +1,9 @@
 package edge
 
 import (
+	"fmt"
 	"github.com/sky-uk/gonsx/api"
 	"net/http"
-	"fmt"
 )
 
 // GetAllEdgesAPI base object.
