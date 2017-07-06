@@ -19,7 +19,7 @@ type PagedEdgeList struct {
 	EdgePage Page `xml:"edgePage,omitempty"`
 }
 
-// EdgePage type struct
+// Page type struct
 type Page struct {
 	PagingInfo  PagingInfo `xml:"pagingInfo,omitempty"`
 	EdgeSummary []Summary  `xml:"edgeSummary,omitempty"`
@@ -35,7 +35,7 @@ type PagingInfo struct {
 	SortBy             string   `xml:"sortBy,omitempty"`
 }
 
-// EdgeSummary type struct
+// Summary type struct
 type Summary struct {
 	XMLName        xml.Name `xml:"edgeSummary"`
 	ObjectID       string   `xml:"objectId,omitempty"`
