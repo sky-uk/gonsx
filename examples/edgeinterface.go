@@ -19,11 +19,12 @@ func RunEdgeinterfaceExample(nsxManager, nsxUser, nsxPassword string, debug bool
 	//
 	nsxclient := gonsx.NewNSXClient(nsxManager, nsxUser, nsxPassword, true, debug)
 
+	scopeID := "vdnscope-1"
 	//
 	// Get All VirtualWires.
 	//
-	fmt.Println("Getting all virtual wires in vdnscope-1...")
-	api := virtualwire.NewGetAll("vdnscope-1")
+	fmt.Println("Getting all virtual wires in " + scopeID + "....")
+	api := virtualwire.NewGetAll(scopeID)
 	nsxclient.Do(api)
 
 	// Get ID of our virtualwire with name "test"
@@ -32,7 +33,8 @@ func RunEdgeinterfaceExample(nsxManager, nsxUser, nsxPassword string, debug bool
 	// check if we got virtual wire id, otherwise let's create one and get the ID.
 	if virtualWireID == "" {
 		fmt.Println("VirtualWire name test doesn't exist, going to create it...")
-		createAPI := virtualwire.NewCreate("test", "test desc", "tenant id", "vdnscope-1")
+		virtualWireCreateSpec := virtualwire.CreateSpec{Name: "gonsx-example", Description: "gonsx example edge interface", TenantID: "tenant_id", ControlPlaneMode: "UNICAST_MODE"}
+		createAPI := virtualwire.NewCreate(virtualWireCreateSpec, scopeID)
 		nsxclient.Do(createAPI)
 		fmt.Println("Status code:", createAPI.StatusCode())
 		virtualWireID = createAPI.GetResponse()
@@ -88,7 +90,7 @@ func RunEdgeinterfaceExample(nsxManager, nsxUser, nsxPassword string, debug bool
 			fmt.Println("Found edge interface, index: ", interfaceObj.Index)
 
 			// create delete call object.
-			fmt.Printf("Going to delete edgeinterface with index %s, proceed?", interfaceObj.Index)
+			fmt.Printf("Going to delete edgeinterface with index %d, proceed?", interfaceObj.Index)
 			reader.ReadString('\n')
 
 			edgeDeleteAPI := edgeinterface.NewDelete(interfaceObj.Index, "edge-7")

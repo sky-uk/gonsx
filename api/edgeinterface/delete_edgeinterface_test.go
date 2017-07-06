@@ -9,7 +9,7 @@ import (
 var deleteEdgeInterfaceAPI *DeleteEdgeInterfaceAPI
 
 func setupDelete() {
-	deleteEdgeInterfaceAPI = NewDelete("1", "edge-1")
+	deleteEdgeInterfaceAPI = NewDelete(1, "edge-1")
 }
 
 func TestDeleteMethod(t *testing.T) {
