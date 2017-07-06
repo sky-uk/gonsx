@@ -11,12 +11,9 @@ var createIpSetAPI *CreateIpSetAPI
 
 func createSetup() {
 
-  ipSets := new(IpSets)
-  varIpSet := IpSet{ Value : "10.50.0.0/8", Name : "CIDR_ENV", Description : "CIDR_ENV_Description"}
+  ipSet := IpSet{ Value : "10.50.0.0/8", Name : "CIDR_ENV", Description : "CIDR_ENV_Description"}
 
-  ipSets.IpSets = append(ipSets.IpSets, varIpSet)
-
-  createIpSetAPI = NewCreate("globalroot-0", ipSets)
+  createIpSetAPI = NewCreate("globalroot-0", &ipSet)
 }
 
 func TestCreateMethod(t *testing.T) {
