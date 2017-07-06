@@ -13,6 +13,8 @@ import (
 	"strings"
 )
 
+var headerName, headerValue string
+
 // NewNSXClient  Creates a new nsxclient object.
 func NewNSXClient(url string, user string, password string, ignoreSSL bool, debug bool) *NSXClient {
 	nsxClient := new(NSXClient)
@@ -60,6 +62,10 @@ func (nsxClient *NSXClient) Do(api api.NSXApi) error {
 	req.SetBasicAuth(nsxClient.User, nsxClient.Password)
 	// TODO: remove this hardcoded value!
 	req.Header.Set("Content-Type", "application/xml")
+	if headerName != "" && headerValue != "" {
+		fmt.Println(headerValue)
+		req.Header.Set(headerName, headerValue)
+	}
 
 	tr := &http.Transport{
 		TLSClientConfig: &tls.Config{InsecureSkipVerify: nsxClient.IgnoreSSL},
@@ -103,6 +109,13 @@ func (nsxClient *NSXClient) handleResponse(api api.NSXApi, res *http.Response) e
 		}
 	}
 	return nil
+}
+
+// SetHeader - sets an http header
+func (nsxClient *NSXClient) SetHeader(HeaderName, HeaderValue string) {
+	headerName = HeaderName
+	headerValue = HeaderValue
+
 }
 
 func isXML(contentType string) bool {

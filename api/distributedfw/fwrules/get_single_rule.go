@@ -1,6 +1,7 @@
 package fwrules
 
 import (
+	"fmt"
 	"github.com/sky-uk/gonsx/api"
 	"net/http"
 )
@@ -16,10 +17,10 @@ func NewGetSingle(ruleID, ruleType, ruleSection string) *GetSingleRuleAPI {
 	var endpoint string
 	switch ruleType {
 	case "LAYER3":
-		endpoint = "/api/4.0/firewall/globalroot-0/config/layer3sections/" + ruleSection + "/rules/" + ruleID
+		endpoint = fmt.Sprintf("/api/4.0/firewall/globalroot-0/config/layer3sections/%s/rules/%s", ruleSection, ruleID)
 
 	case "LAYER2":
-		endpoint = "/api/4.0/firewall/globalroot-0/config/layer2sections/" + ruleSection + "/rules/" + ruleID
+		endpoint = fmt.Sprintf("/api/4.0/firewall/globalroot-0/config/layer2sections/%s/rules/%s", ruleSection, ruleID)
 	}
 
 	this.BaseAPI = api.NewBaseAPI(http.MethodGet, endpoint, nil, new(Rule))

@@ -17,10 +17,10 @@ func NewCreate(newRule Rule) *CreateFWRulesAPI {
 	var endpoint string
 	switch newRule.RuleType {
 	case "LAYER3":
-		endpoint = fmt.Sprintf("/api/4.0/firewall/globalroot-0/config/layer3sections/%d/rules/", newRule.SectionID)
+		endpoint = fmt.Sprintf("/api/4.0/firewall/globalroot-0/config/layer3sections/%d/rules", newRule.SectionID)
 
 	case "LAYER2":
-		endpoint = fmt.Sprintf("/api/4.0/firewall/globalroot-0/config/layer2sections/%d/rules/", newRule.SectionID)
+		endpoint = fmt.Sprintf("/api/4.0/firewall/globalroot-0/config/layer2sections/%d/rules", newRule.SectionID)
 
 	}
 

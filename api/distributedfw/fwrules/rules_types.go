@@ -1,5 +1,7 @@
 package fwrules
 
+import "encoding/xml"
+
 // Section - Contains the rules
 type Section struct {
 	ID    string `xml:"id,attr"`
@@ -10,31 +12,30 @@ type Section struct {
 
 // Rule - The firewall rules
 type Rule struct {
-	RuleID        string        `xml:"id,attr"`
+	XMLName       xml.Name      `xml:"rule"`
+	RuleID        string        `xml:"id,attr,omitempty"`
 	Name          string        `xml:"name"`
 	Disabled      bool          `xml:"disabled,attr"`
-	RuleType      string        `xml:"ruleType"`
+	RuleType      string        `xml:"-"`
 	Logged        string        `xml:"logged,attr"`
-	Source        string        `xml:"source"`
-	Destination   string        `xml:"destination"`
 	Action        string        `xml:"action"`
-	EdgeID        string        `xml:"edgeId"`
 	AppliedToList []AppliedTo   `xml:"appliedToList>appliedTo"`
-	Sources       []Source      `xml:"sources>source"`
-	Destinations  []Destination `xml:"destinations>destination"`
-	Services      []Service     `xml:"services>service"`
-	SectionID     int           `xml:"sectionID"`
+	Sources       []Source      `xml:"sources,omitempty>source,omitempty"`
+	Destinations  []Destination `xml:"destinations,omitempty>destination,omitempty"`
+	Services      []Service     `xml:"services>service,omitempty"`
+	SectionID     int           `xml:"sectionId"`
 	Direction     string        `xml:"direction"`
 	PacketType    string        `xml:"packetType"`
 }
 
 // Service - Struct for the services
 type Service struct {
-	Name            string `xml:"name"`
+	Name            string `xml:"name,omitempty"`
 	Value           string `xml:"value"`
-	DestinationPort int `xml:"destinationPort"`
-	Protocol        int  `xml:"protocol"`
-	SubProtocol     int  `xml:"subProtocol"`
+	DestinationPort int    `xml:"destinationPort"`
+	Protocol        int    `xml:"protocol"`
+	SubProtocol     int    `xml:"subProtocol,omitempty"`
+	Type            string `xml:"type,omitempty"`
 }
 
 // AppliedTo - Objects to which the rule is applied

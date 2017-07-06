@@ -4,11 +4,67 @@ import (
 	"fmt"
 	"github.com/sky-uk/gonsx"
 	"github.com/sky-uk/gonsx/api/distributedfw/fwrules"
+	"github.com/sky-uk/gonsx/api/distributedfw/sections"
 	"os"
 )
 
 // RunDistributedFirewallExamples - Runs examples
 func RunDistributedFirewallExamples(nsxManager, nsxUser, nsxPassword string, debug bool) {
+	/*
+		//example to create a new firewall rule
+		var newrule fwrules.Rule
+		var newSource fwrules.Source
+		var newDestination fwrules.Destination
+		var newService fwrules.Service
+		var newApplied fwrules.AppliedTo
+		creatensxclient := gonsx.NewNSXClient(nsxManager, nsxUser, nsxPassword, true, debug)
+		newrule.Name = "My Test Rule"
+		newrule.Action = "ALLOW"
+		newrule.RuleType = "LAYER3"
+		newrule.Direction = "inout"
+		newrule.SectionID = 1003
+		newrule.PacketType = "any"
+		newrule.Logged = "false"
+		newSource.Name = "sandbox_private_sg"
+		newSource.Value = "securitygroup-713"
+		newSource.Type = "SecurityGroup"
+		//newrule.Sources = append(newrule.Sources, newSource)
+		newDestination.Name = "sandbox_private_sg"
+		newDestination.Value = "securitygroup-714"
+		newDestination.Type = "SecurityGroup"
+		//newrule.Destinations = append(newrule.Destinations, newDestination)
+		newService.Name = "SSH"
+		newService.Value = "application-305"
+		newService.Type = "Application"
+		newService.DestinationPort = 80
+		newService.Protocol = 6
+		newrule.Services = append(newrule.Services, newService)
+		newApplied.Name = "DISTRIBUTED_FIREWALL"
+		newApplied.Value = "DISTRIBUTED_FIREWALL"
+		newApplied.Type = "DISTRIBUTED_FIREWALL"
+		newApplied.IsValid = true
+		newrule.AppliedToList = append(newrule.AppliedToList, newApplied)
+		newRuleAPI := fwrules.NewCreate(newrule)
+		creatensxclient.SetHeader("If-Match","1499349509379")
+		errCreate := creatensxclient.Do(newRuleAPI)
+		if errCreate != nil {
+			fmt.Println("could not create")
+		}
+
+
+		return
+	*/
+
+	//Example to get all the sections
+	sectionnsxclient := gonsx.NewNSXClient(nsxManager, nsxUser, nsxPassword, true, debug)
+	AllSection := sections.NewGetAll()
+	sectionsErr := sectionnsxclient.Do(AllSection)
+	if sectionsErr != nil {
+		os.Exit(1)
+	}
+	fmt.Println(AllSection.GetResponse())
+
+	return
 
 	// Example to get al the rules of type LAYER3, inside section id 1110
 	nsxclient := gonsx.NewNSXClient(nsxManager, nsxUser, nsxPassword, true, debug)
