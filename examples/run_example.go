@@ -44,9 +44,8 @@ func main() {
 		RunSecurityPolicyExample(nsxManager, nsxUser, nsxPassword, debug)
 		return
 	case "ipset":
-		RunIpSetExample(nsxManager, nsxUser, nsxPassword, debug)
+		RunIPSetExample(nsxManager, nsxUser, nsxPassword, debug)
 		return
-
 	}
 
 	fmt.Println("Example not implemented.")
