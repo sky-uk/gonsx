@@ -5,19 +5,19 @@ import (
 	"net/http"
 )
 
-// GetAllIpSetAPI base object.
-type GetAllIpSetAPI struct {
+// GetAllIPSetAPI base object.
+type GetAllIPSetAPI struct {
 	*api.BaseAPI
 }
 
 // NewGetAll returns a new object of GetAllIpSetAPI.
-func NewGetAll(scopeID string) *GetAllIpSetAPI {
-	this := new(GetAllIpSetAPI)
+func NewGetAll(scopeID string) *GetAllIPSetAPI {
+	this := new(GetAllIPSetAPI)
 	this.BaseAPI = api.NewBaseAPI(http.MethodGet, "/api/2.0/services/ipset/scope/"+scopeID, nil, new(List))
 	return this
 }
 
 // GetResponse returns ResponseObject of GetAllIpSetAPI.
-func (ga GetAllIpSetAPI) GetResponse() *List {
+func (ga GetAllIPSetAPI) GetResponse() *List {
 	return ga.ResponseObject().(*List)
 }

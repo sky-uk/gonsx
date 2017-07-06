@@ -7,20 +7,20 @@ import (
 	"testing"
 )
 
-var getAllIpSetAPI *GetAllIpSetAPI
+var getAllIPSetAPI *GetAllIPSetAPI
 
 func setupGetAll() {
-	getAllIpSetAPI = NewGetAll("globalroot-0")
+	getAllIPSetAPI = NewGetAll("globalroot-0")
 }
 
 func TestGetAllMethod(t *testing.T) {
 	setupGetAll()
-	assert.Equal(t, http.MethodGet, getAllIpSetAPI.Method())
+	assert.Equal(t, http.MethodGet, getAllIPSetAPI.Method())
 }
 
 func TestGetAllEndpoint(t *testing.T) {
 	setupGetAll()
-	assert.Equal(t, "/api/2.0/services/ipset/scope/globalroot-0", getAllIpSetAPI.Endpoint())
+	assert.Equal(t, "/api/2.0/services/ipset/scope/globalroot-0", getAllIPSetAPI.Endpoint())
 }
 
 func TestGetAllUnMarshalling(t *testing.T) {
@@ -52,10 +52,10 @@ func TestGetAllUnMarshalling(t *testing.T) {
     </ipset>
 </list>`)
 
-	xmlErr := xml.Unmarshal(xmlContent, getAllIpSetAPI.ResponseObject())
+	xmlErr := xml.Unmarshal(xmlContent, getAllIPSetAPI.ResponseObject())
 
 	assert.Nil(t, xmlErr)
-	assert.Equal(t, "test_ipset_name", getAllIpSetAPI.GetResponse().IpSets[0].Name)
-	assert.Equal(t, "test_ipset_description", getAllIpSetAPI.GetResponse().IpSets[0].Description)
-	assert.Equal(t, "10.50.0.0/8", getAllIpSetAPI.GetResponse().IpSets[0].Value)
+	assert.Equal(t, "test_ipset_name", getAllIPSetAPI.GetResponse().IPSets[0].Name)
+	assert.Equal(t, "test_ipset_description", getAllIPSetAPI.GetResponse().IPSets[0].Description)
+	assert.Equal(t, "10.50.0.0/8", getAllIPSetAPI.GetResponse().IPSets[0].Value)
 }

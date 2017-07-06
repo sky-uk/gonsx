@@ -7,20 +7,20 @@ import (
 	"testing"
 )
 
-var getIpSetAPI *GetIpSetAPI
+var getIPSetAPI *GetIPSetAPI
 
 func setupGet(id string) {
-	getIpSetAPI = NewGet(id)
+	getIPSetAPI = NewGet(id)
 }
 
 func TestGetMethod(t *testing.T) {
 	setupGet("ipset-27")
-	assert.Equal(t, http.MethodGet, getIpSetAPI.Method())
+	assert.Equal(t, http.MethodGet, getIPSetAPI.Method())
 }
 
 func TestGetEndpoint(t *testing.T) {
 	setupGet("ipset-27")
-	assert.Equal(t, "/api/2.0/services/ipset/ipset-27", getIpSetAPI.Endpoint())
+	assert.Equal(t, "/api/2.0/services/ipset/ipset-27", getIPSetAPI.Endpoint())
 }
 
 func TestGetUnMarshalling(t *testing.T) {
@@ -49,10 +49,10 @@ func TestGetUnMarshalling(t *testing.T) {
 			<value>10.50.0.0/8</value>
 	</ipset>`)
 
-	xmlErr := xml.Unmarshal(xmlContent, getIpSetAPI.ResponseObject())
+	xmlErr := xml.Unmarshal(xmlContent, getIPSetAPI.ResponseObject())
 
 	assert.Nil(t, xmlErr)
-	assert.Equal(t, "test_ipset_name", getIpSetAPI.GetResponse().Name)
-	assert.Equal(t, "test_ipset_description", getIpSetAPI.GetResponse().Description)
-	assert.Equal(t, "10.50.0.0/8", getIpSetAPI.GetResponse().Value)
+	assert.Equal(t, "test_ipset_name", getIPSetAPI.GetResponse().Name)
+	assert.Equal(t, "test_ipset_description", getIPSetAPI.GetResponse().Description)
+	assert.Equal(t, "10.50.0.0/8", getIPSetAPI.GetResponse().Value)
 }

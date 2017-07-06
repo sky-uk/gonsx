@@ -21,7 +21,7 @@ func main() {
 		debug = true
 	}
 
-	fmt.Println("running "+ exampleName +" with: ", nsxManager, nsxUser, nsxPassword, exampleName, debug)
+	fmt.Println("running "+exampleName+" with: ", nsxManager, nsxUser, nsxPassword, exampleName, debug)
 	switch exampleName {
 	case "dhcprelay":
 		RunDhcpRelayExample(nsxManager, nsxUser, nsxPassword, debug)

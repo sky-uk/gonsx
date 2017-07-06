@@ -6,18 +6,18 @@ import (
 	"testing"
 )
 
-var deleteIpSetAPI *DeleteIpSetAPI
+var deleteIPSetAPI *DeleteIPSetAPI
 
 func setupDelete() {
-	deleteIpSetAPI = NewDelete("ipset-0001")
+	deleteIPSetAPI = NewDelete("ipset-0001")
 }
 
 func TestDeleteMethod(t *testing.T) {
 	setupDelete()
-	assert.Equal(t, http.MethodDelete, deleteIpSetAPI.Method())
+	assert.Equal(t, http.MethodDelete, deleteIPSetAPI.Method())
 }
 
 func TestDeleteEndpoint(t *testing.T) {
 	setupDelete()
-	assert.Equal(t, "/api/2.0/services/ipset/ipset-0001", deleteIpSetAPI.Endpoint())
+	assert.Equal(t, "/api/2.0/services/ipset/ipset-0001", deleteIPSetAPI.Endpoint())
 }
