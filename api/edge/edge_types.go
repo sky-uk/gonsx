@@ -2,6 +2,7 @@ package edge
 
 import "encoding/xml"
 
+// Edge type struct
 type Edge struct {
 	XMLName  xml.Name `xml:"edge"`
 	ObjectID string   `xml:"objectId,omitempty"`
@@ -13,15 +14,18 @@ type Edge struct {
 	Tenant   string   `xml:"tenant"`
 }
 
+// PagedEdgeList type struct
 type PagedEdgeList struct {
-	EdgePage EdgePage `xml:"edgePage,omitempty"`
+	EdgePage Page `xml:"edgePage,omitempty"`
 }
 
-type EdgePage struct {
-	PagingInfo  PagingInfo    `xml:"pagingInfo,omitempty"`
-	EdgeSummary []EdgeSummary `xml:"edgeSummary,omitempty"`
+// EdgePage type struct
+type Page struct {
+	PagingInfo  PagingInfo `xml:"pagingInfo,omitempty"`
+	EdgeSummary []Summary  `xml:"edgeSummary,omitempty"`
 }
 
+// PagingInfo type struct
 type PagingInfo struct {
 	XMLName            xml.Name `xml:"pagingInfo"`
 	PageSize           int      `xml:"pageSize,omitempty"`
@@ -31,7 +35,8 @@ type PagingInfo struct {
 	SortBy             string   `xml:"sortBy,omitempty"`
 }
 
-type EdgeSummary struct {
+// EdgeSummary type struct
+type Summary struct {
 	XMLName        xml.Name `xml:"edgeSummary"`
 	ObjectID       string   `xml:"objectId,omitempty"`
 	ObjectTypeName string   `xml:"objectTypeName,omitempty"`
