@@ -6,11 +6,12 @@ import (
 	"github.com/sky-uk/gonsx/api/distributedfw/fwrules"
 	"github.com/sky-uk/gonsx/api/distributedfw/sections"
 	"os"
+
 )
 
 // RunDistributedFirewallExamples - Runs examples
 func RunDistributedFirewallExamples(nsxManager, nsxUser, nsxPassword string, debug bool) {
-	/*
+
 		//example to create a new firewall rule
 		var newrule fwrules.Rule
 		var newSource fwrules.Source
@@ -45,7 +46,15 @@ func RunDistributedFirewallExamples(nsxManager, nsxUser, nsxPassword string, deb
 		newApplied.IsValid = true
 		newrule.AppliedToList = append(newrule.AppliedToList, newApplied)
 		newRuleAPI := fwrules.NewCreate(newrule)
-		creatensxclient.SetHeader("If-Match","1499349509379")
+
+		sectionTimestamp := sections.GetSectionTimestamp(newrule.SectionID, newrule.RuleType)
+		sectsxclient := gonsx.NewNSXClient(nsxManager, nsxUser, nsxPassword, true, debug)
+		sectErr := sectsxclient.Do(sectionTimestamp)
+		if sectErr != nil {
+			 fmt.Println("Error getting timestamp")
+		}
+		fmt.Println(sectionTimestamp.GetResponse().Timestamp)
+		creatensxclient.SetHeader("If-Match",sectionTimestamp.GetResponse().Timestamp)
 		errCreate := creatensxclient.Do(newRuleAPI)
 		if errCreate != nil {
 			fmt.Println("could not create")
@@ -53,7 +62,7 @@ func RunDistributedFirewallExamples(nsxManager, nsxUser, nsxPassword string, deb
 
 
 		return
-	*/
+
 
 	//Example to get all the sections
 	sectionnsxclient := gonsx.NewNSXClient(nsxManager, nsxUser, nsxPassword, true, debug)

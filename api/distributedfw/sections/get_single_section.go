@@ -2,8 +2,10 @@ package sections
 
 import (
 	"github.com/sky-uk/gonsx/api"
-	//"net/http"
+	"fmt"
+	"net/http"
 )
+
 
 // GetSingleSectionAPI default struct
 type GetSingleSectionAPI struct {
@@ -27,6 +29,21 @@ func NewGetSingle(sectionID, sectionType string) *GetSingleSectionAPI {
 	*/
 	return this
 
+}
+
+
+func GetSectionTimestamp(sectionID int , sectionType string) *GetSingleSectionAPI{
+	this := new(GetSingleSectionAPI)
+	var endpoint string
+	switch sectionType {
+	case "LAYER3":
+		endpoint = fmt.Sprintf("/api/4.0/firewall/globalroot-0/config/layer3sections/%d", sectionID)
+	case "LAYER2":
+		endpoint = fmt.Sprintf("/api/4.0/firewall/globalroot-0/config/layer2sections/%d", sectionID)
+
+	}
+	this.BaseAPI = api.NewBaseAPI(http.MethodGet, endpoint, nil, new(Section))
+	return this
 }
 
 // GetResponse - Returns ResponseObject from GetAllFirewallRulesAPI of Rule type.
