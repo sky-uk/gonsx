@@ -33,8 +33,8 @@ type Service struct {
 	Name            string `xml:"name"`
 	Value           string `xml:"value"`
 	DestinationPort int `xml:"destinationPort"`
-	Protocol        uint8  `xml:"protocol"`
-	SubProtocol     uint8  `xml:"subProtocol"`
+	Protocol        int  `xml:"protocol"`
+	SubProtocol     int  `xml:"subProtocol"`
 }
 
 // AppliedTo - Objects to which the rule is applied
