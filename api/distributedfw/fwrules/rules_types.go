@@ -53,6 +53,7 @@ type AppliedTo struct {
 
 // Sources - List of source
 type SourceList struct {
+	XMLName  xml.Name `xml:"sources"`
 	Excluded string   `xml:"excluded,attr"`
 	Sources  []Source `xml:"sources,omitempty>source"`
 }
