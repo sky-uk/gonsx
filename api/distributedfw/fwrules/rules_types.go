@@ -54,7 +54,7 @@ type AppliedTo struct {
 // Sources - List of source
 type SourceList struct {
 	Excluded string   `xml:"excluded,attr,default:'false'"`
-	Source  []Source `xml:"source"`
+	Sources  []Source `xml:"source"`
 }
 
 // Source - The source for the rule
