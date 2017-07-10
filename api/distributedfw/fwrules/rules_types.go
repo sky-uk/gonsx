@@ -54,7 +54,7 @@ type AppliedTo struct {
 // Sources - List of source
 type SourceList struct {
 	Excluded string   `xml:"excluded,attr,default:'false'"`
-	Sources  []Source `xml:"source"`
+	Sources  []Source `xml:"source,omitempty"`
 }
 
 // Source - The source for the rule
@@ -67,7 +67,7 @@ type Source struct {
 
 type DstList struct {
 	Excluded     string        `xml:"excluded,attr"`
-	Destinations []Destination `xml:"destinations,omitempty>destination,omitempty"`
+	Destinations []Destination `xml:"destination,omitempty"`
 }
 
 // Destination - The destination for the rule
