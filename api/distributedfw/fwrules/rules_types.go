@@ -19,7 +19,7 @@ type Rule struct {
 	RuleType      string      `xml:"-"`
 	Logged        string      `xml:"logged,attr"`
 	Action        string      `xml:"action"`
-	AppliedToList []AppliedTo `xml:"appliedToList>appliedTo"`
+	AppliedToList []AppliedTo `xml:"appliedToList"`
 	Sources       *SourceList `xml:"sources,omitempty"`
 	Destinations  *DstList    `xml:"destinations,omitempty"`
 	Services      *SvcList    `xml:"services,omitempty"`
