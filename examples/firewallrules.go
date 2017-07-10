@@ -24,12 +24,13 @@ func RunDistributedFirewallExamples(nsxManager, nsxUser, nsxPassword string, deb
 
 		//example to create a new firewall rule
 		var newrule fwrules.Rule
-
 		var newDestination fwrules.Destination
 		var newService fwrules.Service
-		var newApplied fwrules.AppliedTo
+		//var newApplied fwrules.AppliedTo
 	        var newSourceList  fwrules.SourceList
 		var serviceList fwrules.SvcList
+		//var appliedList fwrules.AppliedLst
+
 		creatensxclient := gonsx.NewNSXClient(nsxManager, nsxUser, nsxPassword, true, debug)
 		newrule.Name = "My Test Rule"
 		newrule.Action = "ALLOW"
@@ -44,21 +45,23 @@ func RunDistributedFirewallExamples(nsxManager, nsxUser, nsxPassword string, deb
 		newDestination.Value = "securitygroup-714"
 		newDestination.Type = "SecurityGroup"
 		//newrule.Destinations = append(newrule.Destinations, newDestination)
+
 		newService.Name = "SSH"
 		newService.Value = "application-305"
 		newService.Type = "Application"
 		newService.DestinationPort = 80
 		newService.Protocol = 6
-		newSourceList.Source = append(newSourceList.Source, CreateNewSource("sandbox_private_sg","securitygroup-713","SecurityGroup",true))
+		newSourceList.Sources = append(newSourceList.Sources, CreateNewSource("sandbox_private_sg","securitygroup-713","SecurityGroup",true))
 		newSourceList.Excluded = "false"
 		newrule.Sources = &newSourceList
 		serviceList.Services = append(serviceList.Services, newService)
 		newrule.Services = &serviceList
-		newApplied.Name = "DISTRIBUTED_FIREWALL"
+		/*newApplied.Name = "DISTRIBUTED_FIREWALL"
 		newApplied.Value = "DISTRIBUTED_FIREWALL"
 		newApplied.Type = "DISTRIBUTED_FIREWALL"
 		newApplied.IsValid = true
-		newrule.AppliedToList = append(newrule.AppliedToList, newApplied)
+	        appliedList.AppliedToList = append(appliedList.AppliedToList, newApplied)
+		newrule.AppliedToList = & appliedList*/
 		newRuleAPI := fwrules.NewCreate(newrule)
 
 		sectionTimestamp := sections.GetSectionTimestamp(newrule.SectionID, newrule.RuleType)

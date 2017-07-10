@@ -19,7 +19,7 @@ type Rule struct {
 	RuleType      string      `xml:"-"`
 	Logged        string      `xml:"logged,attr"`
 	Action        string      `xml:"action"`
-	AppliedToList []AppliedTo `xml:"appliedToList"`
+	AppliedToList *AppliedLst `xml:"appliedToList,ommitempty"`
 	Sources       *SourceList `xml:"sources,omitempty"`
 	Destinations  *DstList    `xml:"destinations,omitempty"`
 	Services      *SvcList    `xml:"services,omitempty"`
@@ -28,6 +28,8 @@ type Rule struct {
 	PacketType    string      `xml:"packetType"`
 }
 
+
+// Service List pointer destination
 type SvcList struct {
 	Services []Service `xml:"services,omitempty>service"`
 }
@@ -41,6 +43,10 @@ type Service struct {
 	Protocol        int      `xml:"protocol"`
 	SubProtocol     int      `xml:"subProtocol,omitempty"`
 	Type            string   `xml:"type,omitempty"`
+}
+
+type AppliedLst struct {
+	AppliedToList []AppliedTo `xml:"appliedToList"`
 }
 
 // AppliedTo - Objects to which the rule is applied
