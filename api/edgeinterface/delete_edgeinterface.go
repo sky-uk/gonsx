@@ -12,8 +12,8 @@ type DeleteEdgeInterfaceAPI struct {
 }
 
 // NewDelete returns a new delete method object of DeleteEdgeInterfaceAPI
-func NewDelete(interfaceIndex int, edgeID string) *DeleteEdgeInterfaceAPI {
+func NewDelete(edgeID string, index int) *DeleteEdgeInterfaceAPI {
 	this := new(DeleteEdgeInterfaceAPI)
-	this.BaseAPI = api.NewBaseAPI(http.MethodDelete, "/api/4.0/edges/"+edgeID+"/interfaces/?index="+strconv.Itoa(interfaceIndex), nil, nil)
+	this.BaseAPI = api.NewBaseAPI(http.MethodDelete, "/api/4.0/edges/"+edgeID+"/interfaces/"+strconv.Itoa(index), nil, nil)
 	return this
 }

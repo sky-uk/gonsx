@@ -37,17 +37,20 @@ func createEdgeInterface(client *gonsx.NSXClient, flagSet *flag.FlagSet) {
 		panic(err)
 	}
 
-	createEdgeInterfaceAPI := edgeinterface.NewCreate(&edgeInterfaces, edgeid)
-	err = client.Do(createEdgeInterfaceAPI)
+	api := edgeinterface.NewCreate(&edgeInterfaces, edgeid)
+	err = client.Do(api)
 	if err != nil {
 		fmt.Println("Error creating edge interfaces: " + err.Error())
 		os.Exit(2)
 	}
 
-	if createEdgeInterfaceAPI.StatusCode() == http.StatusOK {
+	if api.StatusCode() == http.StatusOK {
 		fmt.Println("Edge interface successfully created")
+		fmt.Println("-------------- Response -----------------")
+		fmt.Printf("%s\n", api.RawResponse())
+
 	} else {
-		fmt.Println("Error creating edge interface. StatusCode: ", createEdgeInterfaceAPI.StatusCode())
+		fmt.Println("Error creating edge interface. StatusCode: ", api.StatusCode())
 		os.Exit(3)
 	}
 
