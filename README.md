@@ -232,12 +232,14 @@ Create:
 ```
  api := edgeinterface.NewCreate(&edgeInterfaces, edgeId)
  nsxclient.Do(api)
+ createdEdgeInterfaces := api.GetResponse()
 ```
 
 Read:
 ```
 api := edgeinterface.NewGet((edgeid, index)
 nsxclient.Do(api)
+edge := api.GetResponse()
 ```
 
 Update:

@@ -28,6 +28,7 @@ func getEdgeInterface(client *gonsx.NSXClient, flagSet *flag.FlagSet) {
 
 	if getEdgeInterfaceAPI.StatusCode() == http.StatusOK {
 		interfaces := getEdgeInterfaceAPI.GetResponse()
+
 		fmt.Println("------------ Edge Interface ------------")
 		edgesAsXML, err := xml.MarshalIndent(interfaces, "", "  ")
 		if err != nil {
