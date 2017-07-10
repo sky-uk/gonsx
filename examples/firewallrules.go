@@ -9,15 +9,27 @@ import (
 
 )
 
+
+func CreateNewSource(name, value,sourceType string , valid bool ) fwrules.Source {
+	var newSource fwrules.Source
+	newSource.Name = name
+	newSource.Value = value
+	newSource.Type = sourceType
+	newSource.IsValid = &valid
+	return newSource
+}
+
 // RunDistributedFirewallExamples - Runs examples
 func RunDistributedFirewallExamples(nsxManager, nsxUser, nsxPassword string, debug bool) {
 
 		//example to create a new firewall rule
 		var newrule fwrules.Rule
-		var newSource fwrules.Source
+
 		var newDestination fwrules.Destination
 		var newService fwrules.Service
 		var newApplied fwrules.AppliedTo
+	        var newSourceList  fwrules.SourceList
+		var serviceList fwrules.SvcList
 		creatensxclient := gonsx.NewNSXClient(nsxManager, nsxUser, nsxPassword, true, debug)
 		newrule.Name = "My Test Rule"
 		newrule.Action = "ALLOW"
@@ -26,9 +38,7 @@ func RunDistributedFirewallExamples(nsxManager, nsxUser, nsxPassword string, deb
 		newrule.SectionID = 1003
 		newrule.PacketType = "any"
 		newrule.Logged = "false"
-		newSource.Name = "sandbox_private_sg"
-		newSource.Value = "securitygroup-713"
-		newSource.Type = "SecurityGroup"
+
 		//newrule.Sources = append(newrule.Sources, newSource)
 		newDestination.Name = "sandbox_private_sg"
 		newDestination.Value = "securitygroup-714"
@@ -39,7 +49,10 @@ func RunDistributedFirewallExamples(nsxManager, nsxUser, nsxPassword string, deb
 		newService.Type = "Application"
 		newService.DestinationPort = 80
 		newService.Protocol = 6
-		newrule.Services = append(newrule.Services, newService)
+		newSourceList.Sources = append(newSourceList.Sources, CreateNewSource("sandbox_private_sg","securitygroup-713","SecurityGroup",true))
+		newrule.Sources = &newSourceList
+		serviceList.Services = append(serviceList.Services, newService)
+		newrule.Services = &serviceList
 		newApplied.Name = "DISTRIBUTED_FIREWALL"
 		newApplied.Value = "DISTRIBUTED_FIREWALL"
 		newApplied.Type = "DISTRIBUTED_FIREWALL"

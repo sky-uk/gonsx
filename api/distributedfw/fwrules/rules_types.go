@@ -12,30 +12,35 @@ type Section struct {
 
 // Rule - The firewall rules
 type Rule struct {
-	XMLName       xml.Name      `xml:"rule"`
-	RuleID        string        `xml:"id,attr,omitempty"`
-	Name          string        `xml:"name"`
-	Disabled      bool          `xml:"disabled,attr"`
-	RuleType      string        `xml:"-"`
-	Logged        string        `xml:"logged,attr"`
-	Action        string        `xml:"action"`
-	AppliedToList []AppliedTo   `xml:"appliedToList>appliedTo"`
-	Sources       []Source      `xml:"sources,omitempty>source,omitempty"`
-	Destinations  []Destination `xml:"destinations,omitempty>destination,omitempty"`
-	Services      []Service     `xml:"services>service,omitempty"`
-	SectionID     int           `xml:"sectionId"`
-	Direction     string        `xml:"direction"`
-	PacketType    string        `xml:"packetType"`
+	XMLName       xml.Name     `xml:"rule"`
+	RuleID        string       `xml:"id,attr,omitempty"`
+	Name          string       `xml:"name"`
+	Disabled      bool         `xml:"disabled,attr"`
+	RuleType      string       `xml:"-"`
+	Logged        string       `xml:"logged,attr"`
+	Action        string       `xml:"action"`
+	AppliedToList []AppliedTo  `xml:"appliedToList>appliedTo"`
+	Sources       *SourceList  `xml:"sources,omitempty"`
+	Destinations  *DstList     `xml:"destinations,omitempty"`
+	Services      *SvcList `xml:"services,omitempty"`
+	SectionID     int          `xml:"sectionId"`
+	Direction     string       `xml:"direction"`
+	PacketType    string       `xml:"packetType"`
+}
+
+type SvcList struct {
+	Services []Service `xml:"services,omitempty>service"`
 }
 
 // Service - Struct for the services
 type Service struct {
-	Name            string `xml:"name,omitempty"`
-	Value           string `xml:"value"`
-	DestinationPort int    `xml:"destinationPort"`
-	Protocol        int    `xml:"protocol"`
-	SubProtocol     int    `xml:"subProtocol,omitempty"`
-	Type            string `xml:"type,omitempty"`
+	XMLName         xml.Name `xml:"service"`
+	Name            string   `xml:"name,omitempty"`
+	Value           string   `xml:"value"`
+	DestinationPort int      `xml:"destinationPort"`
+	Protocol        int      `xml:"protocol"`
+	SubProtocol     int      `xml:"subProtocol,omitempty"`
+	Type            string   `xml:"type,omitempty"`
 }
 
 // AppliedTo - Objects to which the rule is applied
@@ -46,12 +51,24 @@ type AppliedTo struct {
 	IsValid bool   `xml:"isValid"`
 }
 
+// Sources - List of source
+type SourceList struct {
+	Excluded string   `xml:"excluded,attr"`
+	Sources  []Source `xml:"sources,omitempty>source"`
+}
+
 // Source - The source for the rule
 type Source struct {
-	Name    string `xml:"name"`
-	Type    string `xml:"type"`
-	Value   string `xml:"value"`
-	IsValid bool   `xml:"isValid"`
+	XMLName xml.Name `xml:"source"`
+	Name    string   `xml:"name,omitempty"`
+	Type    string   `xml:"type,omitempty"`
+	Value   string   `xml:"value,omitempty"`
+	IsValid *bool    `xml:"isValid,omitempty"`
+}
+
+type DstList struct {
+	Excluded     string        `xml:"excluded,attr"`
+	Destinations []Destination `xml:"destinations,omitempty>destination,omitempty"`
 }
 
 // Destination - The destination for the rule
