@@ -20,7 +20,7 @@ type Rule struct {
 	Logged        string      `xml:"logged,attr"`
 	Action        string      `xml:"action"`
 	AppliedToList []AppliedTo `xml:"appliedToList>appliedTo"`
-	Sources       *SourceList `xml:"sources>source,omitempty"`
+	Sources       *SourceList `xml:"sources,omitempty"`
 	Destinations  *DstList    `xml:"destinations,omitempty"`
 	Services      *SvcList    `xml:"services,omitempty"`
 	SectionID     int         `xml:"sectionId"`
@@ -53,14 +53,12 @@ type AppliedTo struct {
 
 // Sources - List of source
 type SourceList struct {
-	XMLName  xml.Name `xml:"sources"`
-	Excluded string   `xml:"excluded,attr"`
-	Sources  []Source `xml:"sources,omitempty>source"`
+	Excluded string   `xml:"excluded,attr,default:'false'"`
+	Source  []Source `xml:"source"`
 }
 
 // Source - The source for the rule
 type Source struct {
-	XMLName xml.Name `xml:"source"`
 	Name    string   `xml:"name,omitempty"`
 	Type    string   `xml:"type,omitempty"`
 	Value   string   `xml:"value,omitempty"`

@@ -49,7 +49,8 @@ func RunDistributedFirewallExamples(nsxManager, nsxUser, nsxPassword string, deb
 		newService.Type = "Application"
 		newService.DestinationPort = 80
 		newService.Protocol = 6
-		newSourceList.Sources = append(newSourceList.Sources, CreateNewSource("sandbox_private_sg","securitygroup-713","SecurityGroup",true))
+		newSourceList.Source = append(newSourceList.Source, CreateNewSource("sandbox_private_sg","securitygroup-713","SecurityGroup",true))
+		newSourceList.Excluded = "false"
 		newrule.Sources = &newSourceList
 		serviceList.Services = append(serviceList.Services, newService)
 		newrule.Services = &serviceList
