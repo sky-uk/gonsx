@@ -77,7 +77,7 @@ func RunDistributedFirewallExamples(nsxManager, nsxUser, nsxPassword string, deb
 			fmt.Println("could not create")
 		}
 
-
+		fmt.Print(newRuleAPI.GetResponse().Name)
 		return
 
 
