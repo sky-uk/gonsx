@@ -12,20 +12,20 @@ type Section struct {
 
 // Rule - The firewall rules
 type Rule struct {
-	XMLName       xml.Name     `xml:"rule"`
-	RuleID        string       `xml:"id,attr,omitempty"`
-	Name          string       `xml:"name"`
-	Disabled      bool         `xml:"disabled,attr"`
-	RuleType      string       `xml:"-"`
-	Logged        string       `xml:"logged,attr"`
-	Action        string       `xml:"action"`
-	AppliedToList []AppliedTo  `xml:"appliedToList>appliedTo"`
-	Sources       *SourceList  `xml:"sources,omitempty"`
-	Destinations  *DstList     `xml:"destinations,omitempty"`
-	Services      *SvcList `xml:"services,omitempty"`
-	SectionID     int          `xml:"sectionId"`
-	Direction     string       `xml:"direction"`
-	PacketType    string       `xml:"packetType"`
+	XMLName       xml.Name    `xml:"rule"`
+	RuleID        string      `xml:"id,attr,omitempty"`
+	Name          string      `xml:"name"`
+	Disabled      bool        `xml:"disabled,attr"`
+	RuleType      string      `xml:"-"`
+	Logged        string      `xml:"logged,attr"`
+	Action        string      `xml:"action"`
+	AppliedToList []AppliedTo `xml:"appliedToList>appliedTo"`
+	Sources       *SourceList `xml:"sources>source,omitempty"`
+	Destinations  *DstList    `xml:"destinations,omitempty"`
+	Services      *SvcList    `xml:"services,omitempty"`
+	SectionID     int         `xml:"sectionId"`
+	Direction     string      `xml:"direction"`
+	PacketType    string      `xml:"packetType"`
 }
 
 type SvcList struct {
