@@ -9,7 +9,7 @@ import (
 
 )
 
-// CreateNewSource Example to create a source object
+// CreateNewSource -  Example to create a source object
 func CreateNewSource(name, value,sourceType string , valid bool ) fwrules.Source {
 	var newSource fwrules.Source
 	newSource.Name = name
