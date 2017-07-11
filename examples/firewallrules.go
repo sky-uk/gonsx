@@ -9,7 +9,7 @@ import (
 
 )
 
-
+// CreateNewSource
 func CreateNewSource(name, value,sourceType string , valid bool ) fwrules.Source {
 	var newSource fwrules.Source
 	newSource.Name = name
