@@ -109,7 +109,7 @@ func RunDistributedFirewallExamples(nsxManager, nsxUser, nsxPassword string, deb
 	// Example to get a single Rule
 	fmt.Println(" ==== Getting a single RULE ====")
 	thisnsxclient := gonsx.NewNSXClient(nsxManager, nsxUser, nsxPassword, true, debug)
-	thisRule := fwrules.NewGetSingle("1163", "LAYER3", "1110")
+	thisRule := fwrules.NewGetSingle("1163", "LAYER3", 1110)
 	thiserr := thisnsxclient.Do(thisRule)
 
 	if thiserr != nil {
