@@ -17,9 +17,9 @@ func NewCreate(newSection Section) *CreateFWSectionsAPI {
 	var endpoint string
 	switch newSection.Type {
 	case "LAYER3":
-		endpoint = fmt.Sprintf("/api/4.0/firewall/globalroot-0/config/layer3sections/%s", newSection.ID)
+		endpoint = fmt.Sprintf("/api/4.0/firewall/globalroot-0/config/layer3sections")
 	case "LAYER2":
-		endpoint = fmt.Sprintf("/api/4.0/firewall/globalroot-0/config/layer2sections/%s", newSection.ID)
+		endpoint = fmt.Sprintf("/api/4.0/firewall/globalroot-0/config/layer2sections")
 	}
 	this.BaseAPI = api.NewBaseAPI(http.MethodPost, endpoint, newSection, new(Section))
 	return this
