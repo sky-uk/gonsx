@@ -6,6 +6,7 @@ import (
 	"github.com/sky-uk/gonsx"
 	"github.com/sky-uk/gonsx/api/edgeinterface"
 	"github.com/sky-uk/gonsx/api/virtualwire"
+	"net/http"
 	"os"
 )
 
@@ -67,42 +68,44 @@ func RunEdgeinterfaceExample(nsxManager, nsxUser, nsxPassword string, debug bool
 
 	nsxclient.Do(edgeInterfaceAPI)
 
-	fmt.Println("Status code:", edgeInterfaceAPI.StatusCode())
+	edgeCreated := new(edgeinterface.EdgeInterfaces)
+
 	// Check the status code and process accordingly.
-	if edgeInterfaceAPI.StatusCode() == 200 {
-		fmt.Println("Interface created, Response:\n", edgeInterfaceAPI.GetResponse())
+	if edgeInterfaceAPI.StatusCode() == http.StatusOK {
+		edgeCreated = edgeInterfaceAPI.GetResponse()
+		fmt.Println("Interface created, Response:\n", edgeCreated)
 	} else {
 		fmt.Println("Failed to create interface.")
+		os.Exit(1)
 	}
 
 	//
 	// Deleting Edge Interface.
 	//
 	//  first get all edge interfaces.
-	getAllEdgeInterfacesAPI := edgeinterface.NewGetAll("edge-7")
-	nsxclient.Do(getAllEdgeInterfacesAPI)
+	fmt.Printf("Going to delete interface of index: %d", edgeCreated.Interfaces[0].Index)
+	getEdgeAPI := edgeinterface.NewGet("edge-7", edgeCreated.Interfaces[0].Index)
+	nsxclient.Do(getEdgeAPI)
 
-	if getAllEdgeInterfacesAPI.StatusCode() == 200 {
+	if getEdgeAPI.StatusCode() == 200 {
 		// Find the one we are interested in.
-		interfaceObj := (getAllEdgeInterfacesAPI.GetResponse().FilterByName("app_virtualwire_one"))
+		interfaceObj := getEdgeAPI.GetResponse()
 
-		if interfaceObj != nil {
-			fmt.Println("Found edge interface, index: ", interfaceObj.Index)
+		fmt.Println("Found edge interface, index: ", interfaceObj.Index)
 
-			// create delete call object.
-			fmt.Printf("Going to delete edgeinterface with index %d, proceed?", interfaceObj.Index)
-			reader.ReadString('\n')
+		// create delete call object.
+		fmt.Printf("Going to delete edgeinterface with index %d, proceed?", interfaceObj.Index)
+		reader.ReadString('\n')
 
-			edgeDeleteAPI := edgeinterface.NewDelete(interfaceObj.Index, "edge-7")
-			nsxclient.Do(edgeDeleteAPI)
+		edgeDeleteAPI := edgeinterface.NewDelete("edge-7", interfaceObj.Index)
+		nsxclient.Do(edgeDeleteAPI)
 
-			// check if it was a successful.
-			if edgeDeleteAPI.StatusCode() == 204 {
-				fmt.Println("Deleted edge interface")
-			} else {
-				fmt.Println("Failed to delete edge inteface.")
-				fmt.Println("Status code: ", edgeDeleteAPI.StatusCode())
-			}
+		// check if it was a successful.
+		if edgeDeleteAPI.StatusCode() == 204 {
+			fmt.Println("Deleted edge interface")
+		} else {
+			fmt.Println("Failed to delete edge inteface.")
+			fmt.Println("Status code: ", edgeDeleteAPI.StatusCode())
 		}
 	}
 

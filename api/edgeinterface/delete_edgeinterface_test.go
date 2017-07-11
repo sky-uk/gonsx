@@ -9,7 +9,7 @@ import (
 var deleteEdgeInterfaceAPI *DeleteEdgeInterfaceAPI
 
 func setupDelete() {
-	deleteEdgeInterfaceAPI = NewDelete(1, "edge-1")
+	deleteEdgeInterfaceAPI = NewDelete("edge-1", 1)
 }
 
 func TestDeleteMethod(t *testing.T) {
@@ -19,5 +19,5 @@ func TestDeleteMethod(t *testing.T) {
 
 func TestDeleteEndpoint(t *testing.T) {
 	setupDelete()
-	assert.Equal(t, "/api/4.0/edges/edge-1/interfaces/?index=1", deleteEdgeInterfaceAPI.Endpoint())
+	assert.Equal(t, "/api/4.0/edges/edge-1/interfaces/1", deleteEdgeInterfaceAPI.Endpoint())
 }
