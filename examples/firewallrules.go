@@ -77,7 +77,7 @@ func RunDistributedFirewallExamples(nsxManager, nsxUser, nsxPassword string, deb
 	}
 
 	fmt.Print(newRuleAPI.GetResponse().Name)
-	return
+
 
 	//Example to get all the sections
 	sectionnsxclient := gonsx.NewNSXClient(nsxManager, nsxUser, nsxPassword, true, debug)
@@ -88,7 +88,7 @@ func RunDistributedFirewallExamples(nsxManager, nsxUser, nsxPassword string, deb
 	}
 	fmt.Println(AllSection.GetResponse())
 
-	return
+
 
 	// Example to get al the rules of type LAYER3, inside section id 1110
 	nsxclient := gonsx.NewNSXClient(nsxManager, nsxUser, nsxPassword, true, debug)
