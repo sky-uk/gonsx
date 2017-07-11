@@ -37,6 +37,7 @@ func main() {
 		return
 	case "securitygroup":
 		RunSecurityGroupExample(nsxManager, nsxUser, nsxPassword, debug)
+		return
 	case "securitytag":
 		RunSecurityTagExample(nsxManager, nsxUser, nsxPassword, debug)
 		return
@@ -44,7 +45,6 @@ func main() {
 		RunSecurityPolicyExample(nsxManager, nsxUser, nsxPassword, debug)
 		return
 	case "firewallrules":
-		fmt.Println("running service example with: ", nsxManager, nsxUser, nsxPassword, exampleName, debug)
 		RunDistributedFirewallExamples(nsxManager, nsxUser, nsxPassword, debug)
 		return
 	case "ipset":
