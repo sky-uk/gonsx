@@ -6,11 +6,10 @@ import (
 	"github.com/sky-uk/gonsx/api/distributedfw/fwrules"
 	"github.com/sky-uk/gonsx/api/distributedfw/sections"
 	"os"
-
 )
 
 // CreateNewSource -  Example to create a source object
-func CreateNewSource(name, value,sourceType string , valid bool ) fwrules.Source {
+func CreateNewSource(name, value, sourceType string, valid bool) fwrules.Source {
 	var newSource fwrules.Source
 	newSource.Name = name
 	newSource.Value = value
@@ -22,64 +21,63 @@ func CreateNewSource(name, value,sourceType string , valid bool ) fwrules.Source
 // RunDistributedFirewallExamples - Runs examples
 func RunDistributedFirewallExamples(nsxManager, nsxUser, nsxPassword string, debug bool) {
 
-		//example to create a new firewall rule
-		var newrule fwrules.Rule
-		var newDestination fwrules.Destination
-		var newService fwrules.Service
-		//var newApplied fwrules.AppliedTo
-	        var newSourceList  fwrules.SourceList
-		var serviceList fwrules.SvcList
-		//var appliedList fwrules.AppliedLst
+	//example to create a new firewall rule
+	var newrule fwrules.Rule
+	var newDestination fwrules.Destination
+	var newService fwrules.Service
+	//var newApplied fwrules.AppliedTo
+	var newSourceList fwrules.SourceList
+	var serviceList fwrules.SvcList
+	//var appliedList fwrules.AppliedLst
 
-		creatensxclient := gonsx.NewNSXClient(nsxManager, nsxUser, nsxPassword, true, debug)
-		newrule.Name = "My Test Rule"
-		newrule.Action = "ALLOW"
-		newrule.RuleType = "LAYER3"
-		newrule.Direction = "inout"
-		newrule.SectionID = 1003
-		newrule.PacketType = "any"
-		newrule.Logged = "false"
+	creatensxclient := gonsx.NewNSXClient(nsxManager, nsxUser, nsxPassword, true, debug)
+	newrule.Name = "My Test Rule"
+	newrule.Action = "ALLOW"
+	newrule.RuleType = "LAYER3"
+	newrule.Direction = "inout"
+	newrule.SectionID = 1003
+	newrule.PacketType = "any"
+	newrule.Logged = "false"
 
-		//newrule.Sources = append(newrule.Sources, newSource)
-		newDestination.Name = "sandbox_private_sg"
-		newDestination.Value = "securitygroup-714"
-		newDestination.Type = "SecurityGroup"
-		//newrule.Destinations = append(newrule.Destinations, newDestination)
+	//newrule.Sources = append(newrule.Sources, newSource)
+	newDestination.Name = "sandbox_private_sg"
+	newDestination.Value = "securitygroup-714"
+	newDestination.Type = "SecurityGroup"
+	//newrule.Destinations = append(newrule.Destinations, newDestination)
 
-		newService.Name = "SSH"
-		newService.Value = "application-305"
-		newService.Type = "Application"
-		newService.DestinationPort = 80
-		newService.Protocol = 6
-		newSourceList.Sources = append(newSourceList.Sources, CreateNewSource("sandbox_private_sg","securitygroup-713","SecurityGroup",true))
-		newSourceList.Excluded = "false"
-		newrule.Sources = &newSourceList
-		serviceList.Services = append(serviceList.Services, newService)
-		newrule.Services = &serviceList
-		/*newApplied.Name = "DISTRIBUTED_FIREWALL"
+	newService.Name = "SSH"
+	newService.Value = "application-305"
+	newService.Type = "Application"
+	newService.DestinationPort = 80
+	newService.Protocol = 6
+	newSourceList.Sources = append(newSourceList.Sources, CreateNewSource("sandbox_private_sg", "securitygroup-713", "SecurityGroup", true))
+	newSourceList.Excluded = "false"
+	newrule.Sources = &newSourceList
+	serviceList.Services = append(serviceList.Services, newService)
+	newrule.Services = &serviceList
+	/*newApplied.Name = "DISTRIBUTED_FIREWALL"
 		newApplied.Value = "DISTRIBUTED_FIREWALL"
 		newApplied.Type = "DISTRIBUTED_FIREWALL"
 		newApplied.IsValid = true
 	        appliedList.AppliedToList = append(appliedList.AppliedToList, newApplied)
 		newrule.AppliedToList = & appliedList*/
-		newRuleAPI := fwrules.NewCreate(newrule)
+	newRuleAPI := fwrules.NewCreate(newrule)
 
-		sectionTimestamp := sections.GetSectionTimestamp(newrule.SectionID, newrule.RuleType)
-		sectsxclient := gonsx.NewNSXClient(nsxManager, nsxUser, nsxPassword, true, debug)
-		sectErr := sectsxclient.Do(sectionTimestamp)
-		if sectErr != nil {
-			 fmt.Println("Error getting timestamp")
-		}
-		fmt.Println(sectionTimestamp.GetResponse().Timestamp)
-		creatensxclient.SetHeader("If-Match",sectionTimestamp.GetResponse().Timestamp)
-		errCreate := creatensxclient.Do(newRuleAPI)
-		if errCreate != nil {
-			fmt.Println("could not create")
-		}
+	sectionTimestamp := sections.GetSectionTimestamp(newrule.SectionID, newrule.RuleType)
+	sectsxclient := gonsx.NewNSXClient(nsxManager, nsxUser, nsxPassword, true, debug)
+	sectErr := sectsxclient.Do(sectionTimestamp)
+	if sectErr != nil {
+		fmt.Println("Error getting timestamp")
+	}
+	fmt.Println(sectionTimestamp.GetResponse().Timestamp)
+	creatensxclient.SetHeader("If-Match", sectionTimestamp.GetResponse().Timestamp)
+	errCreate := creatensxclient.Do(newRuleAPI)
+	if errCreate != nil {
+		fmt.Println("could not create")
+	}
 
-		fmt.Print(newRuleAPI.GetResponse().Name)
-		return
-
+	fmt.Print(newRuleAPI.GetResponse().Name)
+	return
 
 	//Example to get all the sections
 	sectionnsxclient := gonsx.NewNSXClient(nsxManager, nsxUser, nsxPassword, true, debug)
