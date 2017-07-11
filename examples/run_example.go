@@ -46,6 +46,7 @@ func main() {
 	case "firewallrules":
 		fmt.Println("running service example with: ", nsxManager, nsxUser, nsxPassword, exampleName, debug)
 		RunDistributedFirewallExamples(nsxManager, nsxUser, nsxPassword, debug)
+		return
 	case "ipset":
 		RunIPSetExample(nsxManager, nsxUser, nsxPassword, debug)
 		return
