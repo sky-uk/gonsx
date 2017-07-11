@@ -20,6 +20,28 @@ func CreateNewSource(name, value, sourceType string, valid bool) fwrules.Source 
 
 // RunDistributedFirewallExamples - Runs examples
 func RunDistributedFirewallExamples(nsxManager, nsxUser, nsxPassword string, debug bool) {
+	var newsection sections.Section
+	newsection.Name = "Terraform test section"
+	newsection.Type = "LAYER3"
+	createSectionclient := gonsx.NewNSXClient(nsxManager, nsxUser, nsxPassword, true, debug)
+	createSectionAPI := sections.NewCreate(newsection)
+	createSectionErr := createSectionclient.Do(createSectionAPI)
+	if createSectionErr != nil {
+		fmt.Println("could not create the section")
+	}
+
+	fmt.Println(createSectionAPI.GetResponse())
+	sectionDeleteID := createSectionAPI.GetResponse().ID
+	var deleteSection sections.Section
+	deleteSection.ID = sectionDeleteID
+	deleteSectionclient := gonsx.NewNSXClient(nsxManager, nsxUser, nsxPassword, true, debug)
+	deleteSectionAPI := sections.NewDelete(deleteSection)
+	deleteSectionErr := deleteSectionclient.Do(deleteSectionAPI)
+	if deleteSectionErr != nil {
+		fmt.Println("could not create the section")
+	}
+	return
+
 
 	//example to create a new firewall rule
 	var newrule fwrules.Rule
