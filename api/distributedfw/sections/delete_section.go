@@ -6,7 +6,7 @@ import (
 	"net/http"
 )
 
-// DeleteFWRuleAPI default struct
+// DeleteFWSectionAPI default struct
 type DeleteFWSectionAPI struct {
 	*api.BaseAPI
 }

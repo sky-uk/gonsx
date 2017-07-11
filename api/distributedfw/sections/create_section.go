@@ -6,11 +6,11 @@ import (
 	"net/http"
 )
 
-// CreateFWRulesAPI default struct
+// CreateFWSectionsAPI default struct
 type CreateFWSectionsAPI struct {
 	*api.BaseAPI
 }
-
+// NewCreate - Creates a new section
 func NewCreate(newSection Section) *CreateFWSectionsAPI {
 	this := new(CreateFWSectionsAPI)
 	var endpoint string
