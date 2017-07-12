@@ -30,14 +30,14 @@ func NewGetSingle(sectionID, sectionType string) *GetSingleSectionAPI {
 }
 
 // GetSectionTimestamp - Returns the timestamp for a section , required to create a new rule
-func GetSectionTimestamp(sectionID, sectionType string) *GetSingleSectionAPI {
+func GetSectionTimestamp(sectionID int, sectionType string) *GetSingleSectionAPI {
 	this := new(GetSingleSectionAPI)
 	var endpoint string
 	switch sectionType {
 	case "LAYER3":
-		endpoint = fmt.Sprintf("/api/4.0/firewall/globalroot-0/config/layer3sections/%s", sectionID)
+		endpoint = fmt.Sprintf("/api/4.0/firewall/globalroot-0/config/layer3sections/%d", sectionID)
 	case "LAYER2":
-		endpoint = fmt.Sprintf("/api/4.0/firewall/globalroot-0/config/layer2sections/%s", sectionID)
+		endpoint = fmt.Sprintf("/api/4.0/firewall/globalroot-0/config/layer2sections/%d", sectionID)
 
 	}
 	this.BaseAPI = api.NewBaseAPI(http.MethodGet, endpoint, nil, new(Section))
