@@ -4,11 +4,10 @@ import (
 	"github.com/stretchr/testify/assert"
 	"net/http"
 	"testing"
-
 )
 
-var  testSection Section
-var   createFWSectionAPI *CreateFWSectionsAPI
+var testSection Section
+var createFWSectionAPI *CreateFWSectionsAPI
 
 func setupCreateSection() {
 	testSection.Name = "My Test Section"
@@ -24,30 +23,25 @@ func setupCreateL2Section() {
 	createFWSectionAPI = NewCreate(testSection)
 }
 
-
-
 func TestCreateMethod(t *testing.T) {
 	setupCreateSection()
 	assert.Equal(t, http.MethodPost, createFWSectionAPI.Method())
 }
 
-func TestL3Endpoint(t *testing.T){
+func TestL3Endpoint(t *testing.T) {
 	setupCreateSection()
 	assert.Equal(t, "/api/4.0/firewall/globalroot-0/config/layer3sections", createFWSectionAPI.Endpoint())
 }
 
-func TestL2Endpoint(t *testing.T){
+func TestL2Endpoint(t *testing.T) {
 	setupCreateL2Section()
 	assert.Equal(t, "/api/4.0/firewall/globalroot-0/config/layer2sections", createFWSectionAPI.Endpoint())
 }
 
-
-
-func TestMethod(t *testing.T){
+func TestMethod(t *testing.T) {
 	setupCreateSection()
 	assert.Equal(t, http.MethodPost, createFWSectionAPI.Method())
 }
-
 
 func TestResponse(t *testing.T) {
 	setupCreateSection()

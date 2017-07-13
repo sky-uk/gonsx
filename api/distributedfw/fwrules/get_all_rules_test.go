@@ -1,10 +1,10 @@
 package fwrules
 
 import (
+	"fmt"
 	"github.com/stretchr/testify/assert"
 	"net/http"
 	"testing"
-	"fmt"
 )
 
 var getAllRules *GetAllRulesAPI
@@ -16,8 +16,8 @@ func setupGetAllRules() {
 }
 
 func setupRule() *Section {
-	testSection := &Section {
-		ID: "1",
+	testSection := &Section{
+		ID:   "1",
 		Name: "Test Section",
 		Type: "LAYER3",
 	}
@@ -33,8 +33,6 @@ func TestGetAllMethod(t *testing.T) {
 	setupGetAllRules()
 	assert.Equal(t, http.MethodGet, getAllRules.Method())
 }
-
-
 
 func TestGetAllResponse(t *testing.T) {
 	setupGetAllRules()
