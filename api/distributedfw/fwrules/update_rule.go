@@ -24,7 +24,7 @@ func NewUpdate(updateRule Rule) *UpdateFWRulesAPI {
 
 	}
 
-	this.BaseAPI = api.NewBaseAPI(http.MethodPut, endpoint, updateRule, new(Rule))
+	this.BaseAPI = api.NewBaseAPI(http.MethodPost, endpoint, updateRule, new(Rule))
 	return this
 }
 
