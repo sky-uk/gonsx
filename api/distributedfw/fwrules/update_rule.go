@@ -32,4 +32,3 @@ func NewUpdate(updateRule Rule) *UpdateFWRulesAPI {
 func (updateAPI UpdateFWRulesAPI) GetResponse() Rule {
 	return *updateAPI.ResponseObject().(*Rule)
 }
-

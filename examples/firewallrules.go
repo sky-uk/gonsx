@@ -42,7 +42,6 @@ func RunDistributedFirewallExamples(nsxManager, nsxUser, nsxPassword string, deb
 	}
 	return
 
-
 	//example to create a new firewall rule
 	var newrule fwrules.Rule
 	var newDestination fwrules.Destination
