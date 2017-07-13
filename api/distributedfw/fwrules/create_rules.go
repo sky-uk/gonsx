@@ -30,5 +30,5 @@ func NewCreate(newRule Rule) *CreateFWRulesAPI {
 
 // GetResponse - Returns ResponseObject from GetAllFirewallRulesAPI of Rule type.
 func (createAPI CreateFWRulesAPI) GetResponse() Rule {
-	return *createAPI.ResponseObject().(Rule)
+	return *createAPI.ResponseObject().(*Rule)
 }

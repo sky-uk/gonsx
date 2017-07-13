@@ -30,5 +30,5 @@ func NewGetSingle(ruleID, ruleType string, ruleSection int) *GetSingleRuleAPI {
 
 // GetResponse - Returns ResponseObject from GetAllFirewallRulesAPI of Rule type.
 func (getSingleAPI GetSingleRuleAPI) GetResponse() Rule {
-	return getSingleAPI.ResponseObject().(Rule)
+	return *getSingleAPI.ResponseObject().(*Rule)
 }

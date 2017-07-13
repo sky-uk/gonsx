@@ -4,6 +4,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"net/http"
 	"testing"
+	"fmt"
 )
 
 var getAllRules *GetAllRulesAPI
@@ -12,6 +13,15 @@ var getAllRules *GetAllRulesAPI
 
 func setupGetAllRules() {
 	getAllRules = NewGetAll("LAYER3", "1110")
+}
+
+func setupRule() *Section {
+	testSection := &Section {
+		ID: "1",
+		Name: "Test Section",
+		Type: "LAYER3",
+	}
+	return testSection
 }
 
 func TestGetAllEndPoint(t *testing.T) {
@@ -24,9 +34,12 @@ func TestGetAllMethod(t *testing.T) {
 	assert.Equal(t, http.MethodGet, getAllRules.Method())
 }
 
-/*func TestGetAllResponse(t *testing.T) {
-	setupGetAllRules()
-	getAllRules.SetResponseObject("test response")
-	assert.Equal(t, "test response", getAllRules.GetResponse())
 
-}*/
+
+func TestGetAllResponse(t *testing.T) {
+	setupGetAllRules()
+	testrule := setupRule()
+	fmt.Println(getAllRules.GetResponse())
+	getAllRules.SetResponseObject(testrule)
+	assert.Equal(t, *testrule, getAllRules.GetResponse())
+}
