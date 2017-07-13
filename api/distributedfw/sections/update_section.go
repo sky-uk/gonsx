@@ -21,7 +21,7 @@ func NewUpdate(updateSection Section) *UpdateFWSectionsAPI {
 	case "LAYER2":
 		endpoint = fmt.Sprintf("/api/4.0/firewall/globalroot-0/config/layer2sections/%s", updateSection.ID)
 	}
-	this.BaseAPI = api.NewBaseAPI(http.MethodPost, endpoint, updateSection, new(Section))
+	this.BaseAPI = api.NewBaseAPI(http.MethodPut, endpoint, updateSection, new(Section))
 	return this
 
 }
