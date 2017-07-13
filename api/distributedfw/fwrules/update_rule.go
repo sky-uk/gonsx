@@ -13,7 +13,7 @@ type UpdateFWRulesAPI struct {
 
 // NewCreate - Returns all the rules in the specified context
 func NewUpdate(updateRule Rule) *UpdateFWRulesAPI {
-	this := new(CreateFWRulesAPI)
+	this := new(UpdateFWRulesAPI)
 	var endpoint string
 	switch updateRule.RuleType {
 	case "LAYER3":
