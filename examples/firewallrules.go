@@ -40,7 +40,6 @@ func RunDistributedFirewallExamples(nsxManager, nsxUser, nsxPassword string, deb
 	if deleteSectionErr != nil {
 		fmt.Println("could not create the section")
 	}
-	return
 
 	//example to create a new firewall rule
 	var newrule fwrules.Rule
