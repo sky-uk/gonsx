@@ -6,12 +6,12 @@ import (
 	"net/http"
 )
 
-// CreateFWRulesAPI default struct
+// UpdateFWRulesAPI default struct
 type UpdateFWRulesAPI struct {
 	*api.BaseAPI
 }
 
-// NewCreate - Returns all the rules in the specified context
+// NewUpdate - Returns all the rules in the specified context
 func NewUpdate(updateRule Rule) *UpdateFWRulesAPI {
 	this := new(UpdateFWRulesAPI)
 	var endpoint string
