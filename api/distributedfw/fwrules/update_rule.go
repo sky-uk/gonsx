@@ -17,10 +17,10 @@ func NewUpdate(updateRule Rule) *UpdateFWRulesAPI {
 	var endpoint string
 	switch updateRule.RuleType {
 	case "LAYER3":
-		endpoint = fmt.Sprintf("/api/4.0/firewall/globalroot-0/config/layer3sections/%d/rules/%d", updateRule.SectionID, updateRule.RuleID)
+		endpoint = fmt.Sprintf("/api/4.0/firewall/globalroot-0/config/layer3sections/%d/rules/%s", updateRule.SectionID, updateRule.RuleID)
 
 	case "LAYER2":
-		endpoint = fmt.Sprintf("/api/4.0/firewall/globalroot-0/config/layer2sections/%d/rules/%d", updateRule.SectionID, updateRule.RuleID)
+		endpoint = fmt.Sprintf("/api/4.0/firewall/globalroot-0/config/layer2sections/%d/rules/%s", updateRule.SectionID, updateRule.RuleID)
 
 	}
 
