@@ -6,12 +6,12 @@ import (
 	"net/http"
 )
 
-// CreateFWSectionsAPI default struct
+// UpdateFWSectionsAPI default struct
 type UpdateFWSectionsAPI struct {
 	*api.BaseAPI
 }
 
-// NewCreate - Creates a new section
+// NewUpdate - Creates a new section
 func NewUpdate(updateSection Section) *UpdateFWSectionsAPI {
 	this := new(UpdateFWSectionsAPI)
 	var endpoint string
