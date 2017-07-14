@@ -20,6 +20,16 @@ type VirtualWire struct {
 	ControlPlaneMode string   `xml:"controlPlaneMode"`
 	Description      string   `xml:"description"`
 	TenantID         string   `xml:"tenantId,omitempty"`
+	VdnID            string   `xml:"vdnId,omitempty"`
+	VdsContext		 []VdsContext `xml:"vdsContextWithBacking,omitempty"`
+}
+
+type VdsContext struct {
+	Switch Switch `xml:"switch"`
+}
+
+type Switch struct {
+	ObjectID string `xml:"objectId"`
 }
 
 // CreateSpec is used in create call on VirtualWire api.
