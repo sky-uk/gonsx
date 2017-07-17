@@ -24,10 +24,12 @@ type VirtualWire struct {
 	VdsContext		 []VdsContext `xml:"vdsContextWithBacking,omitempty"`
 }
 
+// VdsContext represents a port group for which a VirtualWire is provisioned; a VirtualWire can have several VdsContexts
 type VdsContext struct {
 	Switch Switch `xml:"switch"`
 }
 
+// Switch is the logical switch into which a VirtualWire is "plugged"
 type Switch struct {
 	ObjectID string `xml:"objectId"`
 }
