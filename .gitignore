@@ -8,3 +8,4 @@ coverage-gocov.xml
 coverage-gocov.html
 build/
 gonsx-cli
+.gopath~/
