@@ -93,7 +93,61 @@ func (sp *SecurityPolicy) RemoveFirewallActionByUUID(uuid string) {
 	}
 }
 
+// AddFirewallAction adds inbount or outbound firewall action rule into security policy.
+func (sp *SecurityPolicy) AddFirewallAction(name, action, direction string, secGroupObjectIDs, applicationObjectIDs []string) error {
+	if action != "allow" && action != "block" && action != "reject" {
+		return errors.New("Action can be only 'allow', 'block' or 'reject'")
+	}
+	if direction != "inbound" && direction != "outbound" {
+		return errors.New("Direction can only be 'inbound' or 'outbound'")
+	}
+
+	var secondarySecurityGroupList = []SecurityGroup{}
+	for _, secGroupID := range secGroupObjectIDs {
+		securityGroup := SecurityGroup{ObjectID: secGroupID}
+		secondarySecurityGroupList = append(secondarySecurityGroupList, securityGroup)
+	}
+
+	var secondaryApplicationsList = &Applications{}
+
+	if applicationObjectIDs[0] != "any" {
+		var secondaryApplicationList = []Application{}
+		for _, applicationObjectID := range applicationObjectIDs {
+			application := Application{ObjectID: applicationObjectID}
+			secondaryApplicationList = append(secondaryApplicationList, application)
+		}
+
+		secondaryApplicationsList.Applications = secondaryApplicationList
+	} else {
+		secondaryApplicationsList = nil
+	}
+
+	newAction := Action{
+		Class:                  "firewallSecurityAction",
+		Name:                   name,
+		Action:                 action,
+		Category:               "firewall",
+		Direction:              direction,
+		IsEnabled:              true,
+		SecondarySecurityGroup: secondarySecurityGroupList,
+		NegateSource:           false,
+		Applications:           secondaryApplicationsList,
+	}
+
+	if sp.ActionsByCategory.Category == "firewall" && len(sp.ActionsByCategory.Actions) > 0 {
+		sp.ActionsByCategory.Actions = append(sp.ActionsByCategory.Actions, newAction)
+		return nil
+	}
+
+	// Build actionsByCategory list.
+	actionsByCategory := ActionsByCategory{Category: "firewall"}
+	actionsByCategory.Actions = []Action{newAction}
+	sp.ActionsByCategory = actionsByCategory
+	return nil
+}
+
 // AddOutboundFirewallAction adds outbound firewall action rule into security policy.
+// !! Deprecated in favor of AddFirewallAction
 func (sp *SecurityPolicy) AddOutboundFirewallAction(name, action, direction string, secGroupObjectIDs, applicationObjectIDs []string) error {
 	if action != "allow" && action != "block" {
 		return errors.New("Action can be only 'allow' or 'block'")
@@ -146,6 +200,7 @@ func (sp *SecurityPolicy) AddOutboundFirewallAction(name, action, direction stri
 }
 
 // AddInboundFirewallAction adds outbound firewall action rule into security policy.
+// !! Deprecated in favor of AddFirewallAction
 func (sp *SecurityPolicy) AddInboundFirewallAction(name, action, direction string, applicationObjectIDs []string) error {
 	if action != "allow" && action != "block" {
 		return errors.New("Action can be only 'allow' or 'block'")
