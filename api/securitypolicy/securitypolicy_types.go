@@ -53,6 +53,7 @@ type Action struct {
 	Direction              string          `xml:"direction"`
 	IsEnabled              bool            `xml:"isEnabled,omitempty"`
 	SecondarySecurityGroup []SecurityGroup `xml:"secondarySecurityGroup,omitempty"`
+	NegateSource           bool            `xml:"outsideSecondaryContainer,omitempty"`
 	Applications           *Applications   `xml:"applications,omitempty"`
 }
 
