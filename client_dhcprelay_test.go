@@ -1,7 +1,7 @@
 package gonsx
 
 import (
-	"github.com/sky-uk/gonsx/api/dhcprelay"
+	"github.com/tadaweb/gonsx/api/dhcprelay"
 	"github.com/stretchr/testify/assert"
 	"net/http"
 	"testing"

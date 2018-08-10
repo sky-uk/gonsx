@@ -3,8 +3,8 @@ package main
 import (
 	"errors"
 	"fmt"
-	"github.com/sky-uk/gonsx"
-	"github.com/sky-uk/gonsx/api/securitytag"
+	"github.com/tadaweb/gonsx"
+	"github.com/tadaweb/gonsx/api/securitytag"
 	"os"
 )
 

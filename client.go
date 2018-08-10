@@ -5,7 +5,7 @@ import (
 	"crypto/tls"
 	"encoding/xml"
 	"fmt"
-	"github.com/sky-uk/gonsx/api"
+	"github.com/tadaweb/gonsx/api"
 	"io"
 	"io/ioutil"
 	"log"

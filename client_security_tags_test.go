@@ -1,7 +1,7 @@
 package gonsx
 
 import (
-	"github.com/sky-uk/gonsx/api/securitytag"
+	"github.com/tadaweb/gonsx/api/securitytag"
 	"github.com/stretchr/testify/assert"
 	"net/http"
 	"testing"

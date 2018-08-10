@@ -3,6 +3,6 @@ services:
     gonsx:
         build: .
         volumes: 
-            - ./:/go/src/github.com/sky-uk/gonsx
+            - ./:/go/src/github.com/tadaweb/gonsx
 
 

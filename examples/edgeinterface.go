@@ -3,9 +3,9 @@ package main
 import (
 	"bufio"
 	"fmt"
-	"github.com/sky-uk/gonsx"
-	"github.com/sky-uk/gonsx/api/edgeinterface"
-	"github.com/sky-uk/gonsx/api/virtualwire"
+	"github.com/tadaweb/gonsx"
+	"github.com/tadaweb/gonsx/api/edgeinterface"
+	"github.com/tadaweb/gonsx/api/virtualwire"
 	"net/http"
 	"os"
 )

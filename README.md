@@ -154,7 +154,7 @@ To create an NSX object run the following code, with the correct params.
 
 ```
 import (
-    "github.com/sky-uk/gonsx"
+    "github.com/tadaweb/gonsx"
 )
 
 nsxclient := gonsx.NewNSXClient(url, username, password, ignoreSSL, debug)
@@ -182,7 +182,7 @@ nsxclient.Do(my_resource_obj)
 Virtual Wire resource. This resource will call the Virtual Wires api within NSX.
 Import the following class:
 ```
-github.com/sky-uk/gonsx/api/virtualwire
+github.com/tadaweb/gonsx/api/virtualwire
 ```
 
 Create:
@@ -224,7 +224,7 @@ nsxclient.Do(delete_api)
 Interface resource. This resource will call the interface api within NSX.
 Import the following class:
 ```
-github.com/sky-uk/gonsx/api/edgeinterface
+github.com/tadaweb/gonsx/api/edgeinterface
 ```
 
 Create:
@@ -260,7 +260,7 @@ nsxclient.Do(api)
 DHCP resource. This resource will call the DHCP relay api within NSX.
 Import the following class:
 ```
-github.com/sky-uk/gonsx/api/dhcprelay
+github.com/tadaweb/gonsx/api/dhcprelay
 ```
 
 The Dhcp relay behaves differently in the API and as such it doesn't have a create and only an update and delete.
@@ -290,7 +290,7 @@ nsxclient.Do(api)
 Security tag resource. This resource will call the security tag api within NSX.
 Import the following class:
 ```
-github.com/sky-uk/gonsx/api/securitytag
+github.com/tadaweb/gonsx/api/securitytag
 ```
 
 Create:
@@ -334,7 +334,7 @@ nsxclient.Do(api)
 Service resource. This resource will call the service api with NSX.
 Import the following class:
 ```
-github.com/sky-uk/gonsx/api/service
+github.com/tadaweb/gonsx/api/service
 ```
 
 Create:
@@ -366,7 +366,7 @@ nsxclient.Do(api)
 Security Group resource. This resource will call the security group api with NSX.
 Import the following class:
 ```
-github.com/sky-uk/gonsx/api/securitygroup
+github.com/tadaweb/gonsx/api/securitygroup
 ```
 
 Create:
@@ -397,7 +397,7 @@ nsxclient.Do(api)
 Security Policy resource. This resource will call the security policy with NSX.
 Import the following class:
 ```
-github.com/sky-uk/gonsx/api/securitypolicy
+github.com/tadaweb/gonsx/api/securitypolicy
 ```
 
 Create:

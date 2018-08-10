@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"github.com/sky-uk/gonsx"
-	"github.com/sky-uk/gonsx/api/dhcprelay"
+	"github.com/tadaweb/gonsx"
+	"github.com/tadaweb/gonsx/api/dhcprelay"
 	"os"
 )
 

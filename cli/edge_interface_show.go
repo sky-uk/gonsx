@@ -4,8 +4,8 @@ import (
 	"encoding/xml"
 	"flag"
 	"fmt"
-	"github.com/sky-uk/gonsx"
-	"github.com/sky-uk/gonsx/api/edgeinterface"
+	"github.com/tadaweb/gonsx"
+	"github.com/tadaweb/gonsx/api/edgeinterface"
 	"net/http"
 	"os"
 )

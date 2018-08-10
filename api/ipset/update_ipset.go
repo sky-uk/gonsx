@@ -2,7 +2,7 @@ package ipset
 
 import (
 	"fmt"
-	"github.com/sky-uk/gonsx/api"
+	"github.com/tadaweb/gonsx/api"
 	"net/http"
 )
 
