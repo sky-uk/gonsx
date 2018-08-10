@@ -1,4 +1,4 @@
-PACKAGE  = github.com/sky-uk/gonsx
+PACKAGE  = github.com/tadaweb/gonsx
 BINARYNAME = gonsx-cli
 DATE    ?= $(shell date +%FT%T%z)
 VERSION ?= $(shell git describe --tags --always --dirty --match=v* 2> /dev/null || \

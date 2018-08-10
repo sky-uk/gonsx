@@ -1,7 +1,7 @@
 package gonsx
 
 import (
-	"github.com/sky-uk/gonsx/api/tzone"
+	"github.com/tadaweb/gonsx/api/tzone"
 	"github.com/stretchr/testify/assert"
 	"net/http"
 	"testing"

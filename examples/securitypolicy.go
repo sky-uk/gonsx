@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"github.com/sky-uk/gonsx"
-	"github.com/sky-uk/gonsx/api/securitypolicy"
+	"github.com/tadaweb/gonsx"
+	"github.com/tadaweb/gonsx/api/securitypolicy"
 )
 
 // RunSecurityPolicyExample  Implements Security Policy example.

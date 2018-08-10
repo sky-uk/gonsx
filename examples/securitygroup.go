@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
-	"github.com/sky-uk/gonsx"
-	"github.com/sky-uk/gonsx/api/securitygroup"
+	"github.com/tadaweb/gonsx"
+	"github.com/tadaweb/gonsx/api/securitygroup"
 )
 
 // RunSecurityGroupExample  Implementes Service example.
