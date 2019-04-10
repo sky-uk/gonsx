@@ -86,6 +86,7 @@ func (nsxClient *NSXClient) handleResponse(api api.NSXApi, res *http.Response) e
 
 	if nsxClient.debug {
 		log.Println("STATUS CODE: ", api.StatusCode())
+		log.Println(string(bodyText))
 	}
 	if isXML(res.Header.Get("Content-Type")) && api.StatusCode() == 200 {
 		xmlerr := xml.Unmarshal(bodyText, api.ResponseObject())
