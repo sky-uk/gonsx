@@ -128,21 +128,21 @@ func TestSecurityPolicy_AddInboundFirewallAction(t *testing.T) {
 	// test removing existing rule and add new one with 0 rules in list.
 	securityPolicy.RemoveFirewallActionByName("DummyRule")
 	assert.Len(t, securityPolicy.ActionsByCategory.Actions, 0)
-	addInboundErr := securityPolicy.AddInboundFirewallAction("new_inbound_allow_rule", "allow", "inbound", []string{"any"})
+	addInboundErr := securityPolicy.AddInboundFirewallAction("new_inbound_allow_rule", "allow", "inbound", []string{}, []string{"any"})
 	assert.Nil(t, addInboundErr)
 	assert.Len(t, securityPolicy.ActionsByCategory.Actions, 1)
 
 	// test multiple application IDs work
-	multiAppActionErr := securityPolicy.AddInboundFirewallAction("new_inbound_allow_rule", "allow", "inbound", []string{"application-1", "application-2"})
+	multiAppActionErr := securityPolicy.AddInboundFirewallAction("new_inbound_allow_rule", "allow", "inbound", []string{}, []string{"application-1", "application-2"})
 	assert.Nil(t, multiAppActionErr)
 
 	// test failures for wrong action.
-	wrongActionErr := securityPolicy.AddInboundFirewallAction("new_inbound_allow_rule", "allow_wrong", "inbound", []string{"application-1"})
+	wrongActionErr := securityPolicy.AddInboundFirewallAction("new_inbound_allow_rule", "allow_wrong", "inbound", []string{}, []string{"application-1"})
 	assert.NotNil(t, wrongActionErr)
 	assert.Equal(t, "Action can be only 'allow' or 'block'", fmt.Sprint(wrongActionErr))
 
 	// test failures for wrong action.
-	wrongDirectionErr := securityPolicy.AddInboundFirewallAction("new_action_2", "block", "inbound_wrong", []string{"application-1"})
+	wrongDirectionErr := securityPolicy.AddInboundFirewallAction("new_action_2", "block", "inbound_wrong", []string{}, []string{"application-1"})
 	assert.NotNil(t, wrongDirectionErr)
 	assert.Equal(t, "Direction can only be 'inbound'", fmt.Sprint(wrongDirectionErr))
 

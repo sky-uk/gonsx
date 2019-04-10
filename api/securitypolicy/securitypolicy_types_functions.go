@@ -175,14 +175,14 @@ func (sp *SecurityPolicy) AddInboundFirewallAction(name, action, direction strin
 	}
 
 	newAction := Action{
-		Class:        "firewallSecurityAction",
-		Name:         name,
-		Action:       action,
-		Category:     "firewall",
-		Direction:    direction,
-		IsEnabled:    true,
+		Class:                  "firewallSecurityAction",
+		Name:                   name,
+		Action:                 action,
+		Category:               "firewall",
+		Direction:              direction,
+		IsEnabled:              true,
 		SecondarySecurityGroup: secondarySecurityGroupList,
-		Applications: secondaryApplicationsList,
+		Applications:           secondaryApplicationsList,
 	}
 
 	if sp.ActionsByCategory.Category == "firewall" && len(sp.ActionsByCategory.Actions) >= 1 {
