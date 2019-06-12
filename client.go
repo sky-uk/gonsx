@@ -63,6 +63,7 @@ func (nsxClient *NSXClient) Do(api api.NSXApi) error {
 
 	tr := &http.Transport{
 		TLSClientConfig: &tls.Config{InsecureSkipVerify: nsxClient.IgnoreSSL},
+		Proxy: http.ProxyFromEnvironment,
 	}
 	httpClient := &http.Client{Transport: tr}
 	res, err := httpClient.Do(req)
