@@ -61,9 +61,12 @@ func (nsxClient *NSXClient) Do(api api.NSXApi) error {
 	// TODO: remove this hardcoded value!
 	req.Header.Set("Content-Type", "application/xml")
 
+	for k, vs := range api.RequestHeaders() {
+		req.Header.Add(k, vs[0])
+	}
 	tr := &http.Transport{
 		TLSClientConfig: &tls.Config{InsecureSkipVerify: nsxClient.IgnoreSSL},
-		Proxy: http.ProxyFromEnvironment,
+		Proxy:           http.ProxyFromEnvironment,
 	}
 	httpClient := &http.Client{Transport: tr}
 	res, err := httpClient.Do(req)
@@ -82,13 +85,13 @@ func (nsxClient *NSXClient) handleResponse(api api.NSXApi, res *http.Response) e
 		log.Println("ERROR reading response: ", err)
 		return err
 	}
-
+	api.SetResponseHeader(res.Header)
 	api.SetRawResponse(bodyText)
 
 	if nsxClient.debug {
 		log.Println("STATUS CODE: ", api.StatusCode())
 	}
-	if isXML(res.Header.Get("Content-Type")) && api.StatusCode() == 200 {
+	if _, ok := api.ResponseObject().(*string); !ok && api.ResponseObject() != nil {
 		xmlerr := xml.Unmarshal(bodyText, api.ResponseObject())
 		if xmlerr != nil {
 			log.Println("ERROR unmarshalling response: ", err)
