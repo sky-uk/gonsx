@@ -12,10 +12,12 @@ type GetFirewallRuleAPI struct {
 }
 
 // NewCreate returns a new object of CreatePolicyAPI.
-func NewGetRule(sectionId int, etag string) *GetFirewallRuleAPI {
+func NewGetRule(sectionId int, etag string, ruleId int) *GetFirewallRuleAPI {
 	this := new(GetFirewallRuleAPI)
 
-	this.BaseAPI = api.NewBaseAPI(http.MethodGet, fmt.Sprintf("/api/4.0/firewall/globalroot-0/config/layer3sections/%d/rules", sectionId), nil, new(Rule))
+	this.BaseAPI = api.NewBaseAPI(http.MethodGet,
+		fmt.Sprintf("/api/4.0/firewall/globalroot-0/config/layer3sections/%d/rules/%d", sectionId, ruleId),
+		nil, new(Rule))
 	this.SetRequestHeader("If-Match", etag)
 
 	return this

@@ -5,7 +5,7 @@ import (
 )
 
 const (
-	ALL_EDGES                   ElemType = "ElemType"
+	ALL_EDGES                   ElemType = "ALL_EDGES"
 	Application                 ElemType = "Application"
 	ApplicationGroup            ElemType = "ApplicationGroup"
 	Datacenter                  ElemType = "Datacenter"
@@ -66,7 +66,7 @@ type Element struct {
 	Name    string   `xml:"name,omitempty"`
 	Value   string   `xml:"value"`
 	Type    ElemType `xml:"type,omitempty"`
-	IsValid string   `xml:"isValid,omitempty"`
+	IsValid bool     `xml:"isValid,omitempty"`
 }
 
 type Rule struct {
