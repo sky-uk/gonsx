@@ -17,6 +17,7 @@ type ApplicationService struct {
 	Revision    int       `xml:"revision,omitempty"`
 	Description string    `xml:"description"`
 	Element     []Element `xml:"element"`
+	Layer       string    `xml:"layer,omitempty"`
 }
 
 // Element - object within ApplicationService
