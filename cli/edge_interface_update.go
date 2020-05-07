@@ -11,7 +11,7 @@ import (
 	"os"
 )
 
-var edge edgeinterface.EdgeInterface
+var edgeint edgeinterface.EdgeInterface
 
 func updateEdgeInterface(client *gonsx.NSXClient, flagSet *flag.FlagSet) {
 
@@ -30,13 +30,13 @@ func updateEdgeInterface(client *gonsx.NSXClient, flagSet *flag.FlagSet) {
 		panic(err)
 	}
 
-	err = xml.Unmarshal(dat, &edge)
+	err = xml.Unmarshal(dat, &edgeint)
 	if err != nil {
 		fmt.Println("Error decoding edge profile: ", err.Error())
 		os.Exit(4)
 	}
 
-	updateEdgeInterfaceAPI := edgeinterface.NewUpdate(edgeid, index, edge)
+	updateEdgeInterfaceAPI := edgeinterface.NewUpdate(edgeid, index, edgeint)
 	err = client.Do(updateEdgeInterfaceAPI)
 	if err != nil {
 		fmt.Println("error deleting interface: " + err.Error())

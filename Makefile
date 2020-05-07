@@ -32,7 +32,7 @@ $(BASE): ; $(info $(M) setting GOPATH…)
 
 GOLINT = $(BIN)/golint
 $(BIN)/golint: | $(BASE) ; $(info $(M) building golint…)
-	$Q go get github.com/golang/lint/golint
+	$Q go get golang.org/x/lint/golint
 
 TEST_TARGETS := test-default
 .PHONY: $(TEST_TARGETS) check test tests
